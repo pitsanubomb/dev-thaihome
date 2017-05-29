@@ -16,10 +16,10 @@ exports.getPrice = function(req, res){
     // 
     // Validate the data we get from router
     // 
-	// console.log("priceController received: " + JSON.stringify(req.body, null, 4));
-	// console.log("propertyID: " +req.body.propertyID);
-	// console.log("checkin: " +req.body.checkin);
-	// console.log("checkout: " +req.body.checkout);
+	console.log("priceController received: " + JSON.stringify(req.body, null, 4));
+	console.log("propertyID: " +req.body.propertyID);
+	console.log("checkin: " +req.body.checkin);
+	console.log("checkout: " +req.body.checkout);
 
 	// if property is missing
 	if (!req.body.propertyID) {
