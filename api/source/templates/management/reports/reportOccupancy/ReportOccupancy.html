@@ -1,0 +1,440 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+	<meta name="description" content="Thaihome - Vacation Rentals in Thailand">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<style type="text/css">
+		@media print{
+			@page {
+				size: auto; 
+				margin: 10mm 5mm 5mm 5mm;  
+				size: landscape;
+				mso-header-margin:0mm; 
+				mso-footer-margin:0mm; 
+				mso-paper-source:0;
+			}
+		}
+	</style>	
+</head>
+
+<!-- Global date and number functions used in all reports -->
+<script src="formatDate.js"></script>
+
+<!-- Header/Footer used in all reports -->
+<script src="headerFooter.js"></script>
+
+
+
+
+<!-- TIKO to get the language -->
+<script src="dummyData\gb.json"></script>
+
+<!-- TIKO ##REMOVE## -->
+<script src="dummyData\ReportOccupancy.json"></script>
+
+
+<script language="javascript">
+
+
+//
+// WHAT DO WE NEED FROM THE REPORT-FORM?
+//
+// -->  We choose FROM date and TO date 
+// -->  We can choose ALL properties or choose SPECIFIC properties
+//
+var fromDate = new Date("2017-01-01 00:00:00");
+var toDate = new Date("2017-12-31 23:23:59");
+//var properties = ["ALL"];
+var properties = [ "58669386869659d70b424ea4","58669471869659d70b424ea7","58669566869659d70b424ebb","5866947a869659d70b424ea8" ];
+
+var currencyCode = "THB";
+
+var topHeadtxt = 'Occupancy Rate'
+var reportHead = 'Period from <b>' + fromDate.format('j M Y') + '</b> to <b>' + toDate.format('j M Y') + '</b>';
+
+// VARIABLES
+var monthTxt = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+var printArr = [];
+var lowRate = 25 
+var midRate = 50
+var greenTxt = 'color:#007000;';
+var greenBg  = 'background-color:#DDFFDD;';
+var redTxt = 'color:#804040;';
+var redBg  = 'background-color:#FFE5E5;';
+var greyTxt = 'color:#808080;';
+var greyBg  = 'background-color:#E0E0E0;';
+var yellowTxt = 'color:#707000;';
+var yellowBg  = 'background-color:#FFFFB2;';
+
+
+// Loop thru years and months and find all bookings
+function setupReport(){
+
+	var fromDateFind = new Date();  
+	var toDateFind = new Date();  
+
+	var fromMonth = fromDate.getMonth()+1;
+	var toMonth = toDate.getMonth()+1;
+
+	var fromYear = fromDate.getFullYear();
+	var toYear = toDate.getFullYear();
+	
+	var cntFromMonth = 0;
+	var cntToMonth = 0;
+
+	// Did user choose any properties?
+	var selectStr1 = '';
+	var selectStr2 = '';
+	if (properties.length) {
+		if (properties[0]!='ALL') {
+			var tmpStr='';
+			for (var i=0; i<properties.length; i++) {
+				tmpStr += '"' + properties[i].trim() + '",' 
+			}
+			selectStr1 = '_id: { $in: [ ' + tmpStr.slice(0, -1) + ' ] },';
+			selectStr2 = 'property: { $in: [ ' + tmpStr.slice(0, -1) + ' ] },';
+		}
+	}
+
+	// Find all or selected properties and put into propertyArray
+	mongoCall(
+		'Find all or selected properties',
+		'db.getCollection("property").aggregate([                         '
+	+	'	{                                                             '
+	+	'        $match: {                                                '
+	+	'			' + selectStr1 + '                                     '  
+	+	'			active : true                                         '
+	+	'        }                                                        '
+	+	'	},                                                            '
+	+	'                                                                 '
+	+	'	{                                                             '
+	+	'		$project:{                                                '
+	+	'			"_id" : 1,                         '
+	+	'			"unique" : 1,                        '
+	+	'			"name" : 1,                            '
+	+	'		}                                                         '
+	+	'	}	                                                          '
+	+	'])	                                                              '
+	)
+
+	
+	// Find the bookings within the date range and put into bookingArray
+	mongoCall(
+		'Find the bookings within the date range',
+		'db.getCollection("booking").aggregate([                          '
+	+	'    {                                                            '
+	+	'        $match: {                                                '
+	+	'			' + selectStr2 + '                                     '  
+	+	'			status : {$lte: (5)},                                 '
+	+	'			checkin : {$gte: (' + new Date(fromDate)/1000 + ')},  '  
+	+	'			checkout: {$lte: (' + new Date(toDate)/1000 + ')}     '  
+	+	'        }                                                        '
+	+	'    },                                                           '
+	+	'                                                                 '
+	+	'	{                                                             '
+	+	'		$project:{                                                '
+	+	'			"_id" : 1,                                            '
+	+	'			"status" : 1,                                         '
+	+	'			"property" : 1,                         '
+	+	'			"checkin" : 1,                                        '
+	+	'			"checkout" : 1                                        '
+	+	'		}                                                         '
+	+	'	}	                                                          '
+	+	'])	                                                              '
+	)
+	
+	
+	// Put page title the same as report headline
+	document.title = topHeadtxt;
+
+	
+	
+	// Count for all years 
+	for (var countYear=fromYear; countYear<=toYear; countYear++) {
+	
+		// If this year is bigger than fromYear then we need to count from 1st month 
+		if (countYear > fromYear) {
+			cntFromMonth = 1
+		} else {
+			cntFromMonth = fromMonth
+		}
+	
+		// If this year is smaller than toYear then we need to count all 12 months 
+		if (countYear < toYear) {
+			cntToMonth = 12
+		} else {
+			cntToMonth = toMonth
+		}
+	
+		// looping thru all months for the countYear 
+		for (var countMonth=cntFromMonth; countMonth<=cntToMonth; countMonth++) {
+			for (var i=0; i<propertyArray.length; i++) {
+				maxDays = daysInMonth(countMonth, countYear);
+				countBookings(propertyArray[i]._id, countYear, countMonth, maxDays);
+			}
+		}
+	}
+	
+	// Render the HTML
+	var htmlCode = '';
+	htmlCode += topHeadline(topHeadtxt);
+	htmlCode += reportHeadline(reportHead);
+	htmlCode += renderRows(fromYear, toYear, fromMonth, toMonth);
+	htmlCode += reportFooter();
+	
+	document.getElementById('contentAll').innerHTML = htmlCode;	
+	return;
+}
+
+// Loop thru all bookings for given year/month/property
+function countBookings(currentProperty, currentYear, currentMonth, maxDays){
+
+	var bookedNights = 0
+	var minDate = new Date(currentYear + '-' + currentMonth + '-01 00:00:00') / 1000
+	var maxDate = new Date(currentYear + '-' + currentMonth + '-' + maxDays + ' 23:59:59') / 1000
+	console.log('property ID: ' + currentProperty)
+	console.log('currentYear: ' + currentYear)
+	console.log('currentMonth: ' + currentMonth)
+	console.log('minDate: ' + minDate)
+	console.log('maxDate: ' + maxDate)
+	console.log('minDate: ' + new Date(minDate*1000).format('d M Y'))
+	console.log('maxDate: ' + new Date(maxDate*1000).format('d M Y'))
+	
+	var selected = bookingArray.filter(function(obj){
+		return obj.property == currentProperty && obj.checkout >= minDate && obj.checkin <= maxDate;
+	})	
+	
+	for (var j=0; j<selected.length; j++) {
+		console.log('checkin/checkout: ' + new Date(selected[j].checkin).format('d M Y') + ' - ' + new Date(selected[j].checkout).format('d M Y'));
+		
+		// If checkin/checkout cover the whole month 
+		if (selected[j].checkin < minDate && selected[j].checkout > maxDate) {
+			bookedNights = bookedNights + maxDays
+			console.log ('checkin/checkout cover the whole month');
+			
+		// If checkin/checkout are both within this month
+		} else if (selected[j].checkin >= minDate && selected[j].checkout <= maxDate) {
+			bookedNights = bookedNights + daysBetween(new Date(selected[j].checkin*1000), new Date(selected[j].checkout*1000))
+			console.log ('checkin/checkout are both within this month');
+
+		// If checkin is within this month and checkout is more than this month 
+		} else if (selected[j].checkin >= minDate && selected[j].checkout > maxDate) {
+			bookedNights = bookedNights + daysBetween(new Date(selected[j].checkin*1000), new Date(maxDate*1000))
+			console.log ('checkin is within this month and checkout is more than this month');
+
+		// If checkin is before this month and checkout is within this month
+		} else if (selected[j].checkin < minDate && selected[j].checkout <= maxDate) {
+			bookedNights = bookedNights + daysBetween(new Date(minDate*1000), new Date(selected[j].checkout*1000))
+			console.log ('checkin is before this month and checkout is within this month');
+			
+		// This should never happen
+		} else {
+			console.log('THIS CAN NEVER HAPPEN!!');
+			console.log('checkin/checkout: ' + new Date(selected[j].checkin).format('d M Y') + ' - ' + new Date(selected[j].checkout).format('d M Y'));
+			console.log('property ID: ' + currentProperty)
+			console.log('minDate: ' + new Date(minDate).format('d M Y'))
+			console.log('maxDate: ' + new Date(maxDate).format('d M Y'))
+		}
+	}
+
+	// Add to print result
+	printArr.push(
+		{
+			'property' : currentProperty,
+			'year' : currentYear,
+			'month' : currentMonth,
+			'bookNights' : bookedNights,
+			'maxDays' : maxDays,
+			'bookedPct' : Math.round(bookedNights/maxDays * 100)
+		}
+	);
+}
+
+
+// TIKO time to render all generated data 
+function renderRows(fromYear, toYear, fromMonth, toMonth) {
+	var countYear = 0;
+	var countMonth = 0;
+	var cntFromMonth = 0;
+	var cntToMonth = 0;
+	var htmlCode = '';
+	var totalArray = [];
+
+	var htmlProject = '<td style="white-space: nowrap; padding-left:8px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; height:24px; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlProperty = '<td style="white-space: nowrap; padding-left:8px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTD = '<td style="white-space: nowrap; padding-left:8px; padding-right:4px; text-align:right; #COLOR# border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTotalHead = '<td colspan="2" style="white-space: nowrap; padding-left:8px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; border-top:2px solid #666666; border-bottom:2px solid #666666; height:24px; font-size:14px; font-weight:bold; font-family:Arial;">#FIELD#</td>'
+	var htmlTotal = '<td style="white-space: nowrap; padding-left:8px; padding-right:4px; text-align:right; #COLOR# border:1px solid #AAAAAA; border-top:2px solid #666666; border-bottom:2px solid #666666; font-size:14px; font-weight:bold; font-family:Arial;">#FIELD#</td>'
+
+	htmlCode += renderTableHead(fromYear, toYear, fromMonth, toMonth);
+
+	// Generate the rows with data
+	var lines = 0;
+	sortBy(propertyArray, (o) => o.unique);
+
+
+	for (var i=0; i<propertyArray.length; i++) {
+
+		var totalBookNights = 0;
+		var totalMaxDays = 0;	
+		var avgCount = 0;	
+	
+		htmlCode +='<tr>' 
+		htmlCode +=htmlProject.replace('#FIELD#', propertyArray[i].name);
+		htmlCode +=htmlProperty.replace('#FIELD#', propertyArray[i].unique);
+
+		var selected = printArr.filter(function(obj){
+			return obj.property == propertyArray[i]._id;
+		})	
+		
+		for (var j=0; j<selected.length; j++) {
+
+			var renderLine = htmlTD.replace('#FIELD#', (selected[j].bookedPct + '%'));
+			renderLine = renderLine.replace('#COLOR#', coloring(selected[j].bookedPct));		
+			htmlCode +=renderLine;
+
+			// Adding to Totals 
+			var totalSelected = totalArray.filter(function(obj){
+				return obj.year == selected[j].year && obj.month == selected[j].month;
+			})	
+			if (totalSelected.length != 1) {
+				totalArray.push(
+				{
+					'year' : selected[j].year,
+					'month' : selected[j].month,
+					'bookNights' : selected[j].bookNights,
+					'maxDays' : selected[j].maxDays
+				});
+			} else {
+				totalSelected[0].bookNights += selected[j].bookNights;
+				totalSelected[0].maxDays += selected[j].maxDays;
+			}
+			totalBookNights += selected[j].bookNights;
+			totalMaxDays += selected[j].maxDays;
+			avgCount += 1;
+		}
+		
+		// Put total for property
+		var renderLine = htmlTD.replace('#FIELD#', (Math.round(totalBookNights/totalMaxDays * 100) + '%'));
+		renderLine = renderLine.replace('#COLOR#', coloring(Math.round(totalBookNights/totalMaxDays * 100)));		
+		renderLine = renderLine.replace('normal', 'bold');		
+		htmlCode +=renderLine;
+		htmlCode +='</tr>' 
+
+		// Break every 18 lines  
+		lines += 1;
+		if (lines>18) {
+			htmlCode += '</table>';
+			htmlCode += reportFooter();			
+			htmlCode += reportPageBreak();
+			htmlCode += topHeadline(topHeadtxt);
+			htmlCode += reportHeadline(reportHead);
+			htmlCode += renderTableHead(fromYear, toYear, fromMonth, toMonth);
+			lines = 0;
+		}		
+	}	
+
+	
+	// Generate the totals line
+	var totalBookNights = 0;
+	var totalMaxDays = 0;	
+	var avgCount = 0;	
+	htmlCode +='<tr>' 
+	htmlCode +=htmlTotalHead.replace('#FIELD#', 'TOTAL ALL PROPERTIES');
+	for (var j=0; j<totalArray.length; j++) {
+		var renderLine = htmlTotal.replace('#FIELD#', (Math.round(totalArray[j].bookNights/totalArray[j].maxDays * 100) + '%'));
+		renderLine = renderLine.replace('#COLOR#', coloring(Math.round(totalArray[j].bookNights/totalArray[j].maxDays * 100)));		
+		htmlCode +=renderLine;
+
+		totalBookNights += selected[j].bookNights;
+		totalMaxDays += selected[j].maxDays;
+		avgCount += 1;
+	}
+
+	// Put total for all property
+	var renderLine = htmlTotal.replace('#FIELD#', (Math.round(totalBookNights/totalMaxDays * 100) + '%'));
+	renderLine = renderLine.replace('#COLOR#', coloring(Math.round(totalBookNights/totalMaxDays * 100)));		
+	htmlCode +=renderLine;
+
+	htmlCode +='</tr></table>' 
+
+	return htmlCode;
+	
+}
+
+// Render the Table Header
+function renderTableHead(fromYear, toYear, fromMonth, toMonth) {
+	var htmlTH = '<td style="text-align:left; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;">#FIELD#</td>'
+	var htmlTHR = '<td style="text-align:right; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;">#FIELD#</td>'
+	var htmlCode = ''
+	htmlCode += '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">'
+	htmlCode += '<tr>'
+	htmlCode +=htmlTH.replace('#FIELD#', 'Project');
+	htmlCode +=htmlTH.replace('#FIELD#', 'Unit');
+	
+	// Generate the table header with months
+	for (var countYear=fromYear; countYear<=toYear; countYear++) {
+	
+		// If this year is bigger than fromYear then we need to count from 1st month 
+		if (countYear > fromYear) {
+			cntFromMonth = 1
+		} else {
+			cntFromMonth = fromMonth
+		}
+	
+		// If this year is smaller than toYear then we need to count all 12 months 
+		if (countYear < toYear) {
+			cntToMonth = 12
+		} else {
+			cntToMonth = toMonth
+		}
+	
+		// looping thru all months for the countYear 
+		for (var countMonth=cntFromMonth; countMonth<=cntToMonth; countMonth++) {
+			htmlCode +=htmlTHR.replace('#FIELD#', monthTxt[countMonth-1] + "-" + ('0'+(countYear)).slice(-2));
+		}
+	}
+	htmlCode +=htmlTHR.replace('#FIELD#', 'Total');
+	htmlCode +='</tr>' 
+	return htmlCode;
+}
+
+// Put correct precentage coloring
+function coloring(bookedPct) {
+	var colorStyle = '';
+	// if > 0 and < lowRate then RED color
+	if (bookedPct > 0 && bookedPct < lowRate) {
+		colorStyle = redTxt + ' ' + redBg;		
+			
+	// if >= lowRate and < midRate then YELLOW color
+	} else if (bookedPct >= lowRate && bookedPct < midRate) {
+		colorStyle = yellowTxt + ' ' + yellowBg;		
+
+	// if >= highRate then GREEN color
+	} else if (bookedPct >= midRate) {
+		colorStyle = greenTxt + ' ' + greenBg;		
+
+	// Else GREY color
+	} else {
+		colorStyle = greyTxt + ' ' + greyBg;		
+	}
+	return colorStyle
+}
+</script>
+
+<body onload="setupReport();">
+
+	<div style="width:100%; margin:auto; padding:0; display:table;">
+
+		<!-- CONTENT -->
+		<div id="contentAll"></div>
+
+	</div>
+  
+</body>
+</html>

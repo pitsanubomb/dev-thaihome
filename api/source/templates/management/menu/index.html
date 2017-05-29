@@ -6,27 +6,30 @@
       </md-button>
       <md-menu-content>
         <ul class="nav second-nav manage-nav">
-         <li md-ink-ripple>
-              <a ui-sref="management.book">New Booking</a>
-         </li>
-         <li md-ink-ripple>
-              <a ui-sref="admin.home">Admin</a>
-         </li>
-         <li md-ink-ripple>
-              <a ui-sref="home">Thai Home</a>
-         </li>
-		 <!-- 2016-05-17 - Ajay - Add link for profile page -->
-		 <li md-ink-ripple>
-              <a ui-sref="management.profile">Profile</a>
-         </li>
-         <li md-ink-ripple>
-              <a ui-sref="admin_logout">Logout</a>
-         </li>
+          <li md-ink-ripple>
+            <a ui-sref="management.book">New Booking</a>
+          </li>
+          <li md-ink-ripple>
+            <a ui-sref="admin.home">Admin</a>
+          </li>
+          <li md-ink-ripple>
+            <a ui-sref="home">Thai Home</a>
+          </li>
+             <li md-ink-ripple>
+            <a ui-sref="management.reports">report</a>
+          </li>
+          <!-- 2016-05-17 - Ajay - Add link for profile page -->
+          <li md-ink-ripple>
+            <a ui-sref="management.profile">Profile</a>
+          </li>
+          <li md-ink-ripple>
+            <a ui-sref="admin_logout">Logout</a>
+          </li>
         </ul>
       </md-menu-content>
     </md-menu>
     <div class="custom-menu-col">
-		<!-- 2016-05-27 - Ajay - Add reload option in home menu -->
+      <!-- 2016-05-27 - Ajay - Add reload option in home menu -->
       <button ui-sref="management.home" ui-sref-opts="{reload:true}" class="btn btn-default blue-btn" ng-class="{ 'blue-bld': menu_bookings, 'active-management-btn' : statename == 'management.home'}">Home ({{menu_bookings}})</button>
     </div>
     <div class="custom-menu-col">

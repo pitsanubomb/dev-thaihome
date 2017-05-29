@@ -1,0 +1,197 @@
+<div id="wrapper" ng-controller="reportFormController as vm" ng-init="loadReport()" class="ng-scope" style="clear:both; width:100%; max-width: 600px; display:table; margin: 0 auto;">
+
+    <div class="new-booking-area">
+        <table class="iconTD ">
+		<!-- BOMB PLEASE PUT BUTTONS -->
+		<br><br>
+		</table>
+    </div>
+
+	<div style="padding:10px 10px 10px 10px;">
+
+	<!-- SEARCH FORM -->
+	<table class="startHeadTable">
+		<tbody>
+		<tr><td colspan="4" style="height:10px;"></td></tr>
+		<tr>
+			<td class="startBrownTxt startHeadTxt startOverflow" colspan="4">STATISTICS&nbsp; & &nbsp;REPORTS</td>
+		</tr>
+		<tr><td colspan="4" style="height:10px;"></td></tr>
+
+
+		<!-- List of all expense reports -->
+		<tr>
+			<td style="width:20%;" class="startLeadTxt">Report</td>
+			<td style="width:80%;" colspan="3">
+				<select class="startField ng-pristine ng-untouched ng-valid ng-empty" ng-model="vm.reportName" aria-invalid="false" id="reportName" ng-change="modifyForm()">
+					<option value=""></option>
+					<option value="STATUS">Daily Status</option>
+					<option value="AGENTSALE">Agent Sales Prices</option>
+					<option value="AGENTRENT">Agent Rent Prices</option>
+					<option value="BANK">Bank Accounts</option>
+					<option value="BOOKING">Bookings</option>
+					<option value="OCCUPANCY">Occupancy Rate</option>
+					<option value="EXPENSES">Expenses Report</option>
+					<option value="BALANCE">Property Balance Sheet</option>
+					<option value="PERFORMANCE">Property Performance</option>
+					<option value="REVENUE">Revenue Report</option>
+					<option value="PROFIT">Profits Report</option>
+					<option value="ROIBUY">ROI on Purchase</option>
+					<option value="ROISALE">ROI on Sale</option>
+					<option value="CHANNEL">Channels, Nationalities, Agents</option>
+				</select>
+			</td>
+		</tr>
+
+
+		<tr ng-show="lineOne"><td colspan="4" style="height:30px;vertical-align:middle;">
+			<div class="startBrownBg" style="height:2px; padding:0px;"></div>
+		</td></tr>
+
+		
+		<!-- From and To date -->
+		<tr ng-show="showFromDate">
+			<td class="startLeadTxt">From</td>
+			<td colspan="3"><input type="date" ng-model="vm.fldFromDate" id="fldFromDate" class="startField ng-pristine ng-valid ng-not-empty ng-touched" value="" aria-invalid="false"></td>
+		</tr>
+		<tr ng-show="showToDate">
+			<td class="startLeadTxt">To</td>
+			<td colspan="3"><input type="date" ng-model="vm.fldToDate" id="fldToDate" class="startField ng-pristine ng-valid ng-not-empty ng-touched" value="" aria-invalid="false"></td>
+		</tr>
+
+
+		<tr ng-show="lineTwo"><td colspan="4" style="height:30px;vertical-align:middle;">
+			<div class="startBrownBg" style="height:2px; padding:0px;"></div>
+		</td></tr>
+
+
+		<!-- List of all expense categories -->
+		<tr ng-show="expenseCategories">
+			<td class="startLeadTxt" style="vertical-align:top;">Expenses</td>
+			<td colspan="3">
+				<select multiple 
+					ng-options="item as item._id + ' - ' + item.name for item in vm.expenseCategory track by item._id"
+					ng-model="vm.selectedExpense" 
+					style="height:150px; font-family:'Arial Narrow'!important; font-size:14px;" class="startField ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false">
+				</select>
+			</td>
+		</tr>
+
+		
+		<!-- List of all bank accounts -->
+		<tr ng-show="bankAccounts">
+			<td class="startLeadTxt" style="vertical-align:top;">Bank Accounts</td>
+			<td colspan="3">
+				<select multiple 
+					ng-options="item as item.account for item in vm.bankAccounts track by item._id"
+					ng-model="vm.selectedBank" 
+					style="height:150px;" class="startField ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false">
+				</select>
+			</td>
+		</tr>
+
+		
+		<!-- Stretch or not -->
+		<tr ng-show="expenseStretch">
+			<td class="startLeadTxt">Stretch</td>
+			<td colspan="3" style="text-align:left;"><input type="checkbox" ng-model="vm.stretchExpense" class="ng-pristine ng-valid ng-not-empty ng-touched" style="width:20px; height:20px; margin-top:5px;"  value="" aria-invalid="false"></td>
+		</tr>
+
+
+		<!-- what bookings to include? -->
+		<tr ng-show="includeBookings">
+			<td class="startLeadTxt" style="vertical-align:top;">Booking Status</td>
+			<td colspan="3">
+				<select class="startField ng-pristine ng-untouched ng-valid ng-empty" ng-model="vm.bookingInclude" aria-invalid="false">
+					<option value="ACTIVE" selected>All Active Bookings</option>
+					<option value="ALL">All Bookings</option>
+					<option value="NOPAY">All Not Paid Bookings</option>
+					<option value="0">New Booking</option>
+					<option value="1">Pending</option>
+					<option value="2">Booked</option>
+					<option value="3">Check-in</option>
+					<option value="4">Check-out</option>
+					<option value="5">Done</option>
+					<option value="6">Cancelled</option>
+				</select>
+			</td>
+		</tr>
+
+		<!-- Ways to sort bookings -->
+		<tr ng-show="sortBookings">
+			<td class="startLeadTxt" style="vertical-align:top;">Sort Bookings</td>
+			<td colspan="3">
+				<select class="startField ng-pristine ng-untouched ng-valid ng-empty" ng-model="vm.bookingSort" aria-invalid="false">
+					<option value="DATE" selected>Sort by Checkin Date</option>
+					<option value="CHANNEL">Sort by Channel</option>
+					<option value="PROPERTY">Sort by Property</option>
+					<option value="STATUS">Sort by Status</option>
+				</select>
+			</td>
+		</tr>
+
+
+		<!-- Include Agents? -->
+		<tr ng-show="bookingAgent">
+			<td class="startLeadTxt">Agents</td>
+			<td colspan="3" style="text-align:left;"><input type="checkbox" ng-model="vm.bookingAgents" class="ng-pristine ng-valid ng-not-empty ng-touched" style="width:20px; height:20px; margin-top:5px;"  value="" aria-invalid="false"></td>
+		</tr>
+
+
+		<!-- Include Invoice/Receipt? -->
+		<tr ng-show="bookingInvoice">
+			<td class="startLeadTxt">Invoices</td>
+			<td colspan="3" style="text-align:left;"><input type="checkbox" ng-model="vm.bookingInvoices" class="ng-pristine ng-valid ng-not-empty ng-touched" style="width:20px; height:20px; margin-top:5px;"  value="" aria-invalid="false"></td>
+		</tr>
+		
+
+		<tr ng-show="lineThree"><td colspan="4" style="height:30px;vertical-align:middle;">
+			<div class="startBrownBg" style="height:2px; padding:0px;"></div>
+		</td></tr>
+		
+		
+		<!-- Multi Select List of all properties -->
+		<tr ng-show="propertiesMulti">
+			<td class="startLeadTxt" style="vertical-align:top;">Units</td>
+			<td colspan="3">
+				<select multiple 
+					ng-options="e as e._id for e in vm.propertyIdList track by e._id" 
+					ng-model="vm.selectedPropertiesMulti" 
+					class="startField ng-pristine ng-untouched ng-valid ng-empty" style="height:150px;" aria-invalid="false">
+				</select>
+			</td>
+		</tr>
+
+
+		<!-- Single Select List of all properties -->
+		<tr ng-show="propertiesSingle">
+			<td class="startLeadTxt" style="vertical-align:top;">Units</td>
+			<td colspan="3">
+				<select
+					ng-options="e as e._id for e in vm.propertyIdList track by e._id" 
+					ng-model="vm.selectedPropertiesSingle" 
+					class="startField ng-pristine ng-untouched ng-valid ng-empty"  aria-invalid="false">
+				</select>
+			</td>
+		</tr>
+
+
+		<tr ng-show="lineFour"><td colspan="4" style="height:20px;vertical-align:middle;">
+			<div class="startBrownBg" style="height:2px; padding:0px;"></div>
+		</td></tr>
+
+
+		<!-- Generate Report button -->
+		<tr ng-show="generate">
+			<td colspan="4" class="startCenter">
+				<button class="startBrownBg startButton" style="width:200px;" ng-click="callReport()">
+					GENERATE REPORT
+				</button>
+			</td>
+		</tr>
+
+	</tbody></table>
+
+	</div>
+
+</div>

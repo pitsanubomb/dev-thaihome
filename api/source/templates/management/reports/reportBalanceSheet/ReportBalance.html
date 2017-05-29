@@ -1,0 +1,422 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+	<meta name="description" content="Thaihome - Vacation Rentals in Thailand">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<style type="text/css">
+		@media print{
+			@page {
+				size: auto; 
+				margin: 10mm 5mm 5mm 5mm;  
+				size: portrait;
+				mso-header-margin:0mm; 
+				mso-footer-margin:0mm; 
+				mso-paper-source:0;
+			}
+		}
+	</style>	
+</head>
+
+<!-- Global date and number functions used in all reports -->
+<script src="formatDate.js"></script>
+
+<!-- Header/Footer used in all reports -->
+<script src="headerFooter.js"></script>
+
+
+
+<!-- TIKO to get the language -->
+<script src="dummyData\gb.json"></script>
+
+<!-- TIKO result from property table -->
+<script src="dummyData\property.json"></script>
+
+<!-- TIKO result from find all invoice/receipt -->
+<script src="dummyData\ReportProperty.json"></script>
+
+<!-- TIKO result from expense table -->
+<script src="dummyData\expense.json"></script>
+
+
+<script language="javascript">
+//
+// WHAT DO WE NEED FROM THE REPORT-FORM?
+//
+// -->  We choose FROM date and TO date 
+// -->  We always choose one SPECIFIC property
+//
+var fromDate     = new Date("2017-01-01 00:00:00");
+var toDate       = new Date("2017-12-31 23:23:59");
+var currProperty = '5866947a869659d70b424ea8';
+var currencyCode = "THB";
+
+var topHeadtxt = 'Balance Sheet';
+var reportHead = 'Period from <b>' + fromDate.format('j M Y') + '</b> to <b>' + toDate.format('j M Y') + '</b>';
+
+
+var greenTxt = 'color:#007000;';
+var greenBg  = 'background-color:#DDFFDD;';
+var redTxt = 'color:#804040;';
+var redBg  = 'background-color:#FFE5E5;';
+var greyTxt = 'color:#808080;';
+var greyBg  = 'background-color:#E0E0E0;';
+var yellowTxt = 'color:#707000;';
+var yellowBg  = 'background-color:#FFFFB2;';
+
+// Loop thru years and months
+function setupReport(){
+
+	// Put page title the same as report headline
+	document.title = topHeadtxt;
+
+	
+	// Find the specific Property 
+	mongoCall(
+		'Find the selected property from the ReportForm',
+		'db.getCollection("property").find({									'
+	+	'	_id: "' + currProperty + '"	             							'
+	+	'})                                                                     '
+	);	
+	// Find property  ###REMOVE###
+	var selectProperty = propertyArray.filter(function(obj){
+		return obj._id == currProperty;
+	})			
+	
+	
+	// Render the report
+	var htmlCode = ''
+	htmlCode += topHeadline(topHeadtxt + ' for ' + selectProperty[0].unique);
+	htmlCode += reportHeadline(reportHead + ' for <b>' + selectProperty[0].unique + '</b>')
+	htmlCode += '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse;">'
+	htmlCode += '<tr><td style="vertical-align:top;">'
+	
+	var htmlTHL = '<th style="text-align:left; padding-left:6px; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;">#FIELD#</th>'
+	var htmlTHC = '<th style="text-align:center; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;">#FIELD#</th>'
+	var htmlTHR = '<th style="text-align:right; padding-right:6px; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;">#FIELD#</th>'
+	var htmlTDL = '<td style="text-align:left; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDC = '<td style="text-align:center; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR = '<td style="text-align:right; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTotal = '<td colspan="#SPAN#" style="white-space: nowrap; padding-left:4px; padding-right:4px; text-align:right; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; border-top:2px solid #666666; border-bottom:2px solid #666666; font-size:14px; font-weight:bold; font-family:Arial;">#FIELD#</td>'
+	var htmlTotalSum = '<td colspan="#SPAN#" style="white-space: nowrap; padding-left:4px; padding-right:4px; text-align:right; #COLOR# background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:bold; font-family:Arial;">#FIELD#</td>'
+
+	// Invoice Headline
+	htmlCode += '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse;">'
+	htmlCode += '<tr>'
+	htmlCode += htmlTHC.replace('#FIELD#', 'Date');
+	htmlCode += htmlTHC.replace('#FIELD#', 'Inv');
+	htmlCode += htmlTHC.replace('#FIELD#', 'Book');
+	htmlCode += htmlTHL.replace('#FIELD#', 'Description');
+	htmlCode += htmlTHR.replace('#FIELD#', 'Amount');
+	htmlCode += '</tr>'
+
+	
+	// Find invoices and receipts for the Property and put into bookingArray
+	mongoCall(
+		'Find invoices and receipts for the Property',
+	 	'db.getCollection("booking").aggregate([                          '
+	+	'    {                                                            '
+	+	'        $match: {                                                '
+	+	'           property: "' + currProperty + '",                     '
+	+	'			checkin : {$gte: (' + new Date(fromDate)/1000 + ')},  '
+	+	'			checkout: {$lte: (' + new Date(toDate)/1000 + ')}     '
+	+	'        }                                                        '
+	+	'    },                                                           '
+	+	'                                                                 '
+	+	'	{                                                             '
+	+	'		$lookup: {                                                '
+	+	'			from: "invoice",                                      '
+	+	'			localField: "_id",                                    '
+	+	'			foreignField: "bookingId",	                          '
+	+	'			as: "invoice"		                                  '
+	+	'		}	                                                      '
+	+	'	},                                                            '
+	+	'	                                                              '
+	+	'	{                                                             '
+	+	'		$lookup: {                                                '
+	+	'			from: "receipt",                                      '
+	+	'			localField: "_id",                                    '
+	+	'			foreignField: "bookingId",	                          '
+	+	'			as: "receipt"		                                  '
+	+	'		}	                                                      '
+	+	'	},                                                            '
+	+	'                                                                 '
+	+	'	{                                                             '
+	+	'		$project:{                                                '
+	+	'			"_id" : 1,                                            '
+	+	'			"checkin" : 1,                                        '
+	+	'			"checkout" : 1,                                       '
+	+	'			"invoice" : "$invoice",                               '
+	+	'			"receipt" : "$receipt"                                '
+	+	'		}                                                         '
+	+	'	}                                                             '
+	+	'                                                                 '
+	+	'])		                                                          '
+	);	
+	
+	// Sort invoiceArray by dueDate oldest to newest
+	sortBy(bookingArray, (o) => o.checkin);
+
+	// Loop thru all bookings
+	var totalIncome = 0;
+	var totalExpense = 0;
+	for (var b=0; b<bookingArray.length; b++) {	
+
+		// Loop thru all invoices on that booking
+		for (var i=0; i<bookingArray[b].invoice.length; i++) {	
+	
+			htmlCode += '<tr>'
+			htmlCode += htmlTDC.replace('#FIELD#', new Date(bookingArray[b].invoice[i].dueDate*1000).format('d/m/Y'));
+			htmlCode += htmlTDR.replace('#FIELD#', bookingArray[b].invoice[i].invoiceNumber);
+			htmlCode += htmlTDC.replace('#FIELD#', bookingArray[b].invoice[i].bookingId);
+
+			// Loop thru all lines on the invoice
+			var invoiceTotal = 0;
+			var invoiceText = '';
+
+			for (var l=0; l<bookingArray[b].invoice[i].invoiceLines.length; l++) {	
+				if (invoiceText == '') {
+					invoiceText += htmlTDL.replace('#FIELD#', bookingArray[b].invoice[i].invoiceLines[l].lineText);
+				}
+				invoiceTotal += bookingArray[b].invoice[i].invoiceLines[l].amountTotal;
+			}
+			htmlCode += invoiceText;
+
+			// Loop thru all receipts on that invoice
+			var receiptTotal = 0;
+			for (var r=0; r<bookingArray[b].receipt.length; r++) {	
+				if (bookingArray[b].receipt[r].invoiceId == bookingArray[b].invoice[i]._id) {
+					receiptTotal += bookingArray[b].receipt[r].amount;
+				}
+			}
+			
+			// if this is a completed booking (checkout before today) then use amount from receipts
+			currAmount = 0;
+			if (bookingArray[b].checkout <= new Date().format('U')) {
+				currAmount = receiptTotal
+			} else {
+				currAmount = invoiceTotal
+			}
+			htmlCode += htmlTDR.replace('#FIELD#', ('฿ ' + accFormat(currAmount)));
+			htmlCode += '</tr>'
+			totalIncome += currAmount;
+		}
+
+		// Loop thru all receipts with no invoice on this booking
+		var receiptTotal = 0;
+		var duedate = 0;
+		var recpNo = 0;
+		for (var r=0; r<bookingArray[b].receipt.length; r++) {	
+			if (bookingArray[b].receipt[r].invoiceId == "") {
+				receiptTotal += bookingArray[b].receipt[r].amount;
+				duedate = bookingArray[b].checkin;
+				recpNo = bookingArray[b].receipt[r].receiptNo;
+			}
+		}
+		if (receiptTotal != 0) {
+			htmlCode += '<tr>'
+			htmlCode += htmlTDC.replace('#FIELD#', new Date(duedate*1000).format('d/m/Y'));
+			htmlCode += htmlTDR.replace('#FIELD#', 0);
+			htmlCode += htmlTDC.replace('#FIELD#', bookingArray[b]._id);
+			htmlCode += htmlTDL.replace('#FIELD#', 'Extra receipts');		
+			htmlCode += htmlTDR.replace('#FIELD#', ('฿ ' + accFormat(receiptTotal)));
+			htmlCode += '</tr>'
+			totalIncome += currAmount;
+		}
+	}
+
+	// Writing the total Income
+	htmlCode += '<tr>'
+	var renderLine = htmlTotal.replace('#FIELD#', 'Total Income');
+	renderLine = renderLine.replace('#SPAN#','4');
+	htmlCode += renderLine;
+	var renderLine = htmlTotal.replace('#FIELD#', ('฿ ' + accFormat(totalIncome)));
+	renderLine = renderLine.replace('#SPAN#','1');
+	htmlCode += renderLine;
+	htmlCode += '</tr></table>'
+
+	
+	// Expense Headline
+	htmlCode += '</td><td style="width:8px;"></td><td style="vertical-align:top;">'
+	htmlCode += '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse;">'
+	htmlCode += '<tr>'
+	htmlCode += htmlTHC.replace('#FIELD#', 'Date');
+	htmlCode += htmlTHC.replace('#FIELD#', 'Exp');
+	htmlCode += htmlTHL.replace('#FIELD#', 'Description');
+	htmlCode += htmlTHR.replace('#FIELD#', 'Amount');
+	htmlCode += '</tr>'
+
+	
+	// Find all expenses for this property and put into expenseArray
+	// If it not work its because GEV turned all dates into strings!!!
+	mongoCall(
+		'Find all expenses for this property',
+		'db.getCollection("expense").aggregate([                                                               '
+	+	'	{                                                                                                  '
+	+	'		$match: {                                                                                      '
+	+	'			propertyId: "' + selectProperty[0].unique + '",                                            '
+	+	'			dueDate : {$gte: (' + new Date(fromDate)/1000 + '), $lte: (' + new Date(toDate)/1000 + ')} '
+	+	'		}                                                                                              '
+	+	'	},                                                                                                 '
+	+	'                                                                                                      '
+	+	'	{                                                                                                  '
+	+	'		$project:{                                                                                     '
+	+	'			"_id" : 0,                                                                                 '
+	+	'			"dueDate" : 1,                                                                             '
+	+	'			"propertyId" : 1,                                                                          '
+	+	'			"transactionNo" : 1,                                                                       '
+	+	'			"expenseCategory" : 1,                                                                     '
+	+	'			"text" : 1,                                                                                '
+	+	'			"amount" : 1                                                                               '
+	+	'		}                                                                                              '
+	+	'	}                                                                                                  '
+	+	'                                                                                                      '
+	+	'])                                                                                                    '
+	)
+	
+	// Sort expenseArray by dueDate oldest to newest
+	sortBy(expenseArray, (o) => o.dueDate);
+
+	// Loop thru all expenses
+	for (var e=0; e<expenseArray.length; e++) {	
+
+		// Should this expense be split between several properties?
+		shareModifier = 100;
+		if (typeof(expenseArray[e].propertyId)=='object') {
+			console.log ('ITS ARRAY OF PROPERTIES!!!')
+			// Find total salesprice for all properties who share this expense and put into totalSaleprice
+			var mongoString = '';
+			for (var p=0; p<expenseArray[e].propertyId.length; p++) {
+				mongoString += '"' + expenseArray[e].propertyId[p] + '", '
+			}
+			var totalSaleprice = 0;
+			mongoCall(
+				'Find total salesprice for all properties who share this expense',
+					'db.getCollection("property").aggregate(                    '
+				+	'	{                                                       '
+				+	'		$match: {                                           '
+				+	'			unique: {                                       '
+				+	'				$in: [ ' + mongoString.slice(0,-2) + ' ]    '
+				+	'			}                                               '
+				+	'		}                                                   '
+				+	'	},                                                      '
+				+	'	{                                                       '
+				+	'		$group: {                                           '
+				+	'			_id : null, sum : { $sum: "$saleprice" }        '
+				+	'		}                                                   '
+				+	'	},                                                      '
+				+	'	{                                                       '
+				+	'		$project: {                                         '
+				+	'			_id: 0, sum: 1                                  '
+				+	'		}                                                   '
+				+	'	}                                                       '
+				+	')                                                          '
+			);
+			if (totalSaleprice==0) {
+				totalSaleprice = selectProperty[0].saleprice
+			};
+			shareModifier = Math.round((selectProperty[0].saleprice/totalSaleprice)*100)
+			console.log ('shareModifier ' + shareModifier)
+
+		} else {
+			console.log ('Its single property ')
+			shareModifier = 100;
+		}
+	
+		// Render the line
+		htmlCode += '<tr>'
+		htmlCode += htmlTDC.replace('#FIELD#', new Date(expenseArray[e].dueDate*1000).format('d/m/Y'));
+		htmlCode += htmlTDR.replace('#FIELD#', expenseArray[e].transactionNo);
+		htmlCode += htmlTDL.replace('#FIELD#', expenseArray[e].text);
+		htmlCode += htmlTDR.replace('#FIELD#', ('฿ ' + accFormat(expenseArray[e].amount * (shareModifier/100))));
+		htmlCode += '</tr>'
+		
+		totalExpense += Math.round(expenseArray[e].amount * (shareModifier/100));
+		
+	}
+
+	// Writing the total Expense
+	htmlCode += '<tr>'
+	var renderLine = htmlTotal.replace('#FIELD#', 'Total Expense');
+	renderLine = renderLine.replace('#SPAN#','3');
+	htmlCode += renderLine;
+	var renderLine = htmlTotal.replace('#FIELD#', ('฿ ' + accFormat(totalExpense)));
+	renderLine = renderLine.replace('#SPAN#','1');
+	htmlCode += renderLine;
+	htmlCode += '</tr>'
+	
+	htmlCode += '<tr><td colspan="4" style="border:0; height:16px;"></td></tr>'
+	
+
+	
+	// Totals
+	htmlCode += '<tr>'
+
+	var renderLine = htmlTotalSum.replace('#FIELD#', 'Total Income from ' + selectProperty[0].unique);
+	renderLine = renderLine.replace('#COLOR#','color:#000000;');
+	renderLine = renderLine.replace('#SPAN#','3');
+	htmlCode += renderLine;
+
+	var renderLine = htmlTotalSum.replace('#FIELD#', ('฿ ' + accFormat(totalIncome)));
+	renderLine = renderLine.replace('#COLOR#',greenTxt);
+	renderLine = renderLine.replace('#SPAN#','1');
+	htmlCode += renderLine;
+
+	htmlCode += '</tr>'
+	htmlCode += '<tr>'
+	
+	var renderLine = htmlTotalSum.replace('#FIELD#', 'Total Expense from ' + selectProperty[0].unique);
+	renderLine = renderLine.replace('#COLOR#','color:#000000;');
+	renderLine = renderLine.replace('#SPAN#','3');
+	htmlCode += renderLine;
+
+	var renderLine = htmlTotalSum.replace('#FIELD#', ('฿ -' + accFormat(totalExpense)));
+	renderLine = renderLine.replace('#COLOR#',redTxt);
+	renderLine = renderLine.replace('#SPAN#','1');
+	htmlCode += renderLine;
+
+	htmlCode += '</tr>'
+	htmlCode += '<tr>'
+	if (totalExpense<=totalIncome) {
+		var renderLine = htmlTotalSum.replace('#FIELD#', 'Total PROFIT from ' + selectProperty[0].unique);
+	} else {
+		var renderLine = htmlTotalSum.replace('#FIELD#', 'Total LOSS from ' + selectProperty[0].unique);
+	}
+	renderLine = renderLine.replace('#COLOR#','color:#000000;');
+	renderLine = renderLine.replace('#SPAN#','3');
+	htmlCode += renderLine;
+
+	var renderLine = htmlTotalSum.replace('#FIELD#', ('฿ ' + accFormat(totalIncome-totalExpense)));
+	if (totalExpense<=totalIncome) {
+		renderLine = renderLine.replace('#COLOR#',greenTxt);
+	} else {
+		renderLine = renderLine.replace('#COLOR#',redTxt);
+	}
+	renderLine = renderLine.replace('#SPAN#','1');
+	htmlCode += renderLine;
+	htmlCode += '</tr></table>'
+	htmlCode += '</td></tr></table>'
+
+	htmlCode += reportFooter();
+	document.getElementById('contentAll').innerHTML = htmlCode;	
+
+}
+	
+</script>
+
+
+<body onload="setupReport();">
+
+	<div style="width:100%; margin:auto; padding:0; display:table;">
+
+		<!-- CONTENT -->
+		<div id="contentAll"></div>
+
+	</div>
+  
+</body>
+</html>

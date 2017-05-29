@@ -1,4 +1,4 @@
-angular.module('templates-main', ['templates/admin/bookings/index.html', 'templates/admin/bookings/view.html', 'templates/admin/currencies/index.html', 'templates/admin/currencies/view.html', 'templates/admin/deals/index.html', 'templates/admin/deals/view.html', 'templates/admin/discounts/index.html', 'templates/admin/discounts/view.html', 'templates/admin/emailVariables/index.html', 'templates/admin/emails/index.html', 'templates/admin/emails/signature.html', 'templates/admin/emails/view.html', 'templates/admin/header/index.html', 'templates/admin/home/index.html', 'templates/admin/inspection/index.html', 'templates/admin/inspection/view.html', 'templates/admin/languages/index.html', 'templates/admin/languages/view.html', 'templates/admin/locations/index.html', 'templates/admin/locations/view.html', 'templates/admin/login/index.html', 'templates/admin/messages/index.html', 'templates/admin/news/index.html', 'templates/admin/news/view.html', 'templates/admin/periods/index.html', 'templates/admin/periods/view.html', 'templates/admin/prices/index.html', 'templates/admin/prices/view.html', 'templates/admin/properties/index.html', 'templates/admin/properties/view.html', 'templates/admin/ratings/index.html', 'templates/admin/ratings/view.html', 'templates/admin/sidebar/index.html', 'templates/admin/translations/index.html', 'templates/admin/translations/property-index.html', 'templates/admin/translations/property-view.html', 'templates/admin/translations/view.html', 'templates/admin/users/index.html', 'templates/admin/users/view.html', 'templates/agent/book/index.html', 'templates/agent/booking/index.html', 'templates/agent/chat/index.html', 'templates/agent/home/index.html', 'templates/agent/listing/index.html', 'templates/agent/login/index.html', 'templates/agent/messenger/messenger.html', 'templates/agent/modal/login.html', 'templates/agent/navigation/index.html', 'templates/agent/password-forgot/index.html', 'templates/agent/password-reset/index.html', 'templates/agent/property/index.html', 'templates/agent/register/index.html', 'templates/lists/agent/add.html', 'templates/lists/agent/index.html', 'templates/lists/booking/index.html', 'templates/lists/currency/index.html', 'templates/lists/discount/index.html', 'templates/lists/email/index.html', 'templates/lists/location/index.html', 'templates/lists/property/index.html', 'templates/lists/season/index.html', 'templates/lists/status/index.html', 'templates/lists/tags/index.html', 'templates/lists/tenant/add.html', 'templates/lists/tenant/index.html', 'templates/management/book/index.html', 'templates/management/booking/index.html', 'templates/management/bookings/index.html', 'templates/management/calendar/index.html', 'templates/management/expenses/index.html', 'templates/management/home/index.html', 'templates/management/menu/index.html', 'templates/management/message/index.html', 'templates/management/messages/index.html', 'templates/management/profile/index.html', 'templates/management/properties/index.html', 'templates/management/property/index.html', 'templates/management/todo/index.html', 'templates/payment/bank/index.html', 'templates/payment/paypal/index.html', 'templates/payment/siampay/fail.html', 'templates/payment/siampay/index.html', 'templates/payment/siampay/success.html', 'templates/payment/steps/final.html', 'templates/payment/steps/first.html', 'templates/thaihome/about/index.html', 'templates/thaihome/book/index.html', 'templates/thaihome/booking-dates/index.html', 'templates/thaihome/booking/index.html', 'templates/thaihome/contact/chat.html', 'templates/thaihome/contact/index.html', 'templates/thaihome/discount/index.html', 'templates/thaihome/emails/booking_confirmation.html', 'templates/thaihome/emails/forgot.html', 'templates/thaihome/emails/money_received.html', 'templates/thaihome/emails/notify.html', 'templates/thaihome/emails/pay_bank.html', 'templates/thaihome/emails/pay_online.html', 'templates/thaihome/emails/rating.html', 'templates/thaihome/emails/tenant_paid.html', 'templates/thaihome/footer/index.html', 'templates/thaihome/google-search-snippet/property.html', 'templates/thaihome/header/index.html', 'templates/thaihome/home/index.html', 'templates/thaihome/hot-deals/index.html', 'templates/thaihome/modal/gallery.html', 'templates/thaihome/modal/template-noclose.html', 'templates/thaihome/modal/template.html', 'templates/thaihome/navigation/index.html', 'templates/thaihome/news/index.html', 'templates/thaihome/property-details/about.html', 'templates/thaihome/property-details/index.html', 'templates/thaihome/property-details/more.html', 'templates/thaihome/property-gallery/index.html', 'templates/thaihome/property/index.html', 'templates/thaihome/rating/rate.html', 'templates/thaihome/ratings/index.html', 'templates/thaihome/ratings/stars.html', 'templates/thaihome/results/index.html', 'templates/thaihome/sale/index.html', 'templates/thaihome/search/index.html', 'templates/thaihome/voucher/index.html', 'templates/thaihome/voucher/voucher-print.html']);
+angular.module('templates-main', ['templates/admin/bookings/index.html', 'templates/admin/bookings/view.html', 'templates/admin/currencies/index.html', 'templates/admin/currencies/view.html', 'templates/admin/deals/index.html', 'templates/admin/deals/view.html', 'templates/admin/discounts/index.html', 'templates/admin/discounts/view.html', 'templates/admin/emailVariables/index.html', 'templates/admin/emails/index.html', 'templates/admin/emails/signature.html', 'templates/admin/emails/view.html', 'templates/admin/header/index.html', 'templates/admin/home/index.html', 'templates/admin/inspection/index.html', 'templates/admin/inspection/view.html', 'templates/admin/languages/index.html', 'templates/admin/languages/view.html', 'templates/admin/locations/index.html', 'templates/admin/locations/view.html', 'templates/admin/login/index.html', 'templates/admin/messages/index.html', 'templates/admin/news/index.html', 'templates/admin/news/view.html', 'templates/admin/periods/index.html', 'templates/admin/periods/view.html', 'templates/admin/prices/index.html', 'templates/admin/prices/view.html', 'templates/admin/properties/index.html', 'templates/admin/properties/view.html', 'templates/admin/ratings/index.html', 'templates/admin/ratings/view.html', 'templates/admin/sidebar/index.html', 'templates/admin/translations/index.html', 'templates/admin/translations/property-index.html', 'templates/admin/translations/property-view.html', 'templates/admin/translations/view.html', 'templates/admin/users/index.html', 'templates/admin/users/view.html', 'templates/agent/book/index.html', 'templates/agent/booking/index.html', 'templates/agent/chat/index.html', 'templates/agent/home/index.html', 'templates/agent/listing/index.html', 'templates/agent/login/index.html', 'templates/agent/messenger/messenger.html', 'templates/agent/modal/login.html', 'templates/agent/navigation/index.html', 'templates/agent/password-forgot/index.html', 'templates/agent/password-reset/index.html', 'templates/agent/property/index.html', 'templates/agent/register/index.html', 'templates/lists/agent/add.html', 'templates/lists/agent/index.html', 'templates/lists/booking/index.html', 'templates/lists/currency/index.html', 'templates/lists/discount/index.html', 'templates/lists/email/index.html', 'templates/lists/location/index.html', 'templates/lists/property/index.html', 'templates/lists/season/index.html', 'templates/lists/status/index.html', 'templates/lists/tags/index.html', 'templates/lists/tenant/add.html', 'templates/lists/tenant/index.html', 'templates/management/book/index.html', 'templates/management/booking/index.html', 'templates/management/bookings/index.html', 'templates/management/calendar/index.html', 'templates/management/expenses/index.html', 'templates/management/home/index.html', 'templates/management/menu/index.html', 'templates/management/message/index.html', 'templates/management/messages/index.html', 'templates/management/profile/index.html', 'templates/management/properties/index.html', 'templates/management/property/index.html', 'templates/management/reports/index.html', 'templates/management/reports/reportAgentRent/index.html', 'templates/management/reports/reportAgentSale/index.html', 'templates/management/reports/reportBalanceSheet/ReportBalance.html', 'templates/management/reports/reportBalanceSheet/index.html', 'templates/management/reports/reportBankAccount/index.html', 'templates/management/reports/reportBooking/index.html', 'templates/management/reports/reportExpense/index.html', 'templates/management/reports/reportForm/index.html', 'templates/management/reports/reportOccupancy/ReportOccupancy.html', 'templates/management/reports/reportOccupancy/index.html', 'templates/management/todo/index.html', 'templates/payment/bank/index.html', 'templates/payment/paypal/index.html', 'templates/payment/siampay/fail.html', 'templates/payment/siampay/index.html', 'templates/payment/siampay/success.html', 'templates/payment/steps/final.html', 'templates/payment/steps/first.html', 'templates/thaihome/about/index.html', 'templates/thaihome/book/index.html', 'templates/thaihome/booking-dates/index.html', 'templates/thaihome/booking/index.html', 'templates/thaihome/contact/chat.html', 'templates/thaihome/contact/index.html', 'templates/thaihome/discount/index.html', 'templates/thaihome/emails/booking_confirmation.html', 'templates/thaihome/emails/forgot.html', 'templates/thaihome/emails/money_received.html', 'templates/thaihome/emails/notify.html', 'templates/thaihome/emails/pay_bank.html', 'templates/thaihome/emails/pay_online.html', 'templates/thaihome/emails/rating.html', 'templates/thaihome/emails/tenant_paid.html', 'templates/thaihome/footer/index.html', 'templates/thaihome/google-search-snippet/property.html', 'templates/thaihome/header/index.html', 'templates/thaihome/home/index.html', 'templates/thaihome/hot-deals/index.html', 'templates/thaihome/modal/gallery.html', 'templates/thaihome/modal/template-noclose.html', 'templates/thaihome/modal/template.html', 'templates/thaihome/navigation/index.html', 'templates/thaihome/news/index.html', 'templates/thaihome/property-details/about.html', 'templates/thaihome/property-details/index.html', 'templates/thaihome/property-details/more.html', 'templates/thaihome/property-gallery/index.html', 'templates/thaihome/property/index.html', 'templates/thaihome/rating/rate.html', 'templates/thaihome/ratings/index.html', 'templates/thaihome/ratings/stars.html', 'templates/thaihome/results/index.html', 'templates/thaihome/sale/index.html', 'templates/thaihome/search/index.html', 'templates/thaihome/voucher/index.html', 'templates/thaihome/voucher/voucher-print.html']);
 
 angular.module("templates/admin/bookings/index.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/admin/bookings/index.html",
@@ -9869,27 +9869,30 @@ angular.module("templates/management/menu/index.html", []).run(["$templateCache"
     "      </md-button>\n" +
     "      <md-menu-content>\n" +
     "        <ul class=\"nav second-nav manage-nav\">\n" +
-    "         <li md-ink-ripple>\n" +
-    "              <a ui-sref=\"management.book\">New Booking</a>\n" +
-    "         </li>\n" +
-    "         <li md-ink-ripple>\n" +
-    "              <a ui-sref=\"admin.home\">Admin</a>\n" +
-    "         </li>\n" +
-    "         <li md-ink-ripple>\n" +
-    "              <a ui-sref=\"home\">Thai Home</a>\n" +
-    "         </li>\n" +
-    "		 <!-- 2016-05-17 - Ajay - Add link for profile page -->\n" +
-    "		 <li md-ink-ripple>\n" +
-    "              <a ui-sref=\"management.profile\">Profile</a>\n" +
-    "         </li>\n" +
-    "         <li md-ink-ripple>\n" +
-    "              <a ui-sref=\"admin_logout\">Logout</a>\n" +
-    "         </li>\n" +
+    "          <li md-ink-ripple>\n" +
+    "            <a ui-sref=\"management.book\">New Booking</a>\n" +
+    "          </li>\n" +
+    "          <li md-ink-ripple>\n" +
+    "            <a ui-sref=\"admin.home\">Admin</a>\n" +
+    "          </li>\n" +
+    "          <li md-ink-ripple>\n" +
+    "            <a ui-sref=\"home\">Thai Home</a>\n" +
+    "          </li>\n" +
+    "             <li md-ink-ripple>\n" +
+    "            <a ui-sref=\"management.reports\">report</a>\n" +
+    "          </li>\n" +
+    "          <!-- 2016-05-17 - Ajay - Add link for profile page -->\n" +
+    "          <li md-ink-ripple>\n" +
+    "            <a ui-sref=\"management.profile\">Profile</a>\n" +
+    "          </li>\n" +
+    "          <li md-ink-ripple>\n" +
+    "            <a ui-sref=\"admin_logout\">Logout</a>\n" +
+    "          </li>\n" +
     "        </ul>\n" +
     "      </md-menu-content>\n" +
     "    </md-menu>\n" +
     "    <div class=\"custom-menu-col\">\n" +
-    "		<!-- 2016-05-27 - Ajay - Add reload option in home menu -->\n" +
+    "      <!-- 2016-05-27 - Ajay - Add reload option in home menu -->\n" +
     "      <button ui-sref=\"management.home\" ui-sref-opts=\"{reload:true}\" class=\"btn btn-default blue-btn\" ng-class=\"{ 'blue-bld': menu_bookings, 'active-management-btn' : statename == 'management.home'}\">Home ({{menu_bookings}})</button>\n" +
     "    </div>\n" +
     "    <div class=\"custom-menu-col\">\n" +
@@ -10536,6 +10539,1219 @@ angular.module("templates/management/property/index.html", []).run(["$templateCa
     "        </tbody>\n" +
     "    </table>\n" +
     "\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("templates/management/reports/index.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/management/reports/index.html",
+    "<!DOCTYPE html>\n" +
+    "<html>\n" +
+    "\n" +
+    "<head>\n" +
+    "	<title>ThaiHome Vacation Rentals</title>\n" +
+    "	<meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n" +
+    "	<meta http-equiv=\"Content-type\" content=\"text/html; charset=UTF-8\">\n" +
+    "	<meta name=\"description\" content=\"Thaihome - Vacation Rentals in Thailand\">\n" +
+    "	<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+    "	<link rel=\"stylesheet\" type=\"text/css\" href=\"http://191.101.12.128:3000/styles.css\"> \n" +
+    "\n" +
+    "	<!--<link rel=\"stylesheet\" type=\"text/css\" media=\"print\" href=\"print.css\" />-->\n" +
+    "	<style type=\"text/css\">\n" +
+    "		@media print{\n" +
+    "			@page {\n" +
+    "				size: auto; \n" +
+    "				margin: 10mm 5mm 5mm 5mm;  \n" +
+    "				size: portrait;\n" +
+    "				mso-header-margin:0mm; \n" +
+    "				mso-footer-margin:0mm; \n" +
+    "				mso-paper-source:0;\n" +
+    "			}\n" +
+    "			.printButtonClass{ display : none }\n" +
+    "		}\n" +
+    "	</style>\n" +
+    "\n" +
+    "\n" +
+    "	<!-- Please add to our stylesheet with the others, search for startPinkTxt in CSS and put it there -->\n" +
+    "	<style type=\"text/css\">\n" +
+    "\n" +
+    "		.startBrownTxt { color:#663300; }\n" +
+    "		.startBrownBg { background-color:#663300; }\n" +
+    "		.startBrownTh { background-color:#ffcc99; }\n" +
+    "	\n" +
+    "	</style>\n" +
+    "</head>\n" +
+    "\n" +
+    "<body ng-app=\"Report\">\n" +
+    "\n" +
+    "<div class=\"center\" ng-view>\n" +
+    "\n" +
+    "CONTENT GOES HERE\n" +
+    "\n" +
+    "</div>\n" +
+    "</body>\n" +
+    "</html>\n" +
+    "<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js\"></script>\n" +
+    "<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js\"></script>\n" +
+    "<script src=\"app.js\"></script>\n" +
+    "<script src=\"gb.json\"></script> <!-- BOMB - I think this one is already included? Its the english language for ThaiHome -->\n" +
+    "<script src=\"formatDate.js\"></script> <!-- Global date and number functions used in all reports -->\n" +
+    "<script src=\"headerFooter.js\"></script> <!-- Header/Footer used in all reports -->\n" +
+    "<script src=\"reportForm/index.js\"></script> <!-- The Report Form -->\n" +
+    "<script src=\"reportAgentSale/index.js\"></script> <!-- The AgentSale Report-->\n" +
+    "<script src=\"reportAgentRent/index.js\"></script> <!-- The AgentRent Report -->\n" +
+    "<script src=\"reportBankAccount/index.js\"></script> <!-- The BankAccount Report-->\n" +
+    "<script src=\"reportExpense/index.js\"></script> <!-- The Expense Report-->\n" +
+    "<script src=\"reportBalanceSheet/index.js\"></script> <!-- The Property Balance Sheet Report-->\n" +
+    "<script src=\"reportBooking/index.js\"></script> <!-- The Booking List Report-->\n" +
+    "");
+}]);
+
+angular.module("templates/management/reports/reportAgentRent/index.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/management/reports/reportAgentRent/index.html",
+    "<div style=\"width:100%; margin:auto; padding:0; display:table;\">\n" +
+    "\n" +
+    "	<!-- CONTENT GOES HERE -->\n" +
+    "	<div id=\"contentAll\"></div>\n" +
+    "	\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("templates/management/reports/reportAgentSale/index.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/management/reports/reportAgentSale/index.html",
+    "<div style=\"width:100%; margin:auto; padding:0; display:table;\">\n" +
+    "\n" +
+    "	<!-- CONTENT GOES HERE -->\n" +
+    "	<div id=\"contentAll\"></div>\n" +
+    "	\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("templates/management/reports/reportBalanceSheet/ReportBalance.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/management/reports/reportBalanceSheet/ReportBalance.html",
+    "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\n" +
+    "\"http://www.w3.org/TR/html4/strict.dtd\">\n" +
+    "<html>\n" +
+    "\n" +
+    "<head>\n" +
+    "	<meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n" +
+    "	<meta http-equiv=\"Content-type\" content=\"text/html; charset=UTF-8\">\n" +
+    "	<meta name=\"description\" content=\"Thaihome - Vacation Rentals in Thailand\">\n" +
+    "	<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+    "	<title></title>\n" +
+    "	<style type=\"text/css\">\n" +
+    "		@media print{\n" +
+    "			@page {\n" +
+    "				size: auto; \n" +
+    "				margin: 10mm 5mm 5mm 5mm;  \n" +
+    "				size: portrait;\n" +
+    "				mso-header-margin:0mm; \n" +
+    "				mso-footer-margin:0mm; \n" +
+    "				mso-paper-source:0;\n" +
+    "			}\n" +
+    "		}\n" +
+    "	</style>	\n" +
+    "</head>\n" +
+    "\n" +
+    "<!-- Global date and number functions used in all reports -->\n" +
+    "<script src=\"formatDate.js\"></script>\n" +
+    "\n" +
+    "<!-- Header/Footer used in all reports -->\n" +
+    "<script src=\"headerFooter.js\"></script>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "<!-- TIKO to get the language -->\n" +
+    "<script src=\"dummyData\\gb.json\"></script>\n" +
+    "\n" +
+    "<!-- TIKO result from property table -->\n" +
+    "<script src=\"dummyData\\property.json\"></script>\n" +
+    "\n" +
+    "<!-- TIKO result from find all invoice/receipt -->\n" +
+    "<script src=\"dummyData\\ReportProperty.json\"></script>\n" +
+    "\n" +
+    "<!-- TIKO result from expense table -->\n" +
+    "<script src=\"dummyData\\expense.json\"></script>\n" +
+    "\n" +
+    "\n" +
+    "<script language=\"javascript\">\n" +
+    "//\n" +
+    "// WHAT DO WE NEED FROM THE REPORT-FORM?\n" +
+    "//\n" +
+    "// -->  We choose FROM date and TO date \n" +
+    "// -->  We always choose one SPECIFIC property\n" +
+    "//\n" +
+    "var fromDate     = new Date(\"2017-01-01 00:00:00\");\n" +
+    "var toDate       = new Date(\"2017-12-31 23:23:59\");\n" +
+    "var currProperty = '5866947a869659d70b424ea8';\n" +
+    "var currencyCode = \"THB\";\n" +
+    "\n" +
+    "var topHeadtxt = 'Balance Sheet';\n" +
+    "var reportHead = 'Period from <b>' + fromDate.format('j M Y') + '</b> to <b>' + toDate.format('j M Y') + '</b>';\n" +
+    "\n" +
+    "\n" +
+    "var greenTxt = 'color:#007000;';\n" +
+    "var greenBg  = 'background-color:#DDFFDD;';\n" +
+    "var redTxt = 'color:#804040;';\n" +
+    "var redBg  = 'background-color:#FFE5E5;';\n" +
+    "var greyTxt = 'color:#808080;';\n" +
+    "var greyBg  = 'background-color:#E0E0E0;';\n" +
+    "var yellowTxt = 'color:#707000;';\n" +
+    "var yellowBg  = 'background-color:#FFFFB2;';\n" +
+    "\n" +
+    "// Loop thru years and months\n" +
+    "function setupReport(){\n" +
+    "\n" +
+    "	// Put page title the same as report headline\n" +
+    "	document.title = topHeadtxt;\n" +
+    "\n" +
+    "	\n" +
+    "	// Find the specific Property \n" +
+    "	mongoCall(\n" +
+    "		'Find the selected property from the ReportForm',\n" +
+    "		'db.getCollection(\"property\").find({									'\n" +
+    "	+	'	_id: \"' + currProperty + '\"	             							'\n" +
+    "	+	'})                                                                     '\n" +
+    "	);	\n" +
+    "	// Find property  ###REMOVE###\n" +
+    "	var selectProperty = propertyArray.filter(function(obj){\n" +
+    "		return obj._id == currProperty;\n" +
+    "	})			\n" +
+    "	\n" +
+    "	\n" +
+    "	// Render the report\n" +
+    "	var htmlCode = ''\n" +
+    "	htmlCode += topHeadline(topHeadtxt + ' for ' + selectProperty[0].unique);\n" +
+    "	htmlCode += reportHeadline(reportHead + ' for <b>' + selectProperty[0].unique + '</b>')\n" +
+    "	htmlCode += '<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse;\">'\n" +
+    "	htmlCode += '<tr><td style=\"vertical-align:top;\">'\n" +
+    "	\n" +
+    "	var htmlTHL = '<th style=\"text-align:left; padding-left:6px; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;\">#FIELD#</th>'\n" +
+    "	var htmlTHC = '<th style=\"text-align:center; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;\">#FIELD#</th>'\n" +
+    "	var htmlTHR = '<th style=\"text-align:right; padding-right:6px; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;\">#FIELD#</th>'\n" +
+    "	var htmlTDL = '<td style=\"text-align:left; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;\">#FIELD#</td>'\n" +
+    "	var htmlTDC = '<td style=\"text-align:center; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;\">#FIELD#</td>'\n" +
+    "	var htmlTDR = '<td style=\"text-align:right; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;\">#FIELD#</td>'\n" +
+    "	var htmlTotal = '<td colspan=\"#SPAN#\" style=\"white-space: nowrap; padding-left:4px; padding-right:4px; text-align:right; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; border-top:2px solid #666666; border-bottom:2px solid #666666; font-size:14px; font-weight:bold; font-family:Arial;\">#FIELD#</td>'\n" +
+    "	var htmlTotalSum = '<td colspan=\"#SPAN#\" style=\"white-space: nowrap; padding-left:4px; padding-right:4px; text-align:right; #COLOR# background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:bold; font-family:Arial;\">#FIELD#</td>'\n" +
+    "\n" +
+    "	// Invoice Headline\n" +
+    "	htmlCode += '<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse;\">'\n" +
+    "	htmlCode += '<tr>'\n" +
+    "	htmlCode += htmlTHC.replace('#FIELD#', 'Date');\n" +
+    "	htmlCode += htmlTHC.replace('#FIELD#', 'Inv');\n" +
+    "	htmlCode += htmlTHC.replace('#FIELD#', 'Book');\n" +
+    "	htmlCode += htmlTHL.replace('#FIELD#', 'Description');\n" +
+    "	htmlCode += htmlTHR.replace('#FIELD#', 'Amount');\n" +
+    "	htmlCode += '</tr>'\n" +
+    "\n" +
+    "	\n" +
+    "	// Find invoices and receipts for the Property and put into bookingArray\n" +
+    "	mongoCall(\n" +
+    "		'Find invoices and receipts for the Property',\n" +
+    "	 	'db.getCollection(\"booking\").aggregate([                          '\n" +
+    "	+	'    {                                                            '\n" +
+    "	+	'        $match: {                                                '\n" +
+    "	+	'           property: \"' + currProperty + '\",                     '\n" +
+    "	+	'			checkin : {$gte: (' + new Date(fromDate)/1000 + ')},  '\n" +
+    "	+	'			checkout: {$lte: (' + new Date(toDate)/1000 + ')}     '\n" +
+    "	+	'        }                                                        '\n" +
+    "	+	'    },                                                           '\n" +
+    "	+	'                                                                 '\n" +
+    "	+	'	{                                                             '\n" +
+    "	+	'		$lookup: {                                                '\n" +
+    "	+	'			from: \"invoice\",                                      '\n" +
+    "	+	'			localField: \"_id\",                                    '\n" +
+    "	+	'			foreignField: \"bookingId\",	                          '\n" +
+    "	+	'			as: \"invoice\"		                                  '\n" +
+    "	+	'		}	                                                      '\n" +
+    "	+	'	},                                                            '\n" +
+    "	+	'	                                                              '\n" +
+    "	+	'	{                                                             '\n" +
+    "	+	'		$lookup: {                                                '\n" +
+    "	+	'			from: \"receipt\",                                      '\n" +
+    "	+	'			localField: \"_id\",                                    '\n" +
+    "	+	'			foreignField: \"bookingId\",	                          '\n" +
+    "	+	'			as: \"receipt\"		                                  '\n" +
+    "	+	'		}	                                                      '\n" +
+    "	+	'	},                                                            '\n" +
+    "	+	'                                                                 '\n" +
+    "	+	'	{                                                             '\n" +
+    "	+	'		$project:{                                                '\n" +
+    "	+	'			\"_id\" : 1,                                            '\n" +
+    "	+	'			\"checkin\" : 1,                                        '\n" +
+    "	+	'			\"checkout\" : 1,                                       '\n" +
+    "	+	'			\"invoice\" : \"$invoice\",                               '\n" +
+    "	+	'			\"receipt\" : \"$receipt\"                                '\n" +
+    "	+	'		}                                                         '\n" +
+    "	+	'	}                                                             '\n" +
+    "	+	'                                                                 '\n" +
+    "	+	'])		                                                          '\n" +
+    "	);	\n" +
+    "	\n" +
+    "	// Sort invoiceArray by dueDate oldest to newest\n" +
+    "	sortBy(bookingArray, (o) => o.checkin);\n" +
+    "\n" +
+    "	// Loop thru all bookings\n" +
+    "	var totalIncome = 0;\n" +
+    "	var totalExpense = 0;\n" +
+    "	for (var b=0; b<bookingArray.length; b++) {	\n" +
+    "\n" +
+    "		// Loop thru all invoices on that booking\n" +
+    "		for (var i=0; i<bookingArray[b].invoice.length; i++) {	\n" +
+    "	\n" +
+    "			htmlCode += '<tr>'\n" +
+    "			htmlCode += htmlTDC.replace('#FIELD#', new Date(bookingArray[b].invoice[i].dueDate*1000).format('d/m/Y'));\n" +
+    "			htmlCode += htmlTDR.replace('#FIELD#', bookingArray[b].invoice[i].invoiceNumber);\n" +
+    "			htmlCode += htmlTDC.replace('#FIELD#', bookingArray[b].invoice[i].bookingId);\n" +
+    "\n" +
+    "			// Loop thru all lines on the invoice\n" +
+    "			var invoiceTotal = 0;\n" +
+    "			var invoiceText = '';\n" +
+    "\n" +
+    "			for (var l=0; l<bookingArray[b].invoice[i].invoiceLines.length; l++) {	\n" +
+    "				if (invoiceText == '') {\n" +
+    "					invoiceText += htmlTDL.replace('#FIELD#', bookingArray[b].invoice[i].invoiceLines[l].lineText);\n" +
+    "				}\n" +
+    "				invoiceTotal += bookingArray[b].invoice[i].invoiceLines[l].amountTotal;\n" +
+    "			}\n" +
+    "			htmlCode += invoiceText;\n" +
+    "\n" +
+    "			// Loop thru all receipts on that invoice\n" +
+    "			var receiptTotal = 0;\n" +
+    "			for (var r=0; r<bookingArray[b].receipt.length; r++) {	\n" +
+    "				if (bookingArray[b].receipt[r].invoiceId == bookingArray[b].invoice[i]._id) {\n" +
+    "					receiptTotal += bookingArray[b].receipt[r].amount;\n" +
+    "				}\n" +
+    "			}\n" +
+    "			\n" +
+    "			// if this is a completed booking (checkout before today) then use amount from receipts\n" +
+    "			currAmount = 0;\n" +
+    "			if (bookingArray[b].checkout <= new Date().format('U')) {\n" +
+    "				currAmount = receiptTotal\n" +
+    "			} else {\n" +
+    "				currAmount = invoiceTotal\n" +
+    "			}\n" +
+    "			htmlCode += htmlTDR.replace('#FIELD#', ('฿ ' + accFormat(currAmount)));\n" +
+    "			htmlCode += '</tr>'\n" +
+    "			totalIncome += currAmount;\n" +
+    "		}\n" +
+    "\n" +
+    "		// Loop thru all receipts with no invoice on this booking\n" +
+    "		var receiptTotal = 0;\n" +
+    "		var duedate = 0;\n" +
+    "		var recpNo = 0;\n" +
+    "		for (var r=0; r<bookingArray[b].receipt.length; r++) {	\n" +
+    "			if (bookingArray[b].receipt[r].invoiceId == \"\") {\n" +
+    "				receiptTotal += bookingArray[b].receipt[r].amount;\n" +
+    "				duedate = bookingArray[b].checkin;\n" +
+    "				recpNo = bookingArray[b].receipt[r].receiptNo;\n" +
+    "			}\n" +
+    "		}\n" +
+    "		if (receiptTotal != 0) {\n" +
+    "			htmlCode += '<tr>'\n" +
+    "			htmlCode += htmlTDC.replace('#FIELD#', new Date(duedate*1000).format('d/m/Y'));\n" +
+    "			htmlCode += htmlTDR.replace('#FIELD#', 0);\n" +
+    "			htmlCode += htmlTDC.replace('#FIELD#', bookingArray[b]._id);\n" +
+    "			htmlCode += htmlTDL.replace('#FIELD#', 'Extra receipts');		\n" +
+    "			htmlCode += htmlTDR.replace('#FIELD#', ('฿ ' + accFormat(receiptTotal)));\n" +
+    "			htmlCode += '</tr>'\n" +
+    "			totalIncome += currAmount;\n" +
+    "		}\n" +
+    "	}\n" +
+    "\n" +
+    "	// Writing the total Income\n" +
+    "	htmlCode += '<tr>'\n" +
+    "	var renderLine = htmlTotal.replace('#FIELD#', 'Total Income');\n" +
+    "	renderLine = renderLine.replace('#SPAN#','4');\n" +
+    "	htmlCode += renderLine;\n" +
+    "	var renderLine = htmlTotal.replace('#FIELD#', ('฿ ' + accFormat(totalIncome)));\n" +
+    "	renderLine = renderLine.replace('#SPAN#','1');\n" +
+    "	htmlCode += renderLine;\n" +
+    "	htmlCode += '</tr></table>'\n" +
+    "\n" +
+    "	\n" +
+    "	// Expense Headline\n" +
+    "	htmlCode += '</td><td style=\"width:8px;\"></td><td style=\"vertical-align:top;\">'\n" +
+    "	htmlCode += '<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse;\">'\n" +
+    "	htmlCode += '<tr>'\n" +
+    "	htmlCode += htmlTHC.replace('#FIELD#', 'Date');\n" +
+    "	htmlCode += htmlTHC.replace('#FIELD#', 'Exp');\n" +
+    "	htmlCode += htmlTHL.replace('#FIELD#', 'Description');\n" +
+    "	htmlCode += htmlTHR.replace('#FIELD#', 'Amount');\n" +
+    "	htmlCode += '</tr>'\n" +
+    "\n" +
+    "	\n" +
+    "	// Find all expenses for this property and put into expenseArray\n" +
+    "	// If it not work its because GEV turned all dates into strings!!!\n" +
+    "	mongoCall(\n" +
+    "		'Find all expenses for this property',\n" +
+    "		'db.getCollection(\"expense\").aggregate([                                                               '\n" +
+    "	+	'	{                                                                                                  '\n" +
+    "	+	'		$match: {                                                                                      '\n" +
+    "	+	'			propertyId: \"' + selectProperty[0].unique + '\",                                            '\n" +
+    "	+	'			dueDate : {$gte: (' + new Date(fromDate)/1000 + '), $lte: (' + new Date(toDate)/1000 + ')} '\n" +
+    "	+	'		}                                                                                              '\n" +
+    "	+	'	},                                                                                                 '\n" +
+    "	+	'                                                                                                      '\n" +
+    "	+	'	{                                                                                                  '\n" +
+    "	+	'		$project:{                                                                                     '\n" +
+    "	+	'			\"_id\" : 0,                                                                                 '\n" +
+    "	+	'			\"dueDate\" : 1,                                                                             '\n" +
+    "	+	'			\"propertyId\" : 1,                                                                          '\n" +
+    "	+	'			\"transactionNo\" : 1,                                                                       '\n" +
+    "	+	'			\"expenseCategory\" : 1,                                                                     '\n" +
+    "	+	'			\"text\" : 1,                                                                                '\n" +
+    "	+	'			\"amount\" : 1                                                                               '\n" +
+    "	+	'		}                                                                                              '\n" +
+    "	+	'	}                                                                                                  '\n" +
+    "	+	'                                                                                                      '\n" +
+    "	+	'])                                                                                                    '\n" +
+    "	)\n" +
+    "	\n" +
+    "	// Sort expenseArray by dueDate oldest to newest\n" +
+    "	sortBy(expenseArray, (o) => o.dueDate);\n" +
+    "\n" +
+    "	// Loop thru all expenses\n" +
+    "	for (var e=0; e<expenseArray.length; e++) {	\n" +
+    "\n" +
+    "		// Should this expense be split between several properties?\n" +
+    "		shareModifier = 100;\n" +
+    "		if (typeof(expenseArray[e].propertyId)=='object') {\n" +
+    "			console.log ('ITS ARRAY OF PROPERTIES!!!')\n" +
+    "			// Find total salesprice for all properties who share this expense and put into totalSaleprice\n" +
+    "			var mongoString = '';\n" +
+    "			for (var p=0; p<expenseArray[e].propertyId.length; p++) {\n" +
+    "				mongoString += '\"' + expenseArray[e].propertyId[p] + '\", '\n" +
+    "			}\n" +
+    "			var totalSaleprice = 0;\n" +
+    "			mongoCall(\n" +
+    "				'Find total salesprice for all properties who share this expense',\n" +
+    "					'db.getCollection(\"property\").aggregate(                    '\n" +
+    "				+	'	{                                                       '\n" +
+    "				+	'		$match: {                                           '\n" +
+    "				+	'			unique: {                                       '\n" +
+    "				+	'				$in: [ ' + mongoString.slice(0,-2) + ' ]    '\n" +
+    "				+	'			}                                               '\n" +
+    "				+	'		}                                                   '\n" +
+    "				+	'	},                                                      '\n" +
+    "				+	'	{                                                       '\n" +
+    "				+	'		$group: {                                           '\n" +
+    "				+	'			_id : null, sum : { $sum: \"$saleprice\" }        '\n" +
+    "				+	'		}                                                   '\n" +
+    "				+	'	},                                                      '\n" +
+    "				+	'	{                                                       '\n" +
+    "				+	'		$project: {                                         '\n" +
+    "				+	'			_id: 0, sum: 1                                  '\n" +
+    "				+	'		}                                                   '\n" +
+    "				+	'	}                                                       '\n" +
+    "				+	')                                                          '\n" +
+    "			);\n" +
+    "			if (totalSaleprice==0) {\n" +
+    "				totalSaleprice = selectProperty[0].saleprice\n" +
+    "			};\n" +
+    "			shareModifier = Math.round((selectProperty[0].saleprice/totalSaleprice)*100)\n" +
+    "			console.log ('shareModifier ' + shareModifier)\n" +
+    "\n" +
+    "		} else {\n" +
+    "			console.log ('Its single property ')\n" +
+    "			shareModifier = 100;\n" +
+    "		}\n" +
+    "	\n" +
+    "		// Render the line\n" +
+    "		htmlCode += '<tr>'\n" +
+    "		htmlCode += htmlTDC.replace('#FIELD#', new Date(expenseArray[e].dueDate*1000).format('d/m/Y'));\n" +
+    "		htmlCode += htmlTDR.replace('#FIELD#', expenseArray[e].transactionNo);\n" +
+    "		htmlCode += htmlTDL.replace('#FIELD#', expenseArray[e].text);\n" +
+    "		htmlCode += htmlTDR.replace('#FIELD#', ('฿ ' + accFormat(expenseArray[e].amount * (shareModifier/100))));\n" +
+    "		htmlCode += '</tr>'\n" +
+    "		\n" +
+    "		totalExpense += Math.round(expenseArray[e].amount * (shareModifier/100));\n" +
+    "		\n" +
+    "	}\n" +
+    "\n" +
+    "	// Writing the total Expense\n" +
+    "	htmlCode += '<tr>'\n" +
+    "	var renderLine = htmlTotal.replace('#FIELD#', 'Total Expense');\n" +
+    "	renderLine = renderLine.replace('#SPAN#','3');\n" +
+    "	htmlCode += renderLine;\n" +
+    "	var renderLine = htmlTotal.replace('#FIELD#', ('฿ ' + accFormat(totalExpense)));\n" +
+    "	renderLine = renderLine.replace('#SPAN#','1');\n" +
+    "	htmlCode += renderLine;\n" +
+    "	htmlCode += '</tr>'\n" +
+    "	\n" +
+    "	htmlCode += '<tr><td colspan=\"4\" style=\"border:0; height:16px;\"></td></tr>'\n" +
+    "	\n" +
+    "\n" +
+    "	\n" +
+    "	// Totals\n" +
+    "	htmlCode += '<tr>'\n" +
+    "\n" +
+    "	var renderLine = htmlTotalSum.replace('#FIELD#', 'Total Income from ' + selectProperty[0].unique);\n" +
+    "	renderLine = renderLine.replace('#COLOR#','color:#000000;');\n" +
+    "	renderLine = renderLine.replace('#SPAN#','3');\n" +
+    "	htmlCode += renderLine;\n" +
+    "\n" +
+    "	var renderLine = htmlTotalSum.replace('#FIELD#', ('฿ ' + accFormat(totalIncome)));\n" +
+    "	renderLine = renderLine.replace('#COLOR#',greenTxt);\n" +
+    "	renderLine = renderLine.replace('#SPAN#','1');\n" +
+    "	htmlCode += renderLine;\n" +
+    "\n" +
+    "	htmlCode += '</tr>'\n" +
+    "	htmlCode += '<tr>'\n" +
+    "	\n" +
+    "	var renderLine = htmlTotalSum.replace('#FIELD#', 'Total Expense from ' + selectProperty[0].unique);\n" +
+    "	renderLine = renderLine.replace('#COLOR#','color:#000000;');\n" +
+    "	renderLine = renderLine.replace('#SPAN#','3');\n" +
+    "	htmlCode += renderLine;\n" +
+    "\n" +
+    "	var renderLine = htmlTotalSum.replace('#FIELD#', ('฿ -' + accFormat(totalExpense)));\n" +
+    "	renderLine = renderLine.replace('#COLOR#',redTxt);\n" +
+    "	renderLine = renderLine.replace('#SPAN#','1');\n" +
+    "	htmlCode += renderLine;\n" +
+    "\n" +
+    "	htmlCode += '</tr>'\n" +
+    "	htmlCode += '<tr>'\n" +
+    "	if (totalExpense<=totalIncome) {\n" +
+    "		var renderLine = htmlTotalSum.replace('#FIELD#', 'Total PROFIT from ' + selectProperty[0].unique);\n" +
+    "	} else {\n" +
+    "		var renderLine = htmlTotalSum.replace('#FIELD#', 'Total LOSS from ' + selectProperty[0].unique);\n" +
+    "	}\n" +
+    "	renderLine = renderLine.replace('#COLOR#','color:#000000;');\n" +
+    "	renderLine = renderLine.replace('#SPAN#','3');\n" +
+    "	htmlCode += renderLine;\n" +
+    "\n" +
+    "	var renderLine = htmlTotalSum.replace('#FIELD#', ('฿ ' + accFormat(totalIncome-totalExpense)));\n" +
+    "	if (totalExpense<=totalIncome) {\n" +
+    "		renderLine = renderLine.replace('#COLOR#',greenTxt);\n" +
+    "	} else {\n" +
+    "		renderLine = renderLine.replace('#COLOR#',redTxt);\n" +
+    "	}\n" +
+    "	renderLine = renderLine.replace('#SPAN#','1');\n" +
+    "	htmlCode += renderLine;\n" +
+    "	htmlCode += '</tr></table>'\n" +
+    "	htmlCode += '</td></tr></table>'\n" +
+    "\n" +
+    "	htmlCode += reportFooter();\n" +
+    "	document.getElementById('contentAll').innerHTML = htmlCode;	\n" +
+    "\n" +
+    "}\n" +
+    "	\n" +
+    "</script>\n" +
+    "\n" +
+    "\n" +
+    "<body onload=\"setupReport();\">\n" +
+    "\n" +
+    "	<div style=\"width:100%; margin:auto; padding:0; display:table;\">\n" +
+    "\n" +
+    "		<!-- CONTENT -->\n" +
+    "		<div id=\"contentAll\"></div>\n" +
+    "\n" +
+    "	</div>\n" +
+    "  \n" +
+    "</body>\n" +
+    "</html>");
+}]);
+
+angular.module("templates/management/reports/reportBalanceSheet/index.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/management/reports/reportBalanceSheet/index.html",
+    "<div style=\"width:100%; margin:auto; padding:0; display:table;\">\n" +
+    "\n" +
+    "	<!-- CONTENT GOES HERE -->\n" +
+    "	<div id=\"contentAll\"></div>\n" +
+    "	\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("templates/management/reports/reportBankAccount/index.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/management/reports/reportBankAccount/index.html",
+    "<div style=\"width:100%; margin:auto; padding:0; display:table;\">\n" +
+    "\n" +
+    "	<!-- CONTENT GOES HERE -->\n" +
+    "	<div id=\"contentAll\"></div>\n" +
+    "	\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("templates/management/reports/reportBooking/index.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/management/reports/reportBooking/index.html",
+    "<div style=\"width:100%; margin:auto; padding:0; display:table;\">\n" +
+    "\n" +
+    "	<!-- CONTENT GOES HERE -->\n" +
+    "	<div id=\"contentAll\"></div>\n" +
+    "	\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("templates/management/reports/reportExpense/index.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/management/reports/reportExpense/index.html",
+    "<div style=\"width:100%; margin:auto; padding:0; display:table;\">\n" +
+    "\n" +
+    "	<!-- CONTENT GOES HERE -->\n" +
+    "	<div id=\"contentAll\"></div>\n" +
+    "	\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("templates/management/reports/reportForm/index.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/management/reports/reportForm/index.html",
+    "<div id=\"wrapper\" ng-controller=\"reportFormController as vm\" ng-init=\"loadReport()\" class=\"ng-scope\" style=\"clear:both; width:100%; max-width: 600px; display:table; margin: 0 auto;\">\n" +
+    "\n" +
+    "    <div class=\"new-booking-area\">\n" +
+    "        <table class=\"iconTD \">\n" +
+    "		<!-- BOMB PLEASE PUT BUTTONS -->\n" +
+    "		<br><br>\n" +
+    "		</table>\n" +
+    "    </div>\n" +
+    "\n" +
+    "	<div style=\"padding:10px 10px 10px 10px;\">\n" +
+    "\n" +
+    "	<!-- SEARCH FORM -->\n" +
+    "	<table class=\"startHeadTable\">\n" +
+    "		<tbody>\n" +
+    "		<tr><td colspan=\"4\" style=\"height:10px;\"></td></tr>\n" +
+    "		<tr>\n" +
+    "			<td class=\"startBrownTxt startHeadTxt startOverflow\" colspan=\"4\">STATISTICS&nbsp; & &nbsp;REPORTS</td>\n" +
+    "		</tr>\n" +
+    "		<tr><td colspan=\"4\" style=\"height:10px;\"></td></tr>\n" +
+    "\n" +
+    "\n" +
+    "		<!-- List of all expense reports -->\n" +
+    "		<tr>\n" +
+    "			<td style=\"width:20%;\" class=\"startLeadTxt\">Report</td>\n" +
+    "			<td style=\"width:80%;\" colspan=\"3\">\n" +
+    "				<select class=\"startField ng-pristine ng-untouched ng-valid ng-empty\" ng-model=\"vm.reportName\" aria-invalid=\"false\" id=\"reportName\" ng-change=\"modifyForm()\">\n" +
+    "					<option value=\"\"></option>\n" +
+    "					<option value=\"STATUS\">Daily Status</option>\n" +
+    "					<option value=\"AGENTSALE\">Agent Sales Prices</option>\n" +
+    "					<option value=\"AGENTRENT\">Agent Rent Prices</option>\n" +
+    "					<option value=\"BANK\">Bank Accounts</option>\n" +
+    "					<option value=\"BOOKING\">Bookings</option>\n" +
+    "					<option value=\"OCCUPANCY\">Occupancy Rate</option>\n" +
+    "					<option value=\"EXPENSES\">Expenses Report</option>\n" +
+    "					<option value=\"BALANCE\">Property Balance Sheet</option>\n" +
+    "					<option value=\"PERFORMANCE\">Property Performance</option>\n" +
+    "					<option value=\"REVENUE\">Revenue Report</option>\n" +
+    "					<option value=\"PROFIT\">Profits Report</option>\n" +
+    "					<option value=\"ROIBUY\">ROI on Purchase</option>\n" +
+    "					<option value=\"ROISALE\">ROI on Sale</option>\n" +
+    "					<option value=\"CHANNEL\">Channels, Nationalities, Agents</option>\n" +
+    "				</select>\n" +
+    "			</td>\n" +
+    "		</tr>\n" +
+    "\n" +
+    "\n" +
+    "		<tr ng-show=\"lineOne\"><td colspan=\"4\" style=\"height:30px;vertical-align:middle;\">\n" +
+    "			<div class=\"startBrownBg\" style=\"height:2px; padding:0px;\"></div>\n" +
+    "		</td></tr>\n" +
+    "\n" +
+    "		\n" +
+    "		<!-- From and To date -->\n" +
+    "		<tr ng-show=\"showFromDate\">\n" +
+    "			<td class=\"startLeadTxt\">From</td>\n" +
+    "			<td colspan=\"3\"><input type=\"date\" ng-model=\"vm.fldFromDate\" id=\"fldFromDate\" class=\"startField ng-pristine ng-valid ng-not-empty ng-touched\" value=\"\" aria-invalid=\"false\"></td>\n" +
+    "		</tr>\n" +
+    "		<tr ng-show=\"showToDate\">\n" +
+    "			<td class=\"startLeadTxt\">To</td>\n" +
+    "			<td colspan=\"3\"><input type=\"date\" ng-model=\"vm.fldToDate\" id=\"fldToDate\" class=\"startField ng-pristine ng-valid ng-not-empty ng-touched\" value=\"\" aria-invalid=\"false\"></td>\n" +
+    "		</tr>\n" +
+    "\n" +
+    "\n" +
+    "		<tr ng-show=\"lineTwo\"><td colspan=\"4\" style=\"height:30px;vertical-align:middle;\">\n" +
+    "			<div class=\"startBrownBg\" style=\"height:2px; padding:0px;\"></div>\n" +
+    "		</td></tr>\n" +
+    "\n" +
+    "\n" +
+    "		<!-- List of all expense categories -->\n" +
+    "		<tr ng-show=\"expenseCategories\">\n" +
+    "			<td class=\"startLeadTxt\" style=\"vertical-align:top;\">Expenses</td>\n" +
+    "			<td colspan=\"3\">\n" +
+    "				<select multiple \n" +
+    "					ng-options=\"item as item._id + ' - ' + item.name for item in vm.expenseCategory track by item._id\"\n" +
+    "					ng-model=\"vm.selectedExpense\" \n" +
+    "					style=\"height:150px; font-family:'Arial Narrow'!important; font-size:14px;\" class=\"startField ng-pristine ng-untouched ng-valid ng-empty\" aria-invalid=\"false\">\n" +
+    "				</select>\n" +
+    "			</td>\n" +
+    "		</tr>\n" +
+    "\n" +
+    "		\n" +
+    "		<!-- List of all bank accounts -->\n" +
+    "		<tr ng-show=\"bankAccounts\">\n" +
+    "			<td class=\"startLeadTxt\" style=\"vertical-align:top;\">Bank Accounts</td>\n" +
+    "			<td colspan=\"3\">\n" +
+    "				<select multiple \n" +
+    "					ng-options=\"item as item.account for item in vm.bankAccounts track by item._id\"\n" +
+    "					ng-model=\"vm.selectedBank\" \n" +
+    "					style=\"height:150px;\" class=\"startField ng-pristine ng-untouched ng-valid ng-empty\" aria-invalid=\"false\">\n" +
+    "				</select>\n" +
+    "			</td>\n" +
+    "		</tr>\n" +
+    "\n" +
+    "		\n" +
+    "		<!-- Stretch or not -->\n" +
+    "		<tr ng-show=\"expenseStretch\">\n" +
+    "			<td class=\"startLeadTxt\">Stretch</td>\n" +
+    "			<td colspan=\"3\" style=\"text-align:left;\"><input type=\"checkbox\" ng-model=\"vm.stretchExpense\" class=\"ng-pristine ng-valid ng-not-empty ng-touched\" style=\"width:20px; height:20px; margin-top:5px;\"  value=\"\" aria-invalid=\"false\"></td>\n" +
+    "		</tr>\n" +
+    "\n" +
+    "\n" +
+    "		<!-- what bookings to include? -->\n" +
+    "		<tr ng-show=\"includeBookings\">\n" +
+    "			<td class=\"startLeadTxt\" style=\"vertical-align:top;\">Booking Status</td>\n" +
+    "			<td colspan=\"3\">\n" +
+    "				<select class=\"startField ng-pristine ng-untouched ng-valid ng-empty\" ng-model=\"vm.bookingInclude\" aria-invalid=\"false\">\n" +
+    "					<option value=\"ACTIVE\" selected>All Active Bookings</option>\n" +
+    "					<option value=\"ALL\">All Bookings</option>\n" +
+    "					<option value=\"NOPAY\">All Not Paid Bookings</option>\n" +
+    "					<option value=\"0\">New Booking</option>\n" +
+    "					<option value=\"1\">Pending</option>\n" +
+    "					<option value=\"2\">Booked</option>\n" +
+    "					<option value=\"3\">Check-in</option>\n" +
+    "					<option value=\"4\">Check-out</option>\n" +
+    "					<option value=\"5\">Done</option>\n" +
+    "					<option value=\"6\">Cancelled</option>\n" +
+    "				</select>\n" +
+    "			</td>\n" +
+    "		</tr>\n" +
+    "\n" +
+    "		<!-- Ways to sort bookings -->\n" +
+    "		<tr ng-show=\"sortBookings\">\n" +
+    "			<td class=\"startLeadTxt\" style=\"vertical-align:top;\">Sort Bookings</td>\n" +
+    "			<td colspan=\"3\">\n" +
+    "				<select class=\"startField ng-pristine ng-untouched ng-valid ng-empty\" ng-model=\"vm.bookingSort\" aria-invalid=\"false\">\n" +
+    "					<option value=\"DATE\" selected>Sort by Checkin Date</option>\n" +
+    "					<option value=\"CHANNEL\">Sort by Channel</option>\n" +
+    "					<option value=\"PROPERTY\">Sort by Property</option>\n" +
+    "					<option value=\"STATUS\">Sort by Status</option>\n" +
+    "				</select>\n" +
+    "			</td>\n" +
+    "		</tr>\n" +
+    "\n" +
+    "\n" +
+    "		<!-- Include Agents? -->\n" +
+    "		<tr ng-show=\"bookingAgent\">\n" +
+    "			<td class=\"startLeadTxt\">Agents</td>\n" +
+    "			<td colspan=\"3\" style=\"text-align:left;\"><input type=\"checkbox\" ng-model=\"vm.bookingAgents\" class=\"ng-pristine ng-valid ng-not-empty ng-touched\" style=\"width:20px; height:20px; margin-top:5px;\"  value=\"\" aria-invalid=\"false\"></td>\n" +
+    "		</tr>\n" +
+    "\n" +
+    "\n" +
+    "		<!-- Include Invoice/Receipt? -->\n" +
+    "		<tr ng-show=\"bookingInvoice\">\n" +
+    "			<td class=\"startLeadTxt\">Invoices</td>\n" +
+    "			<td colspan=\"3\" style=\"text-align:left;\"><input type=\"checkbox\" ng-model=\"vm.bookingInvoices\" class=\"ng-pristine ng-valid ng-not-empty ng-touched\" style=\"width:20px; height:20px; margin-top:5px;\"  value=\"\" aria-invalid=\"false\"></td>\n" +
+    "		</tr>\n" +
+    "		\n" +
+    "\n" +
+    "		<tr ng-show=\"lineThree\"><td colspan=\"4\" style=\"height:30px;vertical-align:middle;\">\n" +
+    "			<div class=\"startBrownBg\" style=\"height:2px; padding:0px;\"></div>\n" +
+    "		</td></tr>\n" +
+    "		\n" +
+    "		\n" +
+    "		<!-- Multi Select List of all properties -->\n" +
+    "		<tr ng-show=\"propertiesMulti\">\n" +
+    "			<td class=\"startLeadTxt\" style=\"vertical-align:top;\">Units</td>\n" +
+    "			<td colspan=\"3\">\n" +
+    "				<select multiple \n" +
+    "					ng-options=\"e as e._id for e in vm.propertyIdList track by e._id\" \n" +
+    "					ng-model=\"vm.selectedPropertiesMulti\" \n" +
+    "					class=\"startField ng-pristine ng-untouched ng-valid ng-empty\" style=\"height:150px;\" aria-invalid=\"false\">\n" +
+    "				</select>\n" +
+    "			</td>\n" +
+    "		</tr>\n" +
+    "\n" +
+    "\n" +
+    "		<!-- Single Select List of all properties -->\n" +
+    "		<tr ng-show=\"propertiesSingle\">\n" +
+    "			<td class=\"startLeadTxt\" style=\"vertical-align:top;\">Units</td>\n" +
+    "			<td colspan=\"3\">\n" +
+    "				<select\n" +
+    "					ng-options=\"e as e._id for e in vm.propertyIdList track by e._id\" \n" +
+    "					ng-model=\"vm.selectedPropertiesSingle\" \n" +
+    "					class=\"startField ng-pristine ng-untouched ng-valid ng-empty\"  aria-invalid=\"false\">\n" +
+    "				</select>\n" +
+    "			</td>\n" +
+    "		</tr>\n" +
+    "\n" +
+    "\n" +
+    "		<tr ng-show=\"lineFour\"><td colspan=\"4\" style=\"height:20px;vertical-align:middle;\">\n" +
+    "			<div class=\"startBrownBg\" style=\"height:2px; padding:0px;\"></div>\n" +
+    "		</td></tr>\n" +
+    "\n" +
+    "\n" +
+    "		<!-- Generate Report button -->\n" +
+    "		<tr ng-show=\"generate\">\n" +
+    "			<td colspan=\"4\" class=\"startCenter\">\n" +
+    "				<button class=\"startBrownBg startButton\" style=\"width:200px;\" ng-click=\"callReport()\">\n" +
+    "					GENERATE REPORT\n" +
+    "				</button>\n" +
+    "			</td>\n" +
+    "		</tr>\n" +
+    "\n" +
+    "	</tbody></table>\n" +
+    "\n" +
+    "	</div>\n" +
+    "\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("templates/management/reports/reportOccupancy/ReportOccupancy.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/management/reports/reportOccupancy/ReportOccupancy.html",
+    "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\n" +
+    "\"http://www.w3.org/TR/html4/strict.dtd\">\n" +
+    "<html>\n" +
+    "\n" +
+    "<head>\n" +
+    "	<meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n" +
+    "	<meta http-equiv=\"Content-type\" content=\"text/html; charset=UTF-8\">\n" +
+    "	<meta name=\"description\" content=\"Thaihome - Vacation Rentals in Thailand\">\n" +
+    "	<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+    "	<title></title>\n" +
+    "	<style type=\"text/css\">\n" +
+    "		@media print{\n" +
+    "			@page {\n" +
+    "				size: auto; \n" +
+    "				margin: 10mm 5mm 5mm 5mm;  \n" +
+    "				size: landscape;\n" +
+    "				mso-header-margin:0mm; \n" +
+    "				mso-footer-margin:0mm; \n" +
+    "				mso-paper-source:0;\n" +
+    "			}\n" +
+    "		}\n" +
+    "	</style>	\n" +
+    "</head>\n" +
+    "\n" +
+    "<!-- Global date and number functions used in all reports -->\n" +
+    "<script src=\"formatDate.js\"></script>\n" +
+    "\n" +
+    "<!-- Header/Footer used in all reports -->\n" +
+    "<script src=\"headerFooter.js\"></script>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "<!-- TIKO to get the language -->\n" +
+    "<script src=\"dummyData\\gb.json\"></script>\n" +
+    "\n" +
+    "<!-- TIKO ##REMOVE## -->\n" +
+    "<script src=\"dummyData\\ReportOccupancy.json\"></script>\n" +
+    "\n" +
+    "\n" +
+    "<script language=\"javascript\">\n" +
+    "\n" +
+    "\n" +
+    "//\n" +
+    "// WHAT DO WE NEED FROM THE REPORT-FORM?\n" +
+    "//\n" +
+    "// -->  We choose FROM date and TO date \n" +
+    "// -->  We can choose ALL properties or choose SPECIFIC properties\n" +
+    "//\n" +
+    "var fromDate = new Date(\"2017-01-01 00:00:00\");\n" +
+    "var toDate = new Date(\"2017-12-31 23:23:59\");\n" +
+    "//var properties = [\"ALL\"];\n" +
+    "var properties = [ \"58669386869659d70b424ea4\",\"58669471869659d70b424ea7\",\"58669566869659d70b424ebb\",\"5866947a869659d70b424ea8\" ];\n" +
+    "\n" +
+    "var currencyCode = \"THB\";\n" +
+    "\n" +
+    "var topHeadtxt = 'Occupancy Rate'\n" +
+    "var reportHead = 'Period from <b>' + fromDate.format('j M Y') + '</b> to <b>' + toDate.format('j M Y') + '</b>';\n" +
+    "\n" +
+    "// VARIABLES\n" +
+    "var monthTxt = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']\n" +
+    "var printArr = [];\n" +
+    "var lowRate = 25 \n" +
+    "var midRate = 50\n" +
+    "var greenTxt = 'color:#007000;';\n" +
+    "var greenBg  = 'background-color:#DDFFDD;';\n" +
+    "var redTxt = 'color:#804040;';\n" +
+    "var redBg  = 'background-color:#FFE5E5;';\n" +
+    "var greyTxt = 'color:#808080;';\n" +
+    "var greyBg  = 'background-color:#E0E0E0;';\n" +
+    "var yellowTxt = 'color:#707000;';\n" +
+    "var yellowBg  = 'background-color:#FFFFB2;';\n" +
+    "\n" +
+    "\n" +
+    "// Loop thru years and months and find all bookings\n" +
+    "function setupReport(){\n" +
+    "\n" +
+    "	var fromDateFind = new Date();  \n" +
+    "	var toDateFind = new Date();  \n" +
+    "\n" +
+    "	var fromMonth = fromDate.getMonth()+1;\n" +
+    "	var toMonth = toDate.getMonth()+1;\n" +
+    "\n" +
+    "	var fromYear = fromDate.getFullYear();\n" +
+    "	var toYear = toDate.getFullYear();\n" +
+    "	\n" +
+    "	var cntFromMonth = 0;\n" +
+    "	var cntToMonth = 0;\n" +
+    "\n" +
+    "	// Did user choose any properties?\n" +
+    "	var selectStr1 = '';\n" +
+    "	var selectStr2 = '';\n" +
+    "	if (properties.length) {\n" +
+    "		if (properties[0]!='ALL') {\n" +
+    "			var tmpStr='';\n" +
+    "			for (var i=0; i<properties.length; i++) {\n" +
+    "				tmpStr += '\"' + properties[i].trim() + '\",' \n" +
+    "			}\n" +
+    "			selectStr1 = '_id: { $in: [ ' + tmpStr.slice(0, -1) + ' ] },';\n" +
+    "			selectStr2 = 'property: { $in: [ ' + tmpStr.slice(0, -1) + ' ] },';\n" +
+    "		}\n" +
+    "	}\n" +
+    "\n" +
+    "	// Find all or selected properties and put into propertyArray\n" +
+    "	mongoCall(\n" +
+    "		'Find all or selected properties',\n" +
+    "		'db.getCollection(\"property\").aggregate([                         '\n" +
+    "	+	'	{                                                             '\n" +
+    "	+	'        $match: {                                                '\n" +
+    "	+	'			' + selectStr1 + '                                     '  \n" +
+    "	+	'			active : true                                         '\n" +
+    "	+	'        }                                                        '\n" +
+    "	+	'	},                                                            '\n" +
+    "	+	'                                                                 '\n" +
+    "	+	'	{                                                             '\n" +
+    "	+	'		$project:{                                                '\n" +
+    "	+	'			\"_id\" : 1,                         '\n" +
+    "	+	'			\"unique\" : 1,                        '\n" +
+    "	+	'			\"name\" : 1,                            '\n" +
+    "	+	'		}                                                         '\n" +
+    "	+	'	}	                                                          '\n" +
+    "	+	'])	                                                              '\n" +
+    "	)\n" +
+    "\n" +
+    "	\n" +
+    "	// Find the bookings within the date range and put into bookingArray\n" +
+    "	mongoCall(\n" +
+    "		'Find the bookings within the date range',\n" +
+    "		'db.getCollection(\"booking\").aggregate([                          '\n" +
+    "	+	'    {                                                            '\n" +
+    "	+	'        $match: {                                                '\n" +
+    "	+	'			' + selectStr2 + '                                     '  \n" +
+    "	+	'			status : {$lte: (5)},                                 '\n" +
+    "	+	'			checkin : {$gte: (' + new Date(fromDate)/1000 + ')},  '  \n" +
+    "	+	'			checkout: {$lte: (' + new Date(toDate)/1000 + ')}     '  \n" +
+    "	+	'        }                                                        '\n" +
+    "	+	'    },                                                           '\n" +
+    "	+	'                                                                 '\n" +
+    "	+	'	{                                                             '\n" +
+    "	+	'		$project:{                                                '\n" +
+    "	+	'			\"_id\" : 1,                                            '\n" +
+    "	+	'			\"status\" : 1,                                         '\n" +
+    "	+	'			\"property\" : 1,                         '\n" +
+    "	+	'			\"checkin\" : 1,                                        '\n" +
+    "	+	'			\"checkout\" : 1                                        '\n" +
+    "	+	'		}                                                         '\n" +
+    "	+	'	}	                                                          '\n" +
+    "	+	'])	                                                              '\n" +
+    "	)\n" +
+    "	\n" +
+    "	\n" +
+    "	// Put page title the same as report headline\n" +
+    "	document.title = topHeadtxt;\n" +
+    "\n" +
+    "	\n" +
+    "	\n" +
+    "	// Count for all years \n" +
+    "	for (var countYear=fromYear; countYear<=toYear; countYear++) {\n" +
+    "	\n" +
+    "		// If this year is bigger than fromYear then we need to count from 1st month \n" +
+    "		if (countYear > fromYear) {\n" +
+    "			cntFromMonth = 1\n" +
+    "		} else {\n" +
+    "			cntFromMonth = fromMonth\n" +
+    "		}\n" +
+    "	\n" +
+    "		// If this year is smaller than toYear then we need to count all 12 months \n" +
+    "		if (countYear < toYear) {\n" +
+    "			cntToMonth = 12\n" +
+    "		} else {\n" +
+    "			cntToMonth = toMonth\n" +
+    "		}\n" +
+    "	\n" +
+    "		// looping thru all months for the countYear \n" +
+    "		for (var countMonth=cntFromMonth; countMonth<=cntToMonth; countMonth++) {\n" +
+    "			for (var i=0; i<propertyArray.length; i++) {\n" +
+    "				maxDays = daysInMonth(countMonth, countYear);\n" +
+    "				countBookings(propertyArray[i]._id, countYear, countMonth, maxDays);\n" +
+    "			}\n" +
+    "		}\n" +
+    "	}\n" +
+    "	\n" +
+    "	// Render the HTML\n" +
+    "	var htmlCode = '';\n" +
+    "	htmlCode += topHeadline(topHeadtxt);\n" +
+    "	htmlCode += reportHeadline(reportHead);\n" +
+    "	htmlCode += renderRows(fromYear, toYear, fromMonth, toMonth);\n" +
+    "	htmlCode += reportFooter();\n" +
+    "	\n" +
+    "	document.getElementById('contentAll').innerHTML = htmlCode;	\n" +
+    "	return;\n" +
+    "}\n" +
+    "\n" +
+    "// Loop thru all bookings for given year/month/property\n" +
+    "function countBookings(currentProperty, currentYear, currentMonth, maxDays){\n" +
+    "\n" +
+    "	var bookedNights = 0\n" +
+    "	var minDate = new Date(currentYear + '-' + currentMonth + '-01 00:00:00') / 1000\n" +
+    "	var maxDate = new Date(currentYear + '-' + currentMonth + '-' + maxDays + ' 23:59:59') / 1000\n" +
+    "	console.log('property ID: ' + currentProperty)\n" +
+    "	console.log('currentYear: ' + currentYear)\n" +
+    "	console.log('currentMonth: ' + currentMonth)\n" +
+    "	console.log('minDate: ' + minDate)\n" +
+    "	console.log('maxDate: ' + maxDate)\n" +
+    "	console.log('minDate: ' + new Date(minDate*1000).format('d M Y'))\n" +
+    "	console.log('maxDate: ' + new Date(maxDate*1000).format('d M Y'))\n" +
+    "	\n" +
+    "	var selected = bookingArray.filter(function(obj){\n" +
+    "		return obj.property == currentProperty && obj.checkout >= minDate && obj.checkin <= maxDate;\n" +
+    "	})	\n" +
+    "	\n" +
+    "	for (var j=0; j<selected.length; j++) {\n" +
+    "		console.log('checkin/checkout: ' + new Date(selected[j].checkin).format('d M Y') + ' - ' + new Date(selected[j].checkout).format('d M Y'));\n" +
+    "		\n" +
+    "		// If checkin/checkout cover the whole month \n" +
+    "		if (selected[j].checkin < minDate && selected[j].checkout > maxDate) {\n" +
+    "			bookedNights = bookedNights + maxDays\n" +
+    "			console.log ('checkin/checkout cover the whole month');\n" +
+    "			\n" +
+    "		// If checkin/checkout are both within this month\n" +
+    "		} else if (selected[j].checkin >= minDate && selected[j].checkout <= maxDate) {\n" +
+    "			bookedNights = bookedNights + daysBetween(new Date(selected[j].checkin*1000), new Date(selected[j].checkout*1000))\n" +
+    "			console.log ('checkin/checkout are both within this month');\n" +
+    "\n" +
+    "		// If checkin is within this month and checkout is more than this month \n" +
+    "		} else if (selected[j].checkin >= minDate && selected[j].checkout > maxDate) {\n" +
+    "			bookedNights = bookedNights + daysBetween(new Date(selected[j].checkin*1000), new Date(maxDate*1000))\n" +
+    "			console.log ('checkin is within this month and checkout is more than this month');\n" +
+    "\n" +
+    "		// If checkin is before this month and checkout is within this month\n" +
+    "		} else if (selected[j].checkin < minDate && selected[j].checkout <= maxDate) {\n" +
+    "			bookedNights = bookedNights + daysBetween(new Date(minDate*1000), new Date(selected[j].checkout*1000))\n" +
+    "			console.log ('checkin is before this month and checkout is within this month');\n" +
+    "			\n" +
+    "		// This should never happen\n" +
+    "		} else {\n" +
+    "			console.log('THIS CAN NEVER HAPPEN!!');\n" +
+    "			console.log('checkin/checkout: ' + new Date(selected[j].checkin).format('d M Y') + ' - ' + new Date(selected[j].checkout).format('d M Y'));\n" +
+    "			console.log('property ID: ' + currentProperty)\n" +
+    "			console.log('minDate: ' + new Date(minDate).format('d M Y'))\n" +
+    "			console.log('maxDate: ' + new Date(maxDate).format('d M Y'))\n" +
+    "		}\n" +
+    "	}\n" +
+    "\n" +
+    "	// Add to print result\n" +
+    "	printArr.push(\n" +
+    "		{\n" +
+    "			'property' : currentProperty,\n" +
+    "			'year' : currentYear,\n" +
+    "			'month' : currentMonth,\n" +
+    "			'bookNights' : bookedNights,\n" +
+    "			'maxDays' : maxDays,\n" +
+    "			'bookedPct' : Math.round(bookedNights/maxDays * 100)\n" +
+    "		}\n" +
+    "	);\n" +
+    "}\n" +
+    "\n" +
+    "\n" +
+    "// TIKO time to render all generated data \n" +
+    "function renderRows(fromYear, toYear, fromMonth, toMonth) {\n" +
+    "	var countYear = 0;\n" +
+    "	var countMonth = 0;\n" +
+    "	var cntFromMonth = 0;\n" +
+    "	var cntToMonth = 0;\n" +
+    "	var htmlCode = '';\n" +
+    "	var totalArray = [];\n" +
+    "\n" +
+    "	var htmlProject = '<td style=\"white-space: nowrap; padding-left:8px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; height:24px; font-size:14px; font-weight:normal; font-family:Arial;\">#FIELD#</td>'\n" +
+    "	var htmlProperty = '<td style=\"white-space: nowrap; padding-left:8px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;\">#FIELD#</td>'\n" +
+    "	var htmlTD = '<td style=\"white-space: nowrap; padding-left:8px; padding-right:4px; text-align:right; #COLOR# border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;\">#FIELD#</td>'\n" +
+    "	var htmlTotalHead = '<td colspan=\"2\" style=\"white-space: nowrap; padding-left:8px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; border-top:2px solid #666666; border-bottom:2px solid #666666; height:24px; font-size:14px; font-weight:bold; font-family:Arial;\">#FIELD#</td>'\n" +
+    "	var htmlTotal = '<td style=\"white-space: nowrap; padding-left:8px; padding-right:4px; text-align:right; #COLOR# border:1px solid #AAAAAA; border-top:2px solid #666666; border-bottom:2px solid #666666; font-size:14px; font-weight:bold; font-family:Arial;\">#FIELD#</td>'\n" +
+    "\n" +
+    "	htmlCode += renderTableHead(fromYear, toYear, fromMonth, toMonth);\n" +
+    "\n" +
+    "	// Generate the rows with data\n" +
+    "	var lines = 0;\n" +
+    "	sortBy(propertyArray, (o) => o.unique);\n" +
+    "\n" +
+    "\n" +
+    "	for (var i=0; i<propertyArray.length; i++) {\n" +
+    "\n" +
+    "		var totalBookNights = 0;\n" +
+    "		var totalMaxDays = 0;	\n" +
+    "		var avgCount = 0;	\n" +
+    "	\n" +
+    "		htmlCode +='<tr>' \n" +
+    "		htmlCode +=htmlProject.replace('#FIELD#', propertyArray[i].name);\n" +
+    "		htmlCode +=htmlProperty.replace('#FIELD#', propertyArray[i].unique);\n" +
+    "\n" +
+    "		var selected = printArr.filter(function(obj){\n" +
+    "			return obj.property == propertyArray[i]._id;\n" +
+    "		})	\n" +
+    "		\n" +
+    "		for (var j=0; j<selected.length; j++) {\n" +
+    "\n" +
+    "			var renderLine = htmlTD.replace('#FIELD#', (selected[j].bookedPct + '%'));\n" +
+    "			renderLine = renderLine.replace('#COLOR#', coloring(selected[j].bookedPct));		\n" +
+    "			htmlCode +=renderLine;\n" +
+    "\n" +
+    "			// Adding to Totals \n" +
+    "			var totalSelected = totalArray.filter(function(obj){\n" +
+    "				return obj.year == selected[j].year && obj.month == selected[j].month;\n" +
+    "			})	\n" +
+    "			if (totalSelected.length != 1) {\n" +
+    "				totalArray.push(\n" +
+    "				{\n" +
+    "					'year' : selected[j].year,\n" +
+    "					'month' : selected[j].month,\n" +
+    "					'bookNights' : selected[j].bookNights,\n" +
+    "					'maxDays' : selected[j].maxDays\n" +
+    "				});\n" +
+    "			} else {\n" +
+    "				totalSelected[0].bookNights += selected[j].bookNights;\n" +
+    "				totalSelected[0].maxDays += selected[j].maxDays;\n" +
+    "			}\n" +
+    "			totalBookNights += selected[j].bookNights;\n" +
+    "			totalMaxDays += selected[j].maxDays;\n" +
+    "			avgCount += 1;\n" +
+    "		}\n" +
+    "		\n" +
+    "		// Put total for property\n" +
+    "		var renderLine = htmlTD.replace('#FIELD#', (Math.round(totalBookNights/totalMaxDays * 100) + '%'));\n" +
+    "		renderLine = renderLine.replace('#COLOR#', coloring(Math.round(totalBookNights/totalMaxDays * 100)));		\n" +
+    "		renderLine = renderLine.replace('normal', 'bold');		\n" +
+    "		htmlCode +=renderLine;\n" +
+    "		htmlCode +='</tr>' \n" +
+    "\n" +
+    "		// Break every 18 lines  \n" +
+    "		lines += 1;\n" +
+    "		if (lines>18) {\n" +
+    "			htmlCode += '</table>';\n" +
+    "			htmlCode += reportFooter();			\n" +
+    "			htmlCode += reportPageBreak();\n" +
+    "			htmlCode += topHeadline(topHeadtxt);\n" +
+    "			htmlCode += reportHeadline(reportHead);\n" +
+    "			htmlCode += renderTableHead(fromYear, toYear, fromMonth, toMonth);\n" +
+    "			lines = 0;\n" +
+    "		}		\n" +
+    "	}	\n" +
+    "\n" +
+    "	\n" +
+    "	// Generate the totals line\n" +
+    "	var totalBookNights = 0;\n" +
+    "	var totalMaxDays = 0;	\n" +
+    "	var avgCount = 0;	\n" +
+    "	htmlCode +='<tr>' \n" +
+    "	htmlCode +=htmlTotalHead.replace('#FIELD#', 'TOTAL ALL PROPERTIES');\n" +
+    "	for (var j=0; j<totalArray.length; j++) {\n" +
+    "		var renderLine = htmlTotal.replace('#FIELD#', (Math.round(totalArray[j].bookNights/totalArray[j].maxDays * 100) + '%'));\n" +
+    "		renderLine = renderLine.replace('#COLOR#', coloring(Math.round(totalArray[j].bookNights/totalArray[j].maxDays * 100)));		\n" +
+    "		htmlCode +=renderLine;\n" +
+    "\n" +
+    "		totalBookNights += selected[j].bookNights;\n" +
+    "		totalMaxDays += selected[j].maxDays;\n" +
+    "		avgCount += 1;\n" +
+    "	}\n" +
+    "\n" +
+    "	// Put total for all property\n" +
+    "	var renderLine = htmlTotal.replace('#FIELD#', (Math.round(totalBookNights/totalMaxDays * 100) + '%'));\n" +
+    "	renderLine = renderLine.replace('#COLOR#', coloring(Math.round(totalBookNights/totalMaxDays * 100)));		\n" +
+    "	htmlCode +=renderLine;\n" +
+    "\n" +
+    "	htmlCode +='</tr></table>' \n" +
+    "\n" +
+    "	return htmlCode;\n" +
+    "	\n" +
+    "}\n" +
+    "\n" +
+    "// Render the Table Header\n" +
+    "function renderTableHead(fromYear, toYear, fromMonth, toMonth) {\n" +
+    "	var htmlTH = '<td style=\"text-align:left; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;\">#FIELD#</td>'\n" +
+    "	var htmlTHR = '<td style=\"text-align:right; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;\">#FIELD#</td>'\n" +
+    "	var htmlCode = ''\n" +
+    "	htmlCode += '<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;\">'\n" +
+    "	htmlCode += '<tr>'\n" +
+    "	htmlCode +=htmlTH.replace('#FIELD#', 'Project');\n" +
+    "	htmlCode +=htmlTH.replace('#FIELD#', 'Unit');\n" +
+    "	\n" +
+    "	// Generate the table header with months\n" +
+    "	for (var countYear=fromYear; countYear<=toYear; countYear++) {\n" +
+    "	\n" +
+    "		// If this year is bigger than fromYear then we need to count from 1st month \n" +
+    "		if (countYear > fromYear) {\n" +
+    "			cntFromMonth = 1\n" +
+    "		} else {\n" +
+    "			cntFromMonth = fromMonth\n" +
+    "		}\n" +
+    "	\n" +
+    "		// If this year is smaller than toYear then we need to count all 12 months \n" +
+    "		if (countYear < toYear) {\n" +
+    "			cntToMonth = 12\n" +
+    "		} else {\n" +
+    "			cntToMonth = toMonth\n" +
+    "		}\n" +
+    "	\n" +
+    "		// looping thru all months for the countYear \n" +
+    "		for (var countMonth=cntFromMonth; countMonth<=cntToMonth; countMonth++) {\n" +
+    "			htmlCode +=htmlTHR.replace('#FIELD#', monthTxt[countMonth-1] + \"-\" + ('0'+(countYear)).slice(-2));\n" +
+    "		}\n" +
+    "	}\n" +
+    "	htmlCode +=htmlTHR.replace('#FIELD#', 'Total');\n" +
+    "	htmlCode +='</tr>' \n" +
+    "	return htmlCode;\n" +
+    "}\n" +
+    "\n" +
+    "// Put correct precentage coloring\n" +
+    "function coloring(bookedPct) {\n" +
+    "	var colorStyle = '';\n" +
+    "	// if > 0 and < lowRate then RED color\n" +
+    "	if (bookedPct > 0 && bookedPct < lowRate) {\n" +
+    "		colorStyle = redTxt + ' ' + redBg;		\n" +
+    "			\n" +
+    "	// if >= lowRate and < midRate then YELLOW color\n" +
+    "	} else if (bookedPct >= lowRate && bookedPct < midRate) {\n" +
+    "		colorStyle = yellowTxt + ' ' + yellowBg;		\n" +
+    "\n" +
+    "	// if >= highRate then GREEN color\n" +
+    "	} else if (bookedPct >= midRate) {\n" +
+    "		colorStyle = greenTxt + ' ' + greenBg;		\n" +
+    "\n" +
+    "	// Else GREY color\n" +
+    "	} else {\n" +
+    "		colorStyle = greyTxt + ' ' + greyBg;		\n" +
+    "	}\n" +
+    "	return colorStyle\n" +
+    "}\n" +
+    "</script>\n" +
+    "\n" +
+    "<body onload=\"setupReport();\">\n" +
+    "\n" +
+    "	<div style=\"width:100%; margin:auto; padding:0; display:table;\">\n" +
+    "\n" +
+    "		<!-- CONTENT -->\n" +
+    "		<div id=\"contentAll\"></div>\n" +
+    "\n" +
+    "	</div>\n" +
+    "  \n" +
+    "</body>\n" +
+    "</html>");
+}]);
+
+angular.module("templates/management/reports/reportOccupancy/index.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/management/reports/reportOccupancy/index.html",
+    "<div style=\"width:100%; margin:auto; padding:0; display:table;\">\n" +
+    "\n" +
+    "	<!-- CONTENT GOES HERE -->\n" +
+    "	<div id=\"contentAll\"></div>\n" +
+    "	\n" +
     "</div>\n" +
     "");
 }]);

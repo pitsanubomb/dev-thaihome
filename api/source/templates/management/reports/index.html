@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>ThaiHome Vacation Rentals</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+	<meta name="description" content="Thaihome - Vacation Rentals in Thailand">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="http://191.101.12.128:3000/styles.css"> 
+
+	<!--<link rel="stylesheet" type="text/css" media="print" href="print.css" />-->
+	<style type="text/css">
+		@media print{
+			@page {
+				size: auto; 
+				margin: 10mm 5mm 5mm 5mm;  
+				size: portrait;
+				mso-header-margin:0mm; 
+				mso-footer-margin:0mm; 
+				mso-paper-source:0;
+			}
+			.printButtonClass{ display : none }
+		}
+	</style>
+
+
+	<!-- Please add to our stylesheet with the others, search for startPinkTxt in CSS and put it there -->
+	<style type="text/css">
+
+		.startBrownTxt { color:#663300; }
+		.startBrownBg { background-color:#663300; }
+		.startBrownTh { background-color:#ffcc99; }
+	
+	</style>
+</head>
+
+<body ng-app="Report">
+
+<div class="center" ng-view>
+
+CONTENT GOES HERE
+
+</div>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+<script src="app.js"></script>
+<script src="gb.json"></script> <!-- BOMB - I think this one is already included? Its the english language for ThaiHome -->
+<script src="formatDate.js"></script> <!-- Global date and number functions used in all reports -->
+<script src="headerFooter.js"></script> <!-- Header/Footer used in all reports -->
+<script src="reportForm/index.js"></script> <!-- The Report Form -->
+<script src="reportAgentSale/index.js"></script> <!-- The AgentSale Report-->
+<script src="reportAgentRent/index.js"></script> <!-- The AgentRent Report -->
+<script src="reportBankAccount/index.js"></script> <!-- The BankAccount Report-->
+<script src="reportExpense/index.js"></script> <!-- The Expense Report-->
+<script src="reportBalanceSheet/index.js"></script> <!-- The Property Balance Sheet Report-->
+<script src="reportBooking/index.js"></script> <!-- The Booking List Report-->
