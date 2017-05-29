@@ -9537,6 +9537,3242 @@ jQuery("form[name=contact-form] input[value='']:not(:checkbox,:button):visible:f
                 };
             }]);
 })();
+//  Very cool date.format function
+//  console.log (new Date().format('Y-m-d h:i:s'));  =  2017-03-09 10:33:35
+//	console.log (new Date().format('U')); = 1489030415
+//  console.log('checkout ' + new Date(selectBooking[0].checkout*1000).format('Y-m-d h:i:s'))
+//  see https://github.com/JDMcKinstry/JavaScriptDateFormat/blob/master/README.md
+;(function(){function g(a,c){a.setHours(a.getHours()+parseFloat(c));return a}function h(a,c){var b="Sunday Monday Tuesday Wednesday Thursday Friday Saturday".split(" ");return c?b[a.getDay()].substr(0,3):b[a.getDay()]}function k(a,c){var b="January February March April May June July August September October November December".split(" ");return c?b[a.getMonth()].substr(0,3):b[a.getMonth()]}function e(a,c){if(a){if("compound"==a){if(!1===c)return this.format.compound;var b={},d;for(d in Date.prototype.format.compound)b[d]=
+this.format(Date.prototype.format.compound[d]);return b}if(Date.prototype.format.compound[a])return this.format(Date.prototype.format.compound[a],c);if("constants"==a){if(!1===c)return this.format.constants;b={};for(d in Date.prototype.format.constants)b[d]=this.format(Date.prototype.format.constants[d]);return b}if(Date.prototype.format.constants[a])return this.format(Date.prototype.format.constants[a],c);if("pretty"==a){if(!1===c)return this.format.pretty;b={};for(d in Date.prototype.format.pretty)b[d]=
+this.format(Date.prototype.format.pretty[d]);return b}if(Date.prototype.format.pretty[a])return this.format(Date.prototype.format.pretty[a],c);var b=a.split(""),e="";for(d in b){var f=b[d];f&&/[a-z]/i.test(f)&&!/\\/.test(e+f)&&(b[d]=l[f]?l[f].apply(this):f);e=b[d]}return b.join("").replace(/\\/g,"")}return a}var l={d:function(){var a=this.getDate();return 9<a?a:"0"+a},D:function(){return h(this,!0)},j:function(){return this.getDate()},l:function(){return h(this)},N:function(){return this.getDay()+
+1},S:function(){var a=this.getDate();return/^1[0-9]$/.test(a)?"th":/1$/.test(a)?"st":/2$/.test(a)?"nd":/3$/.test(a)?"rd":"th"},w:function(){return this.getDay()},z:function(){return Math.round(Math.abs((this.getTime()-(new Date("1/1/"+this.getFullYear())).getTime())/864E5))},W:function(){var a=new Date(this.getFullYear(),0,1);return Math.ceil(((this-a)/864E5+a.getDay()+1)/7)},F:function(){return k(this)},m:function(){var a=this.getMonth()+1;return 9<a?a:"0"+a},M:function(){return k(this,!0)},n:function(){return this.getMonth()+
+1},t:function(){return(new Date(this.getFullYear(),this.getMonth()+1,0)).getDate()},L:function(){var a=this.getFullYear();return 0==a%4&&0!=a%100||0==a%400},o:function(){return parseInt(this.getFullYear())},Y:function(){return parseInt(this.getFullYear())},y:function(){return parseInt((this.getFullYear()+"").substr(-2))},a:function(){return 12<=this.getHours()?"pm":"am"},A:function(){return 12<=this.getHours()?"PM":"AM"},B:function(){return"@"+("00"+Math.floor((60*((this.getHours()+1)%24*60+this.getMinutes())+
+this.getSeconds()+.001*this.getMilliseconds())/86.4)).slice(-3)},g:function(){var a=this.getHours();return 0==a?12:12>=a?a:a-12},G:function(){return this.getHours()},h:function(){var a=this.getHours(),a=12>=a?a:a-12;return 0==a?12:9<a?a:"0"+a},H:function(){var a=this.getHours();return 9<a?a:"0"+a},i:function(){var a=this.getMinutes();return 9<a?a:"0"+a},s:function(){var a=this.getSeconds();return 9<a?a:"0"+a},u:function(){return this.getMilliseconds()},e:function(){var a=this.toString().match(/ ([A-Z]{3,4})([-|+]?\d{4})/);
+return 1<a.length?a[1]:""},I:function(){var a=new Date(this.getFullYear(),0,1),c=new Date(this.getFullYear(),6,1),a=Math.max(a.getTimezoneOffset(),c.getTimezoneOffset());return this.getTimezoneOffset()<a?1:0},O:function(){var a=this.toString().match(/ ([A-Z]{3,4})([-|+]?\d{4})/);return 2<a.length?a[2]:""},P:function(){var a=this.toString().match(/ ([A-Z]{3,4})([-|+]?\d{4})/);return 2<a.length?a[2].substr(0,3)+":"+a[2].substr(3,2):""},T:function(){return this.toLocaleString("en",{timeZoneName:"short"}).split(" ").pop()},
+Z:function(){return 60*this.getTimezoneOffset()},c:function(){return g(new Date(this),-(this.getTimezoneOffset()/60)).toISOString()},r:function(){return g(new Date(this),-(this.getTimezoneOffset()/60)).toISOString()},U:function(){return this.getTime()/1E3|0}},m={commonLogFormat:"d/M/Y:G:i:s",exif:"Y:m:d G:i:s",isoYearWeek:"Y\\WW",isoYearWeek2:"Y-\\WW",isoYearWeekDay:"Y\\WWj",isoYearWeekDay2:"Y-\\WW-j",mySQL:"Y-m-d h:i:s",postgreSQL:"Y.z",postgreSQL2:"Yz",soap:"Y-m-d\\TH:i:s.u",soap2:"Y-m-d\\TH:i:s.uP",
+unixTimestamp:"@U",xmlrpc:"Ymd\\TG:i:s",xmlrpcCompact:"Ymd\\tGis",wddx:"Y-n-j\\TG:i:s"},n={AMERICAN:"F j, Y",AMERICANSHORT:"m/d/Y",AMERICANSHORTWTIME:"m/d/Y h:i:sA",ATOM:"Y-m-d\\TH:i:sP",COOKIE:"l, d-M-Y H:i:s T",EUROPEAN:"j F Y",EUROPEANSHORT:"d.m.Y",EUROPEANSHORTWTIME:"d.m.Y H:i:s",ISO8601:"Y-m-d\\TH:i:sO",LEGAL:"j F Y",RFC822:"D, d M y H:i:s O",RFC850:"l, d-M-y H:i:s T",RFC1036:"D, d M y H:i:s O",RFC1123:"D, d M Y H:i:s O",RFC2822:"D, d M Y H:i:s O",RFC3339:"Y-m-d\\TH:i:sP",RSS:"D, d M Y H:i:s O",
+W3C:"Y-m-d\\TH:i:sP"},p={"pretty-a":"g:i.sA l jS \\o\\f F, Y","pretty-b":"g:iA l jS \\o\\f F, Y","pretty-c":"n/d/Y g:iA","pretty-d":"n/d/Y","pretty-e":"F jS - g:ia","pretty-f":"g:iA","pretty-g":"F jS, Y","pretty-h":"F jS, Y g:mA"};Object.defineProperty?Object.defineProperty(e,"compound",{value:m}):e.compound=m;Object.defineProperty?Object.defineProperty(e,"constants",{value:n}):e.constants=n;Object.defineProperty?Object.defineProperty(e,"pretty",{value:p}):e.pretty=p;Object.defineProperty&&!Date.prototype.hasOwnProperty("format")?
+Object.defineProperty(Date.prototype,"format",{value:e}):Date.prototype.format=e})();
+
+// 	console.log (dateFormat(new Date('2017-02-01 00:00:00'), 'U'));
+//	console.log (Date.parse('2017-02-01 00:00:00')/1000);
+;function dateFormat(g,c,k){function l(a,b){a.setHours(a.getHours()+parseFloat(b));return a}function m(a,b){var c="Sunday Monday Tuesday Wednesday Thursday Friday Saturday".split(" ");return b?c[a.getDay()].substr(0,3):c[a.getDay()]}function n(a,b){var c="January February March April May June July August September October November December".split(" ");return b?c[a.getMonth()].substr(0,3):c[a.getMonth()]}var d={d:function(){var a=this.getDate();return 9<a?a:"0"+a},D:function(){return m(this,!0)},j:function(){return this.getDate()},
+l:function(){return m(this)},N:function(){return this.getDay()+1},S:function(){var a=this.getDate();return/^1[0-9]$/.test(a)?"th":/1$/.test(a)?"st":/2$/.test(a)?"nd":/3$/.test(a)?"rd":"th"},w:function(){return this.getDay()},z:function(){return Math.round(Math.abs((this.getTime()-(new Date("1/1/"+this.getFullYear())).getTime())/864E5))},W:function(){var a=new Date(this.getFullYear(),0,1);return Math.ceil(((this-a)/864E5+a.getDay()+1)/7)},F:function(){return n(this)},m:function(){var a=this.getMonth()+
+1;return 9<a?a:"0"+a},M:function(){return n(this,!0)},n:function(){return this.getMonth()+1},t:function(){return(new Date(this.getFullYear(),this.getMonth()+1,0)).getDate()},L:function(){var a=this.getFullYear();return 0==a%4&&0!=a%100||0==a%400},o:function(){return parseInt(this.getFullYear())},Y:function(){return parseInt(this.getFullYear())},y:function(){return parseInt((this.getFullYear()+"").substr(-2))},a:function(){return 12<=this.getHours()?"pm":"am"},A:function(){return 12<=this.getHours()?
+"PM":"AM"},B:function(){return"@"+("00"+Math.floor((60*((this.getHours()+1)%24*60+this.getMinutes())+this.getSeconds()+.001*this.getMilliseconds())/86.4)).slice(-3)},g:function(){var a=this.getHours();return 0==a?12:12>=a?a:a-12},G:function(){return this.getHours()},h:function(){var a=this.getHours(),a=12>=a?a:a-12;return 0==a?12:9<a?a:"0"+a},H:function(){var a=this.getHours();return 9<a?a:"0"+a},i:function(){var a=this.getMinutes();return 9<a?a:"0"+a},s:function(){var a=this.getSeconds();return 9<
+a?a:"0"+a},u:function(){return this.getMilliseconds()},e:function(){var a=this.toString().match(/ ([A-Z]{3,4})([-|+]?\d{4})/);return 1<a.length?a[1]:""},I:function(){var a=new Date(this.getFullYear(),0,1),b=new Date(this.getFullYear(),6,1),a=Math.max(a.getTimezoneOffset(),b.getTimezoneOffset());return this.getTimezoneOffset()<a?1:0},O:function(){var a=this.toString().match(/ ([A-Z]{3,4})([-|+]?\d{4})/);return 2<a.length?a[2]:""},P:function(){var a=this.toString().match(/ ([A-Z]{3,4})([-|+]?\d{4})/);
+return 2<a.length?a[2].substr(0,3)+":"+a[2].substr(3,2):""},T:function(){return this.toLocaleString("en",{timeZoneName:"short"}).split(" ").pop()},Z:function(){return 60*this.getTimezoneOffset()},c:function(){return l(new Date(this),-(this.getTimezoneOffset()/60)).toISOString()},r:function(){return l(new Date(this),-(this.getTimezoneOffset()/60)).toISOString()},U:function(){return this.getTime()/1E3|0}},e={commonLogFormat:"d/M/Y:G:i:s",exif:"Y:m:d G:i:s",isoYearWeek:"Y\\WW",isoYearWeek2:"Y-\\WW",
+isoYearWeekDay:"Y\\WWj",isoYearWeekDay2:"Y-\\WW-j",mySQL:"Y-m-d h:i:s",postgreSQL:"Y.z",postgreSQL2:"Yz",soap:"Y-m-d\\TH:i:s.u",soap2:"Y-m-d\\TH:i:s.uP",unixTimestamp:"@U",xmlrpc:"Ymd\\TG:i:s",xmlrpcCompact:"Ymd\\tGis",wddx:"Y-n-j\\TG:i:s"},h={AMERICAN:"F j, Y",AMERICANSHORT:"m/d/Y",AMERICANSHORTWTIME:"m/d/Y h:i:sA",ATOM:"Y-m-d\\TH:i:sP",COOKIE:"l, d-M-Y H:i:s T",EUROPEAN:"j F Y",EUROPEANSHORT:"d.m.Y",EUROPEANSHORTWTIME:"d.m.Y H:i:s",ISO8601:"Y-m-d\\TH:i:sO",LEGAL:"j F Y",RFC822:"D, d M y H:i:s O",
+RFC850:"l, d-M-y H:i:s T",RFC1036:"D, d M y H:i:s O",RFC1123:"D, d M Y H:i:s O",RFC2822:"D, d M Y H:i:s O",RFC3339:"Y-m-d\\TH:i:sP",RSS:"D, d M Y H:i:s O",W3C:"Y-m-d\\TH:i:sP"},f={"pretty-a":"g:i.sA l jS \\o\\f F, Y","pretty-b":"g:iA l jS \\o\\f F, Y","pretty-c":"n/d/Y g:iA","pretty-d":"n/d/Y","pretty-e":"F jS - g:ia","pretty-f":"g:iA","pretty-g":"F jS, Y","pretty-h":"F jS, Y g:mA"};if(c){if("compound"==c){if(!1===k)return e;var d={},b;for(b in e)d[b]=dateFormat(g,e[b]);return d}if(e[c])return dateFormat(g,
+e[c],k);if("constants"==c){if(!1===k)return h;d={};for(b in h)d[b]=dateFormat(g,h[b]);return d}if(h[c])return dateFormat(g,h[c],k);if("pretty"==c){if(!1===k)return f;d={};for(b in f)d[b]=dateFormat(g,f[b]);return d}if(f[c])return dateFormat(g,f[c],k);e=c.split("");h="";for(b in e)(f=e[b])&&/[a-z]/i.test(f)&&!/\\/.test(h+f)&&(e[b]=d[f]?d[f].apply(g):f),h=e[b];return e.join("").replace(/\\/g,"")}return g};
+
+
+
+// Calculate amount of DAYS between two dates
+function daysBetween(date1, date2) {
+    var ONE_DAY = 1000 * 60 * 60 * 24
+    var date1_ms = date1.getTime()
+    var date2_ms = date2.getTime()
+    var difference_ms = Math.abs(date1_ms - date2_ms)
+    return Math.round(difference_ms/ONE_DAY)
+}
+
+// Calculate amount of MONTHS between two dates
+function monthsBetween(date1, date2) {
+	var months = (date2.getMonth() - date1.getMonth())
+		+ 1 
+		+ (12 * (date2.getFullYear() - date1.getFullYear()));
+	if (date2.getDate() < date1.getDate()) {
+		months--;
+	}
+	return months;
+}
+
+// Calculate amount of DAYS in a MONTH
+function daysInMonth(month,year) {
+    return new Date(year, month, 0).getDate();
+}
+
+// Time Ago 
+function timeDifference(current, previous) {
+
+    var msPerMinute = 60 * 1000;
+    var msPerHour = msPerMinute * 60;
+    var msPerDay = msPerHour * 24;
+    var msPerMonth = msPerDay * 30;
+    var msPerYear = msPerDay * 365;
+
+    var elapsed = current - previous;
+
+    if (elapsed < msPerMinute) {
+         return Math.round(elapsed/1000) + ' seconds ago';   
+    }
+
+    else if (elapsed < msPerHour) {
+         return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+    }
+
+    else if (elapsed < msPerDay ) {
+         return Math.round(elapsed/msPerHour ) + ' hours ago';   
+    }
+
+    else if (elapsed < msPerMonth) {
+        return '<b style="color:#AA0000;">' + Math.round(elapsed/msPerDay) + ' days ago</b>';   
+    }
+
+    else if (elapsed < msPerYear) {
+        return '<b style="color:#AA0000;">' + Math.round(elapsed/msPerMonth) + ' months ago</b>';   
+    }
+
+    else {
+        return '<b style="color:#AA0000;">' + Math.round(elapsed/msPerYear ) + ' years ago</b>';   
+    }
+}
+
+
+// Format Number to look nice
+function accFormat(amount){return amount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,').slice(0, -3)}
+
+/**
+ * Sorts an array with multiple ordering criteria.
+ *
+ * It applies the Schwartzian transform:
+ * https://en.wikipedia.org/wiki/Schwartzian_transform
+ *
+ * You can fork this project on github:
+ * https://github.com/jherax/array-sort-by.git
+ *
+ *	sortBy(selectStats, (o) => -o.amount); BIGGEST number first
+ *	sortBy(selectStats, (o) => o.amount); SMALLEST number first
+ *
+ *	sortBy(selectStats, (o) => o.text); A-Z 
+ *	sortBy(selectStats, (o) => "DESC:" + o.text); Z-A 
+ *	sortBy(bookingArray, (o) => [o.property.toUpperCase(), o.checkin]);
+ *
+ *	sortBy(arr, (o) => 'DESC:' + o.name.toUpperCase());
+ *	sortBy(arr, (o) => [o.name.toUpperCase(), -o.age, o.id]);
+ *
+ */
+const sortBy = (function() {
+
+  const _DESC = (/^desc:\s*/i);
+
+  // Sests whether the input value is a string and has set the flag for descending order.
+  const isDesc = (v) => typeof v === 'string' && _DESC.test(v);
+
+  // Compares each element and defines the sort order.
+  function comparer(prev, next) {
+    let asc = 1;
+    if (prev === next) return 0;
+    if (isDesc(prev)) asc = -1;
+    return (prev > next ? 1 : -1) * asc;
+  }
+
+  // Compares each decorated element.
+  function sortItems(aprev, anext) {
+    let sorted, i;
+    for (i in aprev) { // eslint-disable-line
+      sorted = comparer(aprev[i], anext[i]);
+      if (sorted) return sorted;
+    }
+    return 0;
+  }
+  
+  // Defines the default sort order (ASC)
+  const defaultSort  = (p, n) => p < n ? -1 : +(p > n);
+
+  /*
+   * Sort an array and allows multiple sort criteria.
+   *
+   * @param  {Array} array: the collection to sort
+   * @param  {Function} parser: transforms each item and specifies the sort order
+   * @return {Array}
+   */
+  return function sortBy(array, parser) {
+    let i, item;
+    const arrLength = array.length;
+    if (typeof parser === 'undefined') {
+      return array.sort(defaultSort);
+    }
+    // Schwartzian transform (decorate-sort-undecorate)
+    for (i = arrLength; i;) {
+      item = array[i -= 1];
+      // decorate the array
+      array[i] = [].concat(parser.call(null, item, i), item);
+      // console.log('decorated: ', array[i]);
+    }
+    // sort the array
+    array.sort(sortItems);
+    // undecorate the array
+    for (i = arrLength; i;) {
+      item = array[i -= 1];
+      array[i] = item[item.length - 1];
+    }
+    return array;
+  }
+}());
+
+// This is to emulate Mongo DB calls
+function mongoCall(txtExplain, txtMongo) {
+	console.log('-----------------------------')
+	console.log('Explain: ' + txtExplain)
+	var tmp = txtMongo.replace(/\s/g,'')
+	//tmp = tmp.replace(' ','')	
+	console.log('MongoDB: ' + tmp)
+}
+
+
+// This is the page header with stylesheet etc..
+function pageButtons(reportTitle) {
+	var htmlCode = ''
+	+ '<div style="position: absolute; right: 30px;top:26px;z-index: 1;">'
+	+ '	<button onclick="print()" class="btn btn-primary printButtonClass" style="width: 100px; border: 1px solid; border-radius: 4px; padding:6px 12px; color: #fff; background-color: #337ab7; border-color: #2e6da4; font-size: 14px; font-family:Roboto, Arial">Print</button>'
+	+ '	&nbsp;'
+	+ '	<button onclick="history.go(-1);" class="btn btn-primary printButtonClass" style="width: 100px; border: 1px solid; border-radius: 4px; padding:6px 12px; color: #fff; background-color: #337ab7; border-color: #2e6da4; font-size: 14px; font-family:Roboto, Arial">Back</button>'
+	+ '</div>'
+	return htmlCode;
+}
+
+
+// This is the top page headline for all reports
+function topHeadline(reportTitle) {
+	var htmlCode = ''
+	+ '		<style type="text/css">                                                         '
+	+ '			@media print{                                                               '
+	+ '				@page {                                                                 '
+	+ '					size: auto;                                                         '
+	+ '					margin: 10mm 5mm 5mm 5mm;                                           '
+	+ '					size: portrait;                                                     '
+	+ '					mso-header-margin:0mm;                                              '
+	+ '					mso-footer-margin:0mm;                                              '
+	+ '					mso-paper-source:0;                                                 '
+	+ '				}                                                                       '
+	+ '			}                                                                           '
+	+ '		</style>	                                                                    '
+	+ '		<table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;min-width:650px;">                                                           '
+	+ '		<tr>                                                                                                                                                                                                                                                     '
+	+ '			<td style="font-size:40px; font-weight:bold; font-family: Roboto, Helvetica Neue, Arial, Helvetica, sans-serif; padding:0px 0px 0px 5px; margin:0px 0px 0px 0px; text-align:center; vertical-align:middle; white-space:nowrap; color: #4CACCD; width:20%;">'   
+	+ reportTitle // the title
+	+ '			</td>                                                                                                                                                                                                                                                '
+	+ '			<td style="align:left; valign:middle; max-width:60px; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; width:45%; text-align:right; vertical-align:middle; padding-top:5px;">                                                                        '
+	+ '				<img style="max-width:100%; height:auto; width:auto\9; min-height:1px; max-height:60px; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;" src="' + 'http://191.101.12.128:3000/' + 'assets/images/logo_small.png" alt="ThaiHome Logo">                                '
+	+ '			</td>                                                                                                                                                                                                                                                '
+	+ '		</tr>                                                                                                                                                                                                                                                    '
+	+ '		</table>                                                                                                                                                                                                                                                 '
+	+ '		<div style="min-height:6px;"></div>                                                                                                                                                                                                                      '
+	return htmlCode;
+}
+
+
+// This is the Report Headline for each specific report
+function reportHeadline(reportTitle){
+	var htmlCode = ''
+	+ '		<table border="0"; style="border-spacing:0px; border:1px solid #AAAAAA; width:100%;">                                                                                                                                                                    '
+	+ '		<tr>                                                                                                                                                                                                                                                     '
+	+ '			<td style="width:90%; text-align:left; padding-left:6px; background-color:#FFFFFF; color:#000000; border:10px solid #EEEEEE; height:30px; white-space: nowrap; font-size:18px; font-weight:normal; font-family:Roboto, Helvetica Neue, Arial, Helvetica, sans-serif;">'
+	+ reportTitle // the title
+	+ '			</td>                                                                                                                                                                                                                                            '
+	+ '			<td style="width:10%; text-align:right; padding-left:6px; padding-right:6px; background-color:#FFFFFF; color:#000000; border:10px solid #EEEEEE; height:30px; white-space: nowrap; font-size:18px; font-family:Arial Narrow;">Printed: <b>           '
+	+ new Date().format('d M Y') // todays date
+	+ '			</b></td>                                                                                                                                                                                                                                            '
+	+ '		</tr>                                                                                                                                                                                                                                                    '
+	+ '		</table>                                                                                                                                                                                                                                                 '
+	+ '		<div style="min-height:6px;"></div>                                                                                                                                                                                                                      '
+	return htmlCode;                                                                                                                                                                                                                                                 
+}                                                                                                                                                                                                                                                                    
+
+
+
+// This is the Report Headline for agent sales reports
+function reportAgentHeadline(){
+	var htmlCode = ''
+	+ '	<div>                                                                                                                                                           '
+	+ '	<table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">                                                  '
+	+ '		<tr><td colspan="2"><div style="min-height:8px;"></div></td></tr>                                                                                                                                   '
+	+ '		<tr>                                                                                                                                                                                                '
+	+ '			<td style="width:75%;padding:0px 4px 0px 8px;">                                                                                                                                                 '
+	+ '				<table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:0px solid #AAAAAA; padding:0px;">                                                  '
+	+ '				<tr>                                                                                                                                                                                        '
+	+ '					<td style="text-align:right; text-align:right; vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-family: Arial; white-space: nowrap;">Property Manager:&nbsp;</td>   '
+	+ '					<td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-family: Arial; white-space: nowrap;"><b>{{T.transManagerName}}</b></td>                                 '
+	+ '					<td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-family: Arial; white-space: nowrap;">&nbsp; Phone:</td>                                                 '
+	+ '					<td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-family: Arial; white-space: nowrap;"><b>{{T.transNotePhone}}</b></td>                                   '
+	+ '					<td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-family: Arial; white-space: nowrap;">&nbsp; Email:</td>                                                 '
+	+ '					<td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-family: Arial; white-space: nowrap;"><b>{{T.transNoteMail}}</b><br></td>                                '
+	+ '				</tr>                                                                                                                                                                                       '
+	+ '				<tr>                                                                                                                                                                                        '
+	+ '					<td style="text-align:right; vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-family: Arial; white-space: nowrap;">Owner:&nbsp;</td>                                '
+	+ '					<td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-family: Arial; white-space: nowrap;"><b>{{T.transOwnerName}}</b></td>                                   '
+	+ '					<td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-family: Arial; white-space: nowrap;">&nbsp; Phone:</td>                                                 '
+	+ '					<td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-family: Arial; white-space: nowrap;"><b>{{T.transTorbenPhone}}</b></td>                                 '
+	+ '					<td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-family: Arial; white-space: nowrap;">&nbsp; Email:</td>                                                 '
+	+ '					<td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-family: Arial; white-space: nowrap;"><b>{{T.transTorbenMail}}</b><br></td>                              '
+	+ '				</tr>                                                                                                                                                                                       '
+	+ '				</table>                                                                                                                                                                                    '
+	+ '			</td>                                                                                                                                                                                           '
+	+ '			<td style="width:25%; text-align:right; vertical-align:bottom; padding:0px 0px 0px 0px; font-size:14px; font-family: Arial; white-space: nowrap;">Printed: <b>                                  '
+	+ new Date().format('d M Y') // todays date                                                                                                                                                                 '
+	+ '			</b>&nbsp;</td>                                                                                                                                                                                 '
+	+ '		</tr>                                                                                                                                                                                               '
+	+ '		<tr><td colspan="2"><div style="min-height:6px;"></div></td></tr>                                                                                                                                   '
+	+ '	</table>                                                                                                                                                                                                '
+	+ '	<div style="min-height:6px;"></div>                                                                                                                                                                     '
+	+ '	</div>                                                                                                                                                                                                  '
+	return htmlCode;                                                                                                                                                                                                                                                 
+}                                                                                                                                                                                                                                                                    
+
+	
+
+// This is the top headline for all reports
+function reportFooter() {
+	var htmlCode = ''
+	+ '		<div style="min-height:6px;"></div>                                                                                                                                     '
+	+ '		<table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">                  '
+	+ '		<tr>                                                                                                                                                                    '
+	+ '			<td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Roboto, Helvetica Neue, Arial, Helvetica, sans-serif;"> '
+	+ '				<a href="http://www.thaihome.co.uk/"><img src="' + 'http://191.101.12.128:3000/' + 'assets/sig/SigLogo.png" alt="ThaiHome Logo" height="70"></a>                                     '
+	+ '			</td>                                                                                                                                                               '
+	+ '			<td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Roboto, Helvetica Neue, Arial, Helvetica, sans-serif;"> '
+	+ '				{{T.transManagerName}}<br>                                                                                                                                      '
+	+ '				<span style="color:#4caccd;">{{T.transManagerTitle}}</span><br>                                                                                                 '
+	+ '				<b>ThaiHome</b> {{T.transSloganShort}}                                                                                                                          '
+	+ '			</td>                                                                                                                                                               '
+	+ '			<td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Roboto, Helvetica Neue, Arial, Helvetica, sans-serif;"> '
+	+ '				{{T.transOfficeAddress}}                                                                                                                                        '
+	+ '			</td>                                                                                                                                                               '
+	+ '			<td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Roboto, Helvetica Neue, Arial, Helvetica, sans-serif;"> '
+	+ '				{{T.transMobile}}: {{T.transNotePhone}}<br>                                                                                                                     '
+	+ '				{{T.transWebsite}}: <a style="color:#0000ff" href="http://www.thaihome.co.uk/">www.ThaiHome.co.uk</a><br>                                                       '
+	+ '				{{T.transEmail}}: {{T.transNoteMail}}                                                                                                                           '
+	+ '			</td>                                                                                                                                                               '
+	+ '		</tr>                                                                                                                                                                   '
+	+ '		</table>                                                                                                                                                                '
+	htmlCode = findTexts(htmlCode);
+	return htmlCode;
+}	
+
+
+// This is the page break used in all reports
+function reportPageBreak() {
+	var htmlCode = ''	                                                                                                                                                                                                                                                 
+	+ ' 	<div style="page-break-before: always; height:20px;"></div>	'
+	return htmlCode;        
+}	
+
+// This is to get the {{T.whatever}} texts from our translation.json
+function findTexts(thisText) {
+	var safety=0;
+	while (thisText.indexOf('{{T.') !== -1) {
+		safety++;
+		var fromChar = thisText.indexOf('{{T.')
+		var toChar = thisText.indexOf('}}');
+		if (safety>100) {            
+			console.log('####BREAK#### - not good!')
+			break;
+		} 
+		var fldLang = thisText.substring(fromChar+4, toChar)
+		var txtLang = transArray[fldLang];
+		thisText = thisText.replace('{{T.' + fldLang + '}}', txtLang);
+	}
+	return thisText;
+}
+
+
+
+// URL for the Node
+const globalNodeUrl = 'http://localhost:3000/';       
+
+// URL for the Website
+const globalWebUrl = 'http://localhost:8080/';       
+
+// create the module and name it Report
+var app = angular.module('Report', ['ngRoute']);
+
+// // configure our routes
+app.config(function($routeProvider) {
+    $routeProvider
+
+        .when('/', {
+            templateUrl : 'reportForm/',
+            controller  : 'reportFormController'
+        })
+
+        // route for the Bank Account Report
+        .when('/reportBankAccount', {
+            templateUrl : 'reportBankAccount/',
+            controller  : 'reportBankAccountController'
+        })
+
+        // route for the Bank Account Report
+        .when('/reportExpense', {
+            templateUrl : 'reportExpense/',
+            controller  : 'reportExpenseController'
+        })
+
+        // route for the Agent Sale Report
+        .when('/reportAgentSale', {
+            templateUrl : 'reportAgentSale/',
+            controller  : 'reportAgentSaleController'
+        })
+
+        // route for the Agent Rent Report
+        .when('/reportAgentRent', {
+            templateUrl : 'reportAgentRent/',
+            controller  : 'reportAgentRentController'
+        })
+
+        // route for the Property Balance SHeet Report
+        .when('/reportBalanceSheet', {
+            templateUrl : 'reportBalanceSheet/',
+            controller  : 'reportBalanceSheetController'
+        })
+
+        // route for the Bookint List Report
+        .when('/reportBooking', {
+            templateUrl : 'reportBooking/',
+            controller  : 'reportBookingController'
+        })
+
+});
+
+// factory to send data from reportForm to the different reports
+app.factory('ReportData', function() {
+
+    var factoryData = [];
+    var factoryService = {};
+
+    factoryService.add = function(myData) {
+        console.log('FACTORY ADD: ' + myData)
+        factoryData = myData;
+    };
+
+    factoryService.get = function() {
+        console.log('FACTORY GET: ' + factoryData)
+        return factoryData;
+    };
+
+    return factoryService;
+});
+
+
+//
+// WHAT DO ReportAgentRent NEED FROM THE REPORT-FORM?
+//
+// -->  ALL properties or  SPECIFIC properties
+//
+app.controller("reportAgentRentController", function ($scope, $http, $rootScope, $location, ReportData) {
+
+    var formData = ReportData.get();
+    console.log('######### REPORT: ' + formData.reportName);
+	console.log('propertyArr: ' + JSON.stringify(formData.propertyArr, null, 4));
+
+
+	// Load all properties
+	var findProperties = function() {
+		return new Promise((resolve, reject) => {
+		$http({
+			method: 'POST',
+			url: globalNodeUrl + 'report/getAgentRentReport',
+			headers: { 'Content-Type': 'application/json' },
+			data: { propertyID : formData.propertyArr }
+		}).then(function successCallback(res) {
+			console.log('WE GOT THE DATA BACK FROM ROUTER!!!')
+			// console.log('data: ' + JSON.stringify(res, null, 4))
+			console.log('data: ' + JSON.stringify(res.data.propertyArray, null, 4))
+            resolve(res.data.propertyArray);
+		}, function errorCallback(err) {
+			reject(new Error('getAgentRentReport ERROR : ' + err));
+		});
+	})};
+
+
+	// Create HTML for the entire report page
+	var makeReport = function (propertyArray) {
+		return new Promise((resolve, reject) => {
+		console.log('WE MAKE THE REPORT!!!');
+	    console.log("propertyArray Result: " + JSON.stringify(propertyArray, null, 4));
+		console.log('fromDate: ' + formData.fromDate);
+		console.log('toDate: ' + formData.toDate);
+		var topHeadtxt = 'Property Rent Pricelist for Agents'
+		var htmlCode = setupRentReport(formData.fromDate, formData.toDate, propertyArray, topHeadtxt)
+		resolve(htmlCode);
+	})};
+
+
+	// Show the report
+    var showReport = function(data) {
+		return new Promise((resolve, reject) => {
+		console.log('WE SHOW THE REPORT!!!');
+		var topHeadtxt = 'Property Rent Pricelist for Agents'
+		data = pageButtons(topHeadtxt) + data 
+		document.getElementById('contentAll').innerHTML = data;	
+		resolve();
+	})};
+
+
+	// Start all the promises
+	findProperties()
+		.then(makeReport)
+		.then(showReport)
+		.catch(err => {
+			console.error(err);
+			console.log("reportAgentRentController ERROR: " + err.message );
+		})
+
+})
+
+
+// Setup Pricelist
+function setupRentReport(fromDate, toDate, propertyArray, topHeadtxt) {
+	var htmlTHL = '<th style="text-align:left; height:26px; padding-left:6px; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</th>'
+	var htmlTHC = '<th style="text-align:center; height:26px; white-space: nowrap; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</th>'
+	var htmlTHR = '<th style="text-align:right; height:26px; padding-right:6px; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</th>'
+	var htmlTDL = '<td style="text-align:left; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDN = '<td style="text-align:left; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial Narrow;">#FIELD#</td>'
+	var htmlTDC = '<td style="text-align:center; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR = '<td style="text-align:right; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR1 = '<td style="text-align:right; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#f6e4bc; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR2 = '<td style="text-align:right; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#bbf6bb; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+
+	var reportHead = ''
+	document.title = topHeadtxt;
+
+	// Put page title the same as report headline
+	reportHead = reportAgentHeadline();  			// grab the html header for this report cause its special
+	reportHead = findTexts(reportHead); 			// grab the html header for this report cause its special
+	
+	// Render the report 
+	htmlCode = '';
+	htmlCode += topHeadline(topHeadtxt);
+	htmlCode += reportHead;
+	htmlCode += renderRentReportTableHeader();
+
+	// Loop thru all properties
+	var lines=0
+	for (var i=0; i<propertyArray.length; i++) {	
+
+		if (propertyArray[i].checkout) {
+			var textCheckout = '<span style="color:#e60000; font-weight:bold;">' + (new Date(propertyArray[i].checkout*1000).format('d M Y')) + '</span>';
+		} else {
+			var textCheckout = '<span style="color:#009900; font-weight:bold;">Now!</span>';
+		}
+		
+		// Render result
+		htmlCode +='<tr>'
+		htmlCode +=htmlTDL.replace('#FIELD#', propertyArray[i].name);
+		htmlCode +=htmlTDL.replace('#FIELD#', propertyArray[i].unitNumber.replace('(Venus Building D)', ''));
+		htmlCode +=htmlTDN.replace('#FIELD#', propertyArray[i].floor);
+		htmlCode +=htmlTDN.replace('#FIELD#', propertyArray[i].view.substring(0, 18));
+		htmlCode +=htmlTDL.replace('#FIELD#', propertyArray[i].propertyType);
+		htmlCode +=htmlTDR.replace('#FIELD#', propertyArray[i].sqm);
+		htmlCode +=htmlTDC.replace('#FIELD#', textCheckout);
+		htmlCode +=htmlTDR1.replace('#FIELD#', accFormat(propertyArray[i].priceWeek1));
+		htmlCode +=htmlTDR1.replace('#FIELD#', accFormat(propertyArray[i].commissionDay) + '%');
+		htmlCode +=htmlTDR2.replace('#FIELD#', accFormat(propertyArray[i].priceWeek2*7));
+		htmlCode +=htmlTDR2.replace('#FIELD#', accFormat(propertyArray[i].commissionWeek) + '%');
+		htmlCode +=htmlTDR1.replace('#FIELD#', accFormat(propertyArray[i].priceMonth1*30));
+		htmlCode +=htmlTDR1.replace('#FIELD#', accFormat(propertyArray[i].commissionMonth) + '%');
+		htmlCode +=htmlTDR2.replace('#FIELD#', accFormat(propertyArray[i].priceMonth6*30));
+		htmlCode +=htmlTDR2.replace('#FIELD#', '½ Mth');
+		htmlCode +=htmlTDR1.replace('#FIELD#', accFormat(propertyArray[i].priceYear*30));
+		htmlCode +=htmlTDR1.replace('#FIELD#', '1 Mth');
+		htmlCode +='</tr>'
+
+		// Break every 17 lines  
+		lines += 1;
+		if (lines>26) {
+			htmlCode += '</table>';
+			htmlCode += reportFooter();
+			htmlCode += reportPageBreak();
+			htmlCode += topHeadline(topHeadtxt);
+			htmlCode += reportHead;
+			htmlCode += renderRentReportTableHeader();			
+			lines = 0;
+		}				
+	}
+
+	// End of the report
+	htmlCode += '</table>';
+	htmlCode += reportFooter();		
+	return htmlCode;
+}
+
+
+// Render Table Header
+function renderRentReportTableHeader() {
+	var htmlTHL = '<td style="text-align:left; height:26px; padding-left:6px; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</td>'
+	var htmlTHC = '<td style="text-align:center; height:26px; white-space: nowrap; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</td>'
+	var htmlTHR = '<td style="text-align:right; height:26px; padding-right:6px; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</td>'
+	htmlCode = '';
+	htmlCode += '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">'
+	htmlCode += '<tr>'
+	htmlCode +=htmlTHL.replace('#FIELD#', 'Project');
+	htmlCode +=htmlTHL.replace('#FIELD#', 'Unit');
+	htmlCode +=htmlTHC.replace('#FIELD#', 'Floor');
+	htmlCode +=htmlTHL.replace('#FIELD#', 'View');
+	htmlCode +=htmlTHC.replace('#FIELD#', 'Type');
+	htmlCode +=htmlTHC.replace('#FIELD#', 'Sqm');
+	htmlCode +=htmlTHL.replace('#FIELD#', 'Available');
+	htmlCode +=htmlTHL.replace('#FIELD#', 'Daily');
+	htmlCode +=htmlTHL.replace('#FIELD#', 'Comm');
+	htmlCode +=htmlTHR.replace('#FIELD#', 'Weekly');
+	htmlCode +=htmlTHR.replace('#FIELD#', 'Comm');
+	htmlCode +=htmlTHR.replace('#FIELD#', 'Monthly');
+	htmlCode +=htmlTHR.replace('#FIELD#', 'Comm');
+	htmlCode +=htmlTHR.replace('#FIELD#', 'Half Year');
+	htmlCode +=htmlTHR.replace('#FIELD#', 'Comm');
+	htmlCode +=htmlTHR.replace('#FIELD#', 'Full Year');
+	htmlCode +=htmlTHR.replace('#FIELD#', 'Comm');
+	htmlCode += '</tr>'
+	return htmlCode; 
+}
+
+//
+// WHAT DO ReportAgentSale NEED FROM THE REPORT-FORM?
+//
+// -->  ALL properties or  SPECIFIC properties
+//
+app.controller("reportAgentSaleController", function ($scope, $http, $rootScope, $location, ReportData) {
+
+    var formData = ReportData.get();
+    console.log('######### REPORT: ' + formData.reportName);
+	console.log('propertyArr: ' + JSON.stringify(formData.propertyArr, null, 4));
+
+
+	// Load all properties
+	var findProperties = function() {
+		return new Promise((resolve, reject) => {
+		$http({
+			method: 'POST',
+			url: globalNodeUrl + 'report/getAgentSaleReport',
+			headers: { 'Content-Type': 'application/json' },
+			data: { propertyID : formData.propertyArr }
+		}).then(function successCallback(res) {
+			console.log('WE GOT THE DATA BACK FROM ROUTER!!!')
+			// console.log('data: ' + JSON.stringify(res, null, 4))
+			console.log('data: ' + JSON.stringify(res.data.data, null, 4))
+            resolve(res.data.data);
+		}, function errorCallback(err) {
+			reject(new Error('getAgentSaleReport ERROR : ' + err));
+		});
+	})};
+
+
+	// Create HTML for the entire report page
+	var makeReport = function (propertyArray) {
+		return new Promise((resolve, reject) => {
+		console.log('WE MAKE THE REPORT!!!');
+	    console.log("propertyArray Result: " + JSON.stringify(propertyArray, null, 4));
+		console.log('fromDate: ' + formData.fromDate);
+		console.log('toDate: ' + formData.toDate);
+		var topHeadtxt = 'Property Sale Pricelist for Agents'
+		var htmlCode = setupSaleReport(formData.fromDate, formData.toDate, propertyArray, topHeadtxt)
+		resolve (htmlCode);
+	})};
+
+
+	// Show the report
+    var showReport = function(data) {
+		return new Promise((resolve, reject) => {
+		console.log('WE SHOW THE REPORT!!!');
+		var topHeadtxt = 'Property Sale Pricelist for Agents'
+		data = pageButtons(topHeadtxt) + data 
+		document.getElementById('contentAll').innerHTML = data;	
+		resolve();
+	})};
+
+
+	// Start all the promises
+	findProperties()
+		.then(makeReport)
+		.then(showReport)
+		.catch(err => {
+			console.error(err);
+			console.log("reportAgentSaleController ERROR: " + err.message );
+		})
+
+})
+
+
+// Setup Pricelist
+function setupSaleReport(fromDate, toDate, propertyArray, topHeadtxt) {
+	
+	var htmlTDL = '<td style="text-align:left; height:34px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDN = '<td style="text-align:left; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial Narrow;">#FIELD#</td>'
+	var htmlTDC = '<td style="text-align:center; height:34px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR = '<td style="text-align:right; height:34px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR1 = '<td style="text-align:right; height:34px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#f6e4bc; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR2 = '<td style="text-align:right; height:34px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#bbf6bb; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+
+	var reportHead = ''
+	document.title = topHeadtxt;
+
+	// Put page title the same as report headline
+	reportHead = reportAgentHeadline();  			// grab the html header for this report cause its special
+	reportHead = findTexts(reportHead); 			// grab the html header for this report cause its special
+	
+	// Render the report 
+	htmlCode = '';
+	htmlCode += topHeadline(topHeadtxt);
+	htmlCode += reportHead;
+	htmlCode += renderSaleReportTableHeader();
+
+	// Loop thru all properties
+	var lines=0
+	for (var i=0; i<propertyArray.length; i++) {	
+
+		console.log('propertyArray[i].sqm = ' + propertyArray[i].sqm)
+
+		// Render result
+		htmlCode +='<tr>'
+		htmlCode +=htmlTDL.replace('#FIELD#', propertyArray[i].name);
+		htmlCode +=htmlTDL.replace('#FIELD#', propertyArray[i].unitNumber.replace('(Venus Building D)', ''));
+		htmlCode +=htmlTDN.replace('#FIELD#', propertyArray[i].floor);
+		htmlCode +=htmlTDN.replace('#FIELD#', propertyArray[i].view);
+		htmlCode +=htmlTDL.replace('#FIELD#', propertyArray[i].propertyType);
+		htmlCode +=htmlTDR.replace('#FIELD#', propertyArray[i].sqm);
+		htmlCode +=htmlTDC.replace('#FIELD#', propertyArray[i].furnished.substring(0, 3));
+		htmlCode +=htmlTDN.replace('#FIELD#', propertyArray[i].ownership);
+		htmlCode +=htmlTDR.replace('#FIELD#', accFormat(Math.round(propertyArray[i].saleprice/propertyArray[i].sqm)));
+		htmlCode +=htmlTDR2.replace('#FIELD#', '<b>' + accFormat(propertyArray[i].saleprice) + '</b>');
+		htmlCode +=htmlTDR2.replace('#FIELD#', accFormat(Math.round((propertyArray[i].saleprice/100)*propertyArray[i].salecommission)));
+		htmlCode +=htmlTDR1.replace('#FIELD#', '<b>' + accFormat(propertyArray[i].priceYear*30) + '</b>');
+		htmlCode +=htmlTDR1.replace('#FIELD#', '1 mth');
+		htmlCode +='</tr>'
+
+		// Break every 26 lines  
+		lines += 1;
+		if (lines>25) {
+			htmlCode += '</table>';
+			htmlCode += reportFooter();
+			htmlCode += reportPageBreak();
+			htmlCode += topHeadline(topHeadtxt);
+			htmlCode += reportHead;
+			htmlCode += renderSaleReportTableHeader();			
+			lines = 0;
+		}		
+	}
+
+	// End of the report
+	htmlCode += '</table>';
+	htmlCode += reportFooter();
+	return htmlCode;
+}
+
+// Render Table Header
+function renderSaleReportTableHeader() {
+	var htmlTHL = '<td style="text-align:left; height:26px; padding-left:6px; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</td>'
+	var htmlTHC = '<td style="text-align:center; height:26px; white-space: nowrap; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</td>'
+	var htmlTHR = '<td style="text-align:right; height:26px; padding-right:6px; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</td>'
+	var htmlCode = '';
+	htmlCode += '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">'
+	htmlCode += '<tr>'
+	htmlCode += htmlTHL.replace('#FIELD#', 'Project');
+	htmlCode += htmlTHL.replace('#FIELD#', 'Unit');
+	htmlCode += htmlTHC.replace('#FIELD#', 'Floor');
+	htmlCode += htmlTHL.replace('#FIELD#', 'View');
+	htmlCode += htmlTHC.replace('#FIELD#', 'Type');
+	htmlCode += htmlTHC.replace('#FIELD#', 'Sqm');
+	htmlCode += htmlTHL.replace('#FIELD#', 'Furnished');
+	htmlCode += htmlTHL.replace('#FIELD#', 'Ownership');
+	htmlCode += htmlTHL.replace('#FIELD#', 'Price/Sqm');
+	htmlCode += htmlTHR.replace('#FIELD#', 'Sales Price');
+	htmlCode += htmlTHR.replace('#FIELD#', 'Commission');
+	htmlCode += htmlTHR.replace('#FIELD#', 'Rent/Month');
+	htmlCode += htmlTHR.replace('#FIELD#', 'Comm');
+	htmlCode += '</tr>'
+	return htmlCode; 
+}
+
+//
+// WHAT DO Property Balance SHeet NEED FROM THE REPORT-FORM?
+//
+// -->  FROM date and TO date 
+// -->  One Property
+//
+app.controller("reportBalanceSheetController", function ($scope, $http, $rootScope, $location, ReportData) {
+
+	var topHeadtxt = 'Property Balance Sheet';
+    var formData = ReportData.get();
+    console.log('######### REPORT: ' + formData.reportName);
+    console.log('fromDate: ' + formData.fromDate);
+    console.log('toDate: ' + formData.toDate);
+    console.log('propertySingle: ' + JSON.stringify(formData.propertySingle, null, 4));
+
+
+	// Load all data
+	var findData = function() {
+		return new Promise((resolve, reject) => {
+		$http({
+			method: 'POST',
+			url: globalNodeUrl + 'report/getBalanceSheet',
+			headers: { 'Content-Type': 'application/json' },
+			data: { propertyID:formData.propertySingle, fromDate: formData.fromDate, toDate: formData.toDate}
+		}).then(function successCallback(res) {
+			console.log('WE GOT THE getBalanceSheet BACK FROM ROUTER!!!')
+			// console.log('data: ' + JSON.stringify(res.data, null, 4))
+            resolve(res.data);
+		}, function errorCallback(err) {
+			reject(new Error('getBalanceSheet ERROR : ' + err));
+		});
+	})};
+
+
+	// Create HTML for the entire report page
+	var makeReport = function(data) {
+		return new Promise((resolve, reject) => {
+		console.log('WE MAKE THE REPORT!!!');
+		let bookingArray = data.booking;
+		let expenseArray = data.expense;
+		let propertyArray = data.property;
+		// console.log('### bankArray: ' + JSON.stringify(bankArray, null, 4))
+		// console.log('### receiptArray: ' + JSON.stringify(receiptArray, null, 4))
+		// console.log('### expenseArray: ' + JSON.stringify(expenseArray, null, 4))
+		var htmlCode = setupBalanceReport(formData.propertySingle._id, formData.fromDate, formData.toDate, bookingArray, expenseArray, propertyArray, topHeadtxt)
+		resolve(htmlCode);
+	})};
+
+
+	// Show the report
+	var showReport = function(data) {
+		return new Promise((resolve, reject) => {
+		console.log('WE SHOW THE REPORT!!!');
+		data = pageButtons(topHeadtxt) + data 
+		document.getElementById('contentAll').innerHTML = data;	
+	})};
+
+
+	// Start all the promises
+	findData()
+		.then(makeReport)
+		.then(showReport)
+		.catch(err => {
+			console.error(err);
+			console.log("reportBalanceSheetController ERROR: " + err.message );
+			return;
+		})
+
+})
+
+
+// Setup Balance Sheet Report
+function setupBalanceReport(currProperty, parmFromDate, parmToDate, bookingArray, expenseArray, propertyArray, topHeadtxt) {
+
+	console.log('currProperty: ' + currProperty)
+	console.log('parmFromDate: ' + parmFromDate)
+	console.log('parmToDate: ' + parmToDate)
+
+	document.title = topHeadtxt;
+	var fromDate = new Date(parmFromDate*1000);
+	var toDate = new Date(parmToDate*1000);
+	var reportHead = 'Period from <b>' + fromDate.format('j M Y') + '</b> to <b>' + toDate.format('j M Y') + '</b>';
+
+	var greenTxt = 'color:#007000;';
+	var greenBg  = 'background-color:#DDFFDD;';
+	var redTxt = 'color:#804040;';
+	var redBg  = 'background-color:#FFE5E5;';
+	var greyTxt = 'color:#808080;';
+	var greyBg  = 'background-color:#E0E0E0;';
+	var yellowTxt = 'color:#707000;';
+	var yellowBg  = 'background-color:#FFFFB2;';
+
+	// Find property 
+	var selectProperty = propertyArray.filter(function(obj){
+		return obj._id == currProperty;
+	})			
+	
+	// Render the report
+	var htmlCode = ''
+	htmlCode += topHeadline(topHeadtxt + ' for ' + selectProperty[0]._id);
+	htmlCode += reportHeadline(reportHead + ' for <b>' + selectProperty[0]._id + '</b>')
+	htmlCode += '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse;">'
+	htmlCode += '<tr><td style="vertical-align:top;">'
+	
+	var htmlTHL = '<th style="text-align:left; padding-left:6px; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;">#FIELD#</th>'
+	var htmlTHC = '<th style="text-align:center; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;">#FIELD#</th>'
+	var htmlTHR = '<th style="text-align:right; padding-right:6px; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;">#FIELD#</th>'
+	var htmlTDL = '<td style="text-align:left; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDC = '<td style="text-align:center; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR = '<td style="text-align:right; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTotal = '<td colspan="#SPAN#" style="white-space: nowrap; padding-left:4px; padding-right:4px; text-align:right; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; border-top:2px solid #666666; border-bottom:2px solid #666666; font-size:14px; font-weight:bold; font-family:Arial;">#FIELD#</td>'
+	var htmlTotalSum = '<td colspan="#SPAN#" style="white-space: nowrap; padding-left:4px; padding-right:4px; text-align:right; #COLOR# background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:bold; font-family:Arial;">#FIELD#</td>'
+
+	// Invoice Headline
+	htmlCode += '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse;">'
+	htmlCode += '<tr>'
+	htmlCode += htmlTHC.replace('#FIELD#', 'Date');
+	htmlCode += htmlTHC.replace('#FIELD#', 'Inv');
+	htmlCode += htmlTHC.replace('#FIELD#', 'Book');
+	htmlCode += htmlTHL.replace('#FIELD#', 'Description');
+	htmlCode += htmlTHR.replace('#FIELD#', 'Amount');
+	htmlCode += '</tr>'
+
+	// Sort invoiceArray by dueDate oldest to newest
+	sortBy(bookingArray, (o) => o.checkin);
+
+	// Loop thru all bookings
+	var totalIncome = 0;
+	var totalExpense = 0;
+	for (var b=0; b<bookingArray.length; b++) {	
+
+		// Loop thru all invoices on that booking
+		for (var i=0; i<bookingArray[b].invoice.length; i++) {	
+	
+			htmlCode += '<tr>'
+			htmlCode += htmlTDC.replace('#FIELD#', new Date(bookingArray[b].invoice[i].dueDate*1000).format('d/m/Y'));
+			htmlCode += htmlTDR.replace('#FIELD#', bookingArray[b].invoice[i].invoiceNumber);
+			htmlCode += htmlTDC.replace('#FIELD#', bookingArray[b].invoice[i].bookingId);
+
+			// Loop thru all lines on the invoice
+			var invoiceTotal = 0;
+			var invoiceText = '';
+
+			for (var l=0; l<bookingArray[b].invoice[i].invoiceLines.length; l++) {	
+				if (invoiceText == '') {
+					invoiceText += htmlTDL.replace('#FIELD#', bookingArray[b].invoice[i].invoiceLines[l].lineText);
+				}
+				invoiceTotal += bookingArray[b].invoice[i].invoiceLines[l].amountTotal;
+			}
+			htmlCode += invoiceText;
+
+			// Loop thru all receipts on that invoice
+			var receiptTotal = 0;
+			for (var r=0; r<bookingArray[b].receipt.length; r++) {	
+				if (bookingArray[b].receipt[r].invoiceId == bookingArray[b].invoice[i]._id) {
+					receiptTotal += bookingArray[b].receipt[r].amount;
+				}
+			}
+			
+			// if this is a completed booking (checkout before today) then use amount from receipts
+			currAmount = 0;
+			if (bookingArray[b].checkout <= new Date().format('U')) {
+				currAmount = receiptTotal
+			} else {
+				currAmount = invoiceTotal
+			}
+			htmlCode += htmlTDR.replace('#FIELD#', ('฿ ' + accFormat(currAmount)));
+			htmlCode += '</tr>'
+			totalIncome += currAmount;
+		}
+
+		// Loop thru all receipts with no invoice on this booking
+		var receiptTotal = 0;
+		var duedate = 0;
+		var recpNo = 0;
+		for (var r=0; r<bookingArray[b].receipt.length; r++) {	
+			if (bookingArray[b].receipt[r].invoiceId == "") {
+				receiptTotal += bookingArray[b].receipt[r].amount;
+				duedate = bookingArray[b].checkin;
+				recpNo = bookingArray[b].receipt[r].receiptNo;
+			}
+		}
+		if (receiptTotal != 0) {
+			htmlCode += '<tr>'
+			htmlCode += htmlTDC.replace('#FIELD#', new Date(duedate*1000).format('d/m/Y'));
+			htmlCode += htmlTDR.replace('#FIELD#', 0);
+			htmlCode += htmlTDC.replace('#FIELD#', bookingArray[b]._id);
+			htmlCode += htmlTDL.replace('#FIELD#', 'Extra receipts');		
+			htmlCode += htmlTDR.replace('#FIELD#', ('฿ ' + accFormat(receiptTotal)));
+			htmlCode += '</tr>'
+			totalIncome += currAmount;
+		}
+	}
+
+	// Writing the total Income
+	htmlCode += '<tr>'
+	var renderLine = htmlTotal.replace('#FIELD#', 'Total Income');
+	renderLine = renderLine.replace('#SPAN#','4');
+	htmlCode += renderLine;
+	var renderLine = htmlTotal.replace('#FIELD#', ('฿ ' + accFormat(totalIncome)));
+	renderLine = renderLine.replace('#SPAN#','1');
+	htmlCode += renderLine;
+	htmlCode += '</tr></table>'
+
+	
+	// Expense Headline
+	htmlCode += '</td><td style="width:8px;"></td><td style="vertical-align:top;">'
+	htmlCode += '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse;">'
+	htmlCode += '<tr>'
+	htmlCode += htmlTHC.replace('#FIELD#', 'Date');
+	htmlCode += htmlTHC.replace('#FIELD#', 'ExpNo');
+	htmlCode += htmlTHL.replace('#FIELD#', 'Description');
+	htmlCode += htmlTHR.replace('#FIELD#', 'Amount');
+	htmlCode += '</tr>'
+
+	// Sort expenseArray by dueDate oldest to newest
+	sortBy(expenseArray, (o) => o.dueDate);
+
+	// Loop thru all expenses
+	for (var e=0; e<expenseArray.length; e++) {	
+
+		// Should this expense be split between several properties?
+		shareModifier = 100;
+		if (typeof(expenseArray[e].propertyId)=='object') {
+			console.log ('ITS ARRAY OF PROPERTIES!!!')
+
+			// Find total salesprice for all properties who share this expense and put into totalSaleprice
+			var totalSaleprice = 0;
+			for (let p=0; p<expenseArray[e].propertyId.length; p++) {
+				let selecter = propertyArray.filter(function(obj){
+					return obj._id == expenseArray[e].propertyId;
+				})			
+				if (selecter[0].saleprice) {
+					totalSaleprice += selecter[0].saleprice;
+				}				
+			}
+			if (totalSaleprice==0) {
+				totalSaleprice = selectProperty[0].saleprice
+			};
+			shareModifier = Math.round((selectProperty[0].saleprice/totalSaleprice)*100)
+			console.log ('shareModifier ' + shareModifier)
+		} else {
+			console.log ('Its single property ')
+			shareModifier = 100;
+		}
+	
+		// Render the line
+		htmlCode += '<tr>'
+		htmlCode += htmlTDC.replace('#FIELD#', new Date(expenseArray[e].dueDate*1000).format('d/m/Y'));
+		htmlCode += htmlTDR.replace('#FIELD#', expenseArray[e]._id);
+		htmlCode += htmlTDL.replace('#FIELD#', expenseArray[e].text);
+		htmlCode += htmlTDR.replace('#FIELD#', ('฿ ' + accFormat(expenseArray[e].amount * (shareModifier/100))));
+		htmlCode += '</tr>'
+		
+		totalExpense += Math.round(expenseArray[e].amount * (shareModifier/100));
+		
+	}
+
+	// Writing the total Expense
+	htmlCode += '<tr>'
+	var renderLine = htmlTotal.replace('#FIELD#', 'Total Expense');
+	renderLine = renderLine.replace('#SPAN#','3');
+	htmlCode += renderLine;
+	var renderLine = htmlTotal.replace('#FIELD#', ('฿ ' + accFormat(totalExpense)));
+	renderLine = renderLine.replace('#SPAN#','1');
+	htmlCode += renderLine;
+	htmlCode += '</tr>'
+	
+	htmlCode += '<tr><td colspan="4" style="border:0; height:16px;"></td></tr>'
+	
+
+	
+	// Totals
+	htmlCode += '<tr>'
+
+	var renderLine = htmlTotalSum.replace('#FIELD#', 'Total Income from ' + selectProperty[0]._id);
+	renderLine = renderLine.replace('#COLOR#','color:#000000;');
+	renderLine = renderLine.replace('#SPAN#','3');
+	htmlCode += renderLine;
+
+	var renderLine = htmlTotalSum.replace('#FIELD#', ('฿ ' + accFormat(totalIncome)));
+	renderLine = renderLine.replace('#COLOR#',greenTxt);
+	renderLine = renderLine.replace('#SPAN#','1');
+	htmlCode += renderLine;
+
+	htmlCode += '</tr>'
+	htmlCode += '<tr>'
+	
+	var renderLine = htmlTotalSum.replace('#FIELD#', 'Total Expense from ' + selectProperty[0]._id);
+	renderLine = renderLine.replace('#COLOR#','color:#000000;');
+	renderLine = renderLine.replace('#SPAN#','3');
+	htmlCode += renderLine;
+
+	var renderLine = htmlTotalSum.replace('#FIELD#', ('฿ -' + accFormat(totalExpense)));
+	renderLine = renderLine.replace('#COLOR#',redTxt);
+	renderLine = renderLine.replace('#SPAN#','1');
+	htmlCode += renderLine;
+
+	htmlCode += '</tr>'
+	htmlCode += '<tr>'
+	if (totalExpense<=totalIncome) {
+		var renderLine = htmlTotalSum.replace('#FIELD#', 'Total PROFIT from ' + selectProperty[0]._id);
+	} else {
+		var renderLine = htmlTotalSum.replace('#FIELD#', 'Total LOSS from ' + selectProperty[0]._id);
+	}
+	renderLine = renderLine.replace('#COLOR#','color:#000000;');
+	renderLine = renderLine.replace('#SPAN#','3');
+	htmlCode += renderLine;
+
+	var renderLine = htmlTotalSum.replace('#FIELD#', ('฿ ' + accFormat(totalIncome-totalExpense)));
+	if (totalExpense<=totalIncome) {
+		renderLine = renderLine.replace('#COLOR#',greenTxt);
+	} else {
+		renderLine = renderLine.replace('#COLOR#',redTxt);
+	}
+	renderLine = renderLine.replace('#SPAN#','1');
+	htmlCode += renderLine;
+	htmlCode += '</tr></table>'
+	htmlCode += '</td></tr></table>'
+
+	htmlCode += reportFooter();
+	return htmlCode;	
+}
+
+//
+// WHAT DO ReportBankAccount NEED FROM THE REPORT-FORM?
+//
+// -->  FROM date and TO date 
+//
+app.controller("reportBankAccountController", function ($scope, $http, $rootScope, $location, ReportData) {
+
+	var topHeadtxt = 'Book Bank Account Report';
+    var formData = ReportData.get();
+    console.log('######### REPORT: ' + formData.reportName);
+    console.log('fromDate: ' + formData.fromDate);
+    console.log('toDate: ' + formData.toDate);
+	console.log('bankArr: ' + JSON.stringify(formData.bankArr, null, 4));
+
+
+	// Load all data
+	var findData = function() {
+		return new Promise((resolve, reject) => {
+		$http({
+			method: 'POST',
+			url: globalNodeUrl + 'report/getBankAccountReport',
+			headers: { 'Content-Type': 'application/json' },
+			data: { fromDate: formData.fromDate, toDate: formData.toDate, bank:formData.bankArr }
+		}).then(function successCallback(res) {
+			console.log('WE GOT THE DATA BACK FROM ROUTER!!!')
+			// console.log('data: ' + JSON.stringify(res.data, null, 4))
+            resolve(res.data);
+		}, function errorCallback(err) {
+			reject(new Error('getBankAccountReport ERROR : ' + err));
+		});
+	})};
+
+
+	// Create HTML for the entire report page
+	var makeReport = function(data) {
+		return new Promise((resolve, reject) => {
+		console.log('WE MAKE THE REPORT!!!');
+		let bankArray = data.bank;
+		let receiptArray = data.receipt;
+		let expenseArray = data.expense;
+		// console.log('### bankArray: ' + JSON.stringify(bankArray, null, 4))
+		// console.log('### receiptArray: ' + JSON.stringify(receiptArray, null, 4))
+		// console.log('### expenseArray: ' + JSON.stringify(expenseArray, null, 4))
+		var htmlCode = setupBankAccountReport(formData.fromDate, formData.toDate, bankArray, receiptArray, expenseArray, topHeadtxt)
+		resolve(htmlCode);
+	})};
+
+
+
+	// Show the report
+	var showReport = function(data) {
+		return new Promise((resolve, reject) => {
+		console.log('WE SHOW THE REPORT!!!');
+		var topHeadtxt = 'Property Sale Pricelist for Agents'
+		data = pageButtons(topHeadtxt) + data 
+		document.getElementById('contentAll').innerHTML = data;	
+	})};
+
+
+	// Start all the promises
+	findData()
+		.then(makeReport)
+		.then(showReport)
+		.catch(err => {
+			console.error(err);
+			console.log("reportBankAccountController ERROR: " + err.message );
+			return;
+		})
+
+})
+
+
+// Setup Pricelist
+function setupBankAccountReport(parmFromDate, parmToDate, bankArray, receiptArray, expenseArray, topHeadtxt) {
+	
+	var htmlTDL = '<td style="text-align:left; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDX = '<td style="text-align:left; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial Narrow;">#FIELD#</td>'
+	var htmlTDC = '<td style="text-align:center; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR = '<td style="text-align:right; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDT = '<td colspan="4" style="text-align:right; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:bold; font-family:Arial;">#FIELD#</td>'
+	var htmlCode = '';
+	var reportHead = ''
+	var fromDate = new Date(parmFromDate*1000);
+	var toDate = new Date(parmToDate*1000);
+	var statsArray = [];
+
+	document.title = topHeadtxt;
+
+	// Loop thru all bank accounts
+	for (var i=0; i<bankArray.length; i++) {		
+
+		// Prepair the dates
+		var fromMonth = fromDate.getMonth()+1;
+		var toMonth = toDate.getMonth()+1;
+		var fromYear = fromDate.getFullYear();
+		var toYear = toDate.getFullYear();
+		var cntFromMonth = 0;
+		var cntToMonth = 0;
+		var lines = 0;
+
+		// Set Report header for this Bank Account
+		reportHead = '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse;">'
+					+ '<tr><td style="font-family: Arial Narrow, Arial; font-size:15px;">Account: </td><td style="font-family: Arial Narrow, Arial; font-size:15px;"><b>' + bankArray[i].account + '</b></td><td colspan="4" style="font-family: Arial Narrow, Arial; font-size:15px;">Period from <b>' + fromDate.format('j M Y') + '</b> to <b>' + toDate.format('j M Y') + '</b></td></tr>'
+					+ '<tr><td style="font-family: Arial Narrow, Arial; font-size:15px;">Bank: </td><td style="font-family: Arial Narrow, Arial; font-size:15px;"><b>' + bankArray[i].bank + '</b></td><td style="font-family: Arial Narrow, Arial; font-size:15px;">No: </td><td style="font-family: Arial Narrow, Arial; font-size:15px;"><b>' + bankArray[i].accountNo + '</b></td><td style="font-family: Arial Narrow, Arial; font-size:15px;">Name: </td><td style="font-family: Arial Narrow, Arial; font-size:15px;"><b>' + bankArray[i].accountHolder + '</b></td></tr></table>'
+
+		// Render Header
+		if (i!=0) { 
+			htmlCode += reportPageBreak();
+		}
+		htmlCode += topHeadline('Book Bank ' + bankArray[i].account);
+		htmlCode += reportHeadline(reportHead);
+		htmlCode += '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; margin-top:6px;">'
+
+		// Count for all years 
+		for (var countYear=fromYear; countYear<=toYear; countYear++) {
+		
+			// If this year is bigger than fromYear then we need to count from 1st month 
+			if (countYear > fromYear) {
+				cntFromMonth = 1
+			} else {
+				cntFromMonth = fromMonth
+			}
+		
+			// If this year is smaller than toYear then we need to count all 12 months 
+			if (countYear < toYear) {
+				cntToMonth = 12
+			} else {
+				cntToMonth = toMonth
+			}
+			
+			// looping thru all months for the countYear 
+			for (var countMonth=cntFromMonth; countMonth<=cntToMonth; countMonth++) {
+
+				var minDate = new Date(countYear + '-' + countMonth + '-01 00:00:00') / 1000
+				var maxDays = new Date(countYear, countMonth, 0).getDate();
+				var maxDate = new Date(countYear + '-' + countMonth + '-' + maxDays + ' 23:59:59') / 1000
+				var totalReceipt = 0;
+				var totalExpense = 0;
+				var htmlRecp = '';
+
+				// Find receipts
+				var selectReceipt = receiptArray.filter(function(obj){
+					return obj.account == bankArray[i]._id && obj.paidDate >= minDate && obj.paidDate <= maxDate;
+				})
+
+				sortBy(selectReceipt, (o) => o.paidDate);
+				for (var r=0; r<selectReceipt.length; r++) {
+					htmlRecp = '<tr>';
+					htmlRecp += htmlTDL.replace('#FIELD#', new Date(selectReceipt[r].paidDate * 1000).format('d M'));
+					htmlRecp += htmlTDL.replace('#FIELD#', selectReceipt[r].property);
+					htmlRecp += htmlTDX.replace('#FIELD#', selectReceipt[r].name.substring(0,20));
+					htmlRecp += htmlTDR.replace('#FIELD#', selectReceipt[r]._id);
+					htmlRecp += htmlTDR.replace('#FIELD#', accFormat(selectReceipt[r].amount));
+					htmlRecp += '</tr>';
+					totalReceipt += selectReceipt[r].amount;
+					pushStats(r, htmlRecp, '', statsArray);
+				}
+				htmlRecp = '<tr>';
+				htmlRecp += htmlTDT.replace('#FIELD#', 'Total Receipts for ' + new Date(minDate*1000).format('F'));
+				htmlRecp += htmlTDR.replace('#FIELD#', '<b>' + accFormat(totalReceipt) + '</b>');
+				htmlRecp += '</tr>';
+				pushStats((r+1), htmlRecp, '', statsArray);
+
+				// Find expenses
+				var selectExpense = expenseArray.filter(function(obj){
+					return obj.account == bankArray[i]._id && obj.dueDate >= minDate && obj.dueDate <= maxDate
+				})	
+				sortBy(selectExpense, (o) => o.dueDate);
+				
+				var htmlExpe = '';
+				for (var e=0; e<selectExpense.length; e++) {
+					htmlExpe = '<tr>';
+					htmlExpe += htmlTDL.replace('#FIELD#', new Date(selectExpense[e].dueDate*1000).format('d M'));
+					if (typeof(selectExpense[e].propertyId)=='object') {
+						htmlExpe += htmlTDL.replace('#FIELD#', 'MULTIPLE');
+					} else {
+						htmlExpe += htmlTDL.replace('#FIELD#', selectExpense[e].propertyId);
+					}
+					htmlExpe += htmlTDX.replace('#FIELD#', selectExpense[e].expenseCategory);
+					htmlExpe += htmlTDX.replace('#FIELD#', selectExpense[e].text.substring(0,20));
+					htmlExpe += htmlTDR.replace('#FIELD#', accFormat(selectExpense[e].amount));
+					htmlExpe += '</tr>';
+					totalExpense += selectExpense[e].amount;
+					pushStats(e, '', htmlExpe, statsArray);
+				}
+				htmlExpe = '<tr>';
+				htmlExpe += htmlTDT.replace('#FIELD#', 'Total Expense for ' + new Date(minDate*1000).format('F'));
+				htmlExpe += htmlTDR.replace('#FIELD#', '<b>' + accFormat(totalExpense) + '</b>');
+				htmlExpe += '</tr>';
+				pushStats((e+1), '', htmlExpe, statsArray);
+
+				// Render Month Headline
+				htmlCode += '<tr><td colspan="3" style="width:90%; text-align:left; padding-left:6px; padding-top:10px; background-color:#FFFFFF; color:#000000; border:0px; height:25px; white-space: nowrap; font-size:20px; font-weight:bold; font-family:Roboto, Helvetica Neue, Arial, Helvetica, sans-serif;">' + new Date(minDate*1000).format('F Y') + '</td></tr>';
+				htmlRecp = renderBankAccountTableHead("RECEIPT");
+				htmlExpe = renderBankAccountTableHead("EXPENSE");
+				lines += 2;
+				for (var l=0; l<statsArray.length; l++) {
+
+					// Break every 24 lines  
+					lines += 1;
+					if (lines>18) {
+						htmlCode += '<tr><td style="vertical-align:top;">' + htmlRecp + '</table></td><td>&nbsp;</td><td style="vertical-align:top;">' + htmlExpe + '</table></td><tr>';
+						htmlCode += '</table>';
+						htmlCode += reportFooter();			
+						htmlCode += reportPageBreak();
+						htmlCode += topHeadline('Book Bank ' + bankArray[i].account);
+						htmlCode += reportHeadline(reportHead);
+						htmlCode += '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; margin-top:6px;">'
+						htmlCode += '<tr><td colspan="3" style="width:90%; text-align:left; padding-left:6px; padding-top:10px; background-color:#FFFFFF; color:#000000; border:0px; height:25px; white-space: nowrap; font-size:20px; font-weight:bold; font-family:Roboto, Helvetica Neue, Arial, Helvetica, sans-serif;">' + new Date(minDate*1000).format('F Y') + '</td></tr>';
+						htmlRecp = renderBankAccountTableHead("RECEIPT");
+						htmlExpe = renderBankAccountTableHead("EXPENSE");
+						lines = 0;
+					}	
+
+					if (statsArray[l].receipt) {htmlRecp += statsArray[l].receipt;}
+					if (statsArray[l].expense) {htmlExpe += statsArray[l].expense;}
+					
+				}
+				htmlCode += '<tr><td style="vertical-align:top;">' + htmlRecp + '</table></td><td>&nbsp;</td><td style="vertical-align:top;">' + htmlExpe + '</table></td><tr>';
+				statsArray = [];
+			}
+		}
+		htmlCode += '</table>';
+		htmlCode += reportFooter();	
+	}
+	return htmlCode;
+}
+
+// Render table HEADER for the table with all data (because its longer than one page and need to break)
+function renderBankAccountTableHead(whichHeader){
+	var htmlTHL = '<th style="text-align:left; height:26px; padding-left:6px; white-space: nowrap; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</th>'
+	var htmlTHC = '<th style="text-align:center; height:26px; white-space: nowrap; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</th>'
+	var htmlTHR = '<th style="text-align:right; height:26px; padding-right:6px; white-space: nowrap; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</th>'
+	var htmlCode = '' 
+	htmlCode += '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; margin-top:6px;">'
+	if (whichHeader=='RECEIPT') {
+		htmlCode += '<tr><td colspan="5" style="width:90%; text-align:center; padding-left:6px; background-color:#FFFFFF; color:#000000; border:1px solid #AAAAAA; height:25px; white-space: nowrap; font-size:16px; font-weight:bold; font-family:Roboto, Helvetica Neue, Arial, Helvetica, sans-serif;">Money in - Receipts</td></tr>'
+		htmlCode += '<tr>'
+		htmlCode += htmlTHL.replace('#FIELD#', 'Date');
+		htmlCode += htmlTHL.replace('#FIELD#', 'Unit');
+		htmlCode += htmlTHL.replace('#FIELD#', 'Tenant');
+		htmlCode += htmlTHR.replace('#FIELD#', 'RecNo');
+		htmlCode += htmlTHR.replace('#FIELD#', 'Amount');
+	} else {
+		htmlCode += '<tr><td colspan="5" style="width:90%; text-align:center; padding-left:6px; background-color:#FFFFFF; color:#000000; border:1px solid #AAAAAA; height:25px; white-space: nowrap; font-size:16px; font-weight:bold; font-family:Roboto, Helvetica Neue, Arial, Helvetica, sans-serif;">Money out - Expenses</td></tr>'
+		htmlCode += '<tr>'
+		htmlCode += htmlTHL.replace('#FIELD#', 'Date');
+		htmlCode += htmlTHL.replace('#FIELD#', 'Unit');
+		htmlCode += htmlTHL.replace('#FIELD#', 'Category');
+		htmlCode += htmlTHL.replace('#FIELD#', 'Expense');
+		htmlCode += htmlTHR.replace('#FIELD#', 'Amount');
+	}
+	htmlCode += '</tr>'
+	return htmlCode;
+}
+
+// Push Stats
+function pushStats(currKey, lineRecp, lineExpe, statsArray){
+	var selectStats = statsArray.filter(function(obj){
+		return obj.key == currKey
+	})
+  	if (!selectStats.length) {
+		statsArray.push(
+			{
+				'key'		: currKey,
+				'receipt'	: lineRecp,
+				'expense'	: lineExpe
+			}
+		)
+	} else {
+		if (lineRecp) {
+			selectStats[0].receipt = lineRecp;
+		} else {
+			selectStats[0].expense = lineExpe;
+		}
+	}
+}
+
+
+
+
+
+
+//
+// WHAT DO reportBooking NEED FROM THE REPORT-FORM?
+//
+// - From and To Date
+// - Multiple properties or ALL
+// - Booking Status
+// - Sort by
+// - Include Agents and Invoices?
+//
+app.controller("reportBookingController", function ($scope, $http, $rootScope, $location, ReportData) {
+
+	var topHeadtxt = 'Booking Report';
+    var formData = ReportData.get();
+    console.log('######### REPORT: ' + formData.reportName);
+    console.log('fromDate: ' + formData.fromDate);
+    console.log('toDate: ' + formData.toDate);
+    console.log('bookingInclude: ' + formData.bookingInclude);
+    console.log('bookingSort: ' + formData.bookingSort);
+    console.log('bookingAgents: ' + formData.bookingAgents);
+    console.log('bookingInvoices: ' + formData.bookingInvoices);
+    console.log('propertyArr: ' + JSON.stringify(formData.propertyArr, null, 4));
+
+
+	// Load all data
+	var findData = function() {
+		return new Promise((resolve, reject) => {
+		$http({
+			method: 'POST',
+			url: globalNodeUrl + 'report/getBookingList',
+			headers: { 'Content-Type': 'application/json' },
+			data: { fromDate: formData.fromDate, toDate: formData.toDate, status: formData.bookingInclude, propertyID: formData.propertyArr }
+		}).then(function successCallback(res) {
+			console.log('WE GOT getBookingList DATA BACK FROM ROUTER!!!')
+			// console.log('data: ' + JSON.stringify(res.data, null, 4))
+            resolve(res.data);
+		}, function errorCallback(err) {
+			reject(new Error('getBookingList ERROR : ' + err));
+		});
+	})};
+
+
+	// Create HTML for the entire report page
+	var makeReport = function(data) {
+		return new Promise((resolve, reject) => {
+		console.log('WE MAKE THE REPORT!!!');
+		let bookingkArray = data.booking;
+		let receiptArray = data.receipt;
+		let invoiceArray = data.invoice;
+		console.log('### bookingkArray: ' + JSON.stringify(bookingkArray, null, 4))
+		console.log('### receiptArray: ' + JSON.stringify(receiptArray, null, 4))
+		console.log('### invoiceArray: ' + JSON.stringify(invoiceArray, null, 4))
+		var htmlCode = setupBookingReport(
+			formData.fromDate, 
+			formData.toDate, 
+			formData.bookingInclude,	
+			formData.bookingSort,	
+			formData.bookingAgents,	
+			formData.bookingInvoices,	
+			bookingkArray, 
+			receiptArray, 
+			invoiceArray, 
+			topHeadtxt
+		)
+		resolve(htmlCode);
+	})};
+
+
+	// Show the report
+	var showReport = function(data) {
+		return new Promise((resolve, reject) => {
+		console.log('WE SHOW THE REPORT!!!');
+		data = pageButtons(topHeadtxt) + data 
+		document.getElementById('contentAll').innerHTML = data;	
+	})};
+
+
+	// Start all the promises
+	findData()
+		.then(makeReport)
+		.then(showReport)
+		.catch(err => {
+			console.error(err);
+			console.log("reportBookingController ERROR: " + err.message );
+			return;
+		})
+
+})
+
+
+// Setup Booking List Report
+function setupBookingReport(parmFromDate, parmToDate, includeBookings, sortBookings, showAgent, showInv, bookingArray, receiptArray, invoiceArray, topHeadtxt) {
+	
+	document.title = topHeadtxt;
+	var htmlCode = '';
+
+	console.log("parmFromDate: " + parmFromDate)
+	console.log("showAgent: " + showAgent)
+	console.log("includeBookings: " + includeBookings)
+	console.log("receiptArray: " + receiptArray)
+	console.log("sortBookings: " + sortBookings)
+
+	// Prepair the dates
+	var fromDate = new Date(parmFromDate*1000);
+	var toDate = new Date(parmToDate*1000);
+	var reportHead = 'Period from <b>' + fromDate.format('d M Y') + '</b> to <b>' + toDate.format('d M Y') + '</b>';
+	var showChannel = true;
+	var showStatus = true;
+	var showUnit = true;
+
+	// Set the headline and the status conditions
+	switch(includeBookings) {
+		case 'ACTIVE':
+			var txtInclude = 'Active Bookings'
+			break;
+		case 'ALL':
+			var txtInclude = 'All Bookings'
+			break;
+		case 'NOPAY':
+			var txtInclude = 'Unpaid Bookings'
+			break;
+		case '0':
+			var txtInclude = 'New Bookings'
+			break;
+		case '1':
+			var txtInclude = 'Pending'
+			break;
+		case '2':
+			var txtInclude = 'Booked'
+			break;
+		case '3':
+			var txtInclude = 'Check-in'
+			break;
+		case '4':
+			var txtInclude = 'Check-out'
+			break;
+		case '5':
+			var txtInclude = 'Done'
+			break;
+		case '6':
+			var txtInclude = 'Cancelled'
+			break;
+	}
+
+
+	
+	// Sort bookingArray by different things
+	switch(sortBookings) {
+		case 'DATE':
+			var txtSort = 'Checkin Date'
+			sortBy(bookingArray, (o) => o.checkin);
+			break;
+		case 'CHANNEL':
+			var txtSort = 'Booking Channel'
+ 			sortBy(bookingArray, (o) => [o.source, o.checkin]);
+			break;
+		case 'PROPERTY':
+			var txtSort = 'Property'
+			sortBy(bookingArray, (o) => [o.property, o.checkin]); 
+			break;
+		case 'STATUS':
+			var txtSort = 'Booking Status'
+ 			sortBy(bookingArray, (o) => [o.status, o.checkin]);
+			break;
+	}
+
+	sortBy(invoiceArray, (o) => o._id);
+
+	// Put page title the same as report headline
+	document.title = txtInclude + ' sort by ' + txtSort;
+	topHeadtxt = txtInclude + ' sort by ' + txtSort ; 
+	
+	// Render the report 
+	var fldSort = ''
+	var htmlCode = ''
+	htmlCode = '';
+	htmlCode += topHeadline(topHeadtxt);
+	htmlCode += reportHeadline(reportHead)	
+	
+
+	// DATE
+	if (sortBookings=='DATE') {
+		htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+	
+		// Loop thru all bookings
+		var lines=0;
+		for (var i=0; i<bookingArray.length; i++) {	
+			htmlCode += renderBookings(i, includeBookings, sortBookings, showChannel, showStatus, showUnit, showAgent, showInv, bookingArray, receiptArray, invoiceArray);
+
+			// Break every 28 lines  
+			lines += 1;
+			if (lines>28) {
+				lines = 0;
+				htmlCode += '</table>';
+				htmlCode += reportFooter();			
+				htmlCode += reportPageBreak();
+				htmlCode += topHeadline(topHeadtxt);
+				htmlCode += reportHeadline(txtSort)	
+				htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+			}
+		}
+
+	} else {
+
+	
+		// CHANNEL
+		if (sortBookings=='CHANNEL') {
+
+			showChannel = false;
+			htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+			
+			// Loop thru all bookings
+			var lines = 0;
+			for (var i=0; i<bookingArray.length; i++) {	
+				if (fldSort != bookingArray[i].source || lines>26) {
+					fldSort = bookingArray[i].source;
+					// Break every 26 lines  
+					lines += 2;
+					if (lines>26) {
+						lines = 0;
+						htmlCode += '</table>';
+						htmlCode += reportFooter();			
+						htmlCode += reportPageBreak();
+						htmlCode += topHeadline(topHeadtxt);
+						htmlCode += reportHeadline(txtSort)	
+						htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+					}
+					var htmlHead = '<tr><th colspan="20" style="background-color:#EEEEEE; color:#000000; border:1px solid #AAAAAA; text-align:left; height:38px; padding-left:6px; white-space: nowrap;">#FIELD#</th></tr>'
+					var txtStatus = '<div style="background-color:#999999; color:#FFFFFF; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">UNKNOWN</div>'
+					switch(fldSort) {
+						case '':
+							var txtStatus = '<div style="background-color:#999999; color:#FFFFFF; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">UNKNOWN</div>'
+							break;
+						case 'T':
+							var txtStatus = '<div style="background-color:#4CACCD; color:#FFFFFF; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">THAIHOME</div>'
+							break;
+						case 'B':
+							var txtStatus = '<div style="background-color:#003580; color:#FFFFFF; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">BOOKING.COM</div>'
+							break;
+						case 'A':
+							var txtStatus = '<div style="background-color:#FF8084; color:#FFFFFF; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">AIRBNB</div>'
+							break;
+						case 'E':
+							var txtStatus = '<div style="background-color:#00355F; color:#FFCB00; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">EXPEDIA</div>'
+							break;
+						case 'G':
+							var txtStatus = '<div style="background-color:#C59064; color:#FFFFFF; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">AGENTS</div>'
+							break;
+					}
+					htmlCode += htmlHead.replace('#FIELD#', txtStatus);
+				}
+				if (fldSort != '') {
+					htmlCode += renderBookings(i, includeBookings, sortBookings, showChannel, showStatus, showUnit, showAgent, showInv, bookingArray, receiptArray, invoiceArray);
+					lines += 1;
+				}
+				
+			}
+		}
+
+
+		// PROPERTY
+		if (sortBookings=='PROPERTY') {
+
+			// Make the table header
+			var lines = 0;
+			showUnit = false;
+			htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+			
+			// Loop thru all bookings
+			var lines = 0;
+			for (var i=0; i<bookingArray.length; i++) {	
+
+				if (fldSort != bookingArray[i].property || lines>24) {
+					fldSort = bookingArray[i].property;
+					// Break every 25 lines  
+					lines += 2;
+					if (lines>24) {
+						lines = 0;
+						htmlCode += '</table>';
+						htmlCode += reportFooter();			
+						htmlCode += reportPageBreak();
+						htmlCode += topHeadline(topHeadtxt);
+						htmlCode += reportHeadline(txtSort)	
+						htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+					}
+					var htmlHead = '<tr><th colspan="20" style="background-color:#EEEEEE; color:#000000; border:1px solid #AAAAAA; text-align:left; height:38px; padding-left:6px; white-space: nowrap;">#FIELD#</th></tr>'
+					var txtStatus = '<div style="padding-left:10px; background-color:#FFFFFF; color:#333333; width:250px; display: block; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">Property: &nbsp; ' + bookingArray[i].property + '</div>'
+					htmlCode += htmlHead.replace('#FIELD#', txtStatus);
+				}
+				if (fldSort != '') {
+					htmlCode += renderBookings(i, includeBookings, sortBookings, showChannel, showStatus, showUnit, showAgent, showInv, bookingArray, receiptArray, invoiceArray);
+					lines += 1;
+				}
+			}
+		}
+
+
+		// STATUS
+		if (sortBookings=='STATUS') {
+
+			// Make the table header
+			var lines = 0;
+			showStatus = false;
+			htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+			fldSort = 99;
+			
+			// Loop thru all bookings
+			var lines = 0;
+			for (var i=0; i<bookingArray.length; i++) {	
+				if (fldSort != bookingArray[i].status || lines>24) {
+					fldSort = bookingArray[i].status;
+					// Break every 25 lines  
+					lines += 2;
+					if (lines>24) {
+						lines = 0;
+						htmlCode += '</table>';
+						htmlCode += reportFooter();			
+						htmlCode += reportPageBreak();
+						htmlCode += topHeadline(topHeadtxt);
+						htmlCode += reportHeadline(txtSort)	
+						htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+					}
+					var htmlHead = '<tr><th colspan="20" style="background-color:#EEEEEE; color:#000000; border:1px solid #AAAAAA; text-align:left; height:40px; padding-left:6px; white-space: nowrap;">#FIELD#</th></tr>'
+					var txtStatus = '<div style="background-color:#999999; color:#FFFFFF; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">UNKNOWN</div>'
+					switch(fldSort) {
+						case 0:
+							var txtStatus = '<div style="padding-left:12px; font-family:Roboto, Arial; font-size:18px; background-color:#FFE5E5;border: 1px solid #804040; color:#804040; width:200px; display: block;">NEW BOOKINGS</div>'
+							break;
+						case 1:
+							var txtStatus = '<div style="padding-left:12px; font-family:Roboto, Arial; font-size:18px; background-color:#FFE5E5;border: 1px solid #804040; color:#804040; width:200px; display: block;">PENDING</div>'
+							break;
+						case 2:
+							var txtStatus = '<div style="padding-left:12px; font-family:Roboto, Arial; font-size:18px; background-color:#DDFFDD;border: 1px solid #007000; color:#007000; width:200px; display: block;">BOOKED</div>'
+							break;
+						case 3:
+							var txtStatus = '<div style="padding-left:12px; font-family:Roboto, Arial; font-size:18px; background-color:#DDFFDD;border: 1px solid #007000; color:#007000; width:200px; display: block;">CHECKIN</div>'
+							break;
+						case 4:
+							var txtStatus = '<div style="padding-left:12px; font-family:Roboto, Arial; font-size:18px; background-color:#E0E0E0;border: 1px solid #808080; color:#404040; width:200px; display: block;">CHECKOUT</div>'
+							break;
+						case 5:
+							var txtStatus = '<div style="padding-left:12px; font-family:Roboto, Arial; font-size:18px; background-color:#E0E0E0;border: 1px solid #808080; color:#404040; width:200px; display: block;">DONE</div>'
+							break;
+						case 6:
+							var txtStatus = '<div style="padding-left:12px; font-family:Roboto, Arial; font-size:18px; background-color:#E0E0E0;border: 1px solid #808080; color:#404040; width:200px; display: block;">CANCEL</div>'
+							break;
+					}
+					htmlCode += htmlHead.replace('#FIELD#', txtStatus);
+				}
+				if (fldSort != 99) {
+					htmlCode += renderBookings(i, includeBookings, sortBookings, showChannel, showStatus, showUnit, showAgent, showInv, bookingArray, receiptArray, invoiceArray);
+					lines += 1;
+				}
+			}
+		}
+	}	
+
+	// Render footer
+	htmlCode += '</table>';
+	htmlCode += reportFooter();			
+	
+	return htmlCode;
+}
+
+// Render the table header
+function renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv){
+	var htmlTHL = '<td style="text-align:left; height:26px; padding-left:6px; white-space: nowrap; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</td>'
+	var htmlTHC = '<td style="text-align:center; height:26px; white-space: nowrap; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</td>'
+	var htmlTHR = '<td style="text-align:right; height:26px; padding-right:6px; white-space: nowrap; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</td>'
+	var htmlCode = '';
+	htmlCode += '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">'
+	htmlCode += '<tr>'
+	if (showChannel) {htmlCode += htmlTHC.replace('#FIELD#', 'Ch')};
+	if (showStatus) {htmlCode += htmlTHC.replace('#FIELD#', 'Status')};
+	if (showUnit) {htmlCode += htmlTHL.replace('#FIELD#', 'Unit')};
+	htmlCode += htmlTHL.replace('#FIELD#', 'Book');
+	htmlCode += htmlTHC.replace('#FIELD#', 'Checkin');
+	htmlCode += htmlTHC.replace('#FIELD#', 'Checkout');
+	htmlCode += htmlTHC.replace('#FIELD#', 'Nights');
+	htmlCode += htmlTHL.replace('#FIELD#', 'Tenant');
+	if (showAgent) {htmlCode += htmlTHL.replace('#FIELD#', 'Agent')};
+	htmlCode += htmlTHR.replace('#FIELD#', 'Price');
+	htmlCode += htmlTHR.replace('#FIELD#', 'Paid');
+	htmlCode += htmlTHR.replace('#FIELD#', 'Missing');
+	if (showInv) {
+		htmlCode += htmlTHC.replace('#FIELD#', 'Inv');
+		htmlCode += htmlTHC.replace('#FIELD#', 'Rec');
+	}
+	htmlCode += '</tr>'
+	return htmlCode;
+}
+
+
+// Render the bookings
+function renderBookings(x, includeBookings, sortBookings, showChannel, showStatus, showUnit, showAgent, showInv, bookingArray, receiptArray, invoiceArray){
+	var htmlTDL = '<td style="text-align:left; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDC = '<td style="text-align:center; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR = '<td style="text-align:right; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR1 = '<td style="text-align:right; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#f6e4bc; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR2 = '<td style="text-align:right; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#bbf6bb; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	
+	// Find invoices
+	var selectInvoice = invoiceArray.filter(function(obj){
+		return obj.bookingId == bookingArray[x]._id;
+	})			
+	var  invoiceTotal = 0;
+	var  invoices = '';
+	for (var k=0; k<selectInvoice.length; k++) {	
+		invoices += selectInvoice[k]._id + ','
+		invoiceTotal += selectInvoice[k].sum 
+	}
+	if (invoices!='') {invoices=invoices.slice(0, -1)}
+	if (invoiceTotal < (bookingArray[x].priceDay * bookingArray[x].nights)) {invoiceTotal = bookingArray[x].priceDay * bookingArray[x].nights;}
+
+	
+	// Find receipts
+	var selectReceipt = receiptArray.filter(function(obj){
+		return obj.bookingId == bookingArray[x]._id;
+	})			
+	var  receiptTotal = 0;
+	var  receipts = '';
+	for (var k=0; k<selectReceipt.length; k++) {	
+		receiptTotal += selectReceipt[k].amount
+		receipts += selectReceipt[k]._id + ','
+	}
+	if (receipts!='') {receipts=receipts.slice(0, -1)}
+	if (receiptTotal > 0) {
+		var paidAlready = '<span style="color:#007700; font-weight:bold;">' + accFormat(receiptTotal) + '</span>'
+	} else {
+		var paidAlready = '<span style="color:#999999; font-weight:bold;">0</span>'
+	}
+	if (receiptTotal<invoiceTotal){
+		var missingPayment = '<span style="color:#770000; font-weight:bold;">' + accFormat(invoiceTotal-receiptTotal) + '</span>'
+	} else if (receiptTotal>invoiceTotal){
+		var missingPayment = '<span style="color:#003300; font-weight:bold;">' + accFormat(invoiceTotal-receiptTotal) + '</span>'
+	} else {
+		var missingPayment = '<span style="color:#999999; font-weight:bold;">0</span>'
+	}
+
+	if (includeBookings=='NOPAY' && receiptTotal>=(invoiceTotal+500)) {
+		return htmlCode;
+	}	
+	
+	// Render result
+	var htmlCode = '';
+	htmlCode += '<tr>'
+	
+	if (showChannel) {
+		var txtStatus = '';
+		switch(bookingArray[x].source) {
+			case 'T':
+				var txtStatus = '<div style="font-family:Roboto, Arial; font-size:14px; background-color:#4CACCD; color:#FFFFFF; width:14px; display: block; text-align:center; font-weight:bold;">T</div>'
+				break;
+			case 'B':
+				var txtStatus = '<div style="font-family:Roboto, Arial; font-size:14px; background-color:#003580; color:#FFFFFF; width:14px; display: block; text-align:center; font-weight:bold;">B</div>'
+				break;
+			case 'A':
+				var txtStatus = '<div style="font-family:Roboto, Arial; font-size:14px; background-color:#FF8084; color:#FFFFFF; width:14px; display: block; text-align:center; font-weight:bold;">A</div>'
+				break;
+			case 'E':
+				var txtStatus = '<div style="font-family:Roboto, Arial; font-size:14px; background-color:#00355F; color:#FFCB00; width:14px; display: block; text-align:center; font-weight:bold;">E</div>'
+				break;
+			case 'G':
+				var txtStatus = '<div style="font-family:Roboto, Arial; font-size:14px; background-color:#C59064; color:#FFFFFF; width:14px; display: block; text-align:center; font-weight:bold;">G</div>'
+				break;
+		}	
+		htmlCode += htmlTDC.replace('#FIELD#', txtStatus)
+	};
+
+	if (showStatus) {
+		var txtStatus = '';
+		switch(bookingArray[x].status) {
+			case 0:
+				var txtStatus = '<div style="font-family:Arial Narrow; font-size:12px; background-color:#FFE5E5;border: 1px solid #804040; color:#804040; width:60px; display: block;">NEW BOOK</div>'
+				break;
+			case 1:
+				var txtStatus = '<div style="font-family:Arial Narrow; font-size:12px; background-color:#FFE5E5;border: 1px solid #804040; color:#804040; width:60px; display: block;">PENDING</div>'
+				break;
+			case 2:
+				var txtStatus = '<div style="font-family:Arial Narrow; font-size:12px; background-color:#DDFFDD;border: 1px solid #007000; color:#007000; width:60px; display: block;">BOOKED</div>'
+				break;
+			case 3:
+				var txtStatus = '<div style="font-family:Arial Narrow; font-size:12px; background-color:#DDFFDD;border: 1px solid #007000; color:#007000; width:60px; display: block;">CHECKIN</div>'
+				break;
+			case 4:
+				var txtStatus = '<div style="font-family:Arial Narrow; font-size:12px; background-color:#E0E0E0;border: 1px solid #808080; color:#404040; width:60px; display: block;">CHECKOUT</div>'
+				break;
+			case 5:
+				var txtStatus = '<div style="font-family:Arial Narrow; font-size:12px; background-color:#E0E0E0;border: 1px solid #808080; color:#404040; width:60px; display: block;">DONE</div>'
+				break;
+			case 6:
+				var txtStatus = '<div style="font-family:Arial Narrow; font-size:12px; background-color:#E0E0E0;border: 1px solid #808080; color:#404040; width:60px; display: block;">CANCEL</div>'
+				break;
+		}
+		htmlCode += htmlTDC.replace('#FIELD#', txtStatus)
+	};
+	
+	if (showUnit) {htmlCode += htmlTDL.replace('#FIELD#', bookingArray[x].property)};
+	htmlCode += htmlTDC.replace('#FIELD#', '<span style="font-family:Arial Narrow">' + bookingArray[x]._id + '</span>');
+	htmlCode += htmlTDC.replace('#FIELD#', new Date(bookingArray[x].checkin*1000).format('d/m/Y'));
+	htmlCode += htmlTDC.replace('#FIELD#', new Date(bookingArray[x].checkout*1000).format('d/m/Y'));
+	htmlCode += htmlTDR.replace('#FIELD#', daysBetween(new Date(bookingArray[x].checkin*1000), new Date(bookingArray[x].checkout*1000)));
+	htmlCode += htmlTDL.replace('#FIELD#', '<span style="font-family:Arial Narrow">' + (bookingArray[x].name.substr(0,24)) + '[' + bookingArray[x].langCode + ']' + '</span>');
+	if (showAgent) {htmlCode += htmlTDL.replace('#FIELD#', '<span style="font-family:Arial Narrow">' + (bookingArray[x].agent.substr(0,15)) + '</span>')};
+	htmlCode += htmlTDR.replace('#FIELD#', '<span style="color:#000000; ">' + accFormat(invoiceTotal) + '</span>');
+	htmlCode += htmlTDR.replace('#FIELD#', paidAlready);
+	htmlCode += htmlTDR.replace('#FIELD#', missingPayment);
+	if (showInv) {
+		htmlCode += htmlTDL.replace('#FIELD#', '<span style="color:#333333; font-family:Arial Narrow;">' + invoices + '</span>');
+		htmlCode += htmlTDL.replace('#FIELD#', '<span style="color:#333333; font-family:Arial Narrow;">' + receipts + '</span>');
+	}
+	htmlCode += '</tr>'
+	return htmlCode;
+}
+
+//
+// WHAT DO ReportExpenses NEED FROM THE REPORT-FORM?
+//
+// -->  FROM date and TO date 
+// -->  Expense Categories or ALL 
+// -->  Properties or ALL
+// -->  Stretch expenses or not
+//
+app.controller("reportExpenseController", function ($scope, $http, $rootScope, $location, ReportData) {
+
+	var topHeadtxt = 'Expenses Report';
+    var formData = ReportData.get();
+    console.log('######### REPORT: ' + formData.reportName);
+    console.log('fromDate: ' + formData.fromDate);
+    console.log('toDate: ' + formData.toDate);
+    console.log('stretchExpense: ' + formData.stretchExpense);
+    console.log('expenseArr: ' + JSON.stringify(formData.expenseArr, null, 4));
+    console.log('propertyArr: ' + JSON.stringify(formData.propertyArr, null, 4));
+
+
+    // Load all expense categories
+	var expenseCategoryArray = [];
+	var findExpenseCategory = function() {
+		return new Promise((resolve, reject) => {
+		if (!formData.expenseArr) {	
+			$http({
+				method: 'GET',
+				url: globalNodeUrl + 'report/getExpenseCategory'
+			}).then(function successCallback(res) {
+				expenseCategoryArray = res.data.data;
+				resolve(res.data);
+			}, function errorCallback(err) {
+				reject(new Error('getExpenseCategory ERROR : ' + err));
+			});
+		} else {
+			expenseCategoryArray = formData.expenseArr;
+			resolve(expenseCategoryArray);
+		}
+	})};
+
+
+	// Load all expenses
+	var expenseArray = [];
+	var findExpense = function() {
+		return new Promise((resolve, reject) => {
+		$http({
+			method: 'POST',
+			url: globalNodeUrl + 'report/getExpense',
+			headers: { 'Content-Type': 'application/json' },
+			data: { expenseCategory:formData.expenseArr, propertyID:formData.propertyArr }
+		}).then(function successCallback(res) {
+			expenseArray = res.data.data;
+            resolve(res.data);
+		}, function errorCallback(err) {
+			reject(new Error('getExpenses ERROR : ' + err));
+		});
+	})};
+
+
+	// Create HTML for the entire report page
+	var makeReport = function(data) {
+		return new Promise((resolve, reject) => {
+		console.log('WE MAKE THE REPORT!!!');
+		var htmlCode = setupExpenseReport(formData.fromDate, formData.toDate, formData.stretchExpense, expenseCategoryArray, expenseArray, topHeadtxt)
+		resolve(htmlCode);
+	})};
+
+
+	// Show the report
+	var showReport = function(data) {
+		return new Promise((resolve, reject) => {
+		console.log('WE SHOW THE REPORT!!!');
+		data = pageButtons(topHeadtxt) + data 
+		document.getElementById('contentAll').innerHTML = data;	
+	})};
+
+
+	// Start all the promises
+	findExpenseCategory()
+		.then(findExpense)
+		.then(makeReport)
+		.then(showReport)
+		.catch(err => {
+			console.error(err);
+			console.log("reportExpensesController ERROR: " + err.message );
+			return;
+		})
+
+})
+
+
+// Setup Expense Report
+function setupExpenseReport(parmFromDate, parmToDate, stretch, expenseCategoryArray, expenseArray, topHeadtxt) {
+	
+	document.title = topHeadtxt;
+	var htmlCode = '';
+
+	// Prepair the dates
+	var fromDate = new Date(parmFromDate*1000);
+	var toDate = new Date(parmToDate*1000);
+	var fromMonth = fromDate.getMonth()+1;
+	var toMonth = toDate.getMonth()+1;
+	var fromYear = fromDate.getFullYear();
+	var toYear = toDate.getFullYear();
+	var cntFromMonth = 0;
+	var cntToMonth = 0;
+	var maxDays = 0;
+	var printArr = [];
+	var reportHead = 'Period from <b>' + fromDate.format('d M Y') + '</b> to <b>' + toDate.format('d M Y') + '</b>';
+
+	// Count for all years 
+	for (var countYear=fromYear; countYear<=toYear; countYear++) {
+	
+		// If this year is bigger than fromYear then we need to count from 1st month 
+		if (countYear > fromYear) {
+			cntFromMonth = 1
+		} else {
+			cntFromMonth = fromMonth
+		}
+	
+		// If this year is smaller than toYear then we need to count all 12 months 
+		if (countYear < toYear) {
+			cntToMonth = 12
+		} else {
+			cntToMonth = toMonth
+		}
+	
+		// looping thru all months for the countYear 
+		for (var countMonth=cntFromMonth; countMonth<=cntToMonth; countMonth++) {
+			for (var i=0; i<expenseCategoryArray.length; i++) {
+				maxDays = daysInMonth(countMonth, countYear);
+				countExpenses(expenseCategoryArray[i]._id, countYear, countMonth, maxDays, stretch, expenseArray, printArr);
+			}
+		}
+	}
+
+	// Render the total content
+	htmlCode += topHeadline(topHeadtxt + ' Totals');
+	htmlCode += reportHeadline(reportHead)	
+	htmlCode += renderExpenseTopRows(fromYear, toYear, fromMonth, toMonth, expenseCategoryArray, printArr);
+	htmlCode += reportFooter();
+	htmlCode += reportPageBreak();	
+
+	// Render the detail content
+	htmlCode += topHeadline(topHeadtxt + ' Details');
+	htmlCode += reportHeadline(reportHead)	
+	htmlCode += renderExpenseDetails(fromDate, toDate, expenseArray, expenseCategoryArray);
+	htmlCode += reportFooter();
+
+	return htmlCode;	
+}
+
+// Loop thru all expenses for given year/month/category
+function countExpenses(currentCategory, currentYear, currentMonth, maxDays, stretch, expenseArray, printArr){
+
+	var dateFrom = Date.parse(currentYear + '-' + currentMonth + '-01 00:00:00')/1000;
+	var dateTo = Date.parse(currentYear + '-' + currentMonth + '-' + maxDays + ' 23:23:59')/1000;
+	var expenseTotal = 0;
+	console.log ('----------------------------------------------------------')
+	console.log ('CATEGORY: ' + currentCategory)
+	console.log ('dateFrom: ' + new Date(dateFrom*1000).format('d M Y'))
+	console.log ('dateTo: ' + new Date(dateTo*1000).format('d M Y'))
+	console.log ('stretch: ' + stretch)
+	console.log ('expenseArray: ' + expenseArray)
+	console.log ('----------------------------------------------------------')
+	
+	// Find all expenses within the given category and dates.  dueDate must be within the date range OR (toDate must be BEFORE date range OR fromDate is AFTER date range)
+	var selected = expenseArray.filter(function(obj){
+		if (stretch==true) {
+			return obj.expenseCategory == currentCategory && ((obj.dueDate >= dateFrom && obj.dueDate <= dateTo) || (obj.paidDate >= dateFrom && obj.paidDate <= dateTo) || (obj.fromDate < obj.toDate))
+		} else {
+			return obj.expenseCategory == currentCategory && (obj.dueDate >= dateFrom && obj.dueDate <= dateTo)
+		}
+	})	
+	console.log ('length: ' + selected.length)
+
+	// Remember we dont care about expenses shared between properties here, cause its category totals
+	for (var j=0; j<selected.length; j++) {
+		console.log ('category: ' + selected[j].expenseCategory)
+		console.log ('text: ' + selected[j].text)
+		console.log ('dueDate: ' + new Date(selected[j].dueDate*1000).format('d M Y'))
+		console.log ('amount: ' + selected[j].amount)
+		if (selected[j].fromDate) {
+			console.log ('fromDate: ' + new Date(selected[j].fromDate*1000).format('d M Y'))
+			console.log ('toDate: ' + new Date(selected[j].toDate*1000).format('d M Y'))
+		}
+
+		// Calculate STRETCHED espenses 
+		if (selected[j].fromDate < selected[j].toDate && stretch==true) {
+		
+			// This one stretch, so we have to split the amount into months of the stretch
+			var monthsNo = monthsBetween(new Date(selected[j].fromDate*1000), new Date(selected[j].toDate*1000));
+			var monthAmount = Math.round(selected[j].amount / monthsNo);
+			console.log('STRETCH!!!!')
+			console.log('monthsNo: ' + monthsNo)
+			console.log('monthAmount: ' + monthAmount)
+
+			// If stretch is INSIDE period  
+			if (selected[j].fromDate >= dateFrom && selected[j].toDate <= dateTo) {
+				expenseTotal += monthAmount
+				console.log ('stretch is INSIDE period')
+			// If stretch COVERS the whole period
+			} else if (selected[j].fromDate <= dateFrom && selected[j].toDate >= dateTo) {
+				expenseTotal += monthAmount
+				console.log ('stretch COVERS the whole period')
+			
+			// If stretch is ENDING in period
+			} else if (selected[j].fromDate <= dateFrom && selected[j].toDate >= dateFrom) {
+				expenseTotal += monthAmount
+				console.log ('stretch is ENDING in period')
+			
+			// If stretch is BEGINNING in period
+			} else if (selected[j].fromDate <= dateTo && selected[j].toDate >= dateTo) {
+				expenseTotal += monthAmount
+				console.log ('stretch is BEGINNING in period')
+
+			} else {
+				console.log ('## stretch is OUTSIDE the period ##')
+			}				
+			console.log('expenseTotal: ' + expenseTotal)
+			
+		} else {
+
+			// This one does not stretch, so we can count the full amount
+			console.log('normal.......')
+			expenseTotal += selected[j].amount
+			console.log('amount: ' + selected[j].amount)
+			console.log('expenseTotal: ' + expenseTotal)
+
+		}
+	}
+
+	// Add category totals to print result
+	printArr.push(
+		{
+			'category' : currentCategory,
+			'year' : currentYear,
+			'month' : currentMonth,
+			'amount' : expenseTotal
+		}
+	)		
+	
+}
+
+
+// Render all TOTALS in the top
+function renderExpenseTopRows(fromYear, toYear, fromMonth, toMonth, expenseCategoryArray, printArr) {
+	var countYear = 0;
+	var countMonth = 0;
+	var cntFromMonth = 0;
+	var cntToMonth = 0;
+	var htmlCode = '';
+	var totalArray	= [];
+	var monthTxt	= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+	var htmlTH = '<th style="white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;">#FIELD#</th>'
+	var htmlCategory = '<td style="white-space: nowrap; padding-left:8px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; height:24px; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTD = '<td style="white-space: nowrap; padding-left:8px; padding-right:4px; text-align:right; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTotalHead = '<td style="white-space: nowrap; padding-left:8px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; border-top:2px solid #666666; border-bottom:2px solid #666666; height:24px; font-size:14px; font-weight:bold; font-family:Arial;">#FIELD#</td>'
+	var htmlTotal = '<td style="white-space: nowrap; padding-left:8px; padding-right:4px; text-align:right; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; border-top:2px solid #666666; border-bottom:2px solid #666666; font-size:14px; font-weight:bold; font-family:Arial;">#FIELD#</td>'
+
+	var htmlCode = '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;" id="totalExpenseTable">'
+	htmlCode += '<tr>'
+	htmlCode +=htmlTH.replace('#FIELD#', 'Category');
+	
+	// Generate the table header with months
+	for (var countYear=fromYear; countYear<=toYear; countYear++) {
+	
+		// If this year is bigger than fromYear then we need to count from 1st month 
+		if (countYear > fromYear) {
+			cntFromMonth = 1
+		} else {
+			cntFromMonth = fromMonth
+		}
+	
+		// If this year is smaller than toYear then we need to count all 12 months 
+		if (countYear < toYear) {
+			cntToMonth = 12
+		} else {
+			cntToMonth = toMonth
+		}
+	
+		// looping thru all months for the countYear 
+		for (var countMonth=cntFromMonth; countMonth<=cntToMonth; countMonth++) {
+			htmlCode +=htmlTH.replace('#FIELD#', monthTxt[countMonth-1] + "-" + ('0'+(countYear)).slice(-2));
+		}
+	}
+	htmlCode +=htmlTH.replace('#FIELD#', 'Total');
+	htmlCode +=htmlTH.replace('#FIELD#', 'Average');
+	htmlCode +='</tr>' 
+
+	// Generate the rows with data
+	for (var i=0; i<expenseCategoryArray.length; i++) {
+
+		var totalCategory = 0;
+		var avgCount = 0;	
+
+		htmlCode +='<tr>' 
+		htmlCode +=htmlCategory.replace('#FIELD#', expenseCategoryArray[i]._id);
+
+		var selected = printArr.filter(function(obj){
+			return obj.category == expenseCategoryArray[i]._id;
+		})	
+		
+		for (var j=0; j<selected.length; j++) {
+
+			// Render the line
+			htmlCode +=htmlTD.replace('#FIELD#', accFormat(selected[j].amount));
+
+			// Adding to Totals 
+			var totalSelected = totalArray.filter(function(obj){
+				return obj.year == selected[j].year && obj.month == selected[j].month;
+			})	
+			if (totalSelected.length != 1) {
+				totalArray.push(
+				{
+					'category' : selected[j].Category,
+					'year' : selected[j].year,
+					'month' : selected[j].month,
+					'amount' : selected[j].amount
+				});
+			} else {
+				totalSelected[0].amount += selected[j].amount;
+			}
+			totalCategory += selected[j].amount;
+			avgCount += 1;
+		}
+
+		// Put total for category
+		var renderLine = htmlTD.replace('#FIELD#', accFormat(totalCategory));
+		renderLine = renderLine.replace('normal', 'bold');		
+		htmlCode +=renderLine;
+		
+		// Put average category
+		var renderLine = htmlTD.replace('#FIELD#', accFormat(Math.round(totalCategory/avgCount)));
+		htmlCode +=renderLine;
+		htmlCode +='</tr>' 
+	}	
+
+	
+	// Generate the totals line
+	totalCategory = 0;
+	avgCount = 0;
+	htmlCode +='<tr>' 
+	htmlCode +=htmlTotalHead.replace('#FIELD#', 'TOTAL');
+	for (var j=0; j<totalArray.length; j++) {
+		htmlCode +=htmlTotal.replace('#FIELD#', accFormat(totalArray[j].amount));;
+		totalCategory += totalArray[j].amount;
+		avgCount += 1;
+	}
+
+	// Put total for all property
+	var renderLine = htmlTotal.replace('#FIELD#', accFormat(totalCategory));
+	htmlCode +=renderLine;
+	
+	// Put average all property
+	var renderLine = htmlTotal.replace('#FIELD#', accFormat(Math.round(totalCategory/avgCount)));
+	htmlCode +=renderLine;
+
+	htmlCode +='</tr>' 
+	return htmlCode;
+}
+
+
+
+// Render all DETAILS data at the bottom 
+function renderExpenseDetails(currFromDate, currToDate, expenseArray, expenseCategoryArray) {
+	var htmlTDL = '<td style="white-space: nowrap; padding-left:4px; padding-right:4px; text-align:left; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR = '<td style="white-space: nowrap; padding-left:4px; padding-right:4px; text-align:right; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDC = '<td style="white-space: nowrap; padding-left:4px; padding-right:4px; text-align:center; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTotal = '<td colspan="6" style="white-space: nowrap; padding-left:4px; padding-right:4px; text-align:right; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; border-top:2px solid #666666; border-bottom:2px solid #666666; font-size:14px; font-weight:bold; font-family:Arial;">Total #CATEGORY#</td>'
+	var htmlTDRT = '<td style="white-space: nowrap; padding-left:4px; padding-right:4px; text-align:right; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; border-top:2px solid #666666; border-bottom:2px solid #666666; font-size:14px; font-weight:bold; font-family:Arial;">#FIELD#</td>'
+	
+	var htmlCode = ''
+	var dateFrom = Date.parse(currFromDate)/1000;
+	var dateTo = Date.parse(currToDate)/1000;
+	var lines=0;
+	var showProperty = ''
+
+	sortBy(expenseArray, (o) => o.dueDate);
+	
+	// Loop thru all details
+	for (var i=0; i<expenseCategoryArray.length; i++) {
+
+		var currTotal = 0;
+		var selected = expenseArray.filter(function(obj){
+			return obj.expenseCategory == expenseCategoryArray[i]._id && (obj.dueDate >= dateFrom && obj.dueDate <= dateTo)
+		})		
+
+		// Skip if no expenses in this category
+		if (selected.length) {
+			lines += 4;
+			if (lines>44) {
+				htmlCode += '</table>';
+				htmlCode += reportFooter();			
+				htmlCode += reportPageBreak();
+				htmlCode += topHeadline(topHeadtxt + ' Details');
+				htmlCode += reportHeadline(reportHead)	
+				lines=0;
+			}
+			htmlCode += renderExpenseTableHead(i, expenseCategoryArray);
+		}
+		
+		// Write expense the lines 
+		for (var j=0; j<selected.length; j++) {
+			console.log ('text: ' + selected[j].text)		
+			console.log ('amount: ' + selected[j].amount)		
+
+			// Break every 36 lines  
+			lines += 1;
+			if (lines>44) {
+				htmlCode += '</table>';
+				htmlCode += reportFooter();			
+				htmlCode += reportPageBreak();
+				htmlCode += topHeadline(topHeadtxt + ' Details');
+				htmlCode += reportHeadline(reportHead)	
+				htmlCode += renderExpenseTableHead(i, expenseCategoryArray);
+				lines=0;
+			}
+			
+			// Find property if any
+			console.log ('propertyId: ' + selected[j].propertyId)
+			console.log ('propertyId: ' + typeof(selected[j].propertyId))
+			console.log ('propertyId: ' + selected[j].propertyId[0])
+			
+			// Should this expense be split between several properties?
+			if (typeof(selected[j].propertyId)=='object') {
+				console.log ('ITS ARRAY!!!')
+				showProperty = 'MULTIPLE';
+			} else {
+				console.log ('Its single property ')
+				showProperty = selected[j].propertyId;
+			}
+
+			if (isNaN(new Date(selected[j].paidDate*1000))) {
+				var textPaid = ""; // selected[j].paidDate;
+			} else {
+				var textPaid = new Date(selected[j].paidDate*1000).format('d/m/Y');
+			}
+			htmlCode += '<tr>' + 
+						htmlTDC.replace('#FIELD#','' + new Date(selected[j].dueDate*1000).format('d/m/Y')) + 
+						htmlTDC.replace('#FIELD#', textPaid) + 
+						htmlTDL.replace('#FIELD#',selected[j].text) + 
+						htmlTDC.replace('#FIELD#',showProperty) + 
+						htmlTDL.replace('#FIELD#',selected[j].account) + 
+						htmlTDC.replace('#FIELD#',selected[j].managerId) +
+						htmlTDR.replace('#FIELD#',accFormat(selected[j].amount)) +
+						'</tr>';
+			currTotal += selected[j].amount
+		}
+
+		// Write the total line 
+		if (selected.length) {
+			htmlCode += '<tr>' + htmlTotal.replace('#CATEGORY#',expenseCategoryArray[i]._id) + htmlTDRT.replace('#FIELD#',accFormat(currTotal)) + '</tr>';
+			htmlCode += '</table><div style="min-height:6px;"></div> ';
+		}
+	}
+	return htmlCode;
+}
+
+// Render table head
+function renderExpenseTableHead(cnt, expenseCategoryArray) {
+	var htmlHead = '<tr><td colspan="7" style="font-size:22px; color:#4CACCD; padding: 5px 5px 2px 5px; text-align:left;font-weight:bold; font-family:Arial; border:0px;"><b>#FIELD#</b></td></tr>'
+	var htmlTH = '<td style="width:#WIDTH#; white-space: nowrap; height:20px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial; font-weight:bold; color:#000000;">#FIELD#</td>'
+	var htmlCode = '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">'
+	htmlCode += htmlHead.replace('#FIELD#', expenseCategoryArray[cnt]._id + '<span style="font-size:14px; font-family:Arial Narrow, Arial; font-weight:normal; color:#333333;"> &nbsp; (' + expenseCategoryArray[cnt].name + ')</span>');
+	htmlCode += '<tr>'  
+	var tmp = htmlTH.replace('#WIDTH#','1%') 
+	htmlCode += tmp.replace('#FIELD#','Due') 
+	var tmp = htmlTH.replace('#WIDTH#','1%') 
+	htmlCode += tmp.replace('#FIELD#','Paid') 
+	var tmp = htmlTH.replace('#WIDTH#','50%') 
+	htmlCode += tmp.replace('#FIELD#','Description') 
+	var tmp = htmlTH.replace('#WIDTH#','5%') 
+	htmlCode += tmp.replace('#FIELD#','Unit') 
+	var tmp = htmlTH.replace('#WIDTH#','10%') 
+	htmlCode += tmp.replace('#FIELD#','Account') 
+	var tmp = htmlTH.replace('#WIDTH#','10%') 
+	htmlCode += tmp.replace('#FIELD#','Manager')
+	var tmp = htmlTH.replace('#WIDTH#','10%') 
+	htmlCode += tmp.replace('#FIELD#','Amount')
+	htmlCode += '</tr>';
+	return htmlCode;
+}
+
+
+app.controller("reportFormController", function ($scope, $http, $rootScope, $location, ReportData) {
+    var vm = this;
+
+
+    //
+    // Fill out properties and expenses and reconstruct all other fields
+    //
+    $scope.loadReport = function () {
+
+        // Put default values in the dates
+        var fromDate = new Date();
+        var firstDay = new Date(fromDate.getFullYear(), fromDate.getMonth(), 1);
+        var lastDay = new Date(fromDate.getFullYear(), fromDate.getMonth() + 1, 0);
+
+        vm.stretchExpense   = true;
+        vm.bookingAgents    = true;
+        vm.bookingInvoices  = true;
+        vm.bookingInclude   = "ACTIVE"; 
+        vm.bookingSort      = "DATE"; 
+        vm.fldFromDate      = new Date(firstDay.format('Y-m-d'));
+        vm.fldToDate        = new Date(lastDay.format('Y-m-d'));
+
+        // Get data from ReportData factory
+        var formData = ReportData.get();
+        if (formData.reportName!==undefined) {
+            console.log("XXX formData.bookingInclude XXX " + formData.bookingInclude);
+            console.log("XXX formData.bookingInclude XXX " + formData.bookingInclude);
+            vm.reportName       = formData.reportName;
+            vm.fldFromDate      = new Date(formData.fromDate*1000);
+            vm.fldToDate        = new Date(formData.toDate*1000);
+            vm.bankAccounts     = formData.bankAccounts;
+            vm.expenseType      = formData.expenseCategory;
+            vm.stretchExpense   = formData.stretchExpense;
+            vm.bookingInclude   = formData.bookingInclude;
+            vm.bookingSort      = formData.bookingSort;
+            vm.bookingAgents    = formData.bookingAgents;
+            vm.bookingInvoices  = formData.bookingInvoices;
+        }
+
+
+        // Show the form
+        $scope.modifyForm()<
+
+        // Load all property IDs
+        $http({
+            method: 'GET',
+            url: globalNodeUrl + 'report/getPropertyIdList'
+        }).then(function successCallback(response) {
+            vm.propertyIdList = response.data.data;
+            vm.propertyIdList.unshift({ "_id": "ALL PROPERTIES" });
+            vm.selectedPropertiesMulti = formData.propertyArr;
+            vm.selectedPropertiesSingle = formData.propertySingle;
+        }, function errorCallback(err) {
+            console.log("getPropertyIdList ERROR: " + JSON.stringify(err, null, 4));
+        }); 
+
+        // Load all expense categories
+        $http({
+            method: 'GET',
+            url: globalNodeUrl + 'report/getExpenseCategory'
+        }).then(function successCallback(response) {
+            vm.expenseCategory = response.data.data;
+            vm.expenseCategory.unshift({ "_id": "ALL", "name": "All Categories" });
+            vm.selectedExpense = formData.expenseArr;
+        }, function errorCallback(err) {
+            console.log("getExpenseCategory ERROR: " + JSON.stringify(err, null, 4));
+        });
+
+        // Load all bank accounts
+        $http({
+            method: 'GET',
+            url: globalNodeUrl + 'report/getBankList'
+        }).then(function successCallback(response) {
+            vm.bankAccounts = response.data.data;
+            vm.bankAccounts.unshift({ "_id": "ALL", "account": "All Accounts" });
+            vm.selectedBank = formData.bankArr;
+        }, function errorCallback(err) {
+            console.log("getBankList ERROR: " + JSON.stringify(err, null, 4));
+        });
+    }
+
+
+    //
+    // Gets data from form and push to router or page
+    //
+    $scope.callReport = function () {
+
+        console.log ('CALL REPORT: ' + vm.reportName)
+        // console.log ('SINGLE: ' + vm.selectedPropertiesSingle)
+        // console.log ('MULTI: ' + vm.selectedPropertiesMulti)
+        // console.log ('EXPENSE: ' + vm.selectedExpense)
+
+        var expenseArr = [];
+        if (!vm.selectedExpense || vm.selectedExpense[0]._id=='ALL'){
+            expenseArr = '';
+        } else {
+            expenseArr = vm.selectedExpense;
+        }
+
+        var bankArr = [];
+        if (!vm.selectedBank || vm.selectedBank[0]._id=='ALL'){
+            bankArr = '';
+        } else {
+            bankArr = vm.selectedBank;
+        }
+
+        var propertyArr = [];
+        if (!vm.selectedPropertiesMulti || vm.selectedPropertiesMulti[0]._id=='ALL PROPERTIES') {
+            propertyArr = '';
+        } else {
+            propertyArr = vm.selectedPropertiesMulti;
+        }
+
+        ReportData.add(
+            {
+                reportName:         vm.reportName,
+                fromDate:           new Date(vm.fldFromDate)/1000,
+                toDate:             new Date(vm.fldToDate)/1000,
+                expenseCategory:    vm.expenseType,
+                stretchExpense:     vm.stretchExpense,
+                bookingInclude:     vm.bookingInclude,
+                bookingSort:        vm.bookingSort,      
+                bookingAgents:      vm.bookingAgents,    
+                bookingInvoices:    vm.bookingInvoices,  
+                propertySingle:     vm.selectedPropertiesSingle,
+                bankArr:            bankArr,
+                expenseArr:         expenseArr,
+                propertyArr:        propertyArr
+            }
+        );
+
+        switch(vm.reportName) {
+            case 'BANK':
+                var url='reportBankAccount/';
+                break;
+
+            case 'EXPENSES':
+                var url='reportExpense/';
+                break;
+
+            case 'AGENTSALE':
+                var url='reportAgentSale/';
+                break;
+
+            case 'AGENTRENT':
+                var url='reportAgentRent/';
+                break;
+
+            case 'BALANCE':
+                var url='reportBalanceSheet/';
+                break;
+
+            case 'BOOKING':
+                var url='reportBooking/';
+                break;
+        }
+        $location.path(url);
+    }
+
+
+    //
+    // Report selected, show the correct fields
+    //
+    $scope.modifyForm = function () {
+
+        $scope.lineOne              = true;
+        $scope.showFromDate         = false;
+        $scope.showToDate           = false;
+        $scope.lineTwo              = false;
+        $scope.expenseCategories    = false;
+        $scope.bankAccounts         = false;
+        $scope.expenseStretch       = false;
+        $scope.includeBookings      = false;
+        $scope.sortBookings         = false;
+        $scope.bookingAgent         = false;
+        $scope.bookingInvoice       = false;
+        $scope.lineThree            = false;
+        $scope.propertiesMulti      = false;
+        $scope.propertiesSingle     = false;
+        $scope.lineFour             = false;
+        $scope.generate             = false;
+
+        switch(vm.reportName) {
+
+            case '':
+                break;
+
+            case 'STATUS':
+                $scope.showFromDate         = true;
+                $scope.lineFour             = true;
+                $scope.generate             = true;
+                vm.fldFromDate              = new Date(new Date().format('Y-m-d'));
+                break;
+
+            case 'BANK':
+                $scope.showFromDate         = true;
+                $scope.showToDate           = true;
+                $scope.lineTwo              = true;
+                $scope.bankAccounts         = true;
+                $scope.lineFour             = true;
+                $scope.generate             = true;
+                break;
+
+            case 'BOOKING':
+                $scope.showFromDate         = true;
+                $scope.showToDate           = true;
+                $scope.lineTwo              = true;
+                $scope.includeBookings      = true;
+                $scope.sortBookings         = true;
+                $scope.bookingAgent         = true;
+                $scope.bookingInvoice       = true;
+                $scope.lineThree            = true;
+                $scope.propertiesMulti      = true;
+                $scope.lineFour             = true;
+                $scope.generate             = true;
+                break;
+
+            case 'OCCUPANCY':
+                $scope.showFromDate         = true;
+                $scope.showToDate           = true;
+                $scope.lineTwo              = true;
+                $scope.propertiesMulti      = true;
+                $scope.lineFour             = true;
+                $scope.generate             = true;
+                break;
+
+            case 'EXPENSES':
+                $scope.showFromDate         = true;
+                $scope.showToDate           = true;
+                $scope.lineTwo              = true;
+                $scope.expenseCategories    = true;
+                $scope.expenseStretch       = true;
+                $scope.lineThree            = true;
+                $scope.propertiesMulti      = true;
+                $scope.lineFour             = true;
+                $scope.generate             = true;
+                break;
+
+            case 'BALANCE':
+                $scope.showFromDate         = true;
+                $scope.showToDate           = true;
+                $scope.lineTwo              = true;
+                $scope.propertiesSingle     = true;
+                $scope.lineFour             = true;
+                $scope.generate             = true;
+                break;
+
+            case 'PERFORMANCE':
+                $scope.showFromDate         = true;
+                $scope.showToDate           = true;
+                $scope.lineTwo              = true;
+                $scope.propertiesSingle     = true;
+                $scope.lineFour             = true;
+                $scope.generate             = true;
+                break;
+
+            case 'REVENUE':
+                $scope.showFromDate         = true;
+                $scope.showToDate           = true;
+                $scope.lineTwo              = true;
+                $scope.expenseStretch       = true;
+                $scope.lineThree            = true;
+                $scope.propertiesMulti      = true;
+                $scope.lineFour             = true;
+                $scope.generate             = true;
+                break;
+
+            case 'PROFIT':
+            case 'ROIBUY':
+            case 'ROISALE':
+                $scope.showFromDate         = true;
+                $scope.showToDate           = true;
+                $scope.lineTwo              = true;
+                $scope.propertiesMulti     = true;
+                $scope.lineFour             = true;
+                $scope.generate             = true;
+                break;
+
+            case 'AGENTSALE':
+            case 'AGENTRENT':
+                $scope.propertiesMulti      = true;
+                $scope.lineFour             = true;
+                $scope.generate             = true;
+                break;
+
+            case 'CHANNEL':
+                $scope.showFromDate         = true;
+                $scope.showToDate           = true;
+                $scope.lineTwo              = true;
+                $scope.propertiesMulti      = true;
+                $scope.lineFour             = true;
+                $scope.generate             = true;
+                break;
+
+
+        }
+    }
+})
+            
+
+
+function callReportLink(nameReport) {
+    switch(nameReport) {
+
+        case 'BOOKINGS':
+            document.location.href='ReportBookings.html';
+            break;		
+    
+        case 'OCCUPANCY':
+            document.location.href='ReportOccupancy.html';
+            break;
+
+        case 'EXPENSES':
+            document.location.href='ReportExpenses.html';
+            break;
+
+        case 'BALANCE':
+            document.location.href='ReportProperty.html';
+            break;
+
+        case 'PERFORMANCE':
+            document.location.href='ReportPerformance.html';
+            break;
+
+        case 'REVENUE':
+            profit  = false; 				
+            ROIbuy  = false;
+            ROIsale = false;
+            document.location.href='ReportProfit.html';
+            break;
+
+        case 'PROFIT':
+            stretch = true; 				
+            profit  = true; 				
+            ROIbuy  = false;
+            ROIsale = false;
+            document.location.href='ReportProfit.html';
+            break;
+            
+        case 'ROIBUY':
+            stretch = true; 				
+            profit  = true; 				
+            ROIbuy  = true;
+            ROIsale = false;
+            document.location.href='ReportProfit.html';
+            break;
+
+        case 'ROISALE':
+            stretch = true; 				
+            profit  = true; 				
+            ROIbuy  = false;
+            ROIsale = true;
+            document.location.href='ReportProfit.html';
+            break;
+
+        case 'AGENTSALE':
+            document.location.href='ReportAgentSale.html';
+            break;
+
+        case 'AGENTRENT':
+            document.location.href='ReportAgentRent.html';
+            break;
+                            
+            
+    }
+}
+
+
+//
+// WHAT DO reportBooking NEED FROM THE REPORT-FORM?
+//
+// - From and To Date
+// - Multiple properties or ALL
+// - Booking Status
+// - Sort by
+// - Include Agents and Invoices?
+//
+app.controller("reportBookingController", function ($scope, $http, $rootScope, $location, ReportData) {
+
+	var topHeadtxt = 'Booking Report';
+    var formData = ReportData.get();
+    console.log('######### REPORT: ' + formData.reportName);
+    console.log('fromDate: ' + formData.fromDate);
+    console.log('toDate: ' + formData.toDate);
+    console.log('bookingInclude: ' + formData.bookingInclude);
+    console.log('bookingSort: ' + formData.bookingSort);
+    console.log('bookingAgents: ' + formData.bookingAgents);
+    console.log('bookingInvoices: ' + formData.bookingInvoices);
+    console.log('propertyArr: ' + JSON.stringify(formData.propertyArr, null, 4));
+
+
+	// Load all data
+	var findData = function() {
+		return new Promise((resolve, reject) => {
+		$http({
+			method: 'POST',
+			url: globalNodeUrl + 'report/getBookingList',
+			headers: { 'Content-Type': 'application/json' },
+			data: { fromDate: formData.fromDate, toDate: formData.toDate, status: formData.bookingInclude, propertyID: formData.propertyArr }
+		}).then(function successCallback(res) {
+			console.log('WE GOT getBookingList DATA BACK FROM ROUTER!!!')
+			// console.log('data: ' + JSON.stringify(res.data, null, 4))
+            resolve(res.data);
+		}, function errorCallback(err) {
+			reject(new Error('getBookingList ERROR : ' + err));
+		});
+	})};
+
+
+	// Create HTML for the entire report page
+	var makeReport = function(data) {
+		return new Promise((resolve, reject) => {
+		console.log('WE MAKE THE REPORT!!!');
+		let bookingkArray = data.booking;
+		let receiptArray = data.receipt;
+		let invoiceArray = data.invoice;
+		console.log('### bookingkArray: ' + JSON.stringify(bookingkArray, null, 4))
+		console.log('### receiptArray: ' + JSON.stringify(receiptArray, null, 4))
+		console.log('### invoiceArray: ' + JSON.stringify(invoiceArray, null, 4))
+		var htmlCode = setupBookingReport(
+			formData.fromDate, 
+			formData.toDate, 
+			formData.bookingInclude,	
+			formData.bookingSort,	
+			formData.bookingAgents,	
+			formData.bookingInvoices,	
+			bookingkArray, 
+			receiptArray, 
+			invoiceArray, 
+			topHeadtxt
+		)
+		resolve(htmlCode);
+	})};
+
+
+	// Show the report
+	var showReport = function(data) {
+		return new Promise((resolve, reject) => {
+		console.log('WE SHOW THE REPORT!!!');
+		data = pageButtons(topHeadtxt) + data 
+		document.getElementById('contentAll').innerHTML = data;	
+	})};
+
+
+	// Start all the promises
+	findData()
+		.then(makeReport)
+		.then(showReport)
+		.catch(err => {
+			console.error(err);
+			console.log("reportBookingController ERROR: " + err.message );
+			return;
+		})
+
+})
+
+
+// Setup Booking List Report
+function setupBookingReport(parmFromDate, parmToDate, includeBookings, sortBookings, showAgent, showInv, bookingArray, receiptArray, invoiceArray, topHeadtxt) {
+	
+	document.title = topHeadtxt;
+	var htmlCode = '';
+
+	console.log("parmFromDate: " + parmFromDate)
+	console.log("showAgent: " + showAgent)
+	console.log("includeBookings: " + includeBookings)
+	console.log("receiptArray: " + receiptArray)
+	console.log("sortBookings: " + sortBookings)
+
+	// Prepair the dates
+	var fromDate = new Date(parmFromDate*1000);
+	var toDate = new Date(parmToDate*1000);
+	var reportHead = 'Period from <b>' + fromDate.format('d M Y') + '</b> to <b>' + toDate.format('d M Y') + '</b>';
+	var showChannel = true;
+	var showStatus = true;
+	var showUnit = true;
+
+	// Set the headline and the status conditions
+	switch(includeBookings) {
+		case 'ACTIVE':
+			var txtInclude = 'Active Bookings'
+			break;
+		case 'ALL':
+			var txtInclude = 'All Bookings'
+			break;
+		case 'NOPAY':
+			var txtInclude = 'Unpaid Bookings'
+			break;
+		case '0':
+			var txtInclude = 'New Bookings'
+			break;
+		case '1':
+			var txtInclude = 'Pending'
+			break;
+		case '2':
+			var txtInclude = 'Booked'
+			break;
+		case '3':
+			var txtInclude = 'Check-in'
+			break;
+		case '4':
+			var txtInclude = 'Check-out'
+			break;
+		case '5':
+			var txtInclude = 'Done'
+			break;
+		case '6':
+			var txtInclude = 'Cancelled'
+			break;
+	}
+
+
+	
+	// Sort bookingArray by different things
+	switch(sortBookings) {
+		case 'DATE':
+			var txtSort = 'Checkin Date'
+			sortBy(bookingArray, (o) => o.checkin);
+			break;
+		case 'CHANNEL':
+			var txtSort = 'Booking Channel'
+ 			sortBy(bookingArray, (o) => [o.source, o.checkin]);
+			break;
+		case 'PROPERTY':
+			var txtSort = 'Property'
+			sortBy(bookingArray, (o) => [o.property, o.checkin]); 
+			break;
+		case 'STATUS':
+			var txtSort = 'Booking Status'
+ 			sortBy(bookingArray, (o) => [o.status, o.checkin]);
+			break;
+	}
+
+	sortBy(invoiceArray, (o) => o._id);
+
+	// Put page title the same as report headline
+	document.title = txtInclude + ' sort by ' + txtSort;
+	topHeadtxt = txtInclude + ' sort by ' + txtSort ; 
+	
+	// Render the report 
+	var fldSort = ''
+	var htmlCode = ''
+	htmlCode = '';
+	htmlCode += topHeadline(topHeadtxt);
+	htmlCode += reportHeadline(reportHead)	
+	
+
+	// DATE
+	if (sortBookings=='DATE') {
+		htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+	
+		// Loop thru all bookings
+		var lines=0;
+		for (var i=0; i<bookingArray.length; i++) {	
+			htmlCode += renderBookings(i, includeBookings, sortBookings, showChannel, showStatus, showUnit, showAgent, showInv, bookingArray, receiptArray, invoiceArray);
+
+			// Break every 28 lines  
+			lines += 1;
+			if (lines>28) {
+				lines = 0;
+				htmlCode += '</table>';
+				htmlCode += reportFooter();			
+				htmlCode += reportPageBreak();
+				htmlCode += topHeadline(topHeadtxt);
+				htmlCode += reportHeadline(txtSort)	
+				htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+			}
+		}
+
+	} else {
+
+	
+		// CHANNEL
+		if (sortBookings=='CHANNEL') {
+
+			showChannel = false;
+			htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+			
+			// Loop thru all bookings
+			var lines = 0;
+			for (var i=0; i<bookingArray.length; i++) {	
+				if (fldSort != bookingArray[i].source || lines>26) {
+					fldSort = bookingArray[i].source;
+					// Break every 26 lines  
+					lines += 2;
+					if (lines>26) {
+						lines = 0;
+						htmlCode += '</table>';
+						htmlCode += reportFooter();			
+						htmlCode += reportPageBreak();
+						htmlCode += topHeadline(topHeadtxt);
+						htmlCode += reportHeadline(txtSort)	
+						htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+					}
+					var htmlHead = '<tr><th colspan="20" style="background-color:#EEEEEE; color:#000000; border:1px solid #AAAAAA; text-align:left; height:38px; padding-left:6px; white-space: nowrap;">#FIELD#</th></tr>'
+					var txtStatus = '<div style="background-color:#999999; color:#FFFFFF; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">UNKNOWN</div>'
+					switch(fldSort) {
+						case '':
+							var txtStatus = '<div style="background-color:#999999; color:#FFFFFF; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">UNKNOWN</div>'
+							break;
+						case 'T':
+							var txtStatus = '<div style="background-color:#4CACCD; color:#FFFFFF; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">THAIHOME</div>'
+							break;
+						case 'B':
+							var txtStatus = '<div style="background-color:#003580; color:#FFFFFF; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">BOOKING.COM</div>'
+							break;
+						case 'A':
+							var txtStatus = '<div style="background-color:#FF8084; color:#FFFFFF; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">AIRBNB</div>'
+							break;
+						case 'E':
+							var txtStatus = '<div style="background-color:#00355F; color:#FFCB00; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">EXPEDIA</div>'
+							break;
+						case 'G':
+							var txtStatus = '<div style="background-color:#C59064; color:#FFFFFF; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">AGENTS</div>'
+							break;
+					}
+					htmlCode += htmlHead.replace('#FIELD#', txtStatus);
+				}
+				if (fldSort != '') {
+					htmlCode += renderBookings(i, includeBookings, sortBookings, showChannel, showStatus, showUnit, showAgent, showInv, bookingArray, receiptArray, invoiceArray);
+					lines += 1;
+				}
+				
+			}
+		}
+
+
+		// PROPERTY
+		if (sortBookings=='PROPERTY') {
+
+			// Make the table header
+			var lines = 0;
+			showUnit = false;
+			htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+			
+			// Loop thru all bookings
+			var lines = 0;
+			for (var i=0; i<bookingArray.length; i++) {	
+
+				if (fldSort != bookingArray[i].property || lines>24) {
+					fldSort = bookingArray[i].property;
+					// Break every 25 lines  
+					lines += 2;
+					if (lines>24) {
+						lines = 0;
+						htmlCode += '</table>';
+						htmlCode += reportFooter();			
+						htmlCode += reportPageBreak();
+						htmlCode += topHeadline(topHeadtxt);
+						htmlCode += reportHeadline(txtSort)	
+						htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+					}
+					var htmlHead = '<tr><th colspan="20" style="background-color:#EEEEEE; color:#000000; border:1px solid #AAAAAA; text-align:left; height:38px; padding-left:6px; white-space: nowrap;">#FIELD#</th></tr>'
+					var txtStatus = '<div style="padding-left:10px; background-color:#FFFFFF; color:#333333; width:250px; display: block; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">Property: &nbsp; ' + bookingArray[i].property + '</div>'
+					htmlCode += htmlHead.replace('#FIELD#', txtStatus);
+				}
+				if (fldSort != '') {
+					htmlCode += renderBookings(i, includeBookings, sortBookings, showChannel, showStatus, showUnit, showAgent, showInv, bookingArray, receiptArray, invoiceArray);
+					lines += 1;
+				}
+			}
+		}
+
+
+		// STATUS
+		if (sortBookings=='STATUS') {
+
+			// Make the table header
+			var lines = 0;
+			showStatus = false;
+			htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+			fldSort = 99;
+			
+			// Loop thru all bookings
+			var lines = 0;
+			for (var i=0; i<bookingArray.length; i++) {	
+				if (fldSort != bookingArray[i].status || lines>24) {
+					fldSort = bookingArray[i].status;
+					// Break every 25 lines  
+					lines += 2;
+					if (lines>24) {
+						lines = 0;
+						htmlCode += '</table>';
+						htmlCode += reportFooter();			
+						htmlCode += reportPageBreak();
+						htmlCode += topHeadline(topHeadtxt);
+						htmlCode += reportHeadline(txtSort)	
+						htmlCode += renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv);
+					}
+					var htmlHead = '<tr><th colspan="20" style="background-color:#EEEEEE; color:#000000; border:1px solid #AAAAAA; text-align:left; height:40px; padding-left:6px; white-space: nowrap;">#FIELD#</th></tr>'
+					var txtStatus = '<div style="background-color:#999999; color:#FFFFFF; width:250px; display: block; text-align:center; font-weight:bold; font-size:18px; font-family:Roboto, Arial;">UNKNOWN</div>'
+					switch(fldSort) {
+						case 0:
+							var txtStatus = '<div style="padding-left:12px; font-family:Roboto, Arial; font-size:18px; background-color:#FFE5E5;border: 1px solid #804040; color:#804040; width:200px; display: block;">NEW BOOKINGS</div>'
+							break;
+						case 1:
+							var txtStatus = '<div style="padding-left:12px; font-family:Roboto, Arial; font-size:18px; background-color:#FFE5E5;border: 1px solid #804040; color:#804040; width:200px; display: block;">PENDING</div>'
+							break;
+						case 2:
+							var txtStatus = '<div style="padding-left:12px; font-family:Roboto, Arial; font-size:18px; background-color:#DDFFDD;border: 1px solid #007000; color:#007000; width:200px; display: block;">BOOKED</div>'
+							break;
+						case 3:
+							var txtStatus = '<div style="padding-left:12px; font-family:Roboto, Arial; font-size:18px; background-color:#DDFFDD;border: 1px solid #007000; color:#007000; width:200px; display: block;">CHECKIN</div>'
+							break;
+						case 4:
+							var txtStatus = '<div style="padding-left:12px; font-family:Roboto, Arial; font-size:18px; background-color:#E0E0E0;border: 1px solid #808080; color:#404040; width:200px; display: block;">CHECKOUT</div>'
+							break;
+						case 5:
+							var txtStatus = '<div style="padding-left:12px; font-family:Roboto, Arial; font-size:18px; background-color:#E0E0E0;border: 1px solid #808080; color:#404040; width:200px; display: block;">DONE</div>'
+							break;
+						case 6:
+							var txtStatus = '<div style="padding-left:12px; font-family:Roboto, Arial; font-size:18px; background-color:#E0E0E0;border: 1px solid #808080; color:#404040; width:200px; display: block;">CANCEL</div>'
+							break;
+					}
+					htmlCode += htmlHead.replace('#FIELD#', txtStatus);
+				}
+				if (fldSort != 99) {
+					htmlCode += renderBookings(i, includeBookings, sortBookings, showChannel, showStatus, showUnit, showAgent, showInv, bookingArray, receiptArray, invoiceArray);
+					lines += 1;
+				}
+			}
+		}
+	}	
+
+	// Render footer
+	htmlCode += '</table>';
+	htmlCode += reportFooter();			
+	
+	return htmlCode;
+}
+
+// Render the table header
+function renderBookingTableHeader(showChannel, showStatus, showUnit, showAgent, showInv){
+	var htmlTHL = '<td style="text-align:left; height:26px; padding-left:6px; white-space: nowrap; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</td>'
+	var htmlTHC = '<td style="text-align:center; height:26px; white-space: nowrap; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</td>'
+	var htmlTHR = '<td style="text-align:right; height:26px; padding-right:6px; white-space: nowrap; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family:Arial Narrow; font-weight:bold; color:#000000;">#FIELD#</td>'
+	var htmlCode = '';
+	htmlCode += '<table border="0" cellspacing="0" cellpadding="0" style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">'
+	htmlCode += '<tr>'
+	if (showChannel) {htmlCode += htmlTHC.replace('#FIELD#', 'Ch')};
+	if (showStatus) {htmlCode += htmlTHC.replace('#FIELD#', 'Status')};
+	if (showUnit) {htmlCode += htmlTHL.replace('#FIELD#', 'Unit')};
+	htmlCode += htmlTHL.replace('#FIELD#', 'Book');
+	htmlCode += htmlTHC.replace('#FIELD#', 'Checkin');
+	htmlCode += htmlTHC.replace('#FIELD#', 'Checkout');
+	htmlCode += htmlTHC.replace('#FIELD#', 'Nights');
+	htmlCode += htmlTHL.replace('#FIELD#', 'Tenant');
+	if (showAgent) {htmlCode += htmlTHL.replace('#FIELD#', 'Agent')};
+	htmlCode += htmlTHR.replace('#FIELD#', 'Price');
+	htmlCode += htmlTHR.replace('#FIELD#', 'Paid');
+	htmlCode += htmlTHR.replace('#FIELD#', 'Missing');
+	if (showInv) {
+		htmlCode += htmlTHC.replace('#FIELD#', 'Inv');
+		htmlCode += htmlTHC.replace('#FIELD#', 'Rec');
+	}
+	htmlCode += '</tr>'
+	return htmlCode;
+}
+
+
+// Render the bookings
+function renderBookings(x, includeBookings, sortBookings, showChannel, showStatus, showUnit, showAgent, showInv, bookingArray, receiptArray, invoiceArray){
+	var htmlTDL = '<td style="text-align:left; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDC = '<td style="text-align:center; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR = '<td style="text-align:right; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#FFFFFF; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR1 = '<td style="text-align:right; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#f6e4bc; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	var htmlTDR2 = '<td style="text-align:right; height:30px; white-space: nowrap; padding-left:4px; padding-right:4px; color:#000000; background-color:#bbf6bb; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family:Arial;">#FIELD#</td>'
+	
+	// Find invoices
+	var selectInvoice = invoiceArray.filter(function(obj){
+		return obj.bookingId == bookingArray[x]._id;
+	})			
+	var  invoiceTotal = 0;
+	var  invoices = '';
+	for (var k=0; k<selectInvoice.length; k++) {	
+		invoices += selectInvoice[k]._id + ','
+		invoiceTotal += selectInvoice[k].sum 
+	}
+	if (invoices!='') {invoices=invoices.slice(0, -1)}
+	if (invoiceTotal < (bookingArray[x].priceDay * bookingArray[x].nights)) {invoiceTotal = bookingArray[x].priceDay * bookingArray[x].nights;}
+
+	
+	// Find receipts
+	var selectReceipt = receiptArray.filter(function(obj){
+		return obj.bookingId == bookingArray[x]._id;
+	})			
+	var  receiptTotal = 0;
+	var  receipts = '';
+	for (var k=0; k<selectReceipt.length; k++) {	
+		receiptTotal += selectReceipt[k].amount
+		receipts += selectReceipt[k]._id + ','
+	}
+	if (receipts!='') {receipts=receipts.slice(0, -1)}
+	if (receiptTotal > 0) {
+		var paidAlready = '<span style="color:#007700; font-weight:bold;">' + accFormat(receiptTotal) + '</span>'
+	} else {
+		var paidAlready = '<span style="color:#999999; font-weight:bold;">0</span>'
+	}
+	if (receiptTotal<invoiceTotal){
+		var missingPayment = '<span style="color:#770000; font-weight:bold;">' + accFormat(invoiceTotal-receiptTotal) + '</span>'
+	} else if (receiptTotal>invoiceTotal){
+		var missingPayment = '<span style="color:#003300; font-weight:bold;">' + accFormat(invoiceTotal-receiptTotal) + '</span>'
+	} else {
+		var missingPayment = '<span style="color:#999999; font-weight:bold;">0</span>'
+	}
+
+	if (includeBookings=='NOPAY' && receiptTotal>=(invoiceTotal+500)) {
+		return htmlCode;
+	}	
+	
+	// Render result
+	var htmlCode = '';
+	htmlCode += '<tr>'
+	
+	if (showChannel) {
+		var txtStatus = '';
+		switch(bookingArray[x].source) {
+			case 'T':
+				var txtStatus = '<div style="font-family:Roboto, Arial; font-size:14px; background-color:#4CACCD; color:#FFFFFF; width:14px; display: block; text-align:center; font-weight:bold;">T</div>'
+				break;
+			case 'B':
+				var txtStatus = '<div style="font-family:Roboto, Arial; font-size:14px; background-color:#003580; color:#FFFFFF; width:14px; display: block; text-align:center; font-weight:bold;">B</div>'
+				break;
+			case 'A':
+				var txtStatus = '<div style="font-family:Roboto, Arial; font-size:14px; background-color:#FF8084; color:#FFFFFF; width:14px; display: block; text-align:center; font-weight:bold;">A</div>'
+				break;
+			case 'E':
+				var txtStatus = '<div style="font-family:Roboto, Arial; font-size:14px; background-color:#00355F; color:#FFCB00; width:14px; display: block; text-align:center; font-weight:bold;">E</div>'
+				break;
+			case 'G':
+				var txtStatus = '<div style="font-family:Roboto, Arial; font-size:14px; background-color:#C59064; color:#FFFFFF; width:14px; display: block; text-align:center; font-weight:bold;">G</div>'
+				break;
+		}	
+		htmlCode += htmlTDC.replace('#FIELD#', txtStatus)
+	};
+
+	if (showStatus) {
+		var txtStatus = '';
+		switch(bookingArray[x].status) {
+			case 0:
+				var txtStatus = '<div style="font-family:Arial Narrow; font-size:12px; background-color:#FFE5E5;border: 1px solid #804040; color:#804040; width:60px; display: block;">NEW BOOK</div>'
+				break;
+			case 1:
+				var txtStatus = '<div style="font-family:Arial Narrow; font-size:12px; background-color:#FFE5E5;border: 1px solid #804040; color:#804040; width:60px; display: block;">PENDING</div>'
+				break;
+			case 2:
+				var txtStatus = '<div style="font-family:Arial Narrow; font-size:12px; background-color:#DDFFDD;border: 1px solid #007000; color:#007000; width:60px; display: block;">BOOKED</div>'
+				break;
+			case 3:
+				var txtStatus = '<div style="font-family:Arial Narrow; font-size:12px; background-color:#DDFFDD;border: 1px solid #007000; color:#007000; width:60px; display: block;">CHECKIN</div>'
+				break;
+			case 4:
+				var txtStatus = '<div style="font-family:Arial Narrow; font-size:12px; background-color:#E0E0E0;border: 1px solid #808080; color:#404040; width:60px; display: block;">CHECKOUT</div>'
+				break;
+			case 5:
+				var txtStatus = '<div style="font-family:Arial Narrow; font-size:12px; background-color:#E0E0E0;border: 1px solid #808080; color:#404040; width:60px; display: block;">DONE</div>'
+				break;
+			case 6:
+				var txtStatus = '<div style="font-family:Arial Narrow; font-size:12px; background-color:#E0E0E0;border: 1px solid #808080; color:#404040; width:60px; display: block;">CANCEL</div>'
+				break;
+		}
+		htmlCode += htmlTDC.replace('#FIELD#', txtStatus)
+	};
+	
+	if (showUnit) {htmlCode += htmlTDL.replace('#FIELD#', bookingArray[x].property)};
+	htmlCode += htmlTDC.replace('#FIELD#', '<span style="font-family:Arial Narrow">' + bookingArray[x]._id + '</span>');
+	htmlCode += htmlTDC.replace('#FIELD#', new Date(bookingArray[x].checkin*1000).format('d/m/Y'));
+	htmlCode += htmlTDC.replace('#FIELD#', new Date(bookingArray[x].checkout*1000).format('d/m/Y'));
+	htmlCode += htmlTDR.replace('#FIELD#', daysBetween(new Date(bookingArray[x].checkin*1000), new Date(bookingArray[x].checkout*1000)));
+	htmlCode += htmlTDL.replace('#FIELD#', '<span style="font-family:Arial Narrow">' + (bookingArray[x].name.substr(0,24)) + '[' + bookingArray[x].langCode + ']' + '</span>');
+	if (showAgent) {htmlCode += htmlTDL.replace('#FIELD#', '<span style="font-family:Arial Narrow">' + (bookingArray[x].agent.substr(0,15)) + '</span>')};
+	htmlCode += htmlTDR.replace('#FIELD#', '<span style="color:#000000; ">' + accFormat(invoiceTotal) + '</span>');
+	htmlCode += htmlTDR.replace('#FIELD#', paidAlready);
+	htmlCode += htmlTDR.replace('#FIELD#', missingPayment);
+	if (showInv) {
+		htmlCode += htmlTDL.replace('#FIELD#', '<span style="color:#333333; font-family:Arial Narrow;">' + invoices + '</span>');
+		htmlCode += htmlTDL.replace('#FIELD#', '<span style="color:#333333; font-family:Arial Narrow;">' + receipts + '</span>');
+	}
+	htmlCode += '</tr>'
+	return htmlCode;
+}
+
 (function () {
     'use strict';
     angular.module('ThaiHome')

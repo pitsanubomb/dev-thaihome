@@ -8797,6 +8797,9 @@ angular.module("templates/management/home/index.html", []).run(["$templateCache"
     "                                    <li md-ink-ripple>\n" +
     "                                        <a ui-sref=\"management.todo\">Todo</a>\n" +
     "                                    </li>\n" +
+    "                                     <li md-ink-ripple>\n" +
+    "                                        <a ui-sref=\"management.reports\">Reports</a>\n" +
+    "                                    </li>\n" +
     "                                    <!-- 2016-05-17 - Ajay - Add link for profile page || Ajay du lrpi lakot es asem imaci -->\n" +
     "                                    <li md-ink-ripple>\n" +
     "                                        <a ui-sref=\"management.profile\">Profile</a>\n" +
