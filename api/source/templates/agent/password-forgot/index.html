@@ -1,0 +1,30 @@
+<header></header>
+<div class="top-images">
+  <div class="row login-frm">
+    <div class="col-md-6 col-xs-10" style="margin:0 auto;float:none;">
+      <div class="login-panel panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Reset Password</h3>
+        </div>
+        <div class="panel-body">
+
+          <form novalidate role="form" ng-submit="forgot(_email)">
+            <div ng-show="error" class="alert alert-danger">
+              User not found.
+            </div>
+            <fieldset>
+              <div class="form-group">
+                <input ng-model="_email" class="form-control" placeholder="Email" type="email" required autofocus>
+              </div>
+              <!-- Change this to a button or input when using this as a form -->
+              <md-button ng-disabled="success" type="submit" class="md-raised pull-right md-primary">Reset Password</md-button>
+            </fieldset>
+          </form>
+          <br />
+          <a href="#" ui-sref="agent_login"><md-button type="submit" class="md-raised pull-left md-primary">Log In</md-button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

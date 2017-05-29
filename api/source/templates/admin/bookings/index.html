@@ -1,0 +1,45 @@
+<div class="row">
+  <ui-view>
+    <div class="col-lg-12">
+      <h1 class="page-header">Bookings</h1>
+    </div>
+    <table id="bookingTable" class="table table-striped table-bordered table-hover no-footer" datatable="ng" dt-options="dtOptions">
+      <thead>
+        <tr>
+          <th><input ng-model="selectAll" ng-click="toggleAll(selectAll, selected)" type="checkbox"></th>
+		  <th>Project</th>
+          <th>Unit</th>
+          <th>Nights</th>
+          <th>Check-in</th>
+          <th>Check-out</th>
+          <th>Status</th>
+          <th>Made</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="gradeA curosr" ng-repeat="booking in bookings">
+          <td><input ng-model="selected[booking.id]" ng-click="toggleOne(selected)" type="checkbox"></td>
+          <td ui-sref="admin.bookings.view({ id: booking.id})">{{booking.property.projectName}}</td>
+          <td ui-sref="admin.bookings.view({ id: booking.id})">{{booking.property.unique}}</td>
+          <td ui-sref="admin.bookings.view({ id: booking.id})">{{booking.nights}}</td>
+          <td ui-sref="admin.bookings.view({ id: booking.id})">{{booking.checkin | defaultDateFormat}}</td>
+          <td ui-sref="admin.bookings.view({ id: booking.id})">{{booking.checkout | defaultDateFormat}}</td>
+          <td ui-sref="admin.bookings.view({ id: booking.id})"><b class="bookstatus_{{booking.status}}">{{getStatus(booking.status).name}}</b></td>
+          <td ui-sref="admin.bookings.view({ id: booking.id})">{{booking.created | defaultDateFormat}}</td>
+          <td width="40">
+            <button ng-really-message=" Are you sure you want to delete {{booking.id}} ?" ng-really-click="delete(booking.id)" class="btn-sm btn btn-danger" type="button">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+	
+  </ui-view>  
+  <div ng-if="bookings.length > 0">
+		<div vc-recaptcha key="publicKey" on-expire="expiredCallback(response)" on-success="verifyCallback(response)" style="margin-bottom:20px;"></div>
+	
+		<button ng-disabled="disabled" ng-really-message=" Are you sure you want to delete the selected bookings?" ng-really-click="deleteSelected(false)" class="btn-sm btn btn-danger" type="button">Delete Selected Bookings</button>
+   
+		<button ng-disabled="disabled"  ng-really-message="Are you sure you want to delete all bookings?" ng-really-click="deleteSelected(true)" class="btn-sm btn btn-danger" type="button">Delete All Bookings</button>
+	</div>
+</div>

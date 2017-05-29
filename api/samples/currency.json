@@ -1,0 +1,5 @@
+{"_id":"124486735576e9ff","name":"Thai Baht","currency":"THB","symbol":"฿","active":true,"default":false}
+{"_id":"436df87be8eff8a7","name":"Ruble","currency":"RUB","symbol":"руб","active":true,"default":false}
+{"_id":"9cd5fbaca3db88f5","name":"Euro","currency":"EUR","symbol":"€","active":true,"default":true}
+{"_id":"UWT51","active":true,"currency":"DKK","default":false,"name":"Kroner","symbol":"kr"}
+{"_id":"d0ae06b57d4268ad","name":"US Dollar","currency":"USD","symbol":"$","active":true,"default":false}

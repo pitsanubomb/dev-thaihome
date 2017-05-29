@@ -1,0 +1,62 @@
+(function () {
+  'use strict';
+  angular.module('ThaiHome')
+    .factory('Location', ['$http', 'CONFIG', '$q', function ($http, CONFIG, $q) {
+      return {
+        getAll: function (query) {
+          var d = $q.defer();
+          $http.get(CONFIG.API_URL + '/location', {
+            params: query
+          }).then(function (data) {
+            d.resolve(data.data);
+          }).catch(function (err) {
+            d.reject(err);
+          });
+
+          return d.promise;
+        },
+        add: function (data) {
+          var d = $q.defer();
+          $http.post(CONFIG.API_URL + '/location', data).then(function (data) {
+            d.resolve(data);
+          }).catch(function (err) {
+            d.reject(err);
+          });
+          return d.promise;
+        },
+        update: function (id, data) {
+          var d = $q.defer();
+          $http.put(CONFIG.API_URL + '/location/' + id, data).then(function (data) {
+            d.resolve(data.data);
+          }).catch(function (e) {
+            d.reject(e);
+          });
+          return d.promise;
+        },
+        delete: function (id) {
+          var d = $q.defer();
+          $http.delete(CONFIG.API_URL + '/location/' + id).then(function (data) {
+            d.resolve(data);
+          }).catch(function (e) {
+            d.reject(e);
+          });
+          return d.promise;
+        },
+        getDetails: function (id) {
+          var d = $q.defer();
+          $http.get(CONFIG.API_URL + '/location/' + id).then(function (data) {
+            if (_.isObject(data.data) && data.data.id) {
+              d.resolve(data.data);
+            } else if (data.data.length) {
+              d.resolve(data.data[0]);
+            } else {
+              d.reject();
+            }
+            return d.promise;
+          });
+          return d.promise;
+
+        }
+      };
+    }]);
+})();

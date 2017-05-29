@@ -1,0 +1,37 @@
+{
+	"type": "Collection",
+	"properties": {
+		"property": {
+			"name": "property",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "property",
+			"order": 0
+		},
+		"language": {
+			"name": "language",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "language",
+			"order": 1
+		},
+		"texts": {
+			"name": "texts",
+			"type": "array",
+			"typeLabel": "array",
+			"required": true,
+			"id": "texts",
+			"order": 2
+		},
+		"amenities": {
+			"name": "amenities",
+			"type": "array",
+			"typeLabel": "array",
+			"required": true,
+			"id": "amenities",
+			"order": 3
+		}
+	}
+}

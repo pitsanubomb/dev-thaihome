@@ -1,0 +1,37 @@
+<i ng-click="$close()" id="close-window" class="material-icons" role="button" tabindex="0">highlight_off</i>
+<form role="form" ng-submit="createAgent(agent);$close();">
+  <div class="col-md-4">
+   <div class="form-group">
+      <label>Username</label>
+      <input required type="text" placeholder="Username" class="form-control" ng-model="agent.username" />
+    </div>
+    <div class="form-group">
+      <label>Agency Company Name</label>
+      <input required type="text" placeholder="Agency Company Name" class="form-control" ng-model="agent.agency" />
+    </div>
+    <div class="form-group">
+      <label>Agent Name</label>
+      <input type="text" required placeholder="Agent Name" class="form-control" ng-model="agent.name" />
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" required placeholder="Email" class="form-control" ng-model="agent.email" />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Password</label>
+      <input min="4" type="password" placeholder="Password" class="form-control" ng-model="agent.password" required />
+    </div>
+    <div class="form-group">
+      <label>Agency Rating - {{agent.rating}}</label>
+      <input type="text" value="3" class="form-control" ng-model="agent.rating" />
+    </div>
+    <div class="form-group">
+      <label>Comment</label>
+      <textarea class="form-control" ng-model="agent.comment"></textarea>
+    </div>
+  </div>
+  <div style="clear:both;"></div>
+  <button ng-disabled="disabled" class="btn btn-primary btn-sm blue-btn" type="submit">Add {{agent.agent}}</button>
+</form>

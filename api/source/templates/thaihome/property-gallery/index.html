@@ -1,0 +1,216 @@
+<div id="photogallery" ng-init="initSpace()">
+    <div class="hidden-xs hidden-sm">
+        <i ng-click="$close()" id="close-window" class="material-icons" role="button" tabindex="0">highlight_off</i>
+        <div class="slider">
+
+            <!-- enumerate all photos -->
+            <div style="overflow:hidden;position:relative;">
+                <img ng-click="showNext()" style="height:510px;margin:0 auto; display:block;position:relative;"
+                     ng-repeat="image in images track by $index" class="slide" ng-swipe-right="showPrev()"
+                     ng-swipe-left="showNext()" ng-show="isActive($index)"
+                     ng-src="/assets/images/property/{{unique | lowercase}}/{{image}}"/>
+
+                <!-- prev / next controls -->
+                <a class="previmg" href="javascript:void(0)" ng-click="showPrev()">‹</a>
+                <a class="nextimg" href="javascript:void(0)" ng-click="showNext()">›</a>
+            </div>
+            <div class="clear"></div>
+            <!-- extra navigation controls -->
+
+
+        </div>
+        <div style="position:relative;overflow:hidden;width:100%;height:55px;">
+            <ul class="nav">
+                <li ng-repeat="thmb in images track by $index" ng-class="{'active':isActive($index)}">
+                    <img src="/assets/images/property/{{unique | lowercase}}/{{thmb}}" ng-click="showPhoto($index);"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="visible-xs visible-sm">
+
+        <div class="slider">
+            <i ng-click="$close()" style="
+    font-size: 30px;
+    position: absolute;
+    right: 30px;
+    z-index: 1000;
+" id="close-window-mobile" class="material-icons" role="button" tabindex="0">highlight_off</i>
+            <!-- enumerate all photos -->
+            <div style="overflow:hidden;position:relative;">
+                <img ng-click="showNext()" style="width: 100%;margin:0 auto; display:block;position:relative;"
+                     ng-repeat="image in images track by $index" class="slide" ng-swipe-right="showPrev()"
+                     ng-swipe-left="showNext()" ng-show="isActive($index)"
+                     ng-src="/assets/images/property/{{unique | lowercase}}/{{image}}"/>
+                <!-- prev / next controls -->
+                <a class="previmg" href="javascript:void(0)" ng-click="showPrev()">‹</a>
+                <a class="nextimg" href="javascript:void(0)" ng-click="showNext()">›</a>
+            </div>
+            <div class="clear"></div>
+            <!-- extra navigation controls -->
+        </div>
+    </div>
+
+
+    <style>
+        /*.property-gallery .modal-content, .property-gallery .modal-dialog {
+        width:840px;
+        height: {{modalHeight}}px !important;
+    }*/
+
+        #photogallery #close-window {
+            color: #000;
+            cursor: pointer;
+            float: right;
+            margin: 10px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 99;
+        }
+
+        .modal-content {
+            overflow: hidden;
+        }
+
+        @media (max-width: 767px) {
+
+            @media screen and (orientation: landscape) {
+                #photogallery .slider {
+                    padding-top:0 !important;
+                }
+            }
+            @media screen and (orientation: portrait) {
+                #photogallery .slider {
+                    padding-top: 100px!important;
+                }
+            }
+            .modal-content {
+                margin-left: -20px !important;
+                padding: 0 !important;
+                overflow: hidden;
+                background: rgba(0, 0, 0, 0) !important;
+            }
+
+            #photogallery .slider {
+
+                height: inherit !important;
+                margin: 0 !important;
+            }
+            #photogallery .nextimg {
+                right: 30px !important;
+                top: 10% !important;
+                font-weight: lighter;
+            }
+            #photogallery .previmg{
+                left: 30px !important;
+                top: 10% !important;
+                font-weight: lighter;
+            }
+            .modal{
+                background: rgba(0,0,0,0.5) !important;
+            }
+
+        }
+
+        #photogallery span.close {
+            color: #000;
+            opacity: 1;
+            position: absolute;
+            position: relative;
+            z-index: 99;
+            font-size: 22px;
+        }
+
+        #photogallery .previmg {
+            cursor: pointer;
+            display: block;
+            position: absolute;
+            top: 30%;
+            z-index: 5;
+            font-size: 30px;
+            left: 30px;
+            color: #000;
+            left: 15px;
+            font-size: 125px;
+            transition: all 0.2s linear 0s;
+        }
+
+        #photogallery .nextimg {
+            color: #000;
+            font-size: 125px;
+            cursor: pointer;
+            display: block;
+            position: absolute;
+            top: 30%;
+            z-index: 5;
+            font-size: 125px;
+            right: 15px;
+            transition: all 0.2s linear 0s;
+        }
+
+        #photogallery .arrow.prev:hover {
+            opacity: 1;
+        }
+
+        #photogallery .arrow.next:hover {
+            opacity: 1;
+        }
+
+        #photogallery .nav {
+            display: block;
+            margin: 0 auto;
+            position: absolute;
+            float: left;
+            left: 0;
+            clear: both;
+            text-align: center;
+            width: 5000px;
+            z-index: 5;
+        }
+
+        #photogallery .nav li {
+            float: left;
+            cursor: pointer;
+            display: inline-block;
+            margin: 4px 3px;
+            position: static;
+            width: 59px;
+        }
+
+        #photogallery .nav li.active {
+            border: 5px solid #FFFFFF;
+            outline: 3px solid #8ba8d7;
+        }
+
+        #photogallery .nav li img {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        #photogallery .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #photogallery .slide,
+        .slide.ng-hide-remove.ng-hide-remove-active {
+            opacity: 1;
+        }
+
+        @media (min-width: 1000px) {
+            .modal-dialog {
+                width: 900px;
+            }
+        }
+
+        @media (max-width: 999px) {
+            .modal-dialog {
+                width: auto;
+                margin: 0 20px;
+            }
+        }
+    </style>
+</div>

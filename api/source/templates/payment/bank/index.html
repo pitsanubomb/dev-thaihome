@@ -1,0 +1,14 @@
+<div ng-bind-html="T.book_text1 || TD.book_text1"></div>
+<table class="table table-striped table-bordered table-hover">
+  <tr>
+    <td ng-bind-html="T.transBankAccount"></td>
+    <td><b ng-bind-html="T.transKBANKacc"></b></td>
+  </tr>
+  <tr>
+    <td ng-bind-html="T.transBankInfo"></td>
+    <td ng-bind-html="T.transKBANKinfo"></td>
+  </tr>
+</table>
+<br />
+<md-button ng-show="bookingID" ui-sref="booking({id: bookingID, sendPaymentPending: true})" class="md-raised book md-warn">{{T.transBookNow}}</md-button>
+<md-button ng-show="isBookingController" ng-click="showPaymentToggle()" class="md-raised book md-warn">{{T.transOK}}</md-button>

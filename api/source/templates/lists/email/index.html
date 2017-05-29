@@ -1,0 +1,36 @@
+<i ng-click="$close()" id="close-window" class="material-icons" role="button" tabindex="0">highlight_off</i>
+<!--
+* 2016-05-17 - Ajay
+* Add tenant info on email template
+-->
+<div class="row">
+	<div class="col-md-6">
+	  <p class="ng-binding">Tenant: <strong>{{tenantDetail.name}}</strong></p>
+	</div>
+	<div class="col-md-6">
+	  <p class="ng-binding">Country: <strong>{{tenantDetail.country}}</strong></p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+	 <p class="ng-binding">Email: <strong>{{tenantDetail.email}}</strong></p>
+	</div>
+	<div class="col-md-6">
+	  <p class="ng-binding">Phone: <strong>{{tenantDetail.phone}}</strong></p>
+	</div>
+</div>
+<select ng-model="emailType" style="width:100;" class="form-control" ng-change="getEmailHTML(emailType)">
+  <option value="">None</option>
+  <option ng-class="{'email_sent': searchEmail(email.value)}" value="{{email.value}}" ng-repeat="email in emails track by $index">{{email.name}} {{searchEmail(email.value)}}</option>
+</select>
+<select ng-change="selectLang(emailLanguage)" ng-model="emailLanguage" class="form-control">
+  <option ng-repeat="lang in languages" value="{{lang.shortname}}">{{lang.name}}</option>
+</select>
+<br />
+<div class="form-group">
+  <label>Subject:</label>
+  <input type="text" class="form-control" ng-model="subject">
+</div>
+<div class="clear"></div>
+<div id="email_html" text-angular  ta-toolbar="[]" ng-model="emailHTML" style="max-height:70% ;overflow-y:scroll"></div>
+<button ng-click="sendEmail(emailType,false,emailHTML,subject)" class="btn btn-default blue-btn">Send</button>

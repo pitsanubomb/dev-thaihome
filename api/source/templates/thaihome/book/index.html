@@ -1,0 +1,105 @@
+<header></header>
+<div>
+  <bookingCalendar></bookingCalendar>
+  <div class="clear"></div>
+
+  <div class="container payment-section">
+    <div class="col-md-7">
+      <div class="payment md-whiteframe-z3">
+
+        <multi-step-container steps="steps">
+          <step-container>
+          </step-container>
+        </multi-step-container>
+      </div>
+      <p>{{T.transBookAgree}} <a ng-click='rules()' class='house-rule' href='javascript:void(0)'>{{T.transHouseRules}}</a> {{T.transAnd}} <a ng-click='cancellation()' class='cancellation_pol' href='javascript:void(0)'>{{T.transCancellation}}</a></p>
+
+    </div>
+
+    <style>
+      input.ng-invalid {
+        border-color: #FA787E;
+      }
+    </style>
+
+    <div class="col-md-5">
+
+      <div class="payment-side md-whiteframe-z3">
+
+        <div class="picture">
+          <img src="/assets/images/property/{{property.unique | lowercase}}/{{property.featured}}" alt="">
+        </div>
+
+        <p><b>{{property.name}}</b></p>
+        <p>{{property.location_name}}</p>
+        <p ng-if="refAgent">{{T.transAgent}}: {{refAgent.name}}, {{refAgent.agency}}</p>
+        <table class="table nomargin-table right-aligned-second">
+          <tbody>
+            <tr>
+              <td class="td-align">{{T.transCheckin}}</td>
+              <td><b>{{checkin}}</b></td>
+            </tr>
+            <tr>
+              <td>{{T.transCheckout}}</td>
+              <td><b>{{checkout}}</b></td>
+            </tr>
+            <tr>
+              <td>{{T.transPeriod}}</td>
+              <td><b>{{nights | timeFormat}}</b></td>
+            </tr>
+          </tbody>
+        </table>
+
+<!-- TIKO is this before the booking is created? -->
+        <table class="table nomargin-table right-aligned-second">
+          <tbody>
+            <tr>
+              <td class="td-align">{{priceDay | currency: currency:0}} x {{nights}} {{T.transNights}}</td>
+              <td>{{priceDay*nights | currency: currency:0}}</td>
+            </tr>
+            <tr ng-if="discount.percent">
+              <td class="green">{{T.transDiscount}} ({{discount.percent}}%)</td>
+              <td class="green">{{ (priceDay * nights / 100 * discount.percent) * -1 | currency: currency:0}}</td>
+            </tr>
+            <tr>
+              <td>{{T.transChkClean}}</td>
+              <td>{{property.cleanfinalprice | currency: currency:0}}</td>
+            </tr>
+            <tr>
+              <td class="td-align">
+                <h3>{{T.transTotal}}</h3></td>
+              <td>
+                <h3>{{priceDay * nights - priceDay * nights * discount.percent / 100 + property.cleanfinalprice | currency: currency: 0}}</h3></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>{{T.transUtilities}}</h4>
+        <table class="table nomargin-table right-aligned-second">
+          <tbody>
+            <tr>
+              <td class="td-align" style="width: 80px;">{{T.transElectricity}}</td>
+              <td>{{T.transPayUse}}, &#3647;{{property.electricUnit}}/unit</td>
+            </tr>
+            <tr>
+              <td>{{T.transWater}}</td>
+              <td>{{T.transPayUse}}, &#3647;({{property.waterUnit}}/unit</td>
+            </tr>
+            <tr>
+              <td>{{T.transInternet}}</td>
+              <td>{{T.transIncluded}}: {{property.internet}}</td>
+            </tr>
+            <tr>
+              <td>{{T.transCable}}</td>
+              <td>{{T.transIncluded}}: {{property.cabletv}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<footer></footer>

@@ -1,0 +1,108 @@
+
+<div id="wrapper" class="col-sm-6 col-sm-push-3" style="padding:20px;clear:both; max-width: 600px;">
+  <div class="new-booking-area">
+      <table class="iconTD ">
+          <tr>
+              <td ui-sref="management.home" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                      src="/assets/images/Home.png" alt="Start Page"><span ng-if="menu_bookings"
+                                                                           class="management-menu-new-element-block">{{menu_bookings}}</span>
+              </td>
+              <td ui-sref="management.messages" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                      src="/assets/images/Messages.png" alt="Messages"><span ng-if="menu_messages"
+                                                                             class="management-menu-new-element-block">{{menu_messages}}</span>
+              </td>
+              <td ui-sref="management.bookings"><img src="/assets/images/Bookings.png" alt="Bookings"></td>
+              <td ui-sref="management.properties"><img src="/assets/images/Properties.png" alt="Properties"></td>
+              <td ui-sref="management.calendar({month: '', year:''})"
+                  ng-class="{'active-management-btn' : statename == 'management.calendar'}"><img
+                      src="/assets/images/Calendar.png" alt="Calendar"></td>
+              <td>
+                  <md-menu style="width: 100%;height: 100%;padding: 0;margin-top: 15px; display:block;"
+                           md-position-mode="target-right target" class="second-menu-container crnc-drop">
+                      <md-button aria-label=""
+                                 style="width: 100%!important;height: 100%;box-shadow: none;border: 0!important;"
+                                 class="md-icon-button" ng-click="$mdOpenMenu()">
+                          <img src="/assets/images/Menu.png" alt="Menu">
+                      </md-button>
+                      <md-menu-content>
+                          <ul class="nav second-nav manage-nav">
+                              <li md-ink-ripple>
+                                  <a ui-sref="management.book">New Booking</a>
+                              </li>
+                              <li md-ink-ripple>
+                                  <a ui-sref="admin.home">Admin</a>
+                              </li>
+                              <li md-ink-ripple>
+                                  <a ui-sref="home">Thai Home</a>
+                              </li>
+                              <li md-ink-ripple>
+                                  <a ui-sref="management.expenses">Expenses</a>
+                              </li>
+                              <li md-ink-ripple>
+                                <a ui-sref="management.todo">Todo</a>
+                              </li>
+                              <!-- 2016-05-17 - Ajay - Add link for profile page || Ajay du lrpi lakot es asem imaci -->
+                              <li md-ink-ripple>
+                                  <a ui-sref="management.profile">Profile</a>
+                              </li>
+                              <li md-ink-ripple>
+                                  <a ui-sref="admin_logout">Logout</a>
+                              </li>
+                          </ul>
+                      </md-menu-content>
+                  </md-menu>
+
+              </td>
+          </tr>
+      </table>
+  </div>
+
+
+<!-- TIKO you need to put data into all these fields -->
+  <table class="startLineTable">
+  	<tbody>
+      <tr>
+        <td style="width:10%;" class="startLineTxt startBlueTh"><b>Property</b></td>
+        <td style="width:40%;" class="startLineTxt startOverflow">{{messages.messages[messages.messages.length - 1].booking.property.unique || propertyToShow}}</td>
+        <td style="border-top-style:hidden; border-bottom-style:hidden;width:3%;"></td>
+        <td style="width:10%;" class="startLineTxt startBlueTh"><b>Booking</b></td>
+<!-- TIKO I want this one to link to the booking form -->
+        <td style="width:37%;" class="startLineTxt startOverflow"><a ui-sref="management.booking({id: messages.messages[messages.messages.length - 1].booking.id})">{{messages.messages[messages.messages.length - 1].booking.id}}</a></td>
+      </tr>
+      <tr>
+        <td class="startLineTxt startBlueTh"><b>Checkin</b></td>
+        <td class="startLineTxt startOverflow">{{messages.messages[messages.messages.length - 1].booking.checkin +'000' | date: 'dd MMM' : 'UTC'}}</td>
+        <td style="border-top-style:hidden; border-bottom-style:hidden;"></td>
+        <td class="startLineTxt startBlueTh"><b>Name</b></td>
+        <td class="startLineTxt startOverflow">{{contact.name}}</td>
+      </tr>
+      <tr>
+          <td class="startLineTxt startBlueTh"><b>Checkout</b></td>
+        <td class="startLineTxt startOverflow">{{messages.messages[messages.messages.length - 1].booking.checkout +'000' | date: 'dd MMM' : 'UTC'}}</td>
+        <td style="border-top-style:hidden; border-bottom-style:hidden;"></td>
+        <td class="startLineTxt startBlueTh"><b>Email</b></td>
+        <td class="startLineTxt startOverflow">{{contact.email}}</td>
+      </tr>
+      <tr>
+          <td class="startLineTxt startBlueTh"><b>Nights</b></td>
+        <td class="startLineTxt startOverflow">{{messages.messages[messages.messages.length - 1].booking.nights}}</td>
+        <td style="border-top-style:hidden; border-bottom-style:hidden;"></td>
+        <td class="startLineTxt startBlueTh"><b>Phone</b></td>
+        <td class="startLineTxt startOverflow">{{contact.phone}}</td>
+      </tr>
+      <tr ng-if="agentExist">
+        <td class="startLineTxt startBlueTh"><b>Agent Name</b></td>
+        <td class="startLineTxt startOverflow">{{agentData.agent}}</td>
+        <td style="border-top-style:hidden; border-bottom-style:hidden;"></td>
+        <td class="startLineTxt startBlueTh"><b>Agent Phone</b></td>
+        <td class="startLineTxt startOverflow">{{agentData.phone}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="container">
+    <br />
+    <chat></chat>
+  </div>
+
+</div>

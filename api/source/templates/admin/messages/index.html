@@ -1,0 +1,40 @@
+<!--
+* 2016-05-17 - Ajay
+* Template for messages
+-->
+<div class="row">
+	<ui-view>
+		<div class="col-lg-12">
+		  <h1 class="page-header">Messages</h1>
+		</div>
+		<table class="table table-striped table-bordered table-hover no-footer" datatable="ng" dt-options="dtOptions">
+			<thead>
+				<tr>
+				  <th><input ng-model="selectAll" ng-click="toggleAll(selectAll, selected)" type="checkbox"></th>
+				  <th>Messages</th>
+				  <th>User</th>
+				  <th>Read</th>
+				  <th>Delete</th>
+				</tr>  
+			</thead>
+			<tbody>
+				<tr class="gradeA curosr" ng-repeat="message in messages">
+					<td><input ng-model="selected[message.id]" ng-click="toggleOne(selected)" type="checkbox"></td>
+					<td><p style="height:150px;overflow:auto;">{{message.messages}}</p></td>
+					<td>{{message.user}}</td>
+					<td>{{message.read}}</td>
+					<td width="40">
+						<button ng-really-message="Are you sure you want to delete this message ?" ng-really-click="delete(message.id)" class="btn-sm btn btn-danger" type="button">Delete</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</ui-view>
+	<div ng-if="messages.length > 0">
+		<div vc-recaptcha key="publicKey" on-expire="expiredCallback(response)" on-success="verifyCallback(response)" style="margin-bottom:20px;"></div>
+	
+		<button ng-disabled="disabled" ng-really-message="Are you sure you want to delete the selected messages?" ng-really-click="deleteSelected(false)" class="btn-sm btn btn-danger" type="button">Delete Selected Messages</button>
+   
+		<button ng-disabled="disabled"  ng-really-message="Are you sure you want to delete all messages?" ng-really-click="deleteSelected(true)" class="btn-sm btn btn-danger" type="button">Delete All Messages</button>
+	</div>
+</div>

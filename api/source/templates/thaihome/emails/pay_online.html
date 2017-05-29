@@ -1,0 +1,102 @@
+<div style="width: 100%;max-width:700px;margin: 0 auto;">
+    
+    <div style="border: 1px solid #C7C7C7;padding: 10px 10px;margin-bottom: 10px;overflow: hidden;">
+       <img style="float:right;width:200px" src="http://thaihome.gosocialdev.eu/images/logo.png" alt="">
+        <span><img style="width: 30px;float: left;margin: 16px 5px 0 0;" src="http://thaihome.gosocialdev.eu/images/green-ok.png" alt=""><p style="text-align:left;margin-top:22px;">Your booking request have been sent to us</p></span>
+    </div>
+    <div style="border: 1px solid #C7C7C7;padding: 0 10px;margin-bottom: 10px;overflow: hidden;">
+        <div style="width: 30%;float:left;">
+            <p>Your Booking ID</p>
+            <p>View Your Booking</p>
+        </div>
+        <div style="width: 50%;float:left;">
+            <p>{{BOOKING_ID}}</p>
+            <p><a href="http://thaihome.gosocialdev.eu/booking/{{BOOKING_ID}}/">http://thaihome.gosocialdev.eu/{{BOOKING_ID}}/</a></p>
+        </div>
+    </div>
+    <div style="border: 1px solid #C7C7C7;padding: 0;margin-bottom: 10px;overflow: hidden;">
+        <div style="width:30%;float:left;">
+           <img style="margin:10px" src="http://thaihome.gosocialdev.eu/images/note.png" alt="">
+        </div>
+        <div style="width:70%;float:left;">
+            <p>Hi {{TENANT_FIRSTNAME}}, <br>I have confirmed that the dates you want are available.</p>
+            <table style="width:90%;width: 90%;padding: 0 10px;border-spacing: 0;border-collapse: collapse;margin: 20px auto;">
+                <tbody>
+                    <tr>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;">Check In</td>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;"><b>{{CHECKIN}}</b></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;">Check Out</td>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;"><b>{{CHECKOUT}}</b></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;">Nights</td>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;"><b>{{NIGHTS}}</b></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Please click this link and pay, so you can reserve the dates and complete your booking. </p>
+            <button style="box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);background-color: rgb(244,67,54);color: #fff;border: 1px solid #DDDDDD;padding: 13px 40px;margin: 10px 0;text-transform: uppercase;margin: 25px auto;display: block;"><b>BOOK NOW</b></button>
+            <p>Thank you for choosing to stay in our condo and if you have any questions, please write me and I will help.</p>
+            <p>Greetings from Sunny Thailand :-) <br>-  Note Lekpradit <br>Property Manager</p>
+            <a href="">Contact Note</a>
+        </div>
+    </div>
+    <div>
+        <div style="width:66%;float:left;padding:0;border: 1px solid #C7C7C7;margin-bottom: 10px;overflow: hidden;">
+            <h3 style=" background-color: #B7B7B7;margin: 0;padding: 15px; ">Booking ID: {{BOOKING_ID}}</h3>
+            <div style="padding: 0 18px;">
+                <p><b>{{PROPERTY_FRONT}}</b></p>
+                <p>{{LOCATION}}</p>
+            </div>
+            <table style="width: 90%;padding: 0 10px;border-spacing: 0;border-collapse: collapse;margin: 20px auto;">
+                <tbody>
+                    <tr>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;">Guest</td>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;"><b>{{TENANT_NAME}}</b></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;">Check In</td>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;"><b>{{CHECKIN}}</b></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;">Check Out</td>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;"><b>{{CHECKOUT}}</b></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;">Nights</td>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;"><b>{{NIGHTS}}</b></td>
+                    </tr>
+                </tbody>
+             </table>
+             <table style="width: 90%;padding: 0 10px;border-spacing: 0;border-collapse: collapse;margin: 20px auto;">
+                <tbody>
+                    <tr>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;">{{CURRENCY}}{{PRICE_DAY}} x {{NIGHTS}} nights</td>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;"><b>{{CURRENCY}}{{PRICE_BOOKING}}</b></td>
+                    </tr>
+                    {{DISCOUNT}}
+                    <tr>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;">Check-out cleaning</td>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;"><b>{{CURRENCY}}{{FINAL_CLEANING}}</b></td>
+                    </tr>
+					{{PRICE_EXTRA}}
+                    <tr>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;"><h2>Total</h2></td>
+                        <td style="padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;"><h2>{{CURRENCY}}{{PRICE_TOTAL}}</h2></td>
+                    </tr>
+                </tbody>
+             </table>
+        </div>
+        <div style="width:30%;float:right;box-sizing:border-box;padding:0px;border: 1px solid #C7C7C7;margin-bottom: 10px;overflow: hidden;">
+            <img style="margin:6px;max-height:200px;max-width:196px;" src="{{FEATURED_IMG}}" alt="">
+            <p style="background-color: #F1F1F1;margin: 15px 8px 8px;padding: 5px;text-align: center;border: 1px solid #DDDDDD;"><a href="http://thaihome.gosocialdev.eu/booking/{{BOOKING_ID}}/">Check Booking</a></p>
+            <p style="background-color: #F1F1F1;margin: 15px 8px 8px;padding: 5px;text-align: center;border: 1px solid #DDDDDD;"><a href="http://thaihome.gosocialdev.eu/booking/{{BOOKING_ID}}/">Contact Us</a></p>
+            <p style="background-color: #F1F1F1;margin: 15px 8px 8px;padding: 5px;text-align: center;border: 1px solid #DDDDDD;"><a href="http://thaihome.gosocialdev.eu/booking/{{BOOKING_ID}}/">Watch Video</a></p>
+            <p style="background-color: #F1F1F1;margin: 15px 8px 8px;padding: 5px;text-align: center;border: 1px solid #DDDDDD;"><a href="http://thaihome.gosocialdev.eu/booking/{{BOOKING_ID}}/">House Rules</a></p>
+            <p style="background-color: #F1F1F1;margin: 15px 8px 8px;padding: 5px;text-align: center;border: 1px solid #DDDDDD;"><a href="http://thaihome.gosocialdev.eu/booking/{{BOOKING_ID}}/">Cancellation</a></p>
+        </div>
+    </div>
+    
+</div>

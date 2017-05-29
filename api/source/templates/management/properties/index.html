@@ -1,0 +1,107 @@
+<div id="wrapper" class="col-sm-6 col-sm-push-3" style="padding:20px;clear:both; max-width: 600px;">
+  <div class="new-booking-area">
+      <table class="iconTD ">
+          <tr>
+              <td ui-sref="management.home" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                      src="/assets/images/Home.png" alt="Start Page"><span ng-if="menu_bookings"
+                                                                           class="management-menu-new-element-block">{{menu_bookings}}</span>
+              </td>
+              <td ui-sref="management.messages" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                      src="/assets/images/Messages.png" alt="Messages"><span ng-if="menu_messages"
+                                                                             class="management-menu-new-element-block">{{menu_messages}}</span>
+              </td>
+              <td ui-sref="management.bookings"><img src="/assets/images/Bookings.png" alt="Bookings"></td>
+              <td ui-sref="management.properties"><img src="/assets/images/Properties.png" alt="Properties"></td>
+              <td ui-sref="management.calendar({month: '', year:''})"
+                  ng-class="{'active-management-btn' : statename == 'management.calendar'}"><img
+                      src="/assets/images/Calendar.png" alt="Calendar"></td>
+              <td>
+                  <md-menu style="width: 100%;height: 100%;padding: 0;margin-top: 15px; display:block;"
+                           md-position-mode="target-right target" class="second-menu-container crnc-drop">
+                      <md-button aria-label=""
+                                 style="width: 100%!important;height: 100%;box-shadow: none;border: 0!important;"
+                                 class="md-icon-button" ng-click="$mdOpenMenu()">
+                          <img src="/assets/images/Menu.png" alt="Menu">
+                      </md-button>
+                      <md-menu-content>
+                          <ul class="nav second-nav manage-nav">
+                              <li md-ink-ripple>
+                                  <a ui-sref="management.book">New Booking</a>
+                              </li>
+                              <li md-ink-ripple>
+                                  <a ui-sref="admin.home">Admin</a>
+                              </li>
+                              <li md-ink-ripple>
+                                  <a ui-sref="home">Thai Home</a>
+                              </li>
+                              <li md-ink-ripple>
+                                  <a ui-sref="management.expenses">Expenses</a>
+                              </li>
+                              <li md-ink-ripple>
+                                <a ui-sref="management.todo">Todo</a>
+                              </li>
+                              <!-- 2016-05-17 - Ajay - Add link for profile page || Ajay du lrpi lakot es asem imaci -->
+                              <li md-ink-ripple>
+                                  <a ui-sref="management.profile">Profile</a>
+                              </li>
+                              <li md-ink-ripple>
+                                  <a ui-sref="admin_logout">Logout</a>
+                              </li>
+                          </ul>
+                      </md-menu-content>
+                  </md-menu>
+
+              </td>
+          </tr>
+      </table>
+  </div>
+  <table class="startHeadTable">
+  	<tr>
+  		<td colspan="2" class="startBlueTxt startHeadTxt startOverflow">PROPERTIES</td>
+  	</tr>
+    <tr>
+      <td class="startLineTxt" style="width:290px;">
+        <booking-calendar></booking-calendar>
+      </td>
+      <td class="startLineTxt" style="vertical-align:bottom; padding-bottom:3px;">
+        <button class="startBlueBg startButton" style="width:65px;" ng-click="search()">SEARCH</button>
+      </td>
+  	</tr>
+  </table>
+  <div class="startSpacer"></div>
+
+  <table class="startLineTable">
+    <thead md-order="query.order">
+    	<tr>
+    		<th style="width:20%;" class="startBlueTh startOverflow startBlueTxt">Project</th>
+    		<th style="width:25%;" class="startBlueTh startOverflow startBlueTxt">Unit</th>
+        <th style="width:15%;" class="startBlueTh startOverflow startBlueTxt">Available</th>
+        <th style="width:20%;" class="startBlueTh startOverflow startBlueTxt">Daily</th>
+        <th style="width:20%;" class="startBlueTh startOverflow startBlueTxt">Monthly</th>
+        <th></th>
+    	</tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="property in properties | orderBy: 'projectName'">
+        <td class="startLineTxt startOverflow" ui-sref="management.property({id: property.unique})">{{property.projectName}}</td>
+        <td class="startLineTxt startOverflow" ui-sref="management.property({id: property.unique})">{{property.unique}}</td>
+        <td class="startLineTxt startOverflow startGreenTxt startBoldTxt" ui-sref="management.property({id: property.unique})">NOW</td>
+        <td class="startLineTxt startOverflow startRight" ui-sref="management.property({id: property.unique})">{{defaultPrices[property.id].priceDay | currency:currency:0}}</td>
+        <td class="startLineTxt startOverflow startRight" ui-sref="management.property({id: property.unique})">{{defaultPrices[property.id].priceMonth | currency:currency:0 }}</td>
+        <td>
+          <button class="startBlueBg startButton startSmallButton" ui-sref="management.book({start: checkin, end: checkout, property: property.unique})">Book</button>
+        </td>
+      </tr>
+      <tr ng-repeat="property in bookedproperties">
+        <td class="startLineTxt startOverflow" ui-sref="management.property({id: property.unique})">{{property.projectName}}</td>
+        <td class="startLineTxt startOverflow" ui-sref="management.property({id: property.unique})">{{property.unique}}</td>
+        <td class="startLineTxt startOverflow startRedTxt startBoldTxt" ui-sref="management.property({id: property.unique})">{{whenFree[property.id] | defaultDateFormat}}</td>
+        <td class="startLineTxt startOverflow startRight" ui-sref="management.property({id: property.unique})">{{defaultPrices[property.id].priceDay | currency:currency:0}}</td>
+        <td class="startLineTxt startOverflow startRight" ui-sref="management.property({id: property.unique})">{{defaultPrices[property.id].priceMonth | currency:currency:0 }}</td>
+        <td>
+          <button class="startBlueBg startButton startSmallButton" ui-sref="management.book({property: property.unique})">Book</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

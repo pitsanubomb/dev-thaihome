@@ -1,0 +1,163 @@
+<nav class="navbar navbar-default pull-right" id="top-nav">
+  <ul class="nav navbar-nav" ng-controller="Locale">
+    <li ng-if="!admin" class="hot" ng-class="getClass('/home')">
+      <a ui-sref="home" class="yellow-btn">
+        <md-button class="md-raised">{{T.hot || TD.hot}}</md-button>
+      </a>
+    </li>
+    <li class="dropdown crnc dropd" md-ink-ripple>
+  <md-select aria-label="Select Currency" ng-change="updateCurrency(currency)" class="menu-lang pull-right" placeholder="{{currency}} {{currencyname}}" ng-model="currency">
+    <md-option ng-repeat="currency in currencies | orderBy:['-default','name']" value="{{currency.currency}}"><img class="lang-flag" ng-src="/assets/images/currencies/{{currency.currency | lowercase}}.png" /> {{currency.symbol}} {{currency.name}}</md-option>
+  </md-select>
+</li>
+<li class="dropdown languages dropd" md-ink-ripple>
+  <md-select aria-label="Select Language" ng-change="updateLanguage(language)" class="menu-lang language-selector-top" ng-model="language">
+    <md-option ng-repeat="language in languages" value="{{language.shortname}}"><img class="lang-flag" ng-src="/assets/images/flags/{{language.shortname}}.png" /> {{language.name}}</md-option>
+  </md-select>
+</li>
+    <li class="contact">
+      <a ui-sref="contact" class="yellow-btn">
+        <md-button class="md-raised">{{T.contactus || TD.contactus}}</md-button>
+      </a>
+    </li>
+    <li class="about">
+      <a ui-sref="about" class="yellow-btn">
+        <md-button class="md-raised">{{T.aboutus || TD.aboutus}}</md-button>
+      </a>
+    </li>
+    <li>
+      <a ui-sref="agent.home" class="agent-login-btn">
+        <md-button class="md-raised">Agent Page</md-button>
+      </a>
+    </li>
+    <li class="user">
+        <i class="material-icons">person</i> 
+        <span>{{agent.name}}</span>
+    </li>
+    <li ng-if="agent">
+      <md-menu md-position-mode="target-right target" class="third-menu-container">
+        <md-button aria-label="Open Menu" class="md-icon-button" ng-click="$mdOpenMenu()">
+          <i class="material-icons">view_headline</i>
+        </md-button>
+        <md-menu-content>
+          <ul class="nav second-nav">
+            <li md-ink-ripple><a ui-sref="agent_logout">{{T.agentlogout || TD.agentlogout}}</a></li>
+          </ul>
+        </md-menu-content>
+      </md-menu>
+    </li>
+  </ul>
+  
+  <div ng-if="agent" class="user2 ng-scope">
+      <i class="material-icons">person</i> 
+      <span>{{agent.name}}</span>
+  </div>
+  
+<md-menu md-position-mode="target-right target" class="second-menu-container">
+    <md-button aria-label="" class="md-icon-button" ng-click="$mdOpenMenu()">
+      <i class="material-icons">view_headline</i>
+    </md-button>
+    <md-menu-content>
+      <ul class="nav second-nav" ng-controller="Locale">
+        <li ng-if="!admin" ng-class="getClass('/home')">
+          <a ui-sref="home">{{T.hot || TD.hot}}</a>
+        </li>
+        <li class="dropdown" md-ink-ripple>
+          <md-select aria-label="Select Currency" ng-change="updateCurrency(currency)" class="menu-lang lang-align" placeholder="{{currency}} {{currencyname}}" ng-model="currency">
+            <md-option ng-repeat="currency in currencies" value="{{currency.currency}}"><img class="lang-flag" ng-src="/assets/images/currencies/{{currency.currency | lowercase}}.png" /> {{currency.symbol}} {{currency.name}}</md-option>
+          </md-select>
+        </li>
+        <li class="dropdown dropd2 lang-res" md-ink-ripple>
+          <md-select aria-label="Select Language" ng-change="updateLanguage(language)" class="menu-lang language-selector-second" ng-model="language">
+            <md-option ng-repeat="language in languages" value="{{language.shortname}}"><img class="lang-flag" ng-src="/assets/images/flags/{{language.shortname}}.png" /> {{language.name}}</md-option>
+          </md-select>
+        </li>
+        <li>
+          <a ui-sref="contact">{{T.contactus || TD.contactus}}</a>
+        </li>
+        <li>
+          <a ui-sref="about">{{T.aboutus || TD.aboutus}}</a>
+        </li>
+        <li>
+          <a ui-sref="agent.home">Agent Page</a>
+        </li>
+        <li ng-if="agent">
+          <a ui-sref="agent_logout">{{T.agentlogout || TD.agentlogout}}</a>
+        </li>
+      </ul>
+    </md-menu-content>
+  </md-menu>
+</nav>
+
+
+
+
+
+
+
+<!--
+  <ul class="nav navbar-nav" ng-controller="Locale">
+    <li class="hot" ng-class="getClass('/home')">
+      <a ui-sref="home" class="yellow-btn">
+        <md-button class="md-raised">{{T.hot || TD.hot}}</md-button>
+      </a>
+    </li>
+    <li class="dropdown crnc dropd" md-ink-ripple>
+      <md-select aria-label="Select Currency" ng-change="updateCurrency(currency)" class="menu-lang pull-right" placeholder="{{currency}} {{currencyname}}" ng-model="currency">
+        <md-option ng-repeat="currency in currencies" value="{{currency.currency}}"><img class="lang-flag" ng-src="/assets/images/currencies/{{currency.currency | lowercase}}.png" /> {{currency.symbol}} {{currency.name}}</md-option>
+      </md-select>
+    </li>
+    <li class="dropdown languages dropd" md-ink-ripple>
+      <md-select aria-label="Select Language" ng-change="updateLanguage(language)" class="menu-lang language-selector-top" ng-model="language">
+        <md-option ng-repeat="language in languages" value="{{language.shortname}}"><img class="lang-flag" ng-src="/assets/images/flags/{{language.shortname}}.png" /> {{language.name}}</md-option>
+      </md-select>
+    </li>
+    <li class="contact">
+      <a ui-sref="contact" class="yellow-btn">
+        <md-button class="md-raised">{{T.contactus || TD.contactus}}</md-button>
+      </a>
+    </li>
+    <li class="about">
+      <a ui-sref="about" class="yellow-btn">
+        <md-button class="md-raised">{{T.aboutus || TD.aboutus}}</md-button>
+      </a>
+    </li>
+    <li>
+      <a ui-sref="agent.home" class="agent-login-btn">
+        <md-button class="md-raised">{{T.agentlogin || TD.agentlogin}}</md-button>
+      </a>
+    </li>
+  </ul>
+  <md-menu md-position-mode="target-right target" class="second-menu-container">
+    <md-button aria-label="" class="md-icon-button" ng-click="$mdOpenMenu()">
+      <i class="material-icons">view_headline</i>
+    </md-button>
+    <md-menu-content>
+      <ul class="nav second-nav" ng-controller="Locale">
+        <li ng-class="getClass('/')" md-ink-ripple>
+            <a ui-sref="home">{{T.hot  || TD.hot}}</a>
+        </li>
+        <li class="dropdown" md-ink-ripple>
+          <md-select aria-label="Select Currency" ng-change="updateCurrency(currency)" class="menu-lang" placeholder="{{currency}} {{currencyname}}" ng-model="currency">
+            <md-option ng-repeat="currency in currencies" value="{{currency.currency}}"><img class="lang-flag" ng-src="/assets/images/currencies/{{currency.currency | lowercase}}.png" /> {{currency.symbol}} {{currency.name}}</md-option>
+          </md-select>
+        </li>
+        <li class="dropdown drop2" md-ink-ripple>
+          <md-select aria-label="Select Language" ng-change="updateLanguage(language)" class="menu-lang language-selector" ng-model="language">
+            <md-option ng-repeat="language in languages" value="{{language.shortname}}"><img class="lang-flag" ng-src="/assets/images/flags/{{language.shortname}}.png" /> {{language.name}}</md-option>
+          </md-select>
+        </li>
+        <li ng-class="getClass('/contact')" md-ink-ripple>
+            <a ui-sref="contact">{{T.contactus || TD.contactus}}</a>
+        </li>
+        <li ng-class="getClass('/about')" md-ink-ripple>
+            <a ui-sref="about">{{T.aboutus || TD.aboutus}}</a>
+        </li>
+        <li md-ink-ripple>
+            <a ui-sref="agent">{{T.agentlogin || TD.agentlogin}}</a>
+        </li>
+      </ul>
+    </md-menu-content>
+  </md-menu>
+  
+ ->>

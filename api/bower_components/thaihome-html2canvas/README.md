@@ -1,0 +1,1 @@
+# thaihome-html2canvas

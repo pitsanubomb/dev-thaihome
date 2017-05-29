@@ -1,0 +1,373 @@
+{
+	"type": "Collection",
+	"properties": {
+		"property": {
+			"name": "property",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "property",
+			"order": 0
+		},
+		"user": {
+			"name": "user",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "user",
+			"order": 1
+		},
+		"agent": {
+			"name": "agent",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "agent",
+			"order": 2
+		},
+		"agentCommission": {
+			"name": "agentCommission",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "agentCommission",
+			"order": 3
+		},
+		"discount": {
+			"name": "discount",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "discount",
+			"order": 4
+		},
+		"discountPercentage": {
+			"name": "discountPercentage",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "discountPercentage",
+			"order": 5
+		},
+		"checkin": {
+			"name": "checkin",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "checkin",
+			"order": 6
+		},
+		"checkout": {
+			"name": "checkout",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "checkout",
+			"order": 7
+		},
+		"status": {
+			"name": "status",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "status",
+			"order": 8
+		},
+		"currency": {
+			"name": "currency",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "currency",
+			"order": 9
+		},
+		"paymentType": {
+			"name": "paymentType",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "paymentType",
+			"order": 10
+		},
+		"paymentDate": {
+			"name": "paymentDate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "paymentDate",
+			"order": 11
+		},
+		"expires": {
+			"name": "expires",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "expires",
+			"order": 12
+		},
+		"priceDay": {
+			"name": "priceDay",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "priceDay",
+			"order": 13
+		},
+		"nights": {
+			"name": "nights",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "nights",
+			"order": 14
+		},
+		"priceReservation": {
+			"name": "priceReservation",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "priceReservation",
+			"order": 15
+		},
+		"priceSecurity": {
+			"name": "priceSecurity",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "priceSecurity",
+			"order": 16
+		},
+		"cleanprice": {
+			"name": "cleanprice",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "cleanprice",
+			"order": 17
+		},
+		"cleanfinalprice": {
+			"name": "cleanfinalprice",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "cleanfinalprice",
+			"order": 18
+		},
+		"priceExtra": {
+			"name": "priceExtra",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "priceExtra",
+			"order": 19
+		},
+		"conditionsTenant": {
+			"name": "conditionsTenant",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "conditionsTenant",
+			"order": 20
+		},
+		"conditionsAgent": {
+			"name": "conditionsAgent",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "conditionsAgent",
+			"order": 21
+		},
+		"created": {
+			"name": "created",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "created",
+			"order": 22
+		},
+		"updated": {
+			"name": "updated",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "updated",
+			"order": 23
+		},
+		"rate": {
+			"name": "rate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "rate",
+			"order": 24
+		},
+		"pricePaid": {
+			"name": "pricePaid",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "pricePaid",
+			"order": 25
+		},
+		"emails": {
+			"name": "emails",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "emails",
+			"order": 26
+		},
+		"confirmation": {
+			"name": "confirmation",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "confirmation",
+			"order": 27
+		},
+		"checked": {
+			"name": "checked",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "checked",
+			"order": 28
+		},
+		"paymentconfirmed": {
+			"name": "paymentconfirmed",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "paymentconfirmed",
+			"order": 29
+		},
+		"rentpayday": {
+			"name": "rentpayday",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "rentpayday",
+			"order": 30
+		},
+		"lastpayment": {
+			"name": "lastpayment",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "lastpayment",
+			"order": 31
+		},
+		"nextpayment": {
+			"name": "nextpayment",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "nextpayment",
+			"order": 32
+		},
+		"comment": {
+			"name": "comment",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "comment",
+			"order": 33
+		},
+		"source": {
+			"name": "source",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "source",
+			"order": 34
+		},
+		"arrival": {
+			"name": "arrival",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "arrival",
+			"order": 35
+		},
+		"departure": {
+			"name": "departure",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "departure",
+			"order": 36
+		},
+		"electricPrice": {
+			"name": "electricPrice",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "electricPrice",
+			"order": 37
+		},
+		"electricFrom": {
+			"name": "electricFrom",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "electricFrom",
+			"order": 38
+		},
+		"waterFrom": {
+			"name": "waterFrom",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "waterFrom",
+			"order": 39
+		},
+		"waterTo": {
+			"name": "waterTo",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "waterTo",
+			"order": 40
+		},
+		"waterPrice": {
+			"name": "waterPrice",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "waterPrice",
+			"order": 41
+		},
+		"electricTo": {
+			"name": "electricTo",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "electricTo",
+			"order": 42
+		},
+		"discountAmount": {
+			"name": "discountAmount",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "discountAmount",
+			"order": 43
+		},
+		"longTermDay": {
+			"name": "longTermDay",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "longTermDay",
+			"order": 44
+		},
+		"longTermAmount": {
+			"name": "longTermAmount",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "longTermAmount",
+			"order": 45
+		}
+	}
+}

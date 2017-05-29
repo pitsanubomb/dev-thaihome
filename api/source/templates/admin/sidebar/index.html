@@ -1,0 +1,17 @@
+<div class="navbar-default sidebar" role="navigation">
+  <div class="sidebar-nav navbar-collapse in">
+    <ul class="nav in" id="side-menu">
+      <li ng-init="currentCollapseVar = $index" ng-class="{'active': collapseVar == $index}" ng-repeat="item in items track by $index" ui-sref-active="active">
+        <a ng-if="item.childs.length == 0" ui-sref="{{item.sref}}"><i class="fa {{item.icon}} fa-fw"></i> {{item.name}}</a>
+        <a ng-if="item.childs.length > 0" ng-click="currentCollapseVar = $index"><i class="fa {{item.icon}} fa-fw"></i> {{item.name}}</a>
+        <ul class="nav nav-second-level">
+          <li ng-repeat="child in item.childs" class="nav nav-second-level" ng-class="{'collapse': collapseVar == $index}">
+            <a ui-sref="{{child.sref}}"> <i class="fa {{child.icon}}"></i> {{child.name}}</a>
+          </li>
+        </ul>
+      </li>
+      <li><a class="admin-lgout" ui-sref="admin_logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+    </ul>
+  </div>
+  <!-- /.sidebar-collapse -->
+</div>

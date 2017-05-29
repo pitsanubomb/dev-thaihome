@@ -1,0 +1,37 @@
+{
+	"type": "Collection",
+	"properties": {
+		"messages": {
+			"name": "messages",
+			"type": "array",
+			"typeLabel": "array",
+			"required": true,
+			"id": "messages",
+			"order": 0
+		},
+		"user": {
+			"name": "user",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "user",
+			"order": 1
+		},
+		"read": {
+			"name": "read",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "read",
+			"order": 2
+		},
+		"updated": {
+			"name": "updated",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "updated",
+			"order": 3
+		}
+	}
+}

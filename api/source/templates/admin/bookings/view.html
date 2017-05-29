@@ -1,0 +1,133 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">{{ data.id ? 'View':'Add'}} {{data.id}}</h1>
+    <div style="clear:both;"></div>
+    <button type="button" class="btn btn-primary inittable" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+      {{ data.id ? 'Edit': 'Add'}}
+    </button>
+    <p ng-show="editableForm.$visible">
+      <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+        {{ data.id ? 'Save': 'Add'}}
+      </button>
+      <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+        Cancel
+      </button>
+    </p>
+    <div style="clear:both;"></div>
+    <form role="form" onaftersave="update()" editable-form name="editableForm" oncancel="back();">
+      <div class="col-md-6">
+        <h4>General Info</h4>
+        <div class="form-group">
+          <p class="title">Status: </p>
+          <p e-class="form-control" e-ng-click="statusList()" editable-text="data.status" e-name="status" e-required e-readonly>{{ data.status || '-' }}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Property: </p>
+          <p e-readonly e-class="form-control form-popup" e-ng-click="propertyList()" editable-text="data.property.unique" e-name="property" e-required>{{data.property.unique || '-'}}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Check-in: </p>
+          <p e-readonly e-class="form-control" e-ng-click="openCalendar()" editable-text="data.checkin" e-name="checkin" e-required>{{data.checkin || '-'}}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Check-out: </p>
+          <p e-readonly e-class="form-control" e-ng-click="openCalendar()" editable-text="data.checkout" e-name="checkout" e-required>{{data.checkout || '-'}}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Tenant: </p>
+          <p e-readonly e-class="form-control form-popup" e-ng-click="tenantList()" editable-text="data.user.name" e-name="user" e-required>{{data.user.name || '-'}}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Agent: </p>
+          <p e-readonly e-class="form-control form-popup" e-ng-click="agentList()" editable-text="data.agent.name" e-name="agent" e-required>{{data.agent.name || '-'}}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Discount: </p>
+          <p e-readonly e-class="form-control form-popup" e-ng-click="discountList()" editable-text="data.discount.code" e-name="discount" e-required>{{data.discount.code || '-'}}</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h4>Price - {{(data.priceDay*data.nights - data.priceDay*data.nights / 100 * data.discount.percent) + priceExtraCalc+data.property.cleanfinalprice | currency:currency:0}}</h4>
+        <div class="form-group">
+          <p class="title">Deposit/Fee: </p>
+          <p e-class="form-control" editable-text="data.priceReservation" e-name="priceReservation">{{data.priceReservation || '-'}}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Total Rent: <span>{{data.nights}} x {{data.priceDay | currency:currency:0}}</span></p>
+          <p e-class="form-control" editable-text="data.priceDay" e-name="priceDay" e-required>{{data.priceDay || '-'}}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Final Cleaning: </p>
+          <p e-class="form-control" editable-text="data.cleanfinalprice" e-name="cleanfinalprice" e-required>{{data.cleanfinalprice || '-'}}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Extra: </p>
+          <table class="table table-striped table-bordered table-hover" ng-show="editableForm.$visible">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="extra in data.priceExtra track by $index">
+                <td>
+                  <p e-class="form-control" editable-text="data.priceExtra[$index].name" e-name="extra[$index]" e-required>{{data.priceExtra[$index].name || '-'}}</p>
+                </td>
+                <td>
+                  <p e-class="form-control" onaftersave="calcExtra()" editable-text="data.priceExtra[$index].price" e-name="extra[$index]" e-required>{{data.priceExtra[$index].price || '-'}}</p>
+                </td>
+                <td ng-click="removeExtra($index)">Remove</td>
+              </tr>
+              <tr>
+                <td colspan="3" class="center"><a ng-click="addExtra()">Add Extra</a></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="form-group">
+          <p class="title">Electricity: </p>
+          <p e-class="form-control" editable-text="data.utilitiesElectricity" e-name="utilitiesElectricity" e-required>{{data.utilitiesElectricity || '-'}}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Water: </p>
+          <p e-class="form-control" editable-text="data.utilitiesWater" e-name="utilitiesWater" e-required>{{data.utilitiesWater || '-'}}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Wifi-Internet: </p>
+          <p e-class="form-control" editable-text="data.utilitiesWifi" e-name="utilitiesWifi" e-required>{{data.utilitiesWifi || '-'}}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Cable TV: </p>
+          <p e-class="form-control" editable-text="data.utilitiesCable" e-name="utilitiesCable" e-required>{{data.utilitiesCable || '-'}}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Conditions for <b>TENANT</b>: </p>
+          <p e-class="form-control" editable-textarea="data.conditionsTenant" e-name="conditionsTenant">{{data.conditionsTenant || '-'}}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Conditions for <b>AGENT</b>: </p>
+          <p e-class="form-control" editable-textarea="data.conditionsAgent" e-name="conditionsAgent">{{data.conditionsAgent || '-'}}</p>
+        </div>
+      </div>
+      <div style="clear:both;"></div>
+      <button type="button" class="btn btn-primary" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+        {{ data.id ? 'Edit': 'Add'}}
+      </button>
+      <p ng-show="editableForm.$visible">
+        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+          {{ data.id ? 'Save': 'Add'}}
+        </button>
+        <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+          Cancel
+        </button>
+      </p>
+    </form>
+    <div style="visibility:hidden;position:absolute;top:30%;left:50%;margin-left:-200px; ">
+      <booking-calendar></booking-calendar>
+    </div>
+    <!-- /.col-lg-12 -->
+  </div>
+  <!-- /.row -->
+</div>

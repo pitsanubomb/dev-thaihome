@@ -1,0 +1,27 @@
+<!--
+* 2016-05-17 - Ajay
+* Template for Chnage Signature
+-->
+<div id="wrapper" style="min-height: 561px;padding:20px;clear:both;">
+	<management-menu></management-menu>
+    <div class="row login-frm" style="margin: 20px auto">
+		<div class="col-md-8 col-xs-10" style="margin:0 auto;float:none;">
+		  <div class="panel panel-default">
+			<div class="panel-heading">
+			  <h3 class="panel-title">Change Signature</h3>
+			</div>
+			<div class="panel-body">
+				<form novalidate role="form" ng-submit="update()">           
+					<fieldset> 
+					  <div class="form-group">
+						<textarea rows="20"  ng-model="_signature" class="form-control" placeholder="Signature" autofocus>		</textarea>
+					  </div>
+					  <!-- Change this to a button or input when using this as a form -->
+					  <md-button ng-disabled="success" type="submit" class="md-raised pull-right md-primary">Change Signature</md-button>
+					</fieldset>
+				</form>
+			</div>
+		  </div>
+		</div>
+	</div>
+</div>

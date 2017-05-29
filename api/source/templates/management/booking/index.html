@@ -1,0 +1,2777 @@
+<script type="text/javascript">
+    function colourFunction() {
+        var myselect = document.getElementById("StatusSelect"),
+            colour = myselect.options[myselect.selectedIndex].className;
+        if (colour == 'redTxt statusOption') myselect.className = 'statusSelect red';
+        if (colour == 'greenTxt statusOption') myselect.className = 'statusSelect green';
+        if (colour == 'greyTxt statusOption') myselect.className = 'statusSelect grey';
+        myselect.blur();
+    }
+    setTimeout(function () {
+        colourFunction();
+    }, 1200)
+
+</script>
+
+<div class="hide">
+    <div id="emailHtmlRegenerated" ng-binding-html="emailHtmlRegenerated">
+
+    </div>
+</div>
+
+
+<div id="balancePdfArea" class="hide">
+
+    <div class="container" style="width: 100%;margin: auto;padding:0;display: table;max-width: 850px;">
+        <style>
+            @media print {
+                body {
+                    -webkit-print-color-adjust: exact;
+                }
+                @page {
+                    size: auto;
+                    margin: 10mm 5mm 5mm 5mm;
+                    size: landscape;
+                    mso-header-margin:0mm;
+                    mso-footer-margin:0mm;
+                    mso-paper-source:0;
+                }
+            }
+        </style>
+
+
+        <!-- BALANCE TOP -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;min-width:650px;">
+            <tr>
+                <td style="font-size:34px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; text-align:center; vertical-align:middle; white-space:nowrap; color: #4CACCD; width:55%;">
+                    {{T.transBalanceSheet}}
+                </td>
+                <td style="align:left; valign:middle; max-width:60px; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; width:45%; text-align:right; vertical-align:middle; padding-top:5px;">
+                    <img style="max-width:100%; height:auto; width:auto\9; min-height:1px; max-height:60px; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;"
+                         src="{{locationThis}}assets/images/ThaiHomeLogo.png" alt="ThaiHome Logo"></td>
+            </tr>
+        </table>
+        <div style="min-height:8px;"></div>
+
+
+        <!-- BALANCE HEADER -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+            <tr>
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="width:15%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transTenant}}
+                </td>
+                <td style="width:45%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{ data.user.name || '' }}
+                </td>
+                <td style="width:40%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transDate}}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{getDateNormalFormat(invoice.createDate)}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transRentalOf}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.name}}
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.address1}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transUnitID}}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.address2}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.unique}}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.address3}}
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transBookingID}}
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transRentPeriod}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{ getDateNormalFormat(data.checkin)}} <span
+                        style="font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">&nbsp;to&nbsp; </span>
+                    {{getDateNormalFormat(data.checkout)}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.id}}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    ({{data.nights}} {{T.transNights}})
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+        </table>
+
+        <!-- BALANCE SHEET CONTENT SPLIT -->
+
+        <div style="min-height:8px;"></div>
+
+        <!-- BALANCE CONTENT -->
+
+        <div style="min-height:8px;"></div>
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:0; padding:8px 8px 8px 8px;">
+            <tr>
+                <td style="width:100%; vertical-align:top; border: 2px solid #AAAAAA;">
+
+                    <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; padding:8px 8px 8px 8px;">
+                        <tr>
+                            <th style="width:5%; text-align:left; vertical-align:middle; padding:0px 4px 0px 8px; height:22px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000; text-align:center;">
+                                {{T.transInvoice}}
+                            </th>
+                            <th style="width:5%; text-align:left; vertical-align:middle; padding:0px 4px 0px 8px; height:22px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000; text-align:center;">
+                                {{T.transDueDateShort}}
+                            </th>
+                            <th style="width:50%; text-align:left; vertical-align:middle; padding:0px 4px 0px 8px; height:22px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000;text-align:left;">
+                                {{T.transDescription}}
+                            </th>
+                            <th style="width:20%; text-align:right; vertical-align:middle; padding:0px 4px 0px 8px; height:22px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000;text-align:right;">
+                                {{T.transPrice}}
+                            </th>
+                            <th style="width:20%; text-align:right; vertical-align:middle; padding:0px 4px 0px 8px; height:22px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000;text-align:right;">
+                                {{T.transTotal}}
+                            </th>
+                            <th style="width:30%; text-align:left; vertical-align:middle; padding:0px 4px 0px 8px; height:22px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000; text-align:center;">
+                                {{T.transPaidDate}}
+                            </th>
+                            <th style="width:40%; text-align:right; vertical-align:middle; padding:0px 4px 0px 8px; height:22px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000; text-align:right;">
+                                {{T.transAmount}}
+                            </th>
+                            <th style="width:30%; text-align:right; vertical-align:middle; padding:0px 4px 0px 8px; height:22px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000; text-align:right;">
+                                {{T.transMissing}}
+                            </th>
+                        </tr>
+
+                        <tr ng-repeat="invoice in data.invoice">
+                            <td style="color:{{invoiceDDlineTextColor(invoice)}}; vertical-align:top; padding:0px 4px 0px 8px; border-top:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:center;">
+                                {{invoice.invoiceNumber}}
+                            </td>
+                            <td style="color:{{invoiceDDlineTextColor(invoice)}}; vertical-align:top; padding:0px 4px 0px 8px; border-top:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:center;">
+                                {{ newDate(invoice.dueDate * 1000) | date : "dd/MM/yy"}}
+                            </td>
+                            <td style=" vertical-align:top; padding:0px 4px 0px 8px; border-top:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:left;">
+                                <p ng-repeat="invoiceText in invoice.invoiceLines"
+                                   style="margin:0; color:{{invoiceDDlineTextColor(invoice);}}">
+                                    {{invoiceText.lineText}}</p></td>
+                            <td style="color:{{invoiceDDlineTextColor(invoice)}}; height:20px; vertical-align:top; padding:0px 4px 0px 8px; border-top:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:right;">
+                                <p ng-repeat="invoiceText in invoice.invoiceLines" style="margin:0">&#3647;{{invoiceText.amountTotal}}</p>
+                            </td>
+                            <td style="color:{{invoiceDDlineTextColor(invoice)}}; border-right: 2px solid #AAAAAA; vertical-align:top; padding:0px 4px 0px 8px; border-top:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:bold; text-align:right;">
+                                &#3647;{{getInvoiceTotal(invoice)}}
+                            </td>
+                            <td style="vertical-align:top; padding:0px 4px 0px 8px; border-top:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; text-align:center;">
+                                <p ng-repeat="receipt in getReceiptsByInvoiceId(invoice.id)"> {{
+                                    newDate(receipt.paidDate * 1000) | date : "dd/MM/yy"}} </p></td>
+                            <td style="height:20px; vertical-align:top; padding:0px 4px 0px 8px; border-top:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:right;">
+                                <p ng-repeat="receipt in getReceiptsByInvoiceId(invoice.id)"><span
+                                        ng-if="receipt.amount"> &#3647;{{receipt.amount}} </span></p></td>
+                            <td style="border-top:1px solid #AAAAAA; vertical-align:top; padding:0px 4px 0px 8px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:bold; text-align:right; white-space: nowrap;">
+                                <p style="margin-top:0">
+                                    <span ng-if="(getInvoiceTotal(invoice) - getInvoiceAllReceiptsTotal(invoice.id)) > 0"
+                                          style="color: #FF0000;"> &#3647;{{getInvoiceTotal(invoice) - getInvoiceAllReceiptsTotal(invoice.id)}} </span>
+                                    <span ng-if="(getInvoiceTotal(invoice) - getInvoiceAllReceiptsTotal(invoice.id)) < 0"
+                                          style="color: green;"> &#3647;{{getInvoiceTotal(invoice) - getInvoiceAllReceiptsTotal(invoice.id)}} </span>
+                                </p>
+                            </td>
+                        </tr>
+
+                        <tr ng-repeat="independantReceipts in getindependantReceipts()">
+                            <td style="vertical-align:top; padding:0px 4px 0px 8px; border-top:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:center;"></td>
+                            <td style="vertical-align:top; padding:0px 4px 0px 8px; border-top:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:center;"></td>
+                            <td style="vertical-align:top; padding:0px 4px 0px 8px; border-top:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:left;"></td>
+                            <td style="height:20px; vertical-align:top; padding:0px 4px 0px 8px; border-top:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:right;"></td>
+                            <td style="border-right: 2px solid #AAAAAA; vertical-align:top; padding:0px 4px 0px 8px; border-top:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:bold; text-align:right;"></td>
+                            <td style="vertical-align:top; padding:0px 4px 0px 8px; border-top:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; text-align:center;">
+                                {{ newDate(independantReceipts.paidDate * 1000) | date : "dd/MM/yy"}}
+                            </td>
+                            <td style="height:20px; vertical-align:top; padding:0px 4px 0px 8px; border-top:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:right;">
+                                <span ng-if="independantReceipts.amount"> &#3647;{{independantReceipts.amount}} </span>
+                            </td>
+                            <td style="border-top:1px solid #AAAAAA; vertical-align:top; padding:0px 4px 0px 8px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:bold; text-align:right; white-space: nowrap;">
+                                <span style="color:#FF0000; font-weight:bold;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="height:20px;border-top:2px solid #AAAAAA;"></td>
+                            <td style="border-top:2px solid #AAAAAA;"></td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:bold; text-align:left; border-top:2px solid #AAAAAA; ">
+                                {{T.transTotal}}
+                            </td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:right; border-top:2px solid #AAAAAA; white-space: nowrap;"></td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:bold; text-align:right; border-top:2px solid #AAAAAA; white-space: nowrap;">
+                                &#3647;{{calculateTotalInvoices()}}
+                            </td>
+                            <td style="height:20px; border-top:2px solid #AAAAAA; "></td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:bold; text-align:right; border-top:2px solid #AAAAAA; white-space: nowrap;">
+                                &#3647;{{calculateTotalReceipts()}}
+                            </td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:bold; text-align:right; border-top:2px solid #AAAAAA; white-space: nowrap;">
+                                <span ng-if="calculateMissingPrice() < 0"
+                                      style="color:green; font-weight:bold;margin:0;padding:0;height:0;">&#3647;{{calculateMissingPrice()}} </span><span
+                                    ng-if="calculateMissingPrice() > 0"
+                                    style="color:#FF0000; font-weight:bold;margin:0;padding:0;height:0;">&#3647;{{calculateMissingPrice()}}  </span>
+                            </td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+        </table>
+        <div style="min-height:8px;"></div>
+
+
+        <!-- BALANCE FOOTER -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+            <tr>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <a href="http://www.thaihome.co.uk/"><img src="http://thaihome.co.uk/assets/sig/SigLogo.png"
+                                                              alt="ThaiHome Logo" height="72"></a>
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transManagerName}}<br>
+                    <span style="color:#4caccd;">{{T.transManagerTitle}}</span><br>
+                    <b>ThaiHome</b> {{T.transSloganShort}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <span ng-bind-html="T.transOfficeAddress"></span>
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transMobile}}: {{T.transNotePhone}}<br>
+                    {{T.transWebsite}}: <a style="color:#0000ff"
+                                           href="http://www.thaihome.co.uk/">www.ThaiHome.co.uk</a><br>
+                    {{T.transEmail}}: <span ng-bind-html="T.transNoteMail"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div id="printedArea" class="hide">
+    <div class="container" style="width: 100%;margin: auto;padding:0;display: table;max-width: 850px;">
+        <style>
+            @media print {
+                body {
+                    -webkit-print-color-adjust: exact;
+                }
+                @page {
+                    size: auto;
+                    margin: 10mm 5mm 5mm 5mm;
+                    size: landscape;
+                    mso-header-margin:0mm;
+                    mso-footer-margin:0mm;
+                    mso-paper-source:0;
+                }
+            }
+        </style>
+
+
+        <!-- VOUCHER TOP -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;min-width:650px;">
+            <tr>
+                <td style="width:46%; font-size:52px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; text-align:center; vertical-align:middle; white-space:nowrap; color:#4CACCD;">
+                    {{T.transVoucher}}
+                </td>
+                <td style="font-size:18px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; padding:22px 0px 0px 0px; margin:0px 0px 0px 0px; text-align:center; white-space:nowrap; color: #000000; width:20%;">
+                    {{T.transBookingID}}: <b>{{data.id}}</b></td>
+                <td style="align:left; valign:middle; max-width:60px; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; width:45%; text-align:right; vertical-align:middle; padding-top:5px;">
+                    <img style="max-width:100%; height:auto; width:auto\9; min-height:1px; max-height:60px; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;"
+                         src="{{locationThis}}assets/images/ThaiHomeLogo.png" alt="ThaiHome Logo"></td>
+            </tr>
+        </table>
+        <div style="min-height:8px;"></div>
+
+
+        <!-- VOUCHER SPLIT COLUMNS -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:0px solid #AAAAAA; padding:8px 8px 8px 8px;">
+            <tr>
+                <td style="width:52%; vertical-align:top;">
+
+
+                    <!-- VOUCHER BOOKING -->
+                    <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+                        <tr>
+                            <th style="width:100%; height:26px; text-align:left; vertical-align:middle; padding:0px 4px 0px 8px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000;">
+                                {{T.transMyBooking}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:0px solid #AAAAAA; padding:8px 8px 8px 8px;">
+                                    <tr>
+                                        <td style="width:20%; height:28px; vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{T.transBookingID}}
+                                        </td>
+                                        <td style="width:80%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{data.id}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height:28px; vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{T.transProperty}}
+                                        </td>
+                                        <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{data.property.name}}, {{T.transRoom}} {{data.property.unitNumber}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height:24px; vertical-align:bottom; padding:0px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{T.transCheckin}}
+                                        </td>
+                                        <td style="vertical-align:bottom; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{getDateNormalFormat(data.checkin)}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="height:16px; width:75%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{data.arrival}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height:28px; vertical-align:bottom; padding:0px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{T.transCheckout}}
+                                        </td>
+                                        <td style="vertical-align:bottom; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{getDateNormalFormat(data.checkout)}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="height:16px; width:75%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{data.departure}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height:28px; vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; white-space: nowrap;">
+                                            {{T.transPeriod}}
+                                        </td>
+                                        <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{data.nights | timeFormat}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="min-height:10px;"></div>
+
+
+                    <!-- VOUCHER GUEST -->
+                    <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+                        <tr>
+                            <th style="width:100%; height:26px; text-align:left; vertical-align:middle; padding:0px 4px 0px 8px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000;">
+                                {{T.transGuest}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:0px solid #AAAAAA; padding:8px 8px 8px 8px;">
+                                    <tr>
+                                        <td style="width:20%; height:22px; vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{T.transName}}
+                                        </td>
+                                        <td style="width:80%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{data.user.name}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height:22px; vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{T.transEmail}}
+                                        </td>
+                                        <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{data.user.email}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height:22px; vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{T.transMobile}}
+                                        </td>
+                                        <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{data.user.phone}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height:22px; vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; white-space: nowrap;">
+                                            {{T.transMaxGuests}}
+                                        </td>
+                                        <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{data.property.guests}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="min-height:10px;"></div>
+
+
+                    <!-- Content from BookingForm -->
+                    <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+
+                        <tr>
+                            <th colspan="3"
+                                style="width:60%; text-align:left; vertical-align:middle; padding:0px 4px 0px 8px; height:22px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000;">
+                                {{T.transPayment}}
+                            </th>
+                        </tr>
+
+                        <!-- The Rent price from bookingform -->
+                        <tr>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; height:24px;">
+                                {{T.transRentPrice}} ({{data.nights}} {{T.transNights}})
+                            </td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:right;">
+                                {{data.nights}} x {{data.priceDay}}
+                            </td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:right;">
+                                {{bothPrices((data.nights * data.priceDay), data.currency.symbol,
+                                data.currencydata[data.currency.currency],'right')}}
+                            </td>
+                        </tr>
+
+                        <!-- The discount from bookingform - ONLY SHOW if there is a discount -->
+                        <tr ng-if="discountPrice">
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; height:24px; color:#008000;">
+                                {{T.transDiscount}}
+                            </td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:bold; text-align:right; color:#008000;">
+                                <span ng-if="data.discount.percent">{{data.discount.percent}}%</span>
+                            </td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:bold; text-align:right; color:#008000;">
+                                {{bothPrices(discountPrice, data.currency.symbol,
+                                data.currencydata[data.currency.currency],'right')}}
+                            </td>
+                        </tr>
+
+                        <!-- The extras from bookingform - ONLY SHOW if there are extras -->
+                        <tr ng-repeat="extra in data.priceExtra track by $index">
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; height:24px;">
+                                {{extra.name}}
+                            </td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:right;">
+                                {{extra.calc}}
+                            </td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:right;">
+                                {{bothPrices(extra.price, data.currency.symbol,
+                                data.currencydata[data.currency.currency],'right')}}
+                            </td>
+                        </tr>
+
+                        <!-- Total from bookingform -->
+                        <tr>
+                            <td></td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA;font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:right; height:24px;">
+                                {{T.transTotal}}
+                            </td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA;font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:right;">
+                                <!-- TIKO LOOK HERE -->
+                                {{bothPrices(data.cleanfinalprice + (data.priceDay * data.nights - discountPrice +
+                                extra.price), data.currency.symbol, data.currencydata[data.currency.currency],'right')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="border-left:0px solid white;">
+                                <div style="min-height:16px;"></div>
+                            </td>
+                        </tr>
+
+
+                        <!-- Paid Already, add all receipts together -->
+                        <tr>
+                            <td colspan="2"
+                                style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                {{T.transPaidAlready}}
+                            </td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:normal; text-align:right; height:26px;">
+                                <!-- TIKO LOOK HERE -->
+                                {{bothPrices(getAlreadyPayed(), data.currency.symbol,
+                                data.currencydata[data.currency.currency],'right')}}
+                            </td>
+                        </tr>
+
+                        <!-- Missing payment, all invoices minus all receipts  -->
+                        <tr>
+                            <td colspan="2"
+                                style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-size:16px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                {{T.transPayArrive}}
+                            </td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:16px; font-weight:bold; text-align:right; height:26px;">
+                                <!-- TIKO LOOK HERE -->
+                                {{bothPrices(payForArrive(), data.currency.symbol,
+                                data.currencydata[data.currency.currency],'both')}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3">
+                                <div style="min-height:16px;"></div>
+                            </td>
+                        </tr>
+
+
+                        <!-- Security Deposit, from BookingForm, only show if its bigger than zero -->
+                        <tr ng-if='data.priceSecurity'>
+                            <td colspan="2"
+                                style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; height:24px;">
+                                {{T.transSecurityDeposit}}
+                            </td>
+                            <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:14px; font-weight:bold; text-align:right;">
+                                {{bothPrices(data.priceSecurity, data.currency.symbol,
+                                data.currencydata[data.currency.currency],'both')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"
+                                style="vertical-align:middle; padding:2px 4px 2px 8px; border:1px solid #AAAAAA; font-size:11px; font-weight:normal; font-family: 'Arial Narrow', Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                {{T.transDepositReturn}}
+                            </td>
+                        </tr>
+
+                    </table>
+                    <div style="min-height:16px;"></div>
+
+
+                </td>
+                <td style="width:2%;"></td>
+                <td style="width:46%; vertical-align:top;">
+
+
+                    <!-- VOUCHER ADDRESS ENGLISH -->
+                    <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+                        <tr>
+                            <th style="width:100%; height:26px; text-align:left; vertical-align:middle; padding:0px 4px 0px 8px; background-color:#666666; border:0px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#FFFFFF;">
+                                {{T.transAddressEng}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:0px solid #AAAAAA; padding:8px 8px 8px 8px;">
+                                    <tr>
+                                        <td style="width:20%; height:28px; border-bottom:1px solid #AAAAAA; vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{T.transProperty}}
+                                        </td>
+                                        <td style="width:80%; border-bottom:1px solid #AAAAAA; vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{data.property.name}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height:28px; border-bottom:1px solid #AAAAAA; vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{T.transLocation}}
+                                        </td>
+                                        <td style="border-bottom:1px solid #AAAAAA; vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{data.property.locationName}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height:28px; border-bottom:1px solid #AAAAAA; vertical-align:top; padding:4px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{T.transAddress}}
+                                        </td>
+                                        <td style="border-bottom:1px solid #AAAAAA; vertical-align:middle; padding:4px 4px 4px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{data.property.address1}} {{data.property.address2}}
+                                            {{data.property.address3}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height:28px; vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{T.transGoogleMaps}}
+                                        </td>
+                                        <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            <a style="color:#0000ff" href="{{data.property.gmapslink}}">{{data.property.gmapslink}}</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="min-height:10px;"></div>
+
+
+                    <!-- VOUCHER ADDRESS THAI -->
+                    <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+                        <tr>
+                            <th style="width:100%; height:26px; text-align:left; vertical-align:middle; padding:0px 4px 0px 8px; background-color:#666666; border:0px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; color:#FFFFFF; font-weight:normal;">
+                                <b style="color:#FFFFFF;">{{T.transAddressThai}}</b> ({{T.transDriver}})
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:0px solid #AAAAAA; padding:8px 8px 8px 8px;">
+                                    <tr>
+                                        <td style="width:20%; height:26px; border-bottom:1px solid #AAAAAA; vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{T.transProperty}}
+                                        </td>
+                                        <td style="width:80%; border-bottom:1px solid #AAAAAA; vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{data.property.name}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"
+                                            style="vertical-align:middle; padding:4px 4px 4px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                            {{data.property.thaiAddress}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="min-height:10px;"></div>
+
+
+                    <!-- SPECIAL CONDITIONS -->
+                    <div ng-if="data.conditionsTenant == undefined || data.conditionsTenant == ''">
+                        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+                            <tr>
+                                <th style="width:100%; height:26px; text-align:left; vertical-align:middle; padding:0px 4px 0px 8px; background-color:#666666; border:0px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#FFFFFF;">
+                                    {{T.transConditions}}
+                                </th>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle; padding:4px 4px 4px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                    {{T.transTenantExtras}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div ng-if="data.conditionsTenant != '' && data.conditionsTenant != undefined">
+                        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+                            <tr>
+                                <th style="width:100%; height:26px; text-align:left; vertical-align:middle; padding:0px 4px 0px 8px; background-color:#666666; border:0px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#FFFFFF;">
+                                    {{T.transConditions}}
+                                </th>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle; padding:4px 4px 4px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                    {{data.conditionsTenant}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="min-height:10px;"></div>
+
+
+
+                    <!-- Arrival Time Reminder -->
+                    <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+                        <tr>
+                            <th colspan="2"
+                                style="width:100%; height:26px; text-align:left; vertical-align:middle; padding:0px 4px 0px 8px; background-color:#660000; border:0px solid #AAAAAA; font-size:14px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#FFFFFF;">
+                                {{T.transImportant}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td colspan="2"
+                                style="vertical-align:middle; padding:4px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                {{T.transArriveHead}}:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"
+                                style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                {{data.arrival}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div style="min-height:4px;"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"
+                                style="vertical-align:middle; padding:0px 4px 4px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                {{T.transArriveLate}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle; padding:4px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                {{T.transMobile}}:
+                            </td>
+                            <td style="vertical-align:middle; padding:4px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                {{T.transNotePhone}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:middle; padding:0px 4px 4px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                {{T.transEmail}}:
+                            </td>
+                            <td style="vertical-align:middle; padding:0px 4px 4px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                <span ng-bind-html="T.transNoteMail"></span>
+                            </td>
+                        </tr>
+
+
+                        <!-- Cash on Arrival Reminder -->
+                        <tr ng-if="data.paymentType == 5 && payForArrive() > 0">
+                            <td colspan="2">
+                                <div style="min-height:4px;"></div>
+                            </td>
+                        </tr>
+                        <tr ng-if="data.paymentType == 5 && payForArrive() > 0">
+                            <td colspan="2"
+                                style="vertical-align:middle; padding:4px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                <span ng-bind-html="T.transPayCashNote4"></span>: <b>{{bothPrices(payForArrive(),
+                                data.currency.symbol, data.currencydata[data.currency.currency],'both')}}</b>
+                            </td>
+                        </tr>
+                        <tr ng-if="data.paymentType == 5 && payForArrive() > 0">
+                            <td colspan="2"
+                                style="vertical-align:middle; padding:4px 4px 0px 8px; font-size:14px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; color:#990000;">
+                                {{T.transPayCashNote5}}
+                            </td>
+                        </tr>
+
+                        <!-- Pay Deposit but only if we have deposit > 0 -->
+                        <tr>
+                            <td colspan="2">
+                                <div style="min-height:4px;"></div>
+                            </td>
+                        </tr>
+                        <tr ng-if='data.priceSecurity'>
+                            <td colspan="2"
+                                style="vertical-align:middle; padding:4px 4px 0px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                {{T.transDepositReady}}
+                            </td>
+                        </tr>
+
+                        </td></tr></table>
+                    <div style="min-height:8px;"></div>
+
+                </td>
+            </tr>
+        </table>
+
+
+        <!-- VOUCHER TERMS -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+            <tr>
+                <td style="vertical-align:middle; padding:4px 4px 4px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transVoucherText}}
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align:middle; padding:4px 4px 4px 8px; font-size:14px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transRead}}
+                    <a style="text-decoration:underline; color:#0000ff; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;"
+                       href="{{locationThis}}booking/{{data.id}}/rules/">{{T.transHouseRules}}</a>
+                    {{T.transAnd}}
+                    <a style="text-decoration:underline; color:#0000ff; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;"
+                       href="{{locationThis}}booking/{{data.id}}/cancel/">{{T.transCancellation}}</a>
+                    {{T.transOnYour}}
+                    <a style="text-decoration:underline; color:#0000ff; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;"
+                       href="{{locationThis}}booking/{{data.id}}">{{T.transBookingPage}}</a>
+                </td>
+            </tr>
+        </table>
+        <div style="min-height:8px;"></div>
+
+
+        <!-- VOUCHER FOOTER -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+            <tr>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <a href="http://www.thaihome.co.uk/"><img
+                            src="http://thaihome.co.uk/assets/sig/SigLogo.png" alt="ThaiHome Logo"
+                            height="72"></a>
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transManagerName}}<br>
+                    <span style="color:#4caccd;">{{T.transManagerTitle}}</span><br>
+                    <b>ThaiHome</b> {{T.transSloganShort}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <span ng-bind-html="T.transOfficeAddress"></span>
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transMobile}}: {{T.transNotePhone}}<br>
+                    {{T.transWebsite}}: <a style="color:#0000ff"
+                                           href="http://www.thaihome.co.uk/">www.ThaiHome.co.uk</a><br>
+                    {{T.transEmail}}: <span ng-bind-html="T.transNoteMail"></span>
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+</div>
+
+<div id="invoicePdfArea" class="hide">
+    <div ng-repeat="invoice in checkedInvoicesForEmail" class="container {{invoice.id}}"
+         style="width: 100%;margin: auto;padding:0;display: table;max-width: 650px;">
+        <style>
+            @media print {
+                body {
+                    -webkit-print-color-adjust: exact;
+                }
+                @page {
+                    size: auto;
+                    margin: 10mm 5mm 5mm 5mm;
+                    size: landscape;
+                    mso-header-margin:0mm;
+                    mso-footer-margin:0mm;
+                    mso-paper-source:0;
+                }
+            }
+        </style>
+        <!-- INVOICE TOP -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;min-width:650px;">
+            <tr>
+                <td style="font-size:34px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; text-align:center; vertical-align:middle; white-space:nowrap; color: #4CACCD; width:55%;">
+                    {{T.transInvoice}}
+                </td>
+                <td style="align:left; valign:middle; max-width:60px; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; width:45%; text-align:right; vertical-align:middle; padding-top:5px;">
+                    <img style="max-width:100%; height:auto; width:auto\9; min-height:1px; max-height:60px; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;"
+                         src="{{locationThis}}assets/images/ThaiHomeLogo.png" alt="ThaiHome Logo"></td>
+            </tr>
+        </table>
+        <div style="min-height:8px;"></div>
+
+
+        <!-- INVOICE HEADER -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+            <tr>
+                <td colspan="4">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="width:15%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transTenant}}
+                </td>
+                <td style="width:45%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{ data.user.name || '' }}
+                </td>
+                <td style="width:20%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transInvoiceNo}}
+                </td>
+                <td style="width:20%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transDate}}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    #{{invoice.invoiceNumber}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{getDateNormalFormat(invoice.createDate * 1000)}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transRentalOf}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.name}}
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.address1}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transUnitID}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transBookingID}}
+                </td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.address2}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.unique}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.id}}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.address3}}
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transRentPeriod}}
+                </td>
+                <td colspan="2"
+                    style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{ getDateNormalFormat(data.checkin)}} <span
+                        style="font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">&nbsp;{{T.transTo}}&nbsp; </span>
+                    {{getDateNormalFormat(data.checkout)}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transDueDate}}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    ({{data.nights}} {{T.transNights}})
+                </td>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{getDateNormalFormat(invoice.dueDate * 1000)}}
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+        </table>
+        <div style="min-height:8px;"></div>
+
+
+        <!-- INVOICE CONTENT -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+
+            <tr>
+                <th style="width:60%; text-align:left; vertical-align:middle; padding:0px 4px 0px 8px; height:22px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:12px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000;">
+                    {{T.transDescription}}
+                </th>
+                <th style="width:20%; text-align:right; vertical-align:middle; padding:0px 4px 0px 8px; height:22px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:12px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000;">
+                    {{T.transUnitPrice}}
+                </th>
+                <th style="width:20%; text-align:right; vertical-align:middle; padding:0px 4px 0px 8px; height:22px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:12px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000;">
+                    {{T.transTotal}}
+                </th>
+            </tr>
+
+            <!-- The Rent price and all the lines from expenses -->
+            <tr ng-repeat="line in invoice.invoiceLines track by $index">
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{line.lineText}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:12px; font-weight:normal; text-align:right; height:26px;">
+                    {{line.amountPcs}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:12px; font-weight:normal; text-align:right; height:26px;">
+                    &#3647; {{line.amountTotal}}
+                </td>
+            </tr>
+
+            <!-- Total -->
+            <tr>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA;font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:12px; font-weight:bold; text-align:right; height:26px; border-top:2px solid #000000; border-bottom:2px solid #000000;">
+                    {{T.transTotal}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA;font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:12px; font-weight:bold; text-align:right; height:26px; border-top:2px solid #000000; border-bottom:2px solid #000000;">
+                    &#3647; {{getInvoiceTotal(invoice)}}
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="3">
+                    <div style="min-height:16px;"></div>
+                </td>
+            </tr>
+
+            <!-- Missing Payment (if any) -->
+            <tr ng-if="invoice.includeMissing">
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transMissingPayment}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:12px; font-weight:normal; text-align:right; height:26px;">
+                    &#3647; {{calculateMissingPrice()}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:12px; font-weight:normal; text-align:right; height:26px;">
+                    &#3647; {{calculateMissingPrice()}}
+                </td>
+            </tr>
+            <tr ng-if="invoice.includeMissing">
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA;font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:12px; font-weight:bold; text-align:right; height:26px; border-top:2px solid #000000; border-bottom:2px solid #000000;">
+                    {{T.transTotal}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA;font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:12px; font-weight:bold; text-align:right; height:26px; border-top:2px solid #000000; border-bottom:2px solid #000000;">
+                    &#3647; {{getInvoiceTotal(invoice) + calculateMissingPrice()}}
+                </td>
+            </tr>
+
+        </table>
+        <div style="min-height:8px;"></div>
+
+
+        <!-- INVOICE TERMS -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+            <tr>
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td style=" vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal;"
+                    colspan="3">
+                    {{T.transBeforePay}}
+                    <span style="font-weight:bold; text-decoration: underline;">{{bothPrices(getInvoiceTotal(invoice) + calculateMissingPrice(), data.currency.symbol, data.currencydata[data.currency.currency],'both')}}</span>.
+                    {{T.transBeforeDate}}
+                    <span style="font-weight:bold; text-decoration: underline;">{{getDateNormalFormat(invoice.dueDate * 1000)}}</span>.
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+            <!-- 0: Bank Transfer INFORMATION -->
+            <tr ng-if="data.paymentType == 0">
+                <td style="width:5%;"></td>
+                <td style="width:35%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <span ng-bind-html="T.transBankAccount"></span>
+                </td>
+                <td style="width:60%;vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <span ng-bind-html="T.transKBANKacc"></span>
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 0">
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 0">
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <span ng-bind-html="T.transBankInfo"></span>
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <span ng-bind-html="T.transKBANKinfo"></span>
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 0">
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 0">
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal;"
+                    colspan="3">
+                    <span ng-bind-html="T.transPaymentSlip"></span>
+                    <span ng-bind-html="T.transNoteMail"></span>
+                    <span ng-bind-html="T.transPaySlipTxt"></span>
+                    <span ng-bind-html="T.transNotePhone"></span>
+                </td>
+            </tr>
+
+
+            <!-- 1: Credit Card INFORMATION -->
+            <tr ng-if="data.paymentType == 1">
+                <td style="width:5%;"></td>
+                <td colspan="2"
+                    style="width:95%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transPayCreditCard}}:
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 1">
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 1">
+                <td style="width:5%;"></td>
+                <td colspan="2"
+                    style="width:95%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <a style="text-decoration:underline; color:#0000ff; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;"
+                       href="{{locationThis}}booking/{{data.id}}">{{locationThis}}booking/{{data.id}}</a>
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 1">
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 1">
+                <td colspan="3" style="text-align:center"><img src="assets/images/VisaMasterJbc.png"
+                                                               style="height:60px;"></td>
+            </tr>
+            <tr ng-if="data.paymentType == 1">
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+
+            <!-- 2: Paid to Agent INFORMATION -->
+            <tr ng-if="data.paymentType == 2">
+                <td style="width:5%;"></td>
+                <td colspan="2"
+                    style="width:95%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transPayAgent}}:
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 2">
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 2">
+                <td style="width:5%;"></td>
+                <td colspan="2"
+                    style="width:95%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.agency}} {{data.agentName}}
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 2">
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+
+            <!-- 3: PayPal INFORMATION -->
+            <tr ng-if="data.paymentType == 3">
+                <td style="width:5%;"></td>
+                <td colspan="2"
+                    style="width:95%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transPayPalInvoice01}}: <b>{{bothPrices(getInvoiceTotal(invoice) + calculateMissingPrice(),
+                    data.currency.symbol, data.currencydata[data.currency.currency],'both')}}</b>
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 3">
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 3">
+                <td style="width:5%;"></td>
+                <td colspan="2"
+                    style="width:95%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transPayPalInvoice02}}:
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 3">
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 3">
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+
+            <!-- 4: Cash INFORMATION -->
+            <tr ng-if="data.paymentType == 4">
+                <td style="width:5%;"></td>
+                <td colspan="2"
+                    style="width:95%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transPayCashReceipt}}<br><br>
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 4">
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+
+            <!-- 5: Cash on Arrival INFORMATION -->
+            <tr ng-if="data.paymentType == 5">
+                <td style="width:5%;"></td>
+                <td colspan="2"
+                    style="width:95%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <span ng-bind-html="T.transPayCash"></span><br><br>
+                    {{T.transPayCashNote1}} <b><u>{{bothPrices(getInvoiceTotal(invoice) + calculateMissingPrice(),
+                    data.currency.symbol, data.currencydata[data.currency.currency],'both')}}</u></b>
+                    <span ng-if="data.depositAmount > 1">
+                    ({{T.transPayCashNote2}} ({{bothPrices(data.depositAmount}}, data.currency.symbol, data.currencydata[data.currency.currency],'both') {{T.transPayCashNote3}})<br><br>
+                    </span>
+                    <span ng-bind-html="T.transPayCashTerm"></span><br><br>
+                </td>
+            </tr>
+            <tr ng-if="data.paymentType == 5">
+                <td colspan="3">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+
+        </table>
+        <div style="min-height:8px;"></div>
+
+
+        <!-- INVOICE FOOTER -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+            <tr>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <a href="http://www.thaihome.co.uk/"><img src="http://thaihome.co.uk/assets/sig/SigLogo.png"
+                                                              alt="ThaiHome Logo" height="72"></a>
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transManagerName}}<br>
+                    <span style="color:#4caccd;">{{T.transManagerTitle}}</span><br>
+                    <b>ThaiHome</b> {{T.transSloganShort}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <span ng-bind-html="T.transOfficeAddress"></span>
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transMobile}}: {{T.transNotePhone}}<br>
+                    {{T.transWebsite}}: <a style="color:#0000ff"
+                                           href="http://www.thaihome.co.uk/">www.ThaiHome.co.uk</a><br>
+                    {{T.transEmail}}: <span ng-bind-html="T.transNoteMail"></span>&nbsp;.
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+</div>
+
+<div id="receiptPdfArea" class="hide">
+    <div ng-repeat="receipt in checkedReceiptsForEmail track by $index" class="container {{receipt.id}}"
+         style="width: 100%;margin: auto;padding:0;display: table;max-width: 650px;">
+        <style>
+            @media print {
+                body {
+                    -webkit-print-color-adjust: exact;
+                }
+                @page {
+                    size: auto;
+                    margin: 10mm 5mm 5mm 5mm;
+                    size: landscape;
+                    mso-header-margin:0mm;
+                    mso-footer-margin:0mm;
+                    mso-paper-source:0;
+                }
+            }
+        </style>
+        <!-- RECEIPT TOP -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;min-width:650px;">
+            <tr>
+                <td style="font-size:34px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; text-align:center; vertical-align:middle; white-space:nowrap; color: #4CACCD; width:55%;">
+                    {{T.transReceipt}}
+                </td>
+                <td style="align:left; valign:middle; max-width:60px; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; width:45%; text-align:right; vertical-align:middle; padding-top:5px;">
+                    <img style="max-width:100%; height:auto; width:auto\9; min-height:1px; max-height:60px; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;"
+                         src="{{locationThis}}assets/images/ThaiHomeLogo.png" alt="ThaiHome Logo"></td>
+            </tr>
+        </table>
+        <div style="min-height:8px;"></div>
+
+
+        <!-- RECEIPT HEADER -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+            <tr>
+                <td colspan="4">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="width:15%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transTenant}}
+                </td>
+                <td style="width:45%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{ data.user.name || '' }}
+                </td>
+                <td style="width:20%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transReceiptNo}}
+                </td>
+                <td style="width:20%; vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transDate}}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    #{{receipt.receiptNo}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{getDateNormalFormat(receipt.paidDate * 1000)}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transRentalOf}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.name}}
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.address1}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transUnitID}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transBookingID}}
+                </td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.address2}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.unique}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.id}}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{data.property.address3}}
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transRentPeriod}}
+                </td>
+                <td colspan="2"
+                    style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{ getDateNormalFormat(data.checkin)}} <span
+                        style="font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">&nbsp;to&nbsp; </span>
+                    {{getDateNormalFormat(data.checkout)}}
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:10px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    ({{data.nights}} {{T.transNights}})
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <div style="min-height:8px;"></div>
+                </td>
+            </tr>
+        </table>
+        <div style="min-height:8px;"></div>
+
+
+        <!-- RECEIPT CONTENT -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+            <thead>
+            <tr>
+                <th
+                    style="width:80%; text-align:left; vertical-align:middle; padding:0px 4px 0px 8px; height:22px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:12px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000;">
+                    {{T.transDescription}}
+                </th>
+                <th style="width:20%; text-align:right; vertical-align:middle; padding:0px 4px 0px 8px; height:22px; background-color:#EEEEEE; border:1px solid #AAAAAA; font-size:12px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:bold; color:#000000;">
+                    {{T.transTotal}}
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- The receipt amount -->
+            <tr>
+
+                <td ng-if="receipt.invoiceId != ''"
+                    style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transPaymentReceived}} {{getInvoiceNumberForReceipt(receipt.invoiceId)}}
+                </td>
+
+                <td ng-if="receipt.invoiceId == ''"
+                    style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transPaymentReceived}}
+                </td>
+
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:12px; font-weight:normal; text-align:right; height:30px;">
+                    {{bothPrices(receipt.amount, data.currency.symbol,
+                    data.currencydata[data.currency.currency],'both')}}
+                </td>
+            </tr>
+
+            <!-- Total -->
+            <tr>
+                <td style="width:60%; vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA;font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:12px; font-weight:bold; text-align:right; height:30px; border-top:2px solid #000000; border-bottom:2px solid #000000;">
+                    {{T.transTotal}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; border:1px solid #AAAAAA;font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:12px; font-weight:bold; text-align:right; border-top:2px solid #000000; border-bottom:2px solid #000000;">
+                    {{bothPrices(receipt.amount, data.currency.symbol,
+                    data.currencydata[data.currency.currency],'both')}}
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+        <div style="min-height:8px;"></div>
+
+
+        <!-- RECEIPT TERMS -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA;">
+            <tr>
+                <td style="width:6%;"></td>
+                <td style="width:90%; text-align:center; padding:20px 8px 20px 8px;">
+                    <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:0px solid #AAAAAA;">
+                        <tr>
+                            <td style="width:30%;"><img
+                                    style="max-width:100%; height:auto; width:auto\9; min-height:1px; max-height:70px; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;"
+                                    src="{{locationThis}}assets/images/Paid.jpg" alt="Paid Stamp"></td>
+                            <td style="width:70%; vertical-align:middle; padding:0px 0px 0px 0px; font-size:16px; font-weight:bold; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; color:red;">
+                                <span ng-bind-html="T.transReceiptOfficial"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width:4%;"></td>
+            </tr>
+
+        </table>
+        <div style="min-height:8px;"></div>
+
+
+        <!-- RECEIPT FOOTER -->
+        <table style="width:100%; background-color:#FFFFFF; border-spacing:0px; border-collapse:collapse; border:1px solid #AAAAAA; padding:8px 8px 8px 8px;">
+            <tr>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <a href="http://www.thaihome.co.uk/"><img src="http://thaihome.co.uk/assets/sig/SigLogo.png"
+                                                              alt="ThaiHome Logo" height="72"></a>
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transManagerName}}<br>
+                    <span style="color:#4caccd;">{{T.transManagerTitle}}</span><br>
+                    <b>ThaiHome</b> {{T.transSloganShort}}
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <span ng-bind-html="T.transOfficeAddress"></span>
+
+                </td>
+                <td style="vertical-align:middle; padding:0px 4px 0px 8px; font-size:12px; font-weight:normal; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    {{T.transMobile}}: {{T.transNotePhone}}<br>
+                    {{T.transWebsite}}: <a style="color:#0000ff"
+                                           href="http://www.thaihome.co.uk/">www.ThaiHome.co.uk</a><br>
+                    {{T.transEmail}}: <span ng-bind-html="T.transNoteMail"></span>&nbsp;.
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+</div>
+
+
+<div class="container" style="width: 100%;">
+
+    <div class="new-booking-area col-sm-10 col-sm-push-1" style="padding-left: 5px;padding-right: 5px;">
+        <!-- ICONS -->
+
+        <table class="iconTD">
+            <tr>
+                <td ui-sref="management.home" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                        src="/assets/images/Home.png" alt="Start Page"><span ng-if="menu_bookings"
+                                                                             class="management-menu-new-element-block">{{menu_bookings}}</span>
+                </td>
+                <td ui-sref="management.messages" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                        src="/assets/images/Messages.png" alt="Messages"><span ng-if="menu_messages"
+                                                                               class="management-menu-new-element-block">{{menu_messages}}</span>
+                </td>
+                <td ui-sref="management.bookings"><img src="/assets/images/Bookings.png" alt="Bookings"></td>
+                <td ui-sref="management.properties"><img src="/assets/images/Properties.png" alt="Properties"></td>
+                <td ui-sref="management.calendar({month: '', year:''})"
+                    ng-class="{'active-management-btn' : statename == 'management.calendar'}"><img
+                        src="/assets/images/Calendar.png" alt="Calendar"></td>
+                <td>
+                    <md-menu style="width: 100%;height: 100%;padding: 0;margin-top: 15px; display:block;"
+                             md-position-mode="target-right target" class="second-menu-container crnc-drop">
+                        <md-button aria-label=""
+                                   style="width: 100%!important;height: 100%;box-shadow: none;border: 0!important;"
+                                   class="md-icon-button" ng-click="$mdOpenMenu()">
+                            <img src="/assets/images/Menu.png" alt="Menu">
+                        </md-button>
+                        <md-menu-content>
+                            <ul class="nav second-nav manage-nav">
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.book">New Booking</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="admin.home">Admin</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="home">Thai Home</a>
+                                </li>
+                                <!-- 2016-05-17 - Ajay - Add link for profile page -->
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.profile">Profile</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.expenses">Expenses</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.todo">Todo</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="admin_logout">Logout</a>
+                                </li>
+                            </ul>
+                        </md-menu-content>
+                    </md-menu>
+
+                </td>
+            </tr>
+        </table>
+        <div class="spacerDiv"></div>
+
+
+        <!-- BUTTONS -->
+        <table>
+            <tr>
+                <td class="midText overflow">
+                    <button class="blue white_color" style="width: 70%; color:#ffffff;" ng-click="update()">SAVE
+                    </button>
+
+                    <button class="grey white_color" style="width: 30%; color: #ffffff;" ng-click="cancelBooking()">
+                        CANCEL
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <div class="spacerDiv"></div>
+
+
+        <!-- STATUS -->
+        <table>
+            <tr style="height:56px;">
+                <td class="leftText" style="font-size:22px;">Status</td>
+                <td style="width:99%">
+                    <select ng-model="data.status" style="color: white !important;" class="statusSelect red white_color"
+                            onchange="colourFunction()" id="StatusSelect">
+                        <option value="0" class="redTxt statusOption">NEW BOOKING</option>
+                        <option value="1" class="redTxt statusOption">PENDING</option>
+                        <option value="2" class="greenTxt statusOption">BOOKED</option>
+                        <option value="3" class="greenTxt statusOption">CHECK-IN</option>
+                        <option value="4" class="greyTxt statusOption">CHECK-OUT</option>
+                        <option value="5" class="greyTxt statusOption">DONE</option>
+                        <option value="6" class="greyTxt statusOption">CANCEL</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <div class="spacerDiv"></div>
+
+
+        <!-- NOTICE -->
+        <!-- <table style="border: 4px solid #AA4040;">
+          <tr>
+            <td style="text-align:center;" class="noticeText">REMEMBER:<br>Send Booking Received email</td>
+          </tr>
+        </table>
+        <div class="spacerDiv"></div> -->
+
+
+        <!-- BOOKING ID -->
+        <table>
+            <tr>
+                <td class="leftText">Booking ID</td>
+                <td class="midText">{{data.id}} <input
+                        style="z-index: -999999999999;height: 10px;opacity: 0;position: absolute;width: 10px;"
+                        id="data_id" type="text"></td>
+                <td style="width:99%">
+                    <select ng-model="data.source" class="rightField">
+                        <option ng-repeat="source in sources" value="{{getValueForBookingScource(source.name)}}">
+                            {{source.name}}
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <button id="copy_btn" class="blue white_color">COPY</button>
+                </td>
+            </tr>
+        </table>
+        <div class="spacerDiv"></div>
+
+        <!-- UNIT -->
+        <table>
+            <tr>
+                <td class="leftText">Unit</td>
+                <td class="midText" style="width:99%">{{data.property.unique}}</td>
+                <td>
+                    <button class="blue white_color" ng-click="propertyList()">EDIT</button>
+                </td>
+            </tr>
+        </table>
+
+        <div class="spacerDiv"></div>
+        <!-- DATES -->
+        <table>
+            <tr>
+                <td class="leftText">Dates</td>
+                <td class="weakText overflow" style="width:99%"><b>{{data.checkin}}</b> to <b>{{data.checkout}}</b>
+                    ({{data.nights}} night)
+                </td>
+                <td class="weakText" style="width:1%">&nbsp;</td>
+                <td>
+                    <button class="blue white_color" ng-click="openCalendar()">EDIT</button>
+                </td>
+            </tr>
+        </table>
+
+        <div class="spacerDiv"></div>
+
+        <!-- TENANT -->
+        <div id="showTenant" style="display:inline;">
+            <table>
+                <tr>
+                    <td class="leftText">Tenant</td>
+                    <td class="midText overflow" style="width:99%">{{ data.user.name || '' }}<span
+                            style="font-family:'Ariel Narrow'; font-weight:normal; font-size:14px;"><i
+                            ng-if="data.user.country">({{data.user.country}})</i></span></td>
+                    <td>
+                        <button class="blue white_color" ng-click="editUser()"
+                                onclick="document.getElementById('showTenant').style.display = 'none';document.getElementById('formTenant').style.display = 'inline';">
+                            EDIT
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="leftText">Phone</td>
+                    <td class="midText overflow">{{ data.user.phone || '' }}</td>
+                    <td class="weakText" style="min-width:50px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="leftText">Email</td>
+                    <td class="midText overflow">{{ data.user.email }}</td>
+                    <td class="weakText" style="min-width:50px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="midText overflow">
+                        <button class="white_color green" style="width: 70%;color:white!important;"
+                                onclick="document.getElementById('mailLayer').style.display = 'inline';angular.element(this).scope().openMailForm();document.getElementById('mailLayer').scrollIntoView();">
+                            MAIL
+                        </button>
+                        <button class="darkred" style="width: 29%;" onclick="alert('SEND SMS');">SMS</button>
+                    </td>
+                </tr>
+            </table>
+            <div class="spacerDiv"></div>
+        </div>
+
+
+        <!-- TENANT FORM -->
+        <div id="formTenant" style="display:none;">
+            <table>
+                <tr>
+                    <td class="leftText">Tenant</td>
+                    <td style="width:99%"><input type="text" ng-model="data.user.name" class="rightField"></td>
+                </tr>
+                <tr>
+                    <td class="leftText">Phone</td>
+                    <td><input type="text" class="rightField" ng-model="data.user.phone"></td>
+                </tr>
+                <tr>
+                    <td class="leftText">Email</td>
+                    <td><input type="text" class="rightField" ng-model="data.user.email"
+                               ng-change="compareUserInfo(data.user.email)"></td>
+                </tr>
+                <tr>
+                    <td class="leftText">Country</td>
+                    <td>
+                        <select class="rightField" ng-model="data.user.country" ng-options="s as s for s in countries">
+                        </select>
+                    </td>
+                    <td>
+                        <p editable-select="data.user.country" e-name="country"
+                           e-ng-options="s as s for s in countries">
+                            {{ user.country }}
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="midText overflow">
+                        <button ng-if="compareUserInfo(data.user.email)" type="submit" ng-click="saveUser()"
+                                ng-disabled="editUser.$waiting" class="blue white_color" style="width: 48%;"
+                                onclick="document.getElementById('formTenant').style.display = 'none';document.getElementById('showTenant').style.display = 'inline';">
+                            SAVE
+                        </button>
+                        <button class="orange white_color" style="width: 24%;" ng-click="tenantList()">SELECT</button>
+                        <button class="grey white_color" style="width: 27%;" ng-click="cancelUserEdit()">CANCEL</button>
+                    </td>
+                </tr>
+            </table>
+            <div class="spacerDiv"></div>
+        </div>
+
+        <!-- PAYMENT -->
+        <table>
+            <tr>
+                <td class="leftText">Payment</td>
+                <td style="width:99%">
+                    <select class="rightField" ng-model="data.paymentType"
+                            ng-options='method.id as method.name for method in paymentMethods'></select>
+
+                </td>
+                <td style="min-width:50px;">&nbsp;</td>
+            </tr>
+        </table>
+
+        <div class="spacerDiv"></div>
+
+
+        <!-- AGENT -->
+        <table>
+            <tr>
+                <td class="leftText">Agent</td>
+                <td class="midText overflow" style="width:99%">{{data.agent.name}}</td>
+                <td>
+                    <button class="blue white_color" ng-click="agentList()">EDIT</button>
+                </td>
+            </tr>
+            <tr ng-if="data.agent.name">
+                <td class="leftText">Percent</td>
+                <td class="midText">{{agentPercent}}%</td>
+                <td class="weakText" style="min-wdth:50px;padding:0;">
+                    <button ng-if="data.agent.name" class="red white_color" style="font-size: 15px;"
+                            ng-click="removeAgent()">X
+                    </button>
+                </td>
+            </tr>
+            <tr ng-if="data.agent.name">
+                <td class="leftText">Amount</td>
+                <td><input type="text" class="rightField" ng-model="data.agentCommission"></td>
+                <td class="weakText" style="min-width:50px;">&nbsp;</td>
+            </tr>
+        </table>
+        <div class="spacerDiv"></div>
+
+
+        <!-- MAIL LAYER -->
+        <div id="mailLayer" style="display:none;">
+            <table style="border: 4px solid #008000; border-collapse: collapse;">
+                <tr>
+                    <td class="midText greenTxt" style="font-size:20px;" colspan="3">New Mail</td>
+                </tr>
+                <tr>
+                    <td class="leftText">Send to</td>
+                    <td style="width:99%"><input type="text" class="rightField" ng-model="userEmail"></td>
+                    <td style="width:1px;"></td>
+                </tr>
+                <tr>
+                    <td class="leftText">Mail</td>
+                    <td colspan="2"><select ng-model="emailType" class="rightField" style="{{emailFieldColor}}"
+                                            ng-change="getEmailHTML(emailType)">
+                        <option style='background-color: #fff;' value="None">None</option>
+                        <option style='background-color: #fff;' ng-class="{'email_sent': searchEmail(email.value)}"
+                                value="{{email.value}}"
+                                ng-repeat="email in emails track by $index">{{email.name}} {{searchEmail(email.value)}}
+                        </option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td class="leftText">Language</td>
+                    <td colspan="2">
+                        <select class="rightField" ng-model="emailLanguage"
+                                ng-options="languageMail.shortname as languageMail.name for languageMail in languages">
+
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height:6px;"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" class="leftText" style="height:10px">Invoices</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <table class="mailTable" style="border-collapse: collapse; width:100%; border-color: #F2F2F2;">
+                            <tr ng-repeat="item in data.invoice track by $index"
+                                ng-class="{litgreen: item.paidDate == true}">
+                                <td style="width:5%; padding-top:3px; padding-left:7px; padding-right:6px; border-left:0;">
+                                    <input ng-click="checkInvoiceToSendAsEmail(item.id)" type="checkbox"
+                                           style="transform: scale(1.7);"></td>
+                                <td style="width:5%;">{{item.invoiceNumber}}</td>
+                                <td style="width:75%" class="overflow">{{item.invoiceLines[0].lineText}}</td>
+                                <td style="width:5%; text-align:center;"><b
+                                        class="{{getDueDateForInvoice(item.dueDate * 1000).color}}">{{getDueDateForInvoice(item.dueDate
+                                    * 1000).days}}</b>
+                                </td>
+                                <td style="width:10%; border-right:0;" class="rightNum">{{getInvoiceTotal(item)}}</td>
+                            </tr>
+                            <!-- <tr ng-repeat="item in data.invoice track by $index">
+                              <td style="width:1px;"><input ng-click="checkInvoiceToSendAsEmail(item.id)" type="checkbox"></td>
+                              <td>{{item.invoiceNumber}}</td>
+                              <td class="overflow" style="width:60%">{{item.invoiceLines[0].lineText}}</td>
+                              <td class="overflow" style="width:20%; text-align:center;"><b class="{{getDueDateForInvoice(item.dueDate).color}}">{{getDueDateForInvoice(item.dueDate).days}}</b></td>
+                              <td class="rightNum">{{getInvoiceTotal(item)}}</td>
+                            </tr> -->
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height:6px;"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" class="leftText" style="height:10px">Receipts</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <table class="mailTable">
+                            <tr ng-repeat="receipt in data.receipt track by $index">
+                                <td style="width:5%; padding-top:3px; padding-left:7px; padding-right:6px; border-left:0;">
+                                    <input ng-click="checkReceiptToSendAsEmail(receipt.id)" type="checkbox"
+                                           style="transform: scale(1.7);"></td>
+                                <td style="width:5%;">{{receipt.receiptNo}}</td>
+                                <td style="width:80%" class="overflow">Payment Received
+                                    {{getInvoiceNumberForReceipt(receipt.invoiceId)}}
+                                </td>
+                                <td style="width:10%; border-right:0;" class="rightNum">{{receipt.amount}}</td>
+                            </tr>
+                            <!-- <tr ng-repeat="receipt in data.receipt track by $index">
+                              <td style="width:1px;"><input ng-click="checkReceiptToSendAsEmail(receipt.id)" type="checkbox"></td>
+                              <td>{{receipt.receiptNo}}</td>
+                              <td class="overflow" style="width:70%">Payment Received{{getInvoiceNumberForReceipt(receipt.invoiceId)}}</td>
+                              <td class="rightNum">{{receipt.amount}}</td>
+                            </tr> -->
+                        </table>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="3" style="height:6px;"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" class="leftText" style="height:10px">Other</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <table class="mailTable">
+                            <tr>
+                                <td style="width:5%; padding-top:3px; padding-left:7px; padding-right:6px; border-left:0;">
+                                    <input type="checkbox" ng-click="sendVoucher()" style="transform: scale(1.7);"></td>
+                                <td style="width:95%; border-right:0;" class="overflow">Voucher</td>
+                            </tr>
+                            <tr ng-if="data.invoice.length">
+                                <td style="width:5%; padding-top:3px; padding-left:7px; padding-right:6px; border-left:0;">
+                                    <input type="checkbox" ng-click="addBalanceSheet()" style="transform: scale(1.7);">
+                                </td>
+                                <td style="width:95%; border-right:0;" class="overflow">Balance Sheet</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" style="height:6px;"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" style="width:99%" class="rightField">
+                        <div>
+                            <div class="noBorderArea" contenteditable="true" id="emailContentArea"></div>
+                        </div>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" class="midText overflow">
+                        <button ng-if="emailSendButton" class="green white_color"
+                                style="width: 45%; color: white!important;"
+                                ng-click="sendEmail(emailType,false,emailHTML,subject,userEmail)">SEND MAIL
+                        </button>
+                        <button ng-if="!emailSendButton" class="grey white_color"
+                                style="width: 45%; color: white!important;">SEND MAIL
+                        </button>
+                        <button ng-if="emailSendButton" class="green white_color"
+                                style="width: 25%; color: white!important;"
+                                ng-click="sendEmailToManager(emailType,false,emailHTML,subject,userEmail)">SEND ME
+                        </button>
+                        <button ng-if="!emailSendButton" class="grey white_color"
+                                style="width: 25%; color: white!important;">SEND ME
+                        </button>
+
+                        <button class="grey white_color" style="width: 28%;" ng-click="openMailForm()"
+                                onclick="document.getElementById('mailLayer').style.display = 'none';document.getElementById('mailLayer').scrollIntoView();">CANCEL
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" style="height:6px;"></td>
+                </tr>
+
+            </table>
+            <div class="spacerDiv"></div>
+        </div>
+
+
+        <!-- ARRIVE DEPART -->
+        <table>
+            <tr>
+                <td class="leftText">Arrive</td>
+                <td style="width:99%"><input type="text" class="rightField" ng-model="data.arrival"></td>
+            </tr>
+            <tr>
+                <td class="leftText">Depart</td>
+                <td><input type="text" class="rightField" ng-model="data.departure"></td>
+            </tr>
+        </table>
+        <div class="spacerDiv"></div>
+
+
+        <!-- RENT EXPENSE -->
+        <table>
+            <tr>
+                <td class="midText" colspan="6">Rent & Expense</td>
+            </tr>
+            <tr>
+                <td class="leftText">Rent Price</td>
+                <td style="width:20%" class="weakText overflow">{{data.nights}} night x</td>
+                <td style="width:25%"><input type="number" id="datePriceField"
+                                             onchange="angular.element(this).scope().onDayPriceChange()"
+                                             class="rightField rightNum"
+                                             value="{{getDayPrice()}}"></td>
+                <td style="min-width:1px;"></td>
+                <td style="width:20%"><input type="number" id="totalPriceInput"
+                                             onchange="angular.element(this).scope().onRentPriceChange()"
+                                             class="rightField rightNum"
+                                             value="{{recentPriceValue}}">
+                </td>
+                <td style="min-width:6px;"></td>
+            </tr>
+            <tr>
+                <td
+                        style="width: 100%; height: 1px; background: #CCCCCC; overflow: hidden; border-style: none; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; "
+                        colspan="6"></td>
+            </tr>
+            <tr>
+                <td class="leftText">Discount</td>
+                <td class="weakText overflow" colspan="3">{{data.discount.code}} <span ng-if="data.discount.code">({{data.discount.percent}}%)</span>
+                </td>
+                <td><input type="number" class="rightField rightNum" ng-model="discountPrice"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td
+                        style="width: 100%; height: 1px; background: #CCCCCC; overflow: hidden; border-style: none; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; "
+                        colspan="6"></td>
+            </tr>
+            <!--<tr>
+              <td colspan="2"><input type="text" class="rightField" value="Check-out Cleaning"></td>
+              <td><input type="text" class="rightField" value="1 x {{data.property.cleanfinalprice }}">
+              </td>
+              <td></td>
+              <td><input type="text" class="rightField rightNum"
+                         value="{{data.property.cleanfinalprice }}"></td>
+              <td></td>
+            </tr>-->
+            <tr>
+                <td
+                        style="width: 100%; height: 1px; background: #CCCCCC; overflow: hidden; border-style: none; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; "
+                        colspan="6"></td>
+            </tr>
+            <tr ng-repeat="extra in data.priceExtra track by $index">
+                <td e-required colspan="2"><input type="text" class="rightField"
+                                                  ng-model="data.priceExtra[$index].name">
+                </td>
+                <td>
+                    <input style="width: 98%;" type="text" class="rightField"
+                           ng-model="data.priceExtra[$index].calc">
+                <td></td>
+                <td><input onchange="angular.element(this).scope().calcExtra()" ng-model="data.priceExtra[$index].price"
+                           type="number" class="rightField rightNum"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td
+                        style="width: 100%; height: 1px; background: #CCCCCC; overflow: hidden; border-style: none; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; "
+                        colspan="6"></td>
+            </tr>
+            <tr>
+                <td class="midText" colspan="4"><b>Total</b></td>
+                <td class="midText" style="text-align:right;min-width: 70px;"><b>{{getExtrasPrices() }}</b></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td
+                        style="width: 100%; height: 1px; background: #CCCCCC; overflow: hidden; border-style: none; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; "
+                        colspan="6"></td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <button class="green white_color" style="width: 99%;color:white!important;" ng-click="addExtra()">
+                        NEW
+                        LINE
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <div class="spacerDiv"></div>
+
+
+        <!-- RESERVATION BOOKING FEE -->
+        <table>
+            <tr>
+                <td class="leftText overflow" style="width:50%">Reservation <span
+                        style="font-family:'Ariel Narrow'; font-weight:normal; font-size:14px;"><i>({{reservationBookingProps.reservation}})</i></span>
+                </td>
+                <td class="leftText" style="width:30%; padding-right:5px; ">
+                    <button ng-if="data.priceReservation" class="blue white_color pull-right"
+                            ng-click="reservationBookingToInvoice()" style="padding-right:5px; width:100px;">
+                        TO INVOICE
+                    </button>
+                </td>
+                <td style="width:20%"><input type="number" class="rightField rightNum" ng-model="data.priceReservation">
+                </td>
+                <td class="weakText overflow" style="min-width:1px;">&nbsp;</td>
+            </tr>
+        </table>
+        <div class="spacerDiv"></div>
+
+
+        <!-- SECURITY DEPOSIT -->
+        <table>
+            <tr>
+                <td class="leftText" style="width:80%">Deposit <span
+                        style="font-family:'Ariel Narrow'; font-weight:normal; font-size:14px;"><i>({{reservationBookingProps.deposit}})</i></span>
+                </td>
+                <td style="width:20%"><input type="number" class="rightField rightNum" ng-model="data.priceSecurity">
+                </td>
+                <td class="weakText overflow" style="min-width:1px;">&nbsp;</td>
+            </tr>
+        </table>
+        <div class="spacerDiv"></div>
+
+
+        <!-- LONG TERM -->
+        <!-- <table ng-if="data.nights > 31">
+          <tr>
+            <td class="leftText overflow" style="width:100%">Long term rent should be paid the&nbsp;
+              <input type="number" class="rightField rightNum" style="max-width:35px;" ng-model="longTheremPayDay.value">
+              &nbsp;of each month
+              <button ng-if='longTheremAutoStatus' class="btn red white_color" ng-click="auotGenerateLongThermInvoices()">Auto</button>
+            </td>
+            <td class="weakText" style="min-width:1px;">&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="leftText overflow">Monthly rent should be&nbsp;
+              <input type="number" class="rightField rightNum" style="max-width:100px;" ng-model="longTheremPayPrice.value">
+              <span style="font-size: 12px;">Month: {{pricesForRent.priceMonth | number:0}} </span>
+              <span style="font-size: 12px;"> Year: {{(pricesForRent.priceYear / 12) | number:0}}</span>
+            </td>
+            <td class="weakText" style="min-width:1px;">&nbsp;</td>
+          </tr>
+        </table> -->
+
+        <table ng-if="data.nights > 31" class="ng-scope">
+            <tbody>
+            <tr>
+                <td class="leftText overflow" style="width:80%">Pay rent&nbsp;
+                    <input type="number" class="rightField rightNum" style="max-width:35px;"
+                           ng-model="longTheremPayDay.value">
+                    &nbsp;each month
+                </td>
+                <td style="min-width:1px; text-align:right; padding-right:5px;">
+                    <button ng-if="longTheremAutoStatus" class="red white_color ng-scope"
+                            ng-click="auotGenerateLongThermInvoices()">Auto
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="leftText overflow" colspan="2">Monthly rent&nbsp;
+                    <input type="number" class="rightField rightNum" style="max-width:100px;"
+                           ng-model="longTheremPayPrice.value">
+                    <span style="padding-left:5px; font-style: italic;" class="ng-binding leftText">(Month:{{fullPrice.priceMonth | number:0}} </span>
+                    <span style="padding-left:5px; font-style: italic;" class="ng-binding leftText">Year:{{(fullPrice.priceYear / 12) | number:0}})</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="spacerDiv"></div>
+
+
+        <!-- INVOICE MENU -->
+        <div id="invoiceEmpty" style="display:inline;">
+            <table>
+                <tr>
+                    <td class="midText">Invoices & Receipts</td>
+                </tr>
+                <tr>
+                    <td class="midText overflow">
+                        <button class="blue white_color" style="width: 24%;" ng-click="openNewInvoice()"
+                                onclick="document.getElementById('invoiceForm').style.display = 'inline';angular.element('html, body').animate({ scrollTop: $('#invoiceForm').position().top }, 500);">
+                            INVOICE
+                        </button>
+                        <button class="cyan white_color" style="width: 25%;"
+                                onclick="angular.element(this).scope().newReceiptOpen();angular.element('html, body').animate({ scrollTop: $('#receiptForm').position().top }, 500);">
+                            RECEIPT
+                        </button>
+                        <button class="white_color green" style="width: 19%;color:white!important"
+                                onclick="document.getElementById('mailLayer').style.display = 'inline';">MAIL
+                        </button>
+                        <button class="orange white_color" style="width: 27%;background-clor:orange!important;"
+                                onclick="alert('OPEN HTML PAGE WITH BALANCE SHEET FROM BalanceSheet.html DOCUMENT');">
+                            BALANCE
+                        </button>
+                    </td>
+                </tr>
+                <tr style="height:5px;"></tr>
+            </table>
+            <div class="spacerDiv"></div>
+        </div>
+
+
+        <style>
+            .full button span {
+                background-color: limegreen;
+                border-radius: 32px;
+                color: black;
+            }
+
+            .partially button span {
+                background-color: orange;
+                border-radius: 32px;
+                color: black;
+            }
+        </style>
+        <!-- INVOICE LIST -->
+        <div id="invoiceList" ng-if="showHideInvoices && data.invoice.length > 0">
+            <table>
+                <tr>
+                    <td class="midText">Invoices</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table style="margin-left:5px;margin-right:5px;border-collapse: collapse; width:98%; border-color: #F2F2F2;">
+                            <tr>
+                                <th style="width:12%; text-align:center;" class="invTH invBorder">Invoice</th>
+                                <th style="width:70%; padding-left:5px;" class="invTH invBorder overflow">Invoice Text
+                                </th>
+                                <th style="width:1%; text-align:center;" class="invTH invBorder">DD</th>
+                                <th style="width:12%; text-align:right; padding-right:4px;" class="invTH invBorder">
+                                    Amount
+                                </th>
+                                <th style="width:1%"></th>
+                            </tr>
+                            <tr ng-repeat="item in data.invoice" class='{{invoiceDDlineColor(item)}}'
+                                ng-class="{lightGreenTd: item.paidDate == true}">
+                                <td class="invTD invBorder " style="text-align:center">{{item.invoiceNumber}}</td>
+                                <td class="invTD invBorder  overflow" style="padding-left:4px;">
+                                    {{item.invoiceLines[0].lineText}}
+                                </td>
+                                <td class="invTD invBorder" style="text-align:center;"><b ng-if="item.paidDate == ''"
+                                                                                          class="{{getDueDateForInvoice(item.dueDate * 1000).color}}">{{getDueDateForInvoice(item.dueDate
+                                    * 1000).days}}</b>
+                                </td>
+                                <td class="invTD invBorder  rightNum">{{getInvoiceTotal(item)}}</td>
+                                <td style="padding-left:2px; background-color:#F2F2F2;">
+                                    <button ng-if="item.paidDate == ''" ng-click="editInvoice(item)"
+                                            class="blue white_color"
+                                            onclick="document.getElementById('invoiceForm').style.display = 'inline';angular.element('html, body').animate({ scrollTop: $('#invoiceForm').position().top }, 500);">
+                                        EDIT
+                                    </button>
+                                    <div ng-if="item.paidDate != ''" class="green-color"
+                                         style="font-weight: bold; font-size:14px; text-align:center;">
+                                        PAID
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="invTD invBorder"
+                                    style="padding-left:4px; border-top:2px solid gray; font-weight:bold;" colspan="3">
+                                    Total
+                                    Invoices
+                                </td>
+                                <td class="invTD invBorder rightNum"
+                                    style="border-top:2px solid gray; font-weight:bold;">
+                                    {{calculateTotalInvoices()}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="invTD invBorder green-color"
+                                    style="padding-left:4px; font-weight:bold; border-bottom:2px solid gray; "
+                                    colspan="3">
+                                    Paid Invoices
+                                </td>
+                                <td class="invTD invBorder rightNum green-color"
+                                    style="font-weight:bold;  border-bottom:2px solid gray; ">
+                                    {{calculateTotalPaidInvoices()}}
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="spacerDiv"></div>
+                    </td>
+                </tr>
+            </table>
+            <div class="spacerDiv"></div>
+        </div>
+
+
+        <div id="receiptList" ng-if="data.receipt.length > 0">
+            <table>
+                <tr>
+                    <td class="midText">Receipts</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table style="margin-left:5px;margin-right:5px;border-collapse: collapse; width:98%; border-color: #F2F2F2;">
+                            <tr>
+                                <th style="width:12%; text-align:center;" class="invTH invBorder">Receipt</th>
+                                <th style="width:70%; padding-left:5px;" class="invTH invBorder overflow">Receipt Text
+                                </th>
+                                <th style="width:12%; text-align:right; padding-right:4px;" class="invTH invBorder">
+                                    Amount
+                                </th>
+                                <th style="width:1%"></th>
+                            </tr>
+                            <tr ng-repeat="item in data.receipt">
+                                <td class="invTD invBorder litgreen" style="text-align:center">{{item.receiptNo}}</td>
+                                <td class="invTD invBorder litgreen overflow" style="padding-left:4px;">Payment
+                                    Received{{getInvoiceNumberForReceipt(item.invoiceId)}}
+                                </td>
+                                <td class="invTD invBorder litgreen rightNum">{{item.amount}}</td>
+                                <td style="padding-left:2px;">
+                                    <button ng-click="editReceipt(item)" class="blue white_color"
+                                            onclick="document.getElementById('receiptForm').style.display = 'inline';angular.element('html, body').animate({ scrollTop: $('#receiptForm').position().top }, 500);">
+                                        EDIT
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="invTD invBorder"
+                                    style="padding-left:4px; border-top:2px solid gray; font-weight:bold;" colspan="2">
+                                    Total
+                                    Receipts
+                                </td>
+                                <td class="invTD invBorder rightNum"
+                                    style="border-top:2px solid gray; font-weight:bold;">
+                                    {{calculateTotalReceipts()}}
+                                </td>
+                            </tr>
+                            <tr ng-show="calculateMissingPrice() > 0">
+                                <td class="invTD invBorder red-color"
+                                    style="padding-left:4px; font-weight:bold; border-bottom:2px solid gray;"
+                                    colspan="2">
+                                    Missing Payment
+                                </td>
+                                <td class="invTD invBorder rightNum red-color"
+                                    style="font-weight:bold; border-bottom:2px solid gray;">{{calculateMissingPrice()}}
+                                </td>
+                            </tr>
+                            <tr ng-show="calculateMissingPrice() < 0">
+                                <td class="invTD invBorder green-color"
+                                    style="padding-left:4px; font-weight:bold; border-bottom:2px solid gray;"
+                                    colspan="2">
+                                    Payed too much
+                                </td>
+                                <td class="invTD invBorder rightNum green-color"
+                                    style="font-weight:bold; border-bottom:2px solid gray;">{{calculateMissingPrice()}}
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="spacerDiv"></div>
+                    </td>
+                </tr>
+
+            </table>
+            <div class="spacerDiv"></div>
+        </div>
+
+        <!-- INVOICE FORM -->
+
+        <div id="invoiceForm" style="display: none;">
+            <table style="border: 4px solid #337AB7; width:100%;background-color:#d7e6f4;">
+                <tbody>
+                <tr>
+                    <td class="midText blueTxt" style="font-size:20px;" colspan="2"><span class="blueTxt"
+                                                                                          ng-if="!invoiceActionStatus">New</span><span
+                            class="blueTxt" ng-if="invoiceActionStatus">Edit</span> Invoice
+                    </td>
+                    <td class="midText blueTxt rightNum ng-binding">#<span class="blueTxt" ng-if="invoiceActionStatus">{{newInvoiceNumber}}</span><span
+                            class="blueTxt" ng-if="!invoiceActionStatus">?</span></td>
+                </tr>
+
+                <tr ng-repeat="line in newInvoiceFields">
+                    <td style="width:60%; padding-left:4px;"><input type="text" class="rightField"
+                                                                    ng-model="line.lineText">
+                    </td>
+                    <td style="width:20%;"><input type="text" class="rightField" ng-model="line.amountPcs"
+                                                  style="width:97%;"></td>
+                    <td style="width:20%; padding-left:2px; padding-right:4px;"><input type="number"
+                                                                                       class="rightField rightNum"
+                                                                                       ng-model="line.amountTotal"
+                                                                                       onchange="angular.element(this).scope().calculateNewInvoiceTotal()"
+                                                                                       onkeydown="angular.element(this).scope().calculateNewInvoiceTotal()"
+                                                                                       onkeyup="angular.element(this).scope().calculateNewInvoiceTotal()">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height: 4px;" colspan="3"></td>
+                </tr>
+
+                <tr>
+                    <td style="padding-left:4px;" colspan="2"><p class="rightField"
+                                                                 style="padding-top:4px; margin:0; background:#F2F2F2; font-weight:bold;">
+                        Total</p></td>
+                    <td style="text-align:right; padding-left:2px; padding-right:4px;"><p class="ng-binding rightField"
+                                                                                          style="padding-right:4px; padding-top:4px; margin:0; background:#F2F2F2; font-weight:bold;">
+                        {{newInvoiceTotal}}</p></td>
+                </tr>
+                <tr>
+                    <td style="height: 16px;" colspan="3"></td>
+                </tr>
+
+
+                <!-- ngIf: (!includedMissingPirce && calculateMissingPrice()) || (invoiceActionStatus && includeMissing.value) -->
+                <tr ng-if="(!includedMissingPirce &amp;&amp; calculateMissingPrice()) || (invoiceActionStatus &amp;&amp; includeMissing.value)"
+                    class="ng-scope">
+                    <td style="padding-left:4px;" colspan="2">
+                        <table border="0" style="border:0px; width:100%;">
+                            <tbody>
+                            <tr>
+                                <td style="width:10%; min-width:24px;">
+                                    <input id="includeMissing" type="checkbox"
+                                           style="-ms-transform: scale(2);-moz-transform: scale(2);-webkit-transform: scale(2);-o-transform: scale(2); margin-left:10px; "
+                                           ng-model="includeMissing.value" ng-value="includeMissing.value"
+                                           class="red-color">
+                                </td>
+                                <td style="width:90%; white-space:nowrap; overflow:hidden;">
+                                    <p ng-if="calculateMissingPrice() > 0" class="rightField red-color"
+                                       style="padding-top:3px; background:#F2F2F2; font-weight:bold; margin:0;">Missing
+                                        Payment</p>
+                                    <p ng-if="calculateMissingPrice() < 0" class="rightField green-color"
+                                       style="padding-top:3px; background:#F2F2F2; font-weight:bold; margin:0; ">Paid
+                                        too
+                                        much</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td ng-if="calculateMissingPrice() > 0"
+                        style="text-align:right; padding-left:2px; padding-right:4px;">
+                        <p class="rightField red-color"
+                           style="margin:0; padding-right:4px; padding-top:3px; background:#F2F2F2; font-weight:bold;">
+                            {{calculateMissingPrice()}}</p></td>
+                    <td ng-if="calculateMissingPrice() < 0"
+                        style="text-align:right; padding-left:2px; padding-right:4px;">
+                        <p class=" rightField green-color"
+                           style="padding-right:4px; padding-top:2px; background:#F2F2F2; font-weight:bold;">
+                            {{calculateMissingPrice()}}</p></td>
+                </tr>
+                <tr ng-if="!includedMissingPirce && calculateMissingPrice()">
+                    <td style="height: 4px;" colspan="3"></td>
+                </tr>
+
+                <tr ng-if="!includedMissingPirce && calculateMissingPrice()">
+                    <td style="padding-left:4px;" colspan="2"><p class="rightField"
+                                                                 style="padding-top:4px; margin:0; background:#F2F2F2; font-weight:bold;">
+                        Total</p></td>
+                    <td style="text-align:right; padding-left:2px; padding-right:4px;"><p class="ng-binding rightField"
+                                                                                          style="padding-right:4px; padding-top:4px; margin:0; background:#F2F2F2; font-weight:bold;">
+                        {{newInvoiceTotal + calculateMissingPrice()}}</p></td>
+                </tr>
+                <tr>
+                    <td style="height: 8px;" colspan="3"></td>
+                </tr>
+                <!-- end ngIf: (!includedMissingPirce && calculateMissingPrice()) || (invoiceActionStatus && includeMissing.value) -->
+
+
+                <tr>
+                    <td style="" class="leftText">Invoice Due Date</td>
+                    <td colspan="2" style="padding-left:2px; padding-right:4px;">
+                        <input type="date" required="required" class="rightField" ng-model="newInvoiceDueDate">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="height: 4px;" colspan="3"></td>
+                </tr>
+
+                <tr>
+                    <td style="" class="leftText">Payment by</td>
+                    <td colspan="2" style="text-align:right; padding-left:2px; padding-right:4px;">
+                        <select class="rightField" ng-model="newInvoicepaymentSuggest"
+                                ng-options='method.id as method.name for method in paymentMethods'></select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="height: 8px;" colspan="3"></td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="3" class="overflow">
+                        <button ng-click="saveInvoice()" class="blue white_color" style="width: 20%;">SAVE</button>
+                        <button ng-click="addNewInvoiceLine()" class="cyan white_color" style="width: 20%;">NEW LINE
+                        </button>
+
+                        <!--blue class-->
+                        <!-- ngIf: invoiceActionStatus -->
+                        <button ng-if="invoiceActionStatus" class="green white_color " style="width: 20%;"
+                                onclick="document.getElementById('receiptForm').style.display = 'inline';">PAID
+                        </button>
+                        <!-- end ngIf: invoiceActionStatus -->
+
+                        <button ng-if="!invoiceActionStatus" class="red white_color" style="width: 20%;"
+                                ng-click="autoGenerateInvoice()">AUTO
+                        </button>
+                        <!-- ngIf: !invoiceActionStatus -->
+                        <!-- ngIf: invoiceActionStatus -->
+                        <button class="red white_color" style="width: 20%;" ng-if="invoiceActionStatus"
+                                ng-click="deleteInvoice(thisInvoiceId)"
+                                onclick="document.getElementById('invoiceForm').style.display = 'none';">DELETE
+                        </button>
+                        <!-- end ngIf: invoiceActionStatus -->
+
+                        <button class="grey white_color" style="width: 20%;" ng-click="cancelInvoice()"
+                                onclick="document.getElementById('invoiceForm').style.display = 'none';">CANCEL
+                        </button>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="height: 1px;" colspan="3"></td>
+                </tr>
+
+
+                </tbody>
+            </table>
+            <div class="spacerDiv"></div>
+        </div>
+
+
+        <div id="receiptForm" style="display: none;">
+            <table style="border: 4px solid #40977E;background-color:#dcefea;">
+                <tbody>
+                <tr>
+                    <td class="midText cyanTxt" style="font-size:20px;"><span class="cyanTxt"
+                                                                              ng-if="!receiptActionStatus">New</span><span
+                            class="cyanTxt" ng-if="receiptActionStatus">Edit</span> Receipt
+                    </td>
+                    <td class="midText cyanTxt rightNum ng-binding">#<span class="cyanTxt" ng-if="receiptActionStatus">{{currentReceipt.receiptNo}}</span><span
+                            class="cyanTxt" ng-if="!receiptActionStatus">?</span></td>
+                </tr>
+
+                <tr>
+                    <td class="leftText" style="width:50%;">Payment of Invoice No.</td>
+                    <td style="width:50%;"><input type="number" style="padding-right:4px;" class="rightField"
+                                                  name="newInvoiceNumber" ng-change="validateInvoiceNumber()"
+                                                  ng-class="{'validation-border': validateInvoiceNumber() == false}"
+                                                  ng-model="newInvoiceNumber"></td>
+                </tr>
+                <tr>
+                    <td class="leftText">Payment Received Date</td>
+                    <td>
+                        <input type="date" required="required" class="rightField" ng-model="currentReceipt.paidDate">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="leftText">Amount Expected</td>
+                    <td><input type="number" style="padding-right:4px;background-color:#F2F2F2;" class="rightField "
+                               name="amountExspected"
+                               value="{{getInvoiceTotalForReceipt(currentReceipt.invoiceId) + isMissingInvoicePrice(currentReceipt.invoiceId)}}"
+                               disabled></td>
+                </tr>
+
+                <tr>
+                    <td class="leftText">Amount Received</td>
+                    <td><input type="number" style="padding-right:4px;" class="rightField"
+                               ng-model="currentReceipt.amount">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="" class="leftText">Paid to Account</td>
+                    <td>
+                        <select class="rightField" ng-model="currentReceipt.account">
+                            <option value="Kbank ThaiHome" selected="selected">Kbank ThaiHome</option>
+                            <option value="Krungsri">Krungsri</option>
+                            <option value="Michael">Michael</option>
+                            <option value="Kbank">Max &amp; Gabi</option>
+                            <option value="Cash">Cash</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height: 8px;" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="overflow">
+                        <button ng-show="validateInvoiceNumber()" class="blue white_color" style="width: 40%;"
+                                ng-click="addReceipt()">SAVE
+                        </button>
+                        <button ng-show="!validateInvoiceNumber()" class=" white_color" style="width: 40%;">SAVE
+                        </button>
+                        <!-- ngIf: currentReceipt.id -->
+                        <button class="red white_color ng-scope" ng-if="currentReceipt.id" style="width: 40%;"
+                                ng-click="deleteReceipt(currentReceipt.id)"
+                                onclick="document.getElementById('receiptForm').style.display = 'none';">DELETE
+                        </button>
+                        <!-- end ngIf: currentReceipt.id -->
+                        <button class="grey white_color" style="width: 20%;" ng-click="cnacelReceipt()"
+                                onclick="document.getElementById('receiptForm').style.display = 'none';">CANCEL
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" style="height:1px;"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="spacerDiv"></div>
+        </div>
+
+
+        <!-- ELECTRIC WATER -->
+        <table>
+            <tr>
+                <td class="midText" colspan="11">Electric & Water
+                    <button ng-if="(data.property.waterUnit * (data.waterTo - data.waterFrom) + data.property.electricUnit * (data.waterTo - data.waterFrom))"
+                            class="btn pull-right" ng-click="convertBillsToInvoice()"
+                            style="width: 100px;font-size: 12px;background-color: #337ab7;"> TO INVOICE
+                    </button>
+                </td>
+            </tr>
+            <tr style="font-size: 12px;white-space: nowrap;max-width: 1px;">
+                <td style="width:15%" class="weakText overflow"></td>
+                <td style="width:12%;" class="overflow">
+                    Check-in
+                </td>
+                <td style="width:1%" class="weakText overflow"></td>
+                <td style="width:12%;" class="overflow">
+                    Check-out
+                </td>
+                <td style="width:1%" class="weakText">&nbsp;</td>
+                <td style="width:7%" class="overflow">
+                    Units
+                </td>
+                <td style="width:1%" class="weakText">&nbsp;</td>
+                <td style="width:7%" class="overflow">
+                    Price
+                </td>
+                <td style="width:1%" class="weakText">&nbsp;</td>
+                <td style="width:10%;" class="overflow">
+                    Total
+                </td>
+                <td style="width:1%" class="weakText">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td style="width:15%" class="weakText overflow">Electric</td>
+                <td style="width:12%;min-width:38px;"><input type="number" class="rightField rightNum"
+                                                             ng-model="data.electricFrom"></td>
+                <td style="width:1%" class="weakText"> -</td>
+                <td style="width:12%;min-width:38px;"><input type="number" class="rightField rightNum"
+                                                             ng-model="data.electricTo">
+                </td>
+                <td style="width:1%" class="weakText">&nbsp;=</td>
+                <td style="width:7%"><input type="text" class="rightField rightNum litgrey"
+                                            value="{{ data.electricTo - data.electricFrom }}" disabled></td>
+                <td style="width:1%" class="weakText">&nbsp;x</td>
+                <td style="width:7%"><input type="text" class="rightField rightNum"
+                                            ng-model="data.property.electricUnit">
+                </td>
+                <td style="width:1%" class="weakText">&nbsp;=</td>
+                <td style="width:10%;min-width:28px;"><input type="text" class="rightField rightNum litgrey"
+                                                             value="{{data.property.electricUnit * (data.electricTo - data.electricFrom)}}"
+                                                             disabled></td>
+                <td style="width:1%" class="weakText">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="weakText overflow">Water</td>
+                <td style="min-width:38px;"><input type="number" class="rightField rightNum" ng-model="data.waterFrom">
+                </td>
+                <td class="weakText">&nbsp;-</td>
+                <td style="min-width:38px;"><input type="number" class="rightField rightNum" ng-model="data.waterTo">
+                </td>
+                <td class="weakText">&nbsp;=</td>
+                <td><input type="text" class="rightField rightNum litgrey" value="{{data.waterTo - data.waterFrom }}"
+                           disabled>
+                </td>
+                <td class="weakText">&nbsp;x</td>
+                <td><input type="text" class="rightField rightNum" ng-model="data.property.waterUnit"></td>
+                <td class="weakText">&nbsp;=</td>
+                <td style="min-width:28px;"><input type="text" class="rightField rightNum litgrey"
+                                                   value="{{data.property.waterUnit * (data.waterTo - data.waterFrom)}}"
+                                                   disabled>
+                </td>
+                <td class="weakText">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="midText" style="text-align:right;" colspan="9">Total&nbsp;</td>
+                <td style="min-width:28px;"><input type="text" class="rightField rightNum litgrey"
+                                                   value="{{data.property.waterUnit * (data.waterTo - data.waterFrom) + data.property.electricUnit * (data.waterTo - data.waterFrom)}}"
+                                                   disabled></td>
+                <td class="weakText">&nbsp;</td>
+            </tr>
+        </table>
+        <div class="spacerDiv"></div>
+
+
+        <!-- CONDITIONS -->
+        <table>
+            <tr>
+                <td class="midText" style="width:20%; white-space: nowrap;">TENANT Conditions</td>
+                <td class="weakText overflow" style="width:80%">(everyone can see)</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="width:95%" colspan="2"><textarea rows="50" cols="4" class="rightField" style="height:60px;"
+                                                            ng-model="data.conditionsTenant"></textarea></td>
+                <td style="width:5%"></td>
+            </tr>
+        </table>
+        <div class="spacerDiv"></div>
+
+        <table>
+            <tr>
+                <td class="midText " style="width:20%; white-space: nowrap;">PRIVATE Comments</td>
+                <td class="weakText overflow" style="width:80%">(Only WE can see this)</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="width:95%" colspan="2"><textarea rows="50" cols="4" class="rightField" style="height:60px;"
+                                                            ng-model="data.comment">
+</textarea></td>
+                <td style="width:5%"></td>
+            </tr>
+        </table>
+        <div class="spacerDiv"></div>
+
+        <table>
+            <tr>
+                <td class="midText " style="width:20%; white-space: nowrap;">AGENT Conditions</td>
+                <td class="weakText overflow" style="width:80%">(tenant cannot see)</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="width:95%" colspan="2"><textarea rows="50" cols="4" class="rightField" style="height:60px;"
+                                                            ng-model="data.conditionsAgent"></textarea></td>
+                <td style="width:5%"></td>
+            </tr>
+        </table>
+        <div class="spacerDiv"></div>
+        <!-- BUTTONS -->
+        <table>
+            <tr>
+                <td style="width:60%">
+                    <button class="blue white_color" style="width: 100%;" ng-click="update()">SAVE</button>
+                </td>
+                <td>
+                    <button class="red white_color" style="width: 100%;"
+                            ng-really-message="Are you sure you want to delete this booking ({{data.id}}) ?"
+                            ng-really-click="delete(data.id)">DELETE
+                    </button>
+                </td>
+                <td>
+                    <button class="grey white_color" style="width: 100%;" ng-click="cancelBooking()">CANCEL</button>
+                </td>
+            </tr>
+        </table>
+        <div class="spacerDiv"></div>
+        <div class="spacerDiv"></div>
+
+        <div style="visibility:hidden;position:absolute;top:30%;left:50%;margin-left:-200px;">
+            <booking-calendar></booking-calendar>
+        </div>
+    </div>
+
+</div>

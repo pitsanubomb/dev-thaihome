@@ -1,0 +1,11 @@
+<h3><span>{{T.transPayment}}&nbsp;{{payableAmount | currency: currency: 0}}</span>
+
+</h3>
+<div ng-if="reservationAction" ng-bind-html="payableReservationText"></div><br><br>
+<label>{{T.transPaymentSelect}}</label>
+<select class="search-option-payment location_select form-control" placeholder="Payment" ng-model="paymentID"
+        ng-change="selectPayment(paymentID)">
+    <option value="" slected="selected" disabled="disabled">{{T.transPaymentSelect}}</option>
+    <option ng-repeat="pay in paymentMethods" ng-if="pay.id!=2" value="{{pay.id}}">{{pay.name}}</option>
+</select>
+<div id="payment_placeholder"></div>

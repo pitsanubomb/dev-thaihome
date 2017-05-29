@@ -1,0 +1,189 @@
+<header></header>
+
+<div class="container agent-booking">
+  <div class="row">
+    <div class="property-buttons">
+      <a ui-sref="agent.property({'id': property.unique})">
+        <md-button class="md-raised md-primary">Information</md-button>
+      </a>
+      <a ui-sref="agent.chat">
+        <md-button class="md-raised md-primary">Talk to us</md-button>
+      </a>
+      <a ui-sref="agent.home">
+        <md-button class="md-raised md-primary">Back to list</md-button>
+      </a>
+    </div>
+    <div class="col-md-7">
+      <div class="clear"></div>
+      <div class="md-whiteframe-z3">
+        <div class="date-price">
+          <table class="table nomargin-table">
+            <tbody>
+              <tr>
+                <td class="td-sm-align">Booking ID</td>
+                <td>{{data.id}}</td>
+              </tr>
+              <tr>
+                <td>Agency</td>
+                <td>{{agent.agency}}</td>
+              </tr>
+              <tr>
+                <td>Agent</td>
+                <td>{{agent.name}}</td>
+              </tr>
+              <tr>
+                <td>Property</td>
+                <td>{{property.projectName}} {{property.unique}} {{property.bedrooms}} Bedrooms</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table nomargin-table">
+            <tbody>
+              <tr>
+                <td class="td-sm-align">Rental period</td>
+                <td>{{data.checkin}} - {{data.checkout}}, &nbsp;{{data.nights | timeFormat}}</td>
+              </tr>
+              <tr>
+                <td>Rent price</td>
+                <td class="sm-table">
+                  <table class="table nomargin-table">
+                    <tbody>
+                      <tr>
+                        <td class="special-td">{{data.nights}} Nights ({{data.nights}} x {{data.priceDay | currency: currency:0}})</td>
+                        <td class="special-td price-right">{{data.nights * data.priceDay | currency:currency:0}}</td>
+                      </tr>
+                      <tr ng-if="data.discountPercentage">
+                        <td class="green">Discount</td>
+                        <td class="green price-right">- {{data.nights * data.priceDay / 100 * data.discountPercentage | currency:currency:0}} ({{data.discountPercentage}}%)</td>
+                      </tr>
+                      <tr>
+                        <td>Check-out cleaning</td>
+                        <td class="price-right"><span ng-if="data.cleanfinalprice > 0">{{data.cleanfinalprice | currency:currency:0}}</span><span ng-if="data.cleanfinalprice == 0">Included for free</span></td>
+                      </tr>
+                      <tr ng-repeat="extra in data.priceExtra track by $index">
+                        <td ng-class="{'green': extra.price<0}">{{extra.name}}</td>
+                        <td class="price-right" ng-class="{'green': extra.price<0}">{{extra.price | currency : currency:0}}</td>
+                      </tr>
+                      <tr>
+                        <td>Total</td>
+                        <td class="price-right">{{data.cleanfinalprice + (data.priceDay * data.nights - (data.priceDay * data.nights / 100 * data.discountPercentage)) + priceExtraTotal | currency : currency:0}}</td>
+                      </tr>
+                      <tr>
+                        <td><b>Agent commission({{data.agentCommission}}%)</b></td>
+                        <td class="price-right"><b>{{((data.nights * data.priceDay) - (data.nights * data.priceDay / 100 * data.discountPercentage)) / 100 * data.agentCommission  | currency:currency:0}}</b></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table" ng-if="data._id">
+            <tbody>
+              <tr>
+                <td>Electricity</td>
+                <td>{{data.utilities_electricity}}</td>
+              </tr>
+              <tr>
+                <td>Water</td>
+                <td>{{data.utilities_water}}</td>
+              </tr>
+              <tr>
+                <td>Internet/wifi</td>
+                <td>{{data.utilities_wifi}}</td>
+              </tr>
+              <tr>
+                <td>Cable TV</td>
+                <td>{{data.utilities_cable}}</td>
+              </tr>
+              <tr ng-if="data.conditions_agent">
+                <td>Conditions for Agent</td>
+                <td ng-bind-html="data.conditions_agent"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row" id="conversation">
+        <div class="col-xs-3">
+          <div class="owner-img">
+            <img src="/assets/images/note.png" alt="">
+          </div>
+        </div>
+        <div class="col-xs-9 about-owner">
+          <div class="owner-buble">
+            <p>Hi, my name is Note. I am the property manager. Ask me about discount, cleaning, commission, booking or if someone want to see the condo. I will be happy to answer in the chat ---->
+              <br> or call me on: <b>080-209-7887</b>
+              <br>or e-mail me: <a href="mailto:note@flipinvert.com">note@flipinvert.com</a></p>
+            <div class="arrow"></div>
+          </div>
+        </div>
+      </div>
+      <chat></chat>
+    </div>
+    <div class="col-md-5">
+      <div class="payment-side md-whiteframe-z3">
+
+        <div class="picture">
+          <img src="/assets/images/property/{{property.unique | lowercase}}/{{property.featured}}" alt="">
+        </div>
+
+        <p><b>{{property.name}}</b></p>
+        <p>{{property.location_name}}</p>
+
+        <table class="table nomargin-table right-aligned-second">
+          <tbody>
+            <tr>
+              <td class="td-align">Check in:</td>
+              <td><b>{{data.checkin}}</b></td>
+            </tr>
+            <tr>
+              <td>Check out:</td>
+              <td><b>{{data.checkout}}</b></td>
+            </tr>
+            <tr>
+              <td>Rental period</td>
+              <td><b>{{data.nights | timeFormat}}</b></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table nomargin-table right-aligned-second">
+          <tbody>
+            <tr>
+              <td class="td-align">{{data.priceDay | currency: currency:0}} x {{data.nights}} data.nights</td>
+              <td>{{data.priceDay * data.nights | currency: currency:0}}</td>
+            </tr>
+            <tr ng-if="data.discountPercentage">
+              <td class="green">Discount</td>
+              <td class="green">- {{data.priceDay * data.nights / 100 * data.discountPercentage | currency:currency:0}} ({{data.discountPercentage}}%)</td>
+            </tr>
+            <tr>
+              <td>Check-out cleaning</td>
+              <td>{{data.cleanfinalprice | currency:currency:0}}</td>
+            </tr>
+            <tr ng-repeat="extra in data.priceExtra track by $index">
+              <td ng-class="{'green': extra.price<0}">{{extra.name}}</td>
+              <td ng-class="{'green': extra.price<0}">{{extra.price | currency : currency:0}}</td>
+            </tr>
+            <tr>
+              <td class="td-align">
+                <h3>Total</h3></td>
+              <td>
+                <h3>{{data.cleanfinalprice + (data.priceDay * data.nights - (data.priceDay * data.nights / 100 * data.discountPercentage)) + priceExtraTotal  | currency : currency:0}}</h3></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="property-download-img-bot">
+          <p>Send this booking to Tenant</p>
+          <input type="text" class="form-control pull-left" ng-model="bookinglink">
+          <md-button class="md-raised pull-left md-primary" href="{{bookinglink}}" target="_blank">View</md-button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<footer></footer>

@@ -1,0 +1,196 @@
+<script>
+    Omise.setPublicKey("pkey_test_55ma3s23zxm7xj5jlmf");
+</script>
+<form action="http://191.101.12.128:3001/omise/charge" class="clearfix" method="post" id="checkout">
+    <div id="token_errors"></div>
+    <input type="hidden" name="omise_token">
+    <input type="hidden" name="amount">
+    <input type="hidden" name="currency">
+    <input type="hidden" name="bookingId">
+    <div class="col-sm-12" style="padding:0;">
+        <div class="col-sm-12" style="padding:0;">
+            <div class="col-sm-5 form-group" style="padding:0;">
+                {{T.transCreditCardNo}}<br>
+                <input type="text" class="form-control" data-omise="number">
+            </div>
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-5 form-group" style="padding:0;">
+                {{T.transName}}<br>
+                <input type="text" class="form-control" data-omise="holder_name">
+            </div>grunt
+        </div>
+        <div class="col-sm-9" style="padding:0;">
+            <div class="col-sm-4 form-group" style="padding-left:0;">
+                {{T.transMonth}}<br>
+
+                <select data-omise="expiration_month" class="form-control">
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+            <div class="col-sm-4 form-group">
+                {{T.transYear}}<br>
+                <select class="form-control" data-omise="expiration_year">
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2022">2021</option>
+                    <option value="2024">2023</option>
+                    <option value="2026">2025</option>
+                    <option value="2027">2027</option>
+                </select>
+            </div>
+            <div class="col-sm-4 form-group">
+                {{T.transCreditCardCvc}}<br>
+                <input type="text" ng-click="" class="form-control" data-omise="security_code" size="8">
+            </div>
+        </div>
+        <div ng-show="isBookingController" class="col-sm-12 text-center form-group" style="padding:0;">
+            <div class="col-sm-6">
+                <input type="submit" class="form-control btn btn-danger md-raised book" style="height: 36px;font-weight: bolder;float: left;box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);" value="{{T.transBookNow}}" id="create_token"
+                       style="width:30%;">
+            </div>
+            <div class="col-sm-6">
+                <md-button  ng-click="showPaymentToggle()" style="background-color: grey; width: 100px;float: left;" class="md-raised book">{{T.transBack}}</md-button>
+            </div>
+        </div>
+        <div ng-show="!isBookingController" class="col-sm-12 text-center form-group" style="padding:0;">
+        <input type="submit" class="form-control btn btn-danger md-raised book" style=" height: 36px;float: left;box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);" value="{{T.transBookNow}}" id="create_token"
+               style="width:30%;">
+    </div>
+    </div>
+    <div class="col-sm-12 col-xs-12" style="padding: 50px 0 0 0;">
+        <div class="col-sm-6 text-left col-xs-6 width-100-for-credit-card-imgs-xs-500" style="padding: 6px 0 0 0;">
+            <img src="/assets/images/VisaMasterJbc.png" alt="" class="img-responsive"
+                 style="max-width: 230px; display: inline-block;">
+        </div>
+        <div class="col-sm-6 text-right text-left-for-credit-card-omise-xs col-xs-6 width-100-for-credit-card-imgs-xs-500"
+             style="padding:0;">
+            <img class="img-responsive" src="/assets/images/OmiseSecure.png" alt=""
+                 style="max-width: 130px;display: inline-block;">
+        </div>
+    </div>
+</form>
+
+
+
+<style>
+    @media (max-width: 500px) {
+        .text-left-for-credit-card-omise-xs {
+            text-align: left !important;
+            margin-top: 15px;
+        }
+
+        .width-100-for-credit-card-imgs-xs-500 {
+            width: 100% !important;
+        }
+    }
+
+    input.ng-invalid {
+        color: red;
+    }
+
+    select.ng-invalid {
+        color: red;
+        border-color: #fa787e;
+    }
+</style>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+<script>
+    setTimeout(function () {
+        if ($(window).width() < 600) {
+            $('#help_outline').popover({
+                html: true,
+                trigger: 'hover',
+                placement: 'bottom',
+                content: function () {
+                    return '<img src="' + $(this).data('image') + '" />';
+                }
+            })
+        }
+        else {
+            $('#help_outline').popover({
+                html: true,
+                trigger: 'hover',
+                placement: 'right',
+                content: function () {
+                    return '<img src="' + $(this).data('image') + '" />';
+                }
+            })
+        }
+    }, 2000);
+</script>
+
+<script>
+    $("#checkout").submit(function () {
+
+        var form = $(this);
+
+        // Disable the submit button to avoid repeated click.
+        form.find("input[type=submit]").prop("disabled", true);
+
+        // Serialize the form fields into a valid card object.
+        var card = {
+            "name": form.find("[data-omise=holder_name]").val(),
+            "number": form.find("[data-omise=number]").val(),
+            "expiration_month": form.find("[data-omise=expiration_month]").val(),
+            "expiration_year": form.find("[data-omise=expiration_year]").val(),
+            "security_code": form.find("[data-omise=security_code]").val()
+        };
+
+        // Send a request to create a token then trigger the callback function once
+        // a response is received from Omise.
+        //
+        // Note that the response could be an error and this needs to be handled within
+        // the callback.
+        Omise.createToken("card", card, function (statusCode, response) {
+            if (response.object == "error" || !response.card.security_code_check) {
+                // Display an error message.
+                var message_text = "Security Code Check Failed.  Please try again";
+                if (response.object == "error") {
+                    message_text = response.message.replace("(unknown)","");
+                }
+                console.log(response.message);
+                $("#token_errors").html('<span style="color:red;"><b>' + message_text+ '</b></span>');
+
+                // Re-enable the submit button.
+                form.find("input[type=submit]").prop("disabled", false);
+            } else {
+                // Then fill the omise_token.
+                form.find("[name=omise_token]").val(response.id);
+                form.find("[name=amount]").val(window.amount);
+                form.find("[name=currency]").val(localStorage.getItem('currency').toLowerCase());
+                if (localStorage.getItem('past-booking-id') != null) {
+                    form.find("[name=bookingId]").val(localStorage.getItem('past-booking-id'));
+                } else {
+                    form.find("[name=bookingId]").val(angular.element('.voucher').scope().data.id);
+                }
+
+
+                // Remove card number from form before submiting to server.
+                form.find("[data-omise=number]").val("");
+                form.find("[data-omise=security_code]").val("");
+
+                // submit token to server.
+                form.get(0).submit();
+            }
+
+        });
+
+        // Prevent the form from being submitted;
+        return false;
+
+    });
+</script>

@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">{{ currency.id ? 'View':'Add'}} {{currency.name}}</h1>
+    <div style="clear:both;"></div>
+    <button type="button" class="btn btn-primary inittable" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+      {{ currency.id ? 'Edit': 'Add'}}
+    </button>
+    <p ng-show="editableForm.$visible">
+      <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+        {{ currency.id ? 'Save': 'Add'}}
+      </button>
+      <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+        Cancel
+      </button>
+    </p>
+    <div style="clear:both;"></div>
+    <form role="form" onaftersave="update()" editable-form name="editableForm" oncancel="back();">
+      <div class="col-md-4">
+        <div class="form-group">
+          <p class="title">Name: </p>
+          <p e-class="form-control" editable-text="currency.name" e-name="name" e-required>{{ currency.name || '-' }}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Currency: </p>
+          <p editable-text="currency.currency" e-name="currency">{{ currency.currency || '-' }}</p>
+        </div>
+		<div class="form-group">
+          <p class="title">Symbol: </p>
+          <p editable-text="currency.symbol" e-name="symbol">{{ currency.symbol || '-' }}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Active: </p>
+          <p ng-show="!editableForm.$visible">
+            {{ currency.active }}
+          </p>
+          <div ng-show="editableForm.$visible">
+            <input name="active" ng-checked="currency.active" type="checkbox" ng-model="currency.active" /> Active
+          </div>
+        </div>
+      </div>
+      <div style="clear:both;"></div>
+      <button type="button" class="btn btn-primary" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+        {{ currency.id ? 'Edit': 'Add'}}
+      </button>
+      <p ng-show="editableForm.$visible">
+        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+          {{ currency.id ? 'Save': 'Add'}}
+        </button>
+        <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+          Cancel
+        </button>
+      </p>
+    </form>
+    <!-- /.col-lg-12 -->
+  </div>
+  <!-- /.row -->
+</div>

@@ -1,0 +1,198 @@
+<div>
+    <div class="col-lg-12">
+        <h1 class="page-header">{{ price.id ? 'View':'Add'}} {{price.property.unique}} {{price.season}}</h1>
+        <div style="clear:both;"></div>
+        <button type="button" class="btn btn-primary inittable" ng-click="editableForm.$show()"
+                ng-show="!editableForm.$visible">
+            {{ price.id ? 'Edit': 'Add'}}
+        </button>
+        <p ng-show="editableForm.$visible">
+            <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+                {{ price.id ? 'Save': 'Add'}}
+            </button>
+            <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting"
+                    ng-click="editableForm.$cancel()">
+                Cancel
+            </button>
+        </p>
+        <div style="clear:both;"></div>
+        <form role="form" onaftersave="update()" editable-form name="editableForm" oncancel="back()">
+            <div class="col-md-12 col-lg-10 no-padd-col">
+                <div class="form-group">
+                    <p class="title">Property: </p>
+                    <p e-readonly e-class="form-control form-popup" e-ng-click="propertyList()"
+                       editable-text="price.property.unique" e-name="property" e-required>{{price.property.unique ||
+                        '-'}}</p>
+                </div>
+                <div class="form-group">
+                    <p class="title">Season: </p>
+                    <p e-readonly e-class="form-control form-popup" e-ng-click="seasonList()"
+                       editable-text="price.season" e-name="season" e-required>{{price.season || '-'}}</p>
+                </div>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="">Price Table</th>
+                    </tr>
+                    <tr>
+                        <th class=" title-">Price per</th>
+                        <th class=" title-">Amount</th>
+                        <th class=" title-">Day</th>
+                        <th class=" title-">Week</th>
+                        <th class=" title-">Month</th>
+                        <th class=" title-">Commission</th>
+                        <th class=" title-">Agent</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Day</td>
+                        <td class="">
+                            <p e-required e-style="max-width:75px;margin:0 auto;text-align:;"
+                               e-class="form-control" editable-text="price.priceDay" e-name="priceDay">{{ price.priceDay
+                                }}</p>
+                        </td>
+                        <td class=" price-right">{{price.priceDay | currency:currency}}</td>
+                        <td class=" price-right">{{price.priceDay*7 | currency:currency}}</td>
+                        <td class=" price-right">{{price.priceDay*30 | currency:currency}}</td>
+                        <td class="">
+                            <p onshow="startWatch()" onhide="stopWatch()" e-required
+                               e-style="max-width:75px;margin:0 auto;text-align:;" e-class="form-control"
+                               editable-text="price.commissionDay" e-name="commissionDay">{{ price.commissionDay }}</p>
+                        </td>
+                        <td class=" price-right">{{price.commissionDay*price.priceDay/100 | currency:currency}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Weekend</td>
+                        <td class="">
+                            <p e-required e-style="max-width:75px;margin:0 auto;text-align:;"
+                               e-class="form-control" editable-text="price.priceWeekend" e-name="priceWeekend">{{
+                                price.priceWeekend }}</p>
+                        </td>
+                        <td class=" price-right">{{price.priceWeekend | currency:currency}}</td>
+                        <td class=" price-right">{{price.priceWeekend*7 | currency:currency}}</td>
+                        <td class=" price-right">{{price.priceWeekend*30 | currency:currency}}</td>
+                        <td class="" style="text-align:;">
+                            -
+                        </td>
+                        <td class=" price-right">{{price.commissionDay*price.priceWeekend/100 |
+                            currency:currency}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Week</td>
+                        <td class="">
+                            <p e-required e-style="max-width:75px;margin:0 auto;text-align:;"
+                               e-class="form-control" editable-text="price.priceWeek" e-name="priceWeek">{{
+                                price.priceWeek }}</p>
+                        </td>
+                        <td class=" price-right">{{price.priceWeek/7 | currency:currency}}</td>
+                        <td class=" price-right">{{price.priceWeek | currency:currency}}</td>
+                        <td class=" price-right">{{price.priceWeek*4 | currency:currency}}</td>
+                        <td class="">
+                            <p e-required e-style="max-width:75px;margin:0 auto;text-align:;"
+                               e-class="form-control" editable-text="price.commissionWeek" e-name="commissionWeek">{{
+                                price.commissionWeek }}</p>
+                        </td>
+                        <td class=" price-right">{{price.commissionWeek*price.priceWeek/100 |
+                            currency:currency}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Month</td>
+                        <td class="">
+                            <p e-required e-style="max-width:75px;margin:0 auto;text-align:;"
+                               e-class="form-control" editable-text="price.priceMonth" e-name="priceMonth">{{
+                                price.priceMonth }}</p>
+                        </td>
+                        <td class=" price-right">{{price.priceMonth/30 | currency:currency}}</td>
+                        <td class=" price-right">{{price.priceMonth/4 | currency:currency}}</td>
+                        <td class=" price-right">{{price.priceMonth | currency:currency}}</td>
+                        <td class="">
+                            <p e-required e-style="max-width:75px;margin:0 auto;text-align:;"
+                               e-class="form-control" editable-text="price.commissionMonth" e-name="commissionMonth">{{
+                                price.commissionMonth }}</p>
+                        </td>
+                        <td class=" price-right">{{price.commissionMonth*price.priceMonth/100 |
+                            currency:currency}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Year</td>
+                        <td class="">
+                            <p e-required e-style="max-width:75px;margin:0 auto;text-align:;"
+                               e-class="form-control" editable-text="price.priceYear" e-name="priceYear">{{
+                                price.priceYear }}</p>
+                        </td>
+                        <td class=" price-right">{{price.priceYear/360 | currency:currency}}</td>
+                        <td class=" price-right">{{price.priceYear/52 | currency:currency}}</td>
+                        <td class=" price-right">{{price.priceYear/12 | currency:currency}}</td>
+                        <td class="">
+                            <p e-required e-style="max-width:75px;margin:0 auto;text-align:;"
+                               e-class="form-control" editable-text="price.commissionYear" e-name="commissionYear">{{
+                                price.commissionYear }}</p>
+                        </td>
+                        <td class=" price-right">{{price.commissionYear*price.priceYear/100 |
+                            currency:currency}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped table-hover table-bordered" ng-if="price.season == 'BASE'">
+                    <thead>
+                    <tr>
+                        <th class="" colspan="20">Deposit Table</th>
+                    <tr>
+                    <tr>
+                        <th>Day</th>
+                        <th>Week</th>
+                        <th>Month</th>
+                        <th>Year</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <p e-required e-style="max-width:75px;margin:0 auto;text-align:;"
+                               e-class="form-control" editable-text="price.depositDay" e-name="depositDay">{{
+                                price.depositDay | currency:currency }}</p>
+                        </td>
+                        <td>
+                            <p e-required e-style="max-width:75px;margin:0 auto;text-align:;"
+                               e-class="form-control" editable-text="price.depositWeek" e-name="depositWeek">{{
+                                price.depositWeek | currency:currency }}</p>
+                        </td>
+                        <td>
+                            <p e-required e-style="max-width:75px;margin:0 auto;text-align:;"
+                               e-class="form-control" editable-text="price.depositMonth" e-name="depositMonth">{{
+                                price.depositMonth | currency:currency }}</p>
+                        </td>
+                        <td>
+                            <p e-required e-style="max-width:75px;margin:0 auto;text-align:;"
+                               e-class="form-control" editable-text="price.depositYear" e-name="depositYear">{{
+                                price.depositYear | currency:currency }}</p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div style="clear:both;"></div>
+                <button type="button" class="btn btn-primary" ng-click="editableForm.$show()"
+                        ng-show="!editableForm.$visible">
+                    {{ price.id ? 'Edit': 'Add'}}
+                </button>
+                <p ng-show="editableForm.$visible">
+                    <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+                        {{ price.id ? 'Save': 'Add'}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting"
+                            ng-click="editableForm.$cancel()">
+                        Cancel
+                    </button>
+                </p>
+            </div>
+        </form>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+</div>

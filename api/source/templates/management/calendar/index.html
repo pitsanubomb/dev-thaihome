@@ -1,0 +1,88 @@
+<div id="wrapper" style="padding:20px;clear:both;">
+  <div class="new-booking-area">
+    <table class="iconTD " style="max-width: inherit;">
+      <tr>
+        <td ui-sref="management.home" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                src="/assets/images/Home.png" alt="Start Page"><span ng-if="menu_bookings"
+                                                                     class="management-menu-new-element-block">{{menu_bookings}}</span>
+        </td>
+        <td ui-sref="management.messages" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                src="/assets/images/Messages.png" alt="Messages"><span ng-if="menu_messages"
+                                                                       class="management-menu-new-element-block">{{menu_messages}}</span>
+        </td>
+        <td ui-sref="management.bookings"><img src="/assets/images/Bookings.png" alt="Bookings"></td>
+        <td ui-sref="management.properties"><img src="/assets/images/Properties.png" alt="Properties"></td>
+        <td ui-sref="management.calendar({month: '', year:''})"
+            ng-class="{'active-management-btn' : statename == 'management.calendar'}"><img
+                src="/assets/images/Calendar.png" alt="Calendar"></td>
+        <td>
+          <md-menu style="width: 100%;height: 100%;padding: 0;margin-top: 15px; display:block;"
+                   md-position-mode="target-right target" class="second-menu-container crnc-drop">
+            <md-button aria-label=""
+                       style="width: 100%!important;height: 100%;box-shadow: none;border: 0!important;"
+                       class="md-icon-button" ng-click="$mdOpenMenu()">
+              <img src="/assets/images/Menu.png" alt="Menu">
+            </md-button>
+            <md-menu-content>
+              <ul class="nav second-nav manage-nav">
+                <li md-ink-ripple>
+                  <a ui-sref="management.book">New Booking</a>
+                </li>
+                <li md-ink-ripple>
+                  <a ui-sref="admin.home">Admin</a>
+                </li>
+                <li md-ink-ripple>
+                  <a ui-sref="home">Thai Home</a>
+                </li>
+                <li md-ink-ripple>
+                  <a ui-sref="management.expenses">Expenses</a>
+                </li>
+                <li md-ink-ripple>
+                  <a ui-sref="management.todo">Todo</a>
+                </li>
+                <!-- 2016-05-17 - Ajay - Add link for profile page || Ajay du lrpi lakot es asem imaci -->
+                <li md-ink-ripple>
+                  <a ui-sref="management.profile">Profile</a>
+                </li>
+                <li md-ink-ripple>
+                  <a ui-sref="admin_logout">Logout</a>
+                </li>
+              </ul>
+            </md-menu-content>
+          </md-menu>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="row" style="margin: 0px auto">
+	<div class="centered-callendar-itm">
+      <div class="pull-left-cl" ng-click="previous()">
+        <img src="/assets/images/arrow-left-callendar.png" alt="">
+    </div>
+	
+	<div class="calendar-view-box">
+      <month-drop month="{{month}}"></month-drop>
+      <year-drop offset="-1" range="3" year="{{year}}"></year-drop>
+      <md-button class="btn-sm btn-default blue-btn" ng-click="reload()">View</md-button>
+      <div class="clear"></div>
+    </div>
+
+    <div class="pull-right-cl" ng-click="next()">
+        <img src="/assets/images/arrow-right-callendar.png" alt="">
+    </div>
+	</div>
+    <div class="clear"></div>
+    <div id="dp"></div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

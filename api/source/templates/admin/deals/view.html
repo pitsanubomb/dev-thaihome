@@ -1,0 +1,127 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">{{ deal.id ? 'View':'Add'}} {{deal.id}}</h1>
+    <div style="clear:both;"></div>
+        <button type="button" class="btn btn-primary" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+          {{ deal.id ? 'Edit': 'Add'}}
+        </button>
+        <p ng-show="editableForm.$visible">
+          <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+            {{ deal.id ? 'Edit': 'Add'}}
+          </button>
+          <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+            Cancel
+          </button>
+        </p>
+    <div style="clear:both;"></div>
+    <form role="form" onaftersave="update()" editable-form name="editableForm">
+      <div class="col-lg-12">
+        <div class="col-sm-2">
+          <div class="form-group">
+            <p class="title">Active: </p>
+            <p ng-show="!editableForm.$visible">
+              {{ deal.active }}
+            </p>
+            <div ng-show="editableForm.$visible">
+              <input name="active" ng-checked="deal.active" type="checkbox" ng-model="deal.active" /> Active
+            </div>
+          </div>
+          <div class="form-group">
+            <p class="title">Property: </p>
+            <p e-readonly e-class="form-control form-popup" e-ng-click="propertyList()" editable-text="deal.property.unique" e-name="property" e-required>{{deal.property.unique || '-'}}</p>
+          </div>
+          <div class="form-group" ng-init="loadCalendar()">
+            <p class="title">Start - End: </p>
+            <p ng-show="!editableForm.$visible">{{ deal.start }} - {{ deal.end }}</p>
+            <div ng-show="editableForm.$visible">
+              <input class="form-control dealCalendar" readonly class="dealCalendar" value="{{ deal.start }} - {{ deal.end }}"></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <p class="title">Hot: </p>
+            <p ng-show="!editableForm.$visible">
+              {{ deal.hot }}
+            </p>
+            <div ng-show="editableForm.$visible">
+              <input name="hot" ng-checked="deal.hot" type="checkbox" ng-model="deal.hot" /> Hot
+            </div>
+          </div>
+          <div class="form-group">
+            <p class="title">Offer Text: </p>
+            <p e-class="form-control" editable-textarea="deal.text" e-name="offer">{{ deal.text }}</p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <table class="table">
+            <thead>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>Day</td>
+                <td>Week</td>
+                <td>Month</td>
+                <td>Year</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Price / Day</td>
+                <td>
+                  <p e-required e-style="max-width:75px;margin:0 auto;text-align:center;" e-class="form-control" editable-text="deal.priceDay" e-name="priceDay">{{ deal.priceDay }}</p>
+                </td>
+                <td>{{deal.priceDay | currency:currency}}</td>
+                <td>{{deal.priceDay * 7 | currency:currency}}</td>
+                <td>{{deal.priceDay * 30 | currency:currency}}</td>
+                <td>{{deal.priceDay * 365 | currency:currency}}</td>
+              </tr>
+              <tr>
+                <td>Price / Week</td>
+                <td>
+                  <p e-required e-style="max-width:75px;margin:0 auto;text-align:center;" e-class="form-control" editable-text="deal.priceWeek" e-name="priceWeek">{{ deal.priceWeek }}</p>
+                </td>
+                <td>{{deal.priceWeek / 7 | currency:currency}}</td>
+                <td>{{deal.priceWeek | currency:currency}}</td>
+                <td>{{deal.priceWeek * 4 | currency:currency}}</td>
+                <td>{{deal.priceWeek * 52 | currency:currency}}</td>
+              </tr>
+              <tr>
+                <td>Price / Month</td>
+                <td>
+                  <p e-required e-style="max-width:75px;margin:0 auto;text-align:center;" e-class="form-control" editable-text="deal.priceMonth" e-name="priceMonth">{{ deal.priceMonth }}</p>
+                </td>
+                <td>{{deal.priceMonth / 30 | currency:currency}}</td>
+                <td>{{deal.priceMonth / 4 | currency:currency}}</td>
+                <td>{{deal.priceMonth | currency:currency}}</td>
+                <td>{{deal.priceMonth * 12 | currency:currency}}</td>
+              </tr>
+              <tr>
+                <td>Price / Year</td>
+                <td>
+                  <p e-required e-style="max-width:75px;margin:0 auto;text-align:center;" e-class="form-control" editable-text="deal.priceYear" e-name="priceYear">{{ deal.priceYear }}</p>
+                </td>
+                <td>{{deal.priceYear / 365 | currency:currency}}</td>
+                <td>{{deal.priceYear / 52 | currency:currency}}</td>
+                <td>{{deal.priceYear / 12 | currency:currency}}</td>
+                <td>{{deal.priceYear | currency:currency}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="clear:both;"></div>
+        <button type="button" class="btn btn-primary" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+          {{ deal.id ? 'Edit': 'Add'}}
+        </button>
+        <p ng-show="editableForm.$visible">
+          <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+            {{ deal.id ? 'Edit': 'Add'}}
+          </button>
+          <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+            Cancel
+          </button>
+        </p>
+      </div>
+    </form>
+    <!-- /.col-lg-12 -->
+  </div>
+  <!-- /.row -->
+</div>

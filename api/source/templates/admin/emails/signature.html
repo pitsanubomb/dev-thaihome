@@ -1,0 +1,31 @@
+<!--
+* 2016-05-17 - Ajay
+* Template for Change Default Signature
+-->
+<div class="row">
+	<div class="col-lg-12">
+		<div class="row login-frm" style="margin: 20px auto">
+			<div class="col-md-8 col-xs-10" style="margin:0 auto;float:none;">
+			  <div class="panel panel-default">
+				<div class="panel-heading">   
+					<h3 class="panel-title">Change Signature <a style="clear:both;" ui-sref="admin.emails"><button class="btn btn-success" type="button">Back</button></a></h3>
+				</div>
+				<div class="panel-body">
+					<form novalidate role="form" ng-submit="changeSignature()">           
+						<fieldset> 
+						  <div class="form-group">
+							<textarea rows="20"  ng-model="_signature" class="form-control" placeholder="Signature" autofocus>		</textarea>
+						  </div>
+						  <!-- Change this to a button or input when using this as a form -->
+						  <md-button ng-disabled="success" type="submit" class="md-raised pull-right md-primary">Change Signature</md-button>
+						</fieldset>
+					</form>
+				</div>
+			  </div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+</div>

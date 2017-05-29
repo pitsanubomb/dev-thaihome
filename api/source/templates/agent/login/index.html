@@ -1,0 +1,34 @@
+<header></header>
+<div class="top-images">
+  <div class="row login-frm">
+    <div class="col-sm-6 col-xs-10" style="margin:0 auto;float:none;">
+      <div class="login-panel panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Agent Log In</h3>
+        </div>
+        <div class="panel-body">
+
+          <form role="form" ng-submit="login(_username, _password)">
+            <div ng-show="$error" class="alert alert-danger">
+              Incorrect login information
+            </div>
+            <fieldset>
+              <div class="form-group">
+                <input ng-model="_username" class="form-control" placeholder="Email" type="text" required autofocus>
+              </div>
+              <div class="form-group">
+                <input ng-model="_password" class="form-control" placeholder="Password" name="password" required type="password" value="">
+              </div>
+              <!-- Change this to a button or input when using this as a form -->
+              <md-button type="submit" class="md-raised pull-right md-primary">Log In</md-button>
+            </fieldset>
+          </form>
+          <br />
+          <a href="#" ui-sref="agent_register"><md-button type="submit" class="md-raised pull-left md-primary">Register</md-button></a>
+          <a href="#" ui-sref="agent_forgot"><md-button type="submit" class="md-raised pull-left md-primary">Forgot Password?</md-button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

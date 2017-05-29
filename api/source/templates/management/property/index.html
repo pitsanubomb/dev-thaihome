@@ -1,0 +1,231 @@
+<div id="wrapper" class="col-sm-6 col-sm-push-3" style="padding:20px;clear:both; max-width: 600px;">
+    <div class="new-booking-area">
+        <table class="iconTD ">
+            <tr>
+                <td ui-sref="management.home" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                        src="/assets/images/Home.png" alt="Start Page"><span ng-if="menu_bookings"
+                                                                             class="management-menu-new-element-block">{{menu_bookings}}</span>
+                </td>
+                <td ui-sref="management.messages" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                        src="/assets/images/Messages.png" alt="Messages"><span ng-if="menu_messages"
+                                                                               class="management-menu-new-element-block">{{menu_messages}}</span>
+                </td>
+                <td ui-sref="management.bookings"><img src="/assets/images/Bookings.png" alt="Bookings"></td>
+                <td ui-sref="management.properties"><img src="/assets/images/Properties.png" alt="Properties"></td>
+                <td ui-sref="management.calendar({month: '', year:''})"
+                    ng-class="{'active-management-btn' : statename == 'management.calendar'}"><img
+                        src="/assets/images/Calendar.png" alt="Calendar"></td>
+                <td>
+                    <md-menu style="width: 100%;height: 100%;padding: 0;margin-top: 15px; display:block;"
+                             md-position-mode="target-right target" class="second-menu-container crnc-drop">
+                        <md-button aria-label=""
+                                   style="width: 100%!important;height: 100%;box-shadow: none;border: 0!important;"
+                                   class="md-icon-button" ng-click="$mdOpenMenu()">
+                            <img src="/assets/images/Menu.png" alt="Menu">
+                        </md-button>
+                        <md-menu-content>
+                            <ul class="nav second-nav manage-nav">
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.book">New Booking</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="admin.home">Admin</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="home">Thai Home</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.expenses">Expenses</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.todo">Todo</a>
+                                </li>
+                                <!-- 2016-05-17 - Ajay - Add link for profile page || Ajay du lrpi lakot es asem imaci -->
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.profile">Profile</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="admin_logout">Logout</a>
+                                </li>
+                            </ul>
+                        </md-menu-content>
+                    </md-menu>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+    <input style="opacity: 0;" id="data_id">
+
+
+    <table class="startLineTable">
+        <tbody>
+        <tr>
+            <td style="width:10%;" class="startLineTxt startBlueTh"><b>Project</b></td>
+            <td style="width:40%;" class="startLineTxt startOverflow" colspan="2">{{property.projectName}}</td>
+            <td style="border-top-style:hidden; border-bottom-style:hidden;width:3%;"></td>
+            <td style="width:10%;" class="startLineTxt startBlueTh"><b>Unit</b></td>
+            <td style="width:37%;" class="startLineTxt startOverflow">{{property.unique}}</td>
+        </tr>
+        <tr>
+            <td class="startLineTxt startBlueTh"><b>Size</b></td>
+            <td class="startLineTxt startOverflow" colspan="2">{{property.sqm}} Sqm</td>
+            <td style="border-top-style:hidden; border-bottom-style:hidden;"></td>
+            <td class="startLineTxt startBlueTh"><b>View</b></td>
+            <td class="startLineTxt startOverflow">{{translation.texts[0].view}}</td>
+        </tr>
+        <tr>
+            <td class="startLineTxt startBlueTh"><b>Status</b></td>
+            <td class="startLineTxt startOverflow" colspan="2"><b ng-if="!booked" class="green">Available</b><b
+                    ng-if="booked" class="red">OCCUPIED</b></td>
+            <td style="border-top-style:hidden; border-bottom-style:hidden;"></td>
+            <td class="startLineTxt startBlueTh"><b>Until</b></td>
+            <td class="startLineTxt startOverflow"><b ng-if="booked" class="red">{{booked | defaultDateFormat}}</b></td>
+        </tr>
+
+        <tr>
+            <td colspan="3" style="border-right-style:hidden;border-left-style:hidden;height:14px;"></td>
+            <td colspan="2" style="border-right-style:hidden;border-left-style:hidden;"></td>
+        </tr>
+
+        <tr>
+            <td style="border-left-style:hidden;border-top-style:hidden;"></td>
+            <td class="startLineTxt startCenter startBlueTh"><b>Rent</b></td>
+            <td class="startLineTxt startCenter startBlueTh"><b>Comm</b></td>
+            <td style="border-top-style:hidden; border-bottom-style:hidden;"></td>
+            <td style="border-left-style:hidden;border-top-style:hidden;"></td>
+            <td class="startLineTxt startOverflow startCenter startBlueTh"><b>Sale</b></td>
+        </tr>
+
+        <tr>
+            <td class="startLineTxt startBlueTh"><b>Day</b></td>
+            <td class="startLineTxt startRight">{{price.priceDay | currency: currency: 2}}</td>
+            <td class="startLineTxt startRight">{{price.commissionDay}}%</td>
+            <td style="border-top-style:hidden; border-bottom-style:hidden;"></td>
+            <td class="startLineTxt startBlueTh"><b>Price</b></td>
+            <td class="startLineTxt startRight startOverflow">{{property.saleprice | currency: currency: 0}}</td>
+        </tr>
+
+        <tr>
+            <td class="startLineTxt startBlueTh"><b>Week</b></td>
+            <td class="startLineTxt startRight">{{price.priceWeek | currency: currency: 2}}</td>
+            <td class="startLineTxt startRight">{{price.commissionWeek}}%</td>
+            <td style="border-top-style:hidden; border-bottom-style:hidden;"></td>
+            <td class="startLineTxt startBlueTh"><b>Comm</b></td>
+            <td class="startLineTxt startOverflow startRight">{{property.salecommission}}%</td>
+        </tr>
+
+        <tr>
+            <td class="startLineTxt startBlueTh"><b>Month</b></td>
+            <td class="startLineTxt startRight">{{price.priceMonth | currency: currency: 2}}</td>
+            <td class="startLineTxt startRight">{{price.commissionMonth}}%</td>
+            <td style="border-top-style:hidden; border-bottom-style:hidden;"></td>
+            <td class="startLineTxt startBlueTh"><b>Owner</b></td>
+            <td class="startLineTxt startOverflow startRight">{{property.ownership}}</td>
+        </tr>
+
+        <tr>
+            <td class="startLineTxt startBlueTh"><b>Year</b></td>
+            <td class="startLineTxt startRight">{{price.priceYear | currency: currency: 2}}</td>
+            <td class="startLineTxt startRight">{{price.commissionYear}}%</td>
+            <td style="border-top-style:hidden; border-bottom-style:hidden;"></td>
+            <td class="startLineTxt startBlueTh"><b>Maintain</b></td>
+            <td class="startLineTxt startOverflow" style="text-align: right">{{translation.texts[0].maintanance}}</td>
+        </tr>
+
+        <tr>
+            <td colspan="3" style="border-right-style:hidden;border-left-style:hidden;height:14px;"></td>
+            <td colspan="2" style="border-right-style:hidden;border-left-style:hidden;"></td>
+        </tr>
+
+        <tr>
+            <td class="startLineTxt startBlueTh"><b>Agent</b></td>
+            <td class="startLineTxt startOverflow" colspan="5">
+                <a target="_blank"
+                                                                  ui-sref="agent.property({id: property.unique})">{{agentrentlink}}</a>
+                <button class="startButton startRedBg copy_btn" data-text="{{agentrentlink}}" style="width:50px; height:23px;float: right;">COPY</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="startLineTxt startBlueTh"><b>Rent</b></td>
+            <td class="startLineTxt startOverflow" colspan="5">
+                <a target="_blank"
+                                                                  ui-sref="property({id: property.unique})">{{rentlink}}</a>
+                <button class="startButton startRedBg copy_btn" data-text="{{rentlink}}" style="width:50px; height:23px;float: right;">COPY</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="startLineTxt startBlueTh"><b>Sale</b></td>
+            <td class="startLineTxt startOverflow" colspan="5">
+                <a target="_blank" ui-sref="sale({id: property.unique})">{{salelink}}</a>
+                <button class="startButton startRedBg copy_btn" data-text="{{salelink}}" style="width:50px; height:23px;float: right;">COPY</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3" style="border-right-style:hidden;border-left-style:hidden;height:14px;"></td>
+            <td colspan="2" style="border-right-style:hidden;border-left-style:hidden;"></td>
+        </tr>
+
+        <tr>
+            <td class="startLineTxt" colspan="6" style="border-style:hidden;padding:0;">
+                <table class="startLineTable">
+                    <tr>
+                        <td style="width:50%" class="startLineTxt startCenter startBlueTh startOverflow"><b>Tenant</b>
+                        </td>
+                        <td style="width:20%" class="startLineTxt startCenter startBlueTh startOverflow"><b>Checkin</b>
+                        </td>
+                        <td style="width:20%" class="startLineTxt startCenter startBlueTh startOverflow" colspan="2"><b>Checkout</b>
+                        </td>
+                        <td style="width:9%" class="startLineTxt startCenter startBlueTh startOverflow"><b>N</b></td>
+                        <td style="width:1%" class="startLineTxt startCenter startBlueTh"></td>
+                    </tr>
+
+
+                    <!--
+                          TIKO here I want to show all active bookings on the current property
+                          So you have to get all bookings where booking.unique = property.unique AND booking.status=0,1,2,3,4 (from NEW BOOKING to CHECK-OUT cause it means the booking is still active)
+                          and then sort by booking.checkin date (oldest to newest)
+                          Clicking the EDIT button calls the booking form with the current booking ID
+                    -->
+
+                    <tr ng-repeat="booking in propertyBookings">
+                        <td class="startLineTxt startOverflow">{{getUserById(booking.user)}}</td>
+                        <td class="startLineTxt startOverflow startCenter">{{booking.checkin}}</td>
+                        <td class="startLineTxt startOverflow startCenter" colspan="2">{{booking.checkout}}</td>
+                        <td class="startLineTxt startOverflow startCenter">{{booking.nights}}</td>
+                        <td class="startLineTxt">
+                            <button class="startButton startBlueBg startSmallButton"
+                                    ui-sref="management.booking({id: booking._id})" style="width:40px;">EDIT
+                            </button>
+                        </td>
+                    </tr>
+
+
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3" style="border-right-style:hidden;border-left-style:hidden;height:14px;"></td>
+            <td colspan="2" style="border-right-style:hidden;border-left-style:hidden;"></td>
+        </tr>
+
+        <!--
+              TIKO please make the Back button go back to the properties list.
+        -->
+        <tr>
+            <td class="startLineTxt" colspan="6" style="border-style:hidden;">
+                <button class="startButton startRedBg" style="width:40%"
+                        ui-sref="management.book({property: property.unique})">New Booking
+                </button>
+                <button class="startButton startBlueBg" style="width:40%" ng-click="propertyDetails()">More Info
+                </button>
+                <button class="startButton startGreyBg" ui-sref="management.properties" style="width:20%">Back</button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>

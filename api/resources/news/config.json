@@ -1,0 +1,29 @@
+{
+	"type": "Collection",
+	"properties": {
+		"start": {
+			"name": "start",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "start",
+			"order": 0
+		},
+		"end": {
+			"name": "end",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "end",
+			"order": 1
+		},
+		"text": {
+			"name": "text",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "text",
+			"order": 2
+		}
+	}
+}

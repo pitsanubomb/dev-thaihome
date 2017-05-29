@@ -1,0 +1,61 @@
+<div class="header header-agent">
+  <div id="logo" class="pull-left">
+    <a ui-sref="home" ui-sref="agent.home">
+      <img src="/assets/images/logo.png" alt="Thai Home" class="img-responsive">
+    </a>
+  </div>
+  <nav class="navbar navbar-default pull-right" id="top-nav">
+    <ul class="nav navbar-nav" ng-controller="Locale">
+      <li ng-class="getClass('/contact')" md-ink-ripple><a ui-sref="contact">{{T.home.navigation.contactus || TD.home.navigation.contactus}}</a></li>
+      <li ng-class="getClass('/about')" md-ink-ripple><a ui-sref="about">{{T.home.navigation.aboutus || TD.home.navigation.aboutus}}</a></li>
+    </ul>
+  </nav>
+</div>
+<div class="container">
+  <div class="row listing">
+    <h2>Properties for Rent</h2>
+    <div>
+      <div class="col-md-6 col-md-offset-2 col-sm-8 col-sm-offset-2">
+        <div id="arches" class="responsive homepage">
+          <div id="search-input" class="manage">
+
+            <form id="vr-search" method="post" ng-submit="searchAgent()">
+
+              <booking-calendar></booking-calendar>
+              <md-button type="submit" class="md-raised md-warn home-search-bt booking_search">{{T.home.booking_search}}</md-button>
+            </form>
+
+            <div style="display: none;" class="calendar-panel"><i class="previous icon-caret-left-circle inactive"></i><i class="next icon-caret-right-circle"></i>
+              <div class="months"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+
+    <h2>Current Bookings by {{agent.name}}</h2>
+    <div>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Project</td>
+            <td>Unit No</td>
+            <td>Check In</td>
+            <td>Check Out</td>
+            <td>Tenant</td>
+            <td>Status</td>
+          </tr>
+          <tr ng-repeat="book in bookings">
+            <td><a ui-sref="agentBooking({'booking': book._id, 'id': book.property.id,'checkin': formatDate(book.checkin),'checkout': formatDate(book.checkout)})"><b>{{book.property.project_name}}</b></a></td>
+            <td>{{book.property.id}}</td>
+            <td><b>{{book.checkin}}</b></td>
+            <td><b>{{book.checkout}}</b></td>
+            <td>{{book.tenant.name}}<span ng-if="book.tenant.country">, {{book.tenant.country}}</span></td>
+            <td><b class="bookstatus_{{book.status}}">{{getStatus(book.status).name}}</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

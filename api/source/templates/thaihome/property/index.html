@@ -1,0 +1,222 @@
+<header></header>
+<div>
+  <div class="container">
+    <property-snippet></property-snippet>
+    <div class="row top-images">
+
+      <div class="main-img-container">
+        <div ng-repeat="image in property.images | limitTo: 2" class="top-image col-sm-6 col-xs-12">
+          <img ng-click="openGallery()" class="cursor" src="/assets/images/property/{{property.unique | lowercase}}/{{image}}" alt="">
+        </div>
+        <div>
+          <md-button ng-click="openGallery()" class="md-raised to-gallery md-warn">{{T.transSeePhotos}}</md-button>
+        </div>
+		<div class="clear"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="main-content container">
+
+    <div class="centered-content">
+
+      <div class="row" id="bookform">
+
+        <div class="price col-md-6">
+
+          <div class="title-first">
+            <div style="min-height:130px">
+              <h3>{{translation.texts[0].headline}}</h3>
+              <p class="pull-left">{{property.locationName}}</p>
+              <div class="reviews">
+                <div ng-if="ratings.length">
+                  <a class="rev" ng-if="ratings.length" href="#ratings" du-smooth-scroll>
+                    <div class="rating-stars">
+                      <stars stars={{stars}}></stars>
+                    </div>
+                    <p>{{T.transReviewRead}}</p>
+                  </a>
+                </div>
+                <a class="rev2" ng-if="ratings.length == 0">
+                  <p class="no-review">{{T.transReviewNo}}</p>
+                </a>
+              </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="row">
+              <div class="more_info blue-border longstay">
+                <div class="title2">
+                  <h3>{{T.transSpace}}</h3>
+                </div>
+                <div class="prices1 row">
+                  <div class="col-sm-6">
+                    <p><span class="prop-width">{{T.transBeds}}:</span> <b> {{translation.texts[0].beds}}</b></p>
+                    <p><span class="prop-width">{{T.transPropertyType}}</span> <b>{{property.propertyType}}</b></p>
+                    <p><span class="prop-width">{{T.transAccomodates}}</span> <b> {{property.guests}}</b></p>
+                  </div>
+                  <div class="col-sm-6">
+                    <p><span class="prop-width">{{T.transBedrooms}}</span> <b> {{property.bedrooms}}</b></p>
+                    <p><span class="prop-width">{{T.transBathrooms}}</span> <b> {{property.bathrooms}}</b></p>
+                    <p><span class="prop-width">{{T.transLivingrooms}}</span> <b> {{property.livingrooms}}</b></p>
+                  </div>
+                </div>
+                <p class="policy">{{T.transRead}} <a href="" ng-click="rules()" class="house-rule">{{T.transHouseRules}}</a> {{T.transAnd}} <a ng-click="cancellation()" class="cancellation_pol" href="">{{T.transCancellation}}</a></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="options col-md-6">
+          <div class="options-color">
+            <div class="option-price">
+              <a href="" class="price-tag">{{priceDay || price.priceDay | currency: currency:1}}</a>
+            </div>
+
+            <div class="option">
+              <i class="glyphicon glyphicon-home"></i>
+              <p>{{T.transEntireCondo}}</p>
+            </div>
+
+            <div class="option">
+              <i class="glyphicon glyphicon-user"></i>
+              <p>{{property.guests}} {{T.transPersons}}</p>
+            </div>
+
+            <div class="option">
+              <i class="glyphicon glyphicon-bed"></i>
+              <p>{{property.bedrooms}} {{T.transBedroom}}</p>
+            </div>
+          </div>
+          <p ng-show="refAgent" style="position:absolute;left:15px;font-size: 14px;margin-top: 5px;">{{T.transAgent}}: <b>{{refAgent.agency}}, {{refAgent.name}}</b></p>
+          <div class="prices">
+            <form ng-submit="book()">
+              <h3>{{T.transDatePrice}}</h3>
+              <div class="clear"></div>
+              <div class="row">
+                <div class="col-lg-7">
+                  <div class="inprice-dates">
+                    <span class="date-fields">
+                      <booking-calendar></booking-calendar>
+                    </span>
+                  </div>
+                  <div class="clear"></div>
+                  <table class="table nomargin-t">
+                    <tbody ng-show="showPrices">
+                      <tr>
+                        <td>{{priceDay | currency: currency:1}} x {{nights}} {{T.transNights}}</td>
+                        <td class="price-right">{{priceDay * nights | currency: currency:0}}</td>
+                      </tr>
+                      <tr ng-if="discount.percent">
+                        <td class="green">{{T.transDiscount}} ({{discount.percent}}%)</td>
+                        <td class="green price-right">{{(priceDay * nights / 100 * discount.percent)  * -1 | currency: currency:0}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{T.transChkClean}}</td>
+                        <td class="price-right">{{property.cleanfinalprice | currency: currency:0}}</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h4 style="margin-top:8px;">{{T.transTotal}}</h4></td>
+                        <td class="price-right">
+                          <h4 style="margin-top:8px;">{{priceDay * nights - priceDay * nights * discount.percent / 100 + property.cleanfinalprice | currency: currency:0}}</h4></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+                <div class="col-lg-5 discount-container1">
+                  <discount></discount>
+                  <div class="clear"></div>
+                  <div class="bookorask1">
+                    <md-button class="md-raised book md-warn">{{T.transBookNow}}</md-button>
+                    <p>{{T.transOr}}</p>
+                    <a href="#messages">
+                      <md-button type="button" class="md-raised ask md-primary" href="#conversation" onclick="$('chat textarea:first').focus();" du-smooth-scroll>{{T.transAskQuestion}}</md-button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+      <property-about></property-about>
+
+    </div>
+
+  </div>
+
+  <property-details></property-details>
+
+  <div class="container">
+    <div class="row imgs-container">
+      <div class="main-img-container2">
+        <div ng-repeat="image in getSubArray(property.images,2, 4) | limitTo: 2" class="top-image custom-col-6">
+          <img ng-click="openGallery()" class="cursor" src="/assets/images/property/{{property.unique | lowercase}}/{{image}}" alt="">
+        </div>
+        <div class="visible-xs-block">
+          <md-button ng-click="openGallery()" class="md-raised to-gallery md-warn">{{T.transSeeAll}} {{property.images.length}} {{T.transPhotos}}</md-button>
+        </div>
+      </div>
+      <div class="main-img-container3 hidden-xs">
+        <div ng-repeat="image in getSubArray(property.images,4, 7) | limitTo: 3" class="top-image col-sm-4 col-xs-6">
+          <img ng-click="openGallery()" class="cursor" src="/assets/images/property/{{property.unique | lowercase}}/{{image}}" alt="">
+        </div>
+        <div>
+          <md-button ng-click="openGallery()" class="md-raised to-gallery md-warn">{{T.transSeeAll}} {{property.images.length}} {{T.transPhotos}}</md-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-content container">
+
+    <div class="centered-content">
+
+      <div class="row" id="conversation">
+        <div class="col-md-6 col-md-offset-3 about-owner">
+
+          <div class="col-xs-3">
+            <div class="owner-img">
+              <img src="/assets/images/note.png" alt="">
+            </div>
+          </div>
+          <div class="col-xs-9">
+            <div class="owner-buble">
+              <div ng-bind-html="T.transNoteAsk"></div>
+              <div class="arrow"></div>
+            </div>
+          </div>
+          <h3 class="chat-title">{{T.transAskBooking}}</h3>
+
+          <div class="clear"></div>
+          <chat></chat>
+          <div class="clear"></div>
+          <div class="rating-bookorask">
+            <md-button ng-show="showPrices" ng-click="book()" class="md-raised book2 md-warn pull-left">{{T.transBookNow}}</md-button>
+          </div>
+          <div class="clear"></div>
+        </div>
+
+
+      </div>
+      <div id="ratings">
+        <ratings></ratings>
+      </div>
+
+
+    </div>
+    <div class="map-container-prop">
+      <div class="google-map-prop">
+        <map style="height:100%;width:100%;" ng-init="map()"></map>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>
+
+<footer></footer>

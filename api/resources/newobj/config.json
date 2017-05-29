@@ -1,0 +1,21 @@
+{
+	"type": "Collection",
+	"properties": {
+		"bomb": {
+			"name": "bomb",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "bomb",
+			"order": 0
+		},
+		"age": {
+			"name": "age",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "age",
+			"order": 1
+		}
+	}
+}

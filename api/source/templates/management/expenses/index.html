@@ -1,0 +1,316 @@
+<div id="wrapper" class="col-sm-6 col-sm-push-3" style="min-height: 561px;padding:5px;clear:both; max-width: 600px;">
+    <!--  TIKO please put menu and top bar from our bookingform -->
+    <style>
+        #paidOption option[label='PAID'] {
+            color: #008000;
+        }
+
+        #paidOption option[label='NOT PAID'] {
+            color: #983434;
+        }
+
+        .redSelect {
+            background: #008000;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+
+        .blueSelect {
+            background: #983434;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+
+        .startField.payStatus option {
+            background: white !important;
+
+        }
+    </style>
+    <div class="new-booking-area">
+        <table class="iconTD ">
+            <tr>
+                <td ui-sref="management.home" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                        src="/assets/images/Home.png" alt="Start Page"><span ng-if="menu_bookings"
+                                                                             class="management-menu-new-element-block">{{menu_bookings}}</span>
+                </td>
+                <td ui-sref="management.messages" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                        src="/assets/images/Messages.png" alt="Messages"><span ng-if="menu_messages"
+                                                                               class="management-menu-new-element-block">{{menu_messages}}</span>
+                </td>
+                <td ui-sref="management.bookings"><img src="/assets/images/Bookings.png" alt="Bookings"></td>
+                <td ui-sref="management.properties"><img src="/assets/images/Properties.png" alt="Properties"></td>
+                <td ui-sref="management.calendar({month: '', year:''})"
+                    ng-class="{'active-management-btn' : statename == 'management.calendar'}"><img
+                        src="/assets/images/Calendar.png" alt="Calendar"></td>
+                <td>
+                    <md-menu style="width: 100%;height: 100%;padding: 0;margin-top: 15px; display:block;"
+                             md-position-mode="target-right target" class="second-menu-container crnc-drop">
+                        <md-button aria-label=""
+                                   style="width: 100%!important;height: 100%;box-shadow: none;border: 0!important;"
+                                   class="md-icon-button" ng-click="$mdOpenMenu()">
+                            <img src="/assets/images/Menu.png" alt="Menu">
+                        </md-button>
+                        <md-menu-content>
+                            <ul class="nav second-nav manage-nav">
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.book">New Booking</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="admin.home">Admin</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="home">Thai Home</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.expenses">Expenses</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.todo">Todo</a>
+                                </li>
+                                <!-- 2016-05-17 - Ajay - Add link for profile page || Ajay du lrpi lakot es asem imaci -->
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.profile">Profile</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="admin_logout">Logout</a>
+                                </li>
+                            </ul>
+                        </md-menu-content>
+                    </md-menu>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- this is just for testing the form/table switch -->
+    <div id="listExpense" style="display:inline;">
+
+
+        <!-- SEARCH FORM -->
+        <table class="startHeadTable">
+            <tbody>
+            <tr>
+                <td class="startPinkTxt startHeadTxt startOverflow" colspan="4">EXPENSES</td>
+            </tr>
+
+            <tr>
+                <td style="width:10%;" class="startLeadTxt">Type</td>
+                <td style="width:50%;">
+                    <select class="startField" ng-model="searchType">
+                        <option value=""></option>
+                        <option value="1">Items</option>
+                        <option value="2">Office</option>
+                        <option value="3">Insurance</option>
+                    </select>
+                </td>
+                <td style="width:20%" class="startLeadTxt startRight">Paid</td>
+                <td style="width:20%;">
+                    <select class="startField payStatus" ng-model="payCheck" style="overflow: hidden"
+                            ng-class="{'redSelect': payCheck == '!NOT PAID', 'blueSelect': payCheck == 'NOT PAID'}">
+                        <option style="font-weight: bold" value=""> SHOW ALL</option>
+                        <option style="color: #008000;" value="!NOT PAID" class="redSelect">PAID</option>
+                        <option style="color: #983434;" selected="NOT PAID" value="NOT PAID" class="blueSelect">NOT
+                            PAID
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="startLeadTxt">Search</td>
+                <td class="startPinkTxt startHeadTxt" colspan="3">
+                    <input style="width: 100%;" type="text" ng-model="expenseSearch.$" class="startField rightField">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="startCenter">
+                    <button class="startPinkBg startButton" style="width:200px;"
+                            onclick="document.getElementById('propSelect').setAttribute('multiple', '');document.getElementById('listExpense').style.display = 'none';document.getElementById('formExpense').style.display = 'inline';">
+                        MAKE NEW EXPENSE
+                    </button>
+                </td>
+            </tr>
+
+        </table>
+        <div class="startSpacer"></div>
+
+
+        <!-- LIST TABLE -->
+        <table class="startLineTable" ng-if="expenses.length">
+            <thead>
+            <tr>
+                <th style="width:46%;" class="startPinkTh startOverflow">Expense</th>
+                <th style="width:1%;" class="startPinkTh startOverflow"></th>
+                <th style="width:20%;" class="startPinkTh startOverflow">Payment</th>
+                <th style="width:10%;" class="startPinkTh"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr ng-repeat="expense in expenses | filter:expenseSearch | filter:{paidDate:payCheck} | filter:{expenseCategory:searchType}
+                    | orderBy: (payCheck == 'NOT PAID' ? 'dueDate' : '-transactionNo')">
+                <td ng-click="editExpense(expense.id)" class="startLineTxt startOverflow">{{expense.text}}
+                </td>
+                <td ng-click="editExpense(expense.id)" class="startLineTxt startBoldTxt startCenter"><span
+                        ng-class="getDateColor(expense)">{{expense.paidDate == 'NOT PAID' ? calcDays(expense.dueDate) : (expense.paidDate + '000' | date:'dd MMM' : 'UTC') }}</span>
+                </td>
+                <td ng-click="editExpense(expense.id)" class="startLineTxt startOverflow startRight">
+                    {{expense.amount | currency:currency:0}}
+                </td>
+                <td class="startCenter">
+                    <button ng-click="payExpChange(expense.id)" class="startPinkBg startButton startSmallButton"
+                            ng-if="expense.paidDate == 'NOT PAID'">
+                        PAY
+                    </button>
+                    <span style="color:green ; font-weight: bold" ng-if="expense.paidDate != 'NOT PAID'">PAID</span>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+        <div class="startSpacer"></div>
+
+    </div>  <!-- for testing -->
+
+
+    <!-- EXPENSE FORM LAYER -->
+
+    <div id="formExpense" style="display:none;">   <!-- for testing -->
+
+        <table class="startHeadTable">
+            <tbody>
+
+            <tr>
+                <!-- David this must be NEW EXPENSE when its a new, and EDIT EXPENSE when its edit existing -->
+                <td class="startPinkTxt startHeadTxt" colspan="2">NEW EXPENSE</td>
+            </tr>
+
+            <!-- David Here we should have the list of expense categories - talk to TIKO, I think we just do a js array -->
+            <tr>
+                <td style="width:10%;" class="startLeadTxt">Type</td>
+                <td style="width:90%;">
+                    <select ng-model="expenseCategories"
+                            ng-options="category.value as category.category for category in categories"
+                            class="startField">
+
+                    </select>
+                </td>
+            </tr>
+
+            <!-- David why are the select and input not the same length? -->
+            <tr>
+                <td class="startLeadTxt">Description</td>
+                <td><input type="text" ng-model="expenseText" class="startField"></td>
+            </tr>
+            <tr>
+                <td class="startLeadTxt">Amount</td>
+                <td><input type="text" ng-model="expenseAmount" class="startField startRight"></td>
+            </tr>
+            <tr>
+                <td class="startLeadTxt">Paid</td>
+                <td>
+                    <select class="startField payStatus" id="paidOption" ng-model="expensePay"
+                            ng-class="{'redSelect': expensePay == payStatus[0], 'blueSelect': expensePay == payStatus[1]}"
+                            ng-options="s as s for s in payStatus">
+
+                    </select>
+                </td>
+            </tr>
+
+            <!-- David Here we should have the list of accounts - talk to TIKO, I think we just do a js array, same as booking form -->
+            <tr>
+                <td class="startLeadTxt">Account</td>
+                <td>
+                    <select ng-model="expenseAccount" ng-options="account as account for account in accounts"
+                            class="startField">
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height:15px;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="startPinkBg" style="height:2px; padding:0px;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height:10px;"></td>
+            </tr>
+
+
+            <!-- David Here you have to get a list of all properties, Tiko already have functions to do that -->
+            <tr>
+                <td class="startLeadTxt" style="vertical-align:top;">Unit</td>
+                <td>
+                    <select id="propSelect" ng-model="prop"
+                            ng-options="property.unique as property.unique for property in properties | orderBy:'unique'"
+                            class="startField" ng-model="prop" multiple style="height:110px;">
+                        <option value=""></option>
+                    </select>
+                </td>
+            </tr>
+
+
+            <!-- This one you have to look up in booking table and validate, Tiko has function - if not correct just make red border around field and show alert'Booking not found' -->
+            <tr>
+                <td class="startLeadTxt">DueDate</td>
+                <td><input type="date" ng-model="dueDate" class="startField" value="{{dueDate}}"></td>
+            </tr>
+
+            <tr>
+                <td class="startLeadTxt">BookID</td>
+                <td><input type="text" class="startField" ng-model="bookId" value=""></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="height:10px;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="startPinkBg" style="height:2px; padding:0px;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height:5px;"></td>
+            </tr>
+
+
+            <tr>
+                <td class="startLeadTxt startPinkTxt" colspan="2"><b>DateSpan</b><i> (for very long expenses) </i></td>
+            </tr>
+            <tr>
+                <td class="startLeadTxt">From</td>
+                <td><input type="date" ng-model="fromDate" class="startField" value="{{fromDate}}"></td>
+            </tr>
+            <tr>
+                <td class="startLeadTxt">To</td>
+                <td><input type="date" ng-model="toDate" class="startField" value="{{toDate}}"></td>
+            </tr>
+            <tr>
+                <td style="height:10px;"></td>
+            </tr>
+
+
+            <tr>
+                <td colspan="2" class="startOverflow">
+                    <button class="startButton startPinkBg" style="width: 48%;" ng-click="saveExp()"
+                            onclick="document.getElementById('listExpense').style.display = 'inline';document.getElementById('formExpense').style.display = 'none';">
+                        SAVE
+                    </button>
+                    <button class="startButton startRedBg" style="width: 25%;" ng-if="actionStatus"
+                            ng-click="deleteExpense(expId)"
+                            onclick="document.getElementById('listExpense').style.display = 'inline';document.getElementById('formExpense').style.display = 'none';">
+                        DELETE
+                    </button>
+                    <button class="startButton startGreyBg" style="width: 25%;background-color: gray;"
+                            ng-click="cleanBuffer()"
+                            onclick="document.getElementById('listExpense').style.display = 'inline';document.getElementById('formExpense').style.display = 'none';">
+                        CANCEL
+                    </button>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>  <!-- for testing -->
+
+</div>

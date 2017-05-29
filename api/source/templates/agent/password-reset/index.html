@@ -1,0 +1,30 @@
+<header></header>
+<div class="top-images">
+  <div class="row">
+    <div class="col-md-6" style="margin:0 auto;float:none;">
+      <div class="login-panel panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Reset Password</h3>
+        </div>
+        <div class="panel-body">
+
+          <form role="form" ng-submit="update(_password)">
+            <div ng-show="error" class="alert alert-danger">
+              {{error}}
+            </div>
+            <fieldset>
+              <div class="form-group">
+                <input ng-model="_password" class="form-control" placeholder="New Password" type="password" required autofocus>
+              </div>
+              <!-- Change this to a button or input when using this as a form -->
+              <md-button class="md-raised md-primary pull-right" type="submit">Update Password</md-button>
+            </fieldset>
+          </form>
+          <br />
+          <a href="#" ui-sref="agent_login"><md-button type="submit" class="md-raised pull-left md-primary">Log In</md-button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

@@ -1,0 +1,21 @@
+{
+	"type": "Collection",
+	"properties": {
+		"featuredproperties": {
+			"name": "featuredproperties",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "featuredproperties",
+			"order": 0
+		},
+		"bookingexpiredays": {
+			"name": "bookingexpiredays",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "bookingexpiredays",
+			"order": 1
+		}
+	}
+}

@@ -1,0 +1,11 @@
+<header></header>
+<div class="clear"></div>
+<div class="content home-news-container">
+  <div class="row home-news" ng-repeat="new in news | limitTo:nrNews">
+    <div class="blue-border" ng-bind-html="deliberatelyTrustDangerousSnippet(new.text)"></div>
+  </div>
+  <md-button ng-click="moreNews()" ng-show="nrNews < news.length">{{T.transMoreNews}}</md-button>
+</div>
+
+<div class="clear"></div>
+<footer></footer>

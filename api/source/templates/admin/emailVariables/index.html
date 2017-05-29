@@ -1,0 +1,55 @@
+<h1>EMAIL VARAIBLES</h1>
+<div class="container">
+  <div class="container" ng-if="!actionStatus">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="variable">Variable:</label>
+        <div class="col-sm-10">
+          <input type="text" ng-model="variable.variable" class="form-control" id="variable" placeholder="Enter variable">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="function">Function:</label>
+        <div class="col-sm-10">
+          <input type="text" ng-model="variable.func" class="form-control" id="function" placeholder="Enter function">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="condition">Condition:</label>
+        <div class="col-sm-10">
+          <input type="text" ng-model="variable.condition" class="form-control" id='condition' placeholder="Enter condition">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="function">Default value:</label>
+        <div class="col-sm-10">
+          <input type="text" ng-model="variable.default" class="form-control" id="function" placeholder="Enter Default value">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button ng-click="saveVariable()" class="btn btn-default">save</button>
+          <button ng-click="cancel()" class="btn btn-default">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <table class="table" ng-if="actionStatus">
+    <thead>
+      <tr>
+        <th>variable</th>
+        <th>func</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="cursor: pointer;" ng-repeat="variableProps in variables | orderBy:'variable'" >
+        <td style="min-width: 140px;" ng-click="editVariable(variableProps._id)">{{variableProps.variable}}</td>
+        <td ng-click="editVariable(variableProps._id)">{{variableProps.func}}</td>
+        <td><button ng-click="delete(variableProps._id)" class="btn btn-default">delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <button ng-if="actionStatus" ng-click="toggleActionStatus()" class="btn btn-default">add variable</button>
+
+</div>

@@ -1,0 +1,89 @@
+<!--Start Of Inspection View Page-->
+<div class="row">
+    <!--Inspection List-->
+    <div ng-show="actionStatus" class="col-sm-12">
+        <div class="col-sm-12">
+            <div class="col-sm-3">
+                <button style="width:50px;" class="startOrangeBg startButton" ng-click="toggleActionStatus()">
+                    NEW
+                </button>
+            </div>
+            <div class="col-sm-6 text-center">
+                <h2 class="col-sm-6 col-sm-push-3">{{currentPropId}}</h2>
+            </div>
+        </div>
+
+
+        <div class="startSpacer"></div>
+        <table class="startLineTable">
+            <tr>
+                <th style="width:30%;" class="startOrangeTh startOverflow">Category</th>
+                <th style="width:60%;" class="startOrangeTh startUnit">Item</th>
+                <th style="width:5%;" class="startOrangeTh startOverflow">Update</th>
+                <th style="width:5%;" class="startOrangeTh startOverflow">Delete</th>
+            </tr>
+            <tr ng-repeat="inspection in inspections">
+                <td class="startLineTxt startBoldTxt startCenter startOverflow">
+                    {{inspection.category}}
+                </td>
+                <td class="startLineTxt startCenter">
+                    {{inspection.item}}
+                </td>
+                <td class="startCenter">
+                    <button style="width:50px;" class="startOrangeBg startButton"
+                            ng-click="updateInspection(inspection._id)">Update
+                    </button>
+                </td>
+                <td>
+                    <button style="width:50px;" class="startOrangeBg startButton"
+                            ng-click="deleteInspection(inspection._id)">Delete
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--End Of Inspection List-->
+
+    <div class="startSpacer"></div>
+
+
+    <!--Item add form-->
+    <div ng-show="!actionStatus">
+        <table class="startHeadTable">
+            <tbody>
+            <tr>
+                <td style="height:1px;width:20%;"></td>
+                <td style="height:1px;width:70%;"></td>
+                <td style="height:1px;width:10%;"></td>
+            </tr>
+            <tr>
+                <td class="startLeadTxt">Item Category</td>
+                <td colspan="2">
+                    <select class="startField"
+                            ng-options="c.category as c.category for c in checkCategories"
+                            ng-model="category">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="startLeadTxt">Item</td>
+                <td colspan="2">
+                    <input class="startField" type="text" ng-model="item">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="startOverflow">
+                    <button class="startButton startOrangeBg" style="width: 40%;" ng-click="saveItem()">
+                        SAVE
+                    </button>
+                    <button class="startButton startGreyBg" style="width: 20%;" ng-click="cancel()">
+                        CANCEL
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--End Of Item Add Form-->
+</div>
+<!--End Of Inspection View Page-->

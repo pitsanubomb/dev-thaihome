@@ -1,0 +1,376 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">{{property.id ? 'Edit': 'Add'}} {{property.unique}}</h1>
+  </div>
+  <div style="clear:both;"></div>
+  <form role="form" ng-submit="update()" nv-file-drop="" uploader="uploader">
+    <div class="col-md-4">
+      <div style="clear:both;"></div>
+      <button class="btn btn-primary btn-sm" type="submit">{{property.id ? 'Update': 'Add'}}</button>
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="property.active" ng-checked="property.active"> Active
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Location</label>
+        <input readonly type="text" placeholder="Location" ng-click="locationList()" class="form-control form-popup" ng-model="property.location.name" />
+      </div>
+      <div class="form-group">
+        <label>Location Name</label>
+        <input type="text" class="form-control" ng-model="property.locationName" />
+      </div>
+      <div class="form-group">
+        <label>Minimum Booking Days</label>
+        <input type="number" placeholder="" class="form-control" ng-model="property.minimDays" />
+      </div>
+      <div class="form-group">
+        <label>Property Custom ID</label>
+        <input type="text" placeholder="XXX-YYY" class="form-control" ng-model="property.unique" />
+      </div>
+      <div class="form-group">
+        <label>Property Name</label>
+        <input type="text" placeholder="" class="form-control" ng-model="property.name" />
+      </div>
+      <div class="form-group">
+        <label>Project Name</label>
+        <input type="text" placeholder="" class="form-control" ng-model="property.projectName" />
+      </div>
+      <div class="form-group">
+        <label>Property Type</label>
+        <input type="text" placeholder="" class="form-control" ng-model="property.propertyType" />
+      </div>
+      <div class="form-group">
+        <label>Unit Type</label>
+        <input type="text" placeholder="" class="form-control" ng-model="property.unitType" />
+      </div>
+      <div class="form-group">
+        <label>Unit Number</label>
+        <input type="text" placeholder="" class="form-control" ng-model="property.unitNumber" />
+      </div>
+      <div class="form-group">
+        <label>Address #1</label>
+        <input type="text" placeholder="" class="form-control" ng-model="property.address1" />
+      </div>
+      <div class="form-group">
+        <label>Address #2</label>
+        <input type="text" placeholder="" class="form-control" ng-model="property.address2" />
+      </div>
+      <div class="form-group">
+        <label>Address #3</label>
+        <input type="text" placeholder="" class="form-control" ng-model="property.address3" />
+      </div>
+      <div class="form-group">
+        <label>Thai Address</label>
+        <input type="text" placeholder="" class="form-control" ng-model="property.thaiAddress" />
+      </div>
+      <div class="form-group">
+        <label>Google Maps Link</label>
+        <input type="text" placeholder="https://maps.google.com/" class="form-control" ng-model="property.gmapslink" />
+      </div>
+      <div class="form-group">
+        <label>Google Maps Map</label>
+        <textarea class="form-control" placeholder="lat,long" ng-model="property.gmapsdata"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Number of Guests</label>
+        <input type="number" placeholder="2" class="form-control" ng-model="property.guests" />
+      </div>
+      <div class="form-group">
+        <label>Number of Bedrooms</label>
+        <input type="number" placeholder="1" class="form-control" ng-model="property.bedrooms" />
+      </div>
+      <div class="form-group">
+        <label>Number of Bathrooms</label>
+        <input type="number" placeholder="1" class="form-control" ng-model="property.bathrooms" />
+      </div>
+      <div class="form-group">
+        <label>Number of Livingrooms</label>
+        <input type="text" placeholder="1" class="form-control" ng-model="property.livingrooms" />
+      </div>
+      <div class="form-group">
+        <label>Surface m<sup>2</sup></label>
+        <input type="number" placeholder="150" class="form-control" ng-model="property.sqm" />
+      </div>
+      <div class="form-group">
+        <label>Sale Price</label>
+        <input type="number" placeholder="100000" class="form-control" ng-model="property.saleprice" />
+      </div>
+      <div class="form-group">
+        <label>Sale Comision (%)</label>
+        <input type="number" placeholder="5" class="form-control" ng-model="property.salecommission" />
+      </div>
+      <div class="form-group">
+        <label>Ownership</label>
+        <input type="text" placeholder="Ownership" class="form-control" ng-model="property.ownership" />
+      </div>
+      <div class="form-group">
+        <label>Cleaning Price</label>
+        <input type="number" placeholder="100" class="form-control" ng-model="property.cleanprice" />
+      </div>
+
+      <div class="form-group">
+        <label>Final Cleaning Price</label>
+        <input type="text" placeholder="100" class="form-control" ng-model="property.cleanfinalprice" />
+      </div>
+      <div class="form-group">
+        <label>Electrinc Unit</label>
+        <input type="number" placeholder="100" class="form-control" ng-model="property.electricUnit" />
+      </div>
+      <div class="form-group">
+        <label>Water Unit</label>
+        <input type="number" placeholder="100" class="form-control" ng-model="property.waterUnit" />
+      </div>
+      <div class="form-group">
+        <label>Internet</label>
+        <input type="text"  class="form-control" ng-model="property.internet" />
+      </div>
+      <div class="form-group">
+        <label>CabelTV</label>
+        <input type="text"  class="form-control" ng-model="property.cabelTv" />
+      </div>
+      <h3>Amenities</h3>
+      <div class="form-group">
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.pets" /> Pets
+          </label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.smoking" /> Smoking
+          </label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.washingmachine" /> Washingmachine
+          </label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.wifi" />Wifi</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.cable" />Cable</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.air">Air-Conditioning</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.balcony">Balcony</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.kitchen">Kitchen</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.towels">Towels</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.friendly">Family/Kid Friendly</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.elevator">Elevator</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.pools">Pools</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.jaccuzis">Jaccuzis</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.fitness">Fitness Center</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.wslide">Water Slide</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.childplay">Children Play Area</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.parking">Free Parking</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.smoke">Smoke Detector</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.deposit">Safety Deposit Box</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.card">Safety Card</label>
+        </div>
+        <div class="checkbox">
+
+          <label>
+            <input type="checkbox" ng-model="property.amenities.security">24h Security</label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="property.amenities.laundry">Laundry Service</label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="property.amenities.breakfast">Breakfast</label>
+        </div>
+      </div>
+      <div style="clear:both;"></div>
+      <button class="btn btn-primary btn-sm" type="submit">{{property.id ? 'Update': 'Add'}}</button>
+    </div>
+    <div class="col-md-8 imagegallery">
+      <h3>Images/PDF Links</h3>
+      <div class="form-group">
+        <label>DropBox Main</label>
+        <input type="text" placeholder="http://" class="form-control" ng-model="property.dropbox" />
+      </div>
+      <div class="form-group">
+        <label>DropBox PDF</label>
+        <input type="text" placeholder="http://" class="form-control" ng-model="property.dropboxPdf" />
+      </div>
+      <div class="form-group">
+        <label>DropBox Web Quality Photos</label>
+        <input type="text" placeholder="http://" class="form-control" ng-model="property.dropboxWeb" />
+      </div>
+      <div class="form-group">
+        <label>DropBox Hi Quality Photos</label>
+        <input type="text" placeholder="http://" class="form-control" ng-model="property.dropboxHq" />
+      </div>
+
+      <h3>Image Gallery</h3>
+      <p ng-if="!property.id"><b>Images can only be added on the edit page</b></p>
+      <div ng-if="property.id">
+        <div class="col-md-8">
+
+
+
+          <div ng-show="uploader.isHTML5">
+            <!-- 3. nv-file-over uploader="link" over-class="className" -->
+
+
+          </div>
+
+          <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
+          <input type="file" nv-file-select="" uploader="uploader" multiple />
+          <br/>
+
+        </div>
+        <div class="clear"></div>
+        <br />
+
+        <p>Queue length: {{ uploader.queue.length }}</p>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="50%">Name</th>
+              <th ng-show="uploader.isHTML5">Progress</th>
+              <th>Status</th>
+              <th>Featured</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody ui-sortable="{update: updateImageOrder}" ng-model="imagesList">
+            <tr style="cursor:move" ng-repeat="image in property.images track by $index" class="ng-scope image_{{image.split('.')[0]}}">
+              <td>
+                <strong class="ng-binding">{{image}}</strong>
+                <div class="clear"></div>
+                <!-- Image preview -->
+                <!--auto height-->
+                <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                <!--auto width-->
+                <img width="150" height="100" src="/assets/images/property/{{property.unique.toLowerCase()}}/{{image}}" />
+                <!--fixed width and height -->
+                <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+              </td>
+
+              <td ng-show="uploader.isHTML5">
+                <div style="margin-bottom: 0;" class="progress">
+                  <div ng-style="{ 'width': item.progress + '%' }" role="progressbar" class="progress-bar" style="width: 100%;"></div>
+                </div>
+              </td>
+              <td class="text-center">
+
+                <span><i class="glyphicon glyphicon-ok"></i></span>
+              </td>
+              <td>
+                <input type="radio" ng-checked="image == property.featured" value="{{image}}" name="featured" ng-model="featured" ng-change="featuredImg(image)" />
+              </td>
+              <td nowrap="">
+                <button type="button" class="btn btn-danger btn-xs" ng-click="deleteImg(image)">
+                  <span class="glyphicon glyphicon-trash"></span> Remove
+                </button>
+              </td>
+            </tr>
+            <tr ng-repeat="item in uploader.queue">
+              <td>
+                <strong>{{ item.file.name }}</strong>
+
+                <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100,width:150 }"></div>
+              </td>
+
+              <td ng-show="uploader.isHTML5">
+                <div class="progress" style="margin-bottom: 0;">
+                  <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                </div>
+              </td>
+              <td class="text-center">
+                <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+              </td>
+              <td>
+                <input type="radio" value="{{item.file.name}}" ng-model="featured" name="featured" ng-change="featuredImg(item.file.name)" />
+              </td>
+              <td nowrap>
+                <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                  <span class="glyphicon glyphicon-upload"></span> Upload
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </form>
+
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

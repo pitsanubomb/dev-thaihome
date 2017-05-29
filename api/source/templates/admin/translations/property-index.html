@@ -1,0 +1,27 @@
+<div class="row">
+  <ui-view>
+    <div class="col-lg-12">
+      <h1 class="page-header">Property Translations <a style="clear:both;" ui-sref="admin.property-translations.add"><button class="btn btn-success" type="button">Add new translation</button></i></button></a></h1>
+    </div>
+
+    <table id="translationTable" class="table table-striped table-bordered table-hover no-footer" datatable="ng" dt-options="dtOptions">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Language</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="gradeA curosr" ng-repeat="translation in translations">
+          <td ui-sref="admin.property-translations.edit({ id: translation.id})">{{translation.property.unique}}</td>
+          <td ui-sref="admin.property-translations.edit({ id: translation.id})">{{translation.language}}</td>
+          <td width="40">
+            <button ng-really-message=" Are you sure you want to delete {{translation.language}} ?" ng-really-click="delete(translation.id)" class="btn-sm btn btn-danger" type="button">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </ui-view>
+</div>

@@ -1,0 +1,131 @@
+<div id="wrapper" class="col-sm-6 col-sm-push-3" style="padding:20px;clear:both; max-width: 600px;">
+    <div class="new-booking-area">
+        <style>
+            .prevSix {
+                color: #FF6600
+            }
+
+            .prevTwlv {
+                color: #FF0000;
+            }
+
+            .prevDay {
+                background-color: #FF0000;
+                color: #ffffff;
+            }
+
+        </style>
+        <table class="iconTD ">
+            <tr>
+                <td ui-sref="management.home" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                        src="/assets/images/Home.png" alt="Start Page"><span ng-if="menu_bookings"
+                                                                             class="management-menu-new-element-block">{{menu_bookings}}</span>
+                </td>
+                <td ui-sref="management.messages" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                        src="/assets/images/Messages.png" alt="Messages"><span ng-if="menu_messages"
+                                                                               class="management-menu-new-element-block">{{menu_messages}}</span>
+                </td>
+                <td ui-sref="management.bookings"><img src="/assets/images/Bookings.png" alt="Bookings"></td>
+                <td ui-sref="management.properties"><img src="/assets/images/Properties.png" alt="Properties"></td>
+                <td ui-sref="management.calendar({month: '', year:''})"
+                    ng-class="{'active-management-btn' : statename == 'management.calendar'}"><img
+                        src="/assets/images/Calendar.png" alt="Calendar"></td>
+                <td>
+                    <md-menu style="width: 100%;height: 100%;padding: 0;margin-top: 15px; display:block;"
+                             md-position-mode="target-right target" class="second-menu-container crnc-drop">
+                        <md-button aria-label=""
+                                   style="width: 100%!important;height: 100%;box-shadow: none;border: 0!important;"
+                                   class="md-icon-button" ng-click="$mdOpenMenu()">
+                            <img src="/assets/images/Menu.png" alt="Menu">
+                        </md-button>
+                        <md-menu-content>
+                            <ul class="nav second-nav manage-nav">
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.book">New Booking</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="admin.home">Admin</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="home">Thai Home</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.expenses">Expenses</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.todo">Todo</a>
+                                </li>
+                                <!-- 2016-05-17 - Ajay - Add link for profile page || Ajay du lrpi lakot es asem imaci -->
+                                <li md-ink-ripple>
+                                    <a ui-sref="management.profile">Profile</a>
+                                </li>
+                                <li md-ink-ripple>
+                                    <a ui-sref="admin_logout">Logout</a>
+                                </li>
+                            </ul>
+                        </md-menu-content>
+                    </md-menu>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+    <table class="startHeadTable">
+        <tr>
+            <td class="startBlueTxt startHeadTxt startOverflow">MESSAGES</td>
+        </tr>
+    </table>
+
+    <table class="startLineTable">
+        <thead>
+        <tr>
+            <th style="width:20%;" class="startBlueTh startOverflow startBlueTxt">From</th>
+            <th style="width:45%;" class="startBlueTh startOverflow startBlueTxt">Message</th>
+            <th style="display:none;" class="startBlueTh startOverflow startBlueTxt">BookID</th>
+            <th style="width:18%;" class="startBlueTh startOverflow startBlueTxt">Unit</th>
+            <th style="width:17%;" class="startBlueTh startOverflow startBlueTxt">Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="message in unread | orderBy:'updated':true" ui-sref="management.message({id: message.id})"
+            ng-class="{ 'msg-bold': !message.read ,
+           'msg-red': (lastUnread(message).date < timeDiff && !message.read)}">
+            <!-- 2016-06-04 - Ajay - Add condition for bold red -->
+            <td class="startLineTxt startOverflow"
+                ng-class="{'prevSix':message.updated/1000 < timeDiff1 && message.updated/1000 > timeDiff2 && !message.read,
+                'prevTwlv':message.updated/1000 < timeDiff2 && message.updated/1000 > timeDiff && !message.read,
+                'prevDay':message.updated/1000 < timeDiff && !message.read}"
+                style="height: 32px">{{message.user.name}}</td>
+            <td class="startLineTxt startOverflow"
+                ng-class="{'prevSix':message.updated/1000 < timeDiff1 && message.updated/1000 > timeDiff2 && !message.read,
+                'prevTwlv':message.updated/1000 < timeDiff2 && message.updated/1000 > timeDiff && !message.read,
+                'prevDay':message.updated/1000 < timeDiff && !message.read}">
+                {{lastUnread(message).message}}</td>
+            <td style="display:none;" class="startLineTxt startOverflow"
+                ng-class="{'cursor': lastUnread(message).booking.id,
+                'prevSix':message.updated/1000 < timeDiff1 && message.updated/1000 > timeDiff2 && !message.read,
+                'prevTwlv':message.updated/1000 < timeDiff2 && message.updated/1000 > timeDiff && !message.read,
+                'prevDay':message.updated/1000 < timeDiff && !message.read}">
+                <a target="_blank" ui-sref="management.booking({id: lastUnread(message).booking.id})">{{lastUnread(message).booking.id
+                || '-'}}</a></td>
+            <td class="startLineTxt startOverflow"
+                ng-class="{'prevSix':message.updated/1000 < timeDiff1 && message.updated/1000 > timeDiff2 && !message.read,
+                'prevTwlv':message.updated/1000 < timeDiff2 && message.updated/1000 > timeDiff && !message.read,
+                'prevDay':message.updated/1000 < timeDiff && !message.read}">
+                {{lastUnread(message).property.unique ||
+                lastUnread(message).booking.property.unique || '-'}}
+            </td>
+            <td class="startLineTxt startOverflow"
+                ng-class="{'prevSix':message.updated/1000 < timeDiff1 && message.updated/1000 > timeDiff2 && !message.read,
+                'prevTwlv':message.updated/1000 < timeDiff2 && message.updated/1000 > timeDiff && !message.read,
+                'prevDay':message.updated/1000 < timeDiff && !message.read}">
+                {{message.updated/1000 | timeAgo}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <div style="text-align:center;  margin-top:10px;">
+        <button ng-hide="noMore" class="startBlueBg startButton" style="width:100px;" ng-click="load()"
+                aria-hidden="false">Load More
+        </button>
+    </div>
+</div>

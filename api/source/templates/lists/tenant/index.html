@@ -1,0 +1,88 @@
+
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $("#DataTables_Table_0_length").find('option')[0].remove()
+  },500)
+  console.log($("#DataTables_Table_0_length"));
+});
+</script>
+
+<style type="text/css">
+  .listTable {
+    width: 100%!important;
+    background-color: #FFFFFF;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    border: 1px solid #eeeeee!important;
+    padding: 0px 0px 0px 0px;
+  }
+  
+  .listTable td,
+  th {
+    height: 25px;
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: normal;
+    font-family: 'Arial Narrow', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    white-space: nowrap;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    border: 1px solid #EEEEEE!important;
+    padding: 0px 4px 0px 4px;
+  }
+  
+  .listTable th {
+    background-color: #EEEEEE;
+    font-weight: bold;
+  }
+  
+  .buttonsNav {
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    cursor: pointer;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 2px 2px 2px 0px #666666;
+    font-family: Arial, Roboto, 'Helvetica Neue', sans-serif;
+    background-color: #337AB7;
+  }
+  .dataTables_filter {
+    float: right;
+    margin: 0;
+    padding-right: 25px;
+  }
+  .dataTables_filter input{
+    border-radius: 8px;
+  }
+</style>
+
+
+<i ng-click="$close()" id="close-window" class="material-icons" role="button" tabindex="0">highlight_off</i>
+<table class="table table-striped table-bordered table-hover no-footer listTable" datatable="ng" dt-options="dtOptions">
+  <thead>
+    <tr>
+      <td  class="center col-xs-12" colspan="3"><b>Tenant List</b></td>
+    </tr>
+    <tr>
+      <td class="overflow col-xs-4">Name</td>
+      <td class="overflow col-xs-4">phone</td>
+      <td class="overflow col-xs-4">Email</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="cursor" ng-repeat="tenant in tenants" ng-click="selectTenant(tenant);$close()">
+      <td class="overflow col-xs-4">{{tenant.name}}</td>
+      <td class="overflow col-xs-4">{{tenant.phone}}</td>
+      <td class="overflow col-xs-4">{{tenant.email}}</td>
+    </tr>
+  </tbody>
+</table>
+<div class="clear"></div>
+<br />
+<button ng-click="addTenant();$close();" class="col-xs-4 col-xs-push-4 btn btn-default blue-btn buttonsNav">Create</button>
+<div class="clear"></div>

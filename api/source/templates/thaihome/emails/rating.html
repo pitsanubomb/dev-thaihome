@@ -1,0 +1,92 @@
+<div style="width: 100%;max-width:700px;margin: 0 auto;">
+    <div class="bordered">
+        <div style="width:30%;float:left;">
+           <img class="note" src="http://thaihome.gosocialdev.eu/images/note.png" alt="">
+        </div>
+        <div style="width:70%;float:left;">
+            <p>Hi {{TENANT_FIRSTNAME}},</p>
+            <p>We would like to thank you very much for staying with us. We hope you enjoyed your visit to Thailand and your stay in our condo.</p>
+            <p>We would like to hear about your experiences at our place. Tell us what you liked and didnt like, tell us what we can do better and give us a rating.</p>
+            <a href="http://thaihome.gosocialdev.eu/rating/{{BOOKING_ID}}/"><button><b>Give Rating</b></button></a>
+        
+            <p>As a thank you for giving us a rating we would like to give you a <b>5% DISCOUNT</b> for next time you come and stay with us.</p>
+            <p style="width:222px;float:left;">Use this code for your next booking: </p><p class="code"><b>{{DISCOUNT_CODE}}</b></p>
+            <div class="clear"></div>
+            
+           
+           
+           <p><b>We are looking forward to see you!!!</b></p>
+            <p>Greetings from Sunny Thailand :-) <br>-  Note Lekpradit <br>Property Manager</p>
+            <a href="http://thaihome.gosocialdev.eu/contact/{{TENANT_ID}}/">Contact Note</a>
+        </div>
+    </div>   
+</div>
+
+
+<style>
+    button{      
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+        background-color: rgb(244,67,54);
+        color: #fff;
+        border: 1px solid #DDDDDD;
+        padding: 13px 40px;
+        margin: 10px 0;
+        text-transform: uppercase;
+        margin: 25px auto;
+        display: block;
+    }
+    button:focus{
+         outline: none;   
+    }
+    .clear{
+         clear: both;
+    }
+    .code{
+        float: left;
+        background-color: #E8FFE8;
+        border: 1px solid green;
+        padding: 5px; 
+        margin-top: 11px;
+    }
+    .bordered{
+         border: 1px solid #C7C7C7;
+        padding: 0 10px;
+        margin-bottom: 10px;
+        overflow: hidden;
+    }
+    .table{
+         width: 90%;
+         padding: 0 10px;  
+         border-spacing: 0;
+         border-collapse: collapse;
+        margin: 20px auto;
+    }
+    .boxed{
+        background-color: #F1F1F1;
+        margin: 15px 8px 8px;
+        padding: 5px;
+        text-align: center;  
+        border: 1px solid #DDDDDD;
+    }
+    .table td{
+            padding: 5px 0 0 0;
+            border-top: 1px solid #ddd;
+            width: 90px;
+    }
+    .note{
+         margin: 10px;   
+    }
+    .green{
+         color: green;
+    }
+    h3{
+        background-color: #B7B7B7;
+        margin: 0;
+        padding: 15px;   
+    }
+    hr{
+        width: 95%;
+        border: none;
+        border-top: 1px solid gray;  
+    }
+</style>

@@ -1,0 +1,97 @@
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $("#DataTables_Table_0_length").find('option')[0].remove()
+  },500)
+  console.log($("#DataTables_Table_0_length"));
+});
+</script>
+
+<style type="text/css">
+  .listTable {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    border: 1px solid #eeeeee!important;
+    padding: 0px 0px 0px 0px;
+  }
+  
+  .listTable td,
+  th {
+    height: 25px;
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: normal;
+    font-family: 'Arial Narrow', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    white-space: nowrap;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    border: 1px solid #EEEEEE!important;
+    padding: 0px 4px 0px 4px;
+  }
+  
+  .listTable th {
+    background-color: #EEEEEE;
+    font-weight: bold;
+  }
+  
+  .buttonsNav {
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    cursor: pointer;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 2px 2px 2px 0px #666666;
+    font-family: Arial, Roboto, 'Helvetica Neue', sans-serif;
+    background-color: #337AB7;
+  }
+  .dataTables_filter {
+    float: right;
+    margin: 0;
+    padding-right: 25px;
+  }
+  .dataTables_filter input{
+    border-radius: 8px;
+  }
+</style>
+
+
+<i ng-click="$close()" id="close-window" class="material-icons" role="button" tabindex="0">highlight_off</i>
+<table class="table table-striped table-bordered table-hover no-footer listTable" datatable="ng" dt-options="dtOptions">
+  <thead>
+    <tr>
+      <th class="overflow col-xs-3">Agency</th>
+      <th class="overflow col-xs-3">Agent</th>
+      <th class="overflow col-xs-3">Phone</th>
+      <th class="overflow col-xs-3">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="cursor" ng-repeat="agent in agents" ng-click="selectAgent(agent, commission, conditionsAgent);$close()">
+      <td class="overflow col-xs-3">{{agent.agency}}</td>
+      <td class="overflow col-xs-3">{{agent.name}}</td>
+      <td class="overflow col-xs-3">{{agent.phone}}</td>
+      <td class="overflow col-xs-3">{{agent.email}}</td>
+    </tr>
+  </tbody>
+</table>
+<div class="clear"></div>
+<br />
+<div ng-show="showExtra">
+  <div class="form-group">
+    <label>Commission (%)</label>
+    <input type="text" ng-model="commission" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label>Agent Conditions</label>
+    <input type="text" ng-model="conditionsAgent" class="form-control" />
+  </div>
+</div>
+<br />
+<button ng-click="addAgent();$close();" class="col-xs-4 col-xs-push-4 btn btn-default blue-btn buttonsNav">Create New Agent</button>
+<div class="clear"></div>

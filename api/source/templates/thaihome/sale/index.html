@@ -1,0 +1,451 @@
+<header></header>
+
+<div class="container">
+
+  <div class="row top-images">
+
+    <div class="main-img-container">
+      <div ng-repeat="image in property.images | limitTo: 2" class="top-image col-sm-6 col-xs-12">
+        <img ng-click="openGallery()" class="cursor" src="/assets/images/property/{{property.unique | lowercase}}/{{image}}" alt="">
+      </div>
+      <div>
+        <md-button ng-click="openGallery()" class="md-raised to-gallery md-warn">{{T.transSeePhotos}}</md-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-content container">
+
+  <div class="centered-content">
+
+    <div class="row">
+
+      <div class="price col-md-6">
+
+        <div class="title-first">
+          <h3>{{translation.texts[0].headline}}</h3>
+          <p><b>{{property.locationName}}</b></p>
+          <div class="clear"></div>
+        </div>
+
+      </div>
+      <div class="options col-md-6">
+
+        <div class="options-color opt-margin">
+          <div class="option-price">
+
+            <a href="" class="price-tag">{{property.saleprice | currency: currency:0}}</a>
+
+          </div>
+
+          <div class="option">
+            <i class="glyphicon glyphicon-home"></i>
+            <p>{{T.transEntireCondo}}</p>
+          </div>
+
+          <div class="option">
+            <i class="glyphicon glyphicon-user"></i>
+            <p>{{property.guests}} {{T.transGuests}}</p>
+          </div>
+
+          <div class="option">
+            <i class="glyphicon glyphicon-bed"></i>
+            <p>{{property.bedrooms}} {{T.transBedrooms}}</p>
+          </div>
+        </div>
+        <p ng-show="refAgent">{{T.transAgent}}: <b>{{refAgent.agency}}, {{refAgent.name}}</b></p>
+      </div>
+
+    </div>
+    <div class="more_info blue-border">
+
+      <h3>{{T.transBasic}}</h3>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <table class="table nomargin-table">
+            <tbody>
+              <tr>
+                <td class="td-align">{{T.transProject}}</td>
+                <td><b>{{property.projectName}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transUnitType}}</td>
+                <td><b>{{property.unitType}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transBedrooms}}</td>
+                <td><b>{{property.bedrooms}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transBathrooms}}</td>
+                <td><b>{{property.bathrooms}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transSize}}</td>
+                <td><b>{{property.sqm}} {{T.transSqm}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transView}}</td>
+                <td><b>{{translation.texts[0].view}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transFurnished}}</td>
+                <td><b>{{translation.texts[0].furnished}}</b></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-6">
+          <table class="table nomargin-table">
+            <tbody>
+              <tr>
+                <td class="td-align">{{T.transProperty}}</td>
+                <td><b>{{property.propertyType}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transUnitID}}</td>
+                <td><b>{{property.unique}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transGuests}}</td>
+                <td><b>{{property.guests}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transLivingrooms}}</td>
+                <td><b>{{property.livingrooms}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transFloor}}</td>
+                <td><b>{{translation.texts[0].floor}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transBalcony}}</td>
+                <td><b>{{translation.texts[0].balcony}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transKitchen}}</td>
+                <td><b>{{translation.texts[0].kitchen}}</b></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <div class="more_info blue-border">
+      <h3>Location</h3>
+      <div class="row">
+        <div class="col-sm-6">
+          <table class="table nomargin-table">
+            <tbody>
+              <tr>
+                <td class="td-align">{{T.transLocation}}</td>
+                <td><b>{{property.locationName}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transAddress}}</td>
+                <td><b>{{property.address1}}<br />{{property.address2}}<br />{{property.address3}}</b></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-6">
+          <table class="table nomargin-table">
+            <tbody>
+              <tr>
+                <td class="td-align">{{transGoogleMaps}}</td>
+                <td><b ng-bind-html="property.gmapslink | linky"></b></td>
+              </tr>
+              <tr>
+                <td>{{T.transBeach}}</td>
+                <td><b>{{translation.texts[0].beach}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transShopping}}</td>
+                <td><b>{{translation.texts[0].shopping}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transNightlife}}</td>
+                <td><b>{{translation.texts[0].nightlife}}</b></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="more_info blue-border">
+      <h3>{{T.transSale}}</h3>
+      <div class="row">
+        <div class="col-sm-6">
+          <table class="table nomargin-table">
+            <tbody>
+              <tr>
+                <td class="td-align">{{T.transSalesPrice}}</td>
+                <td class="price-right"><b>{{property.saleprice | currency: currency:0}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transOwnership}}</td>
+                <td class="price-right"><b>{{property.ownership}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transTransfer}}</td>
+                <td class="price-right"><b>{{T.transNegotiable}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transFinancing}}</td>
+                <td class="price-right"><b>{{T.transFinancingYes}}</b></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-6">
+          <table class="table nomargin-table">
+            <tbody>
+              <tr>
+                <td class="td-align">{{T.transMaintanence}}</td>
+                <td class="price-right"><b>{{translation.texts[0].maintanance}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transAnnualRent}}</td>
+                <td class="price-right"><b>{{T.transEarningBefore}} {{high[0].priceYear | currency:currency:0}} {{T.transEarningAfter}}</b></td>
+              </tr>
+              <tr>
+                <td>{{T.transConditions}}</td>
+                <td class="price-right"><b>{{T.transFinanceCondition}}</b></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="centered-content row" style="margin:0px;">
+      <div class="more_info custom-col-6 pull-left blue-border">
+        <div class="col-sm-12">
+          <div class="title2">
+            <h3>{{T.transSpace}}</h3>
+          </div>
+          <div class="prices1 row">
+            <div class="col-sm-6">
+              <p><span class="prop-width">{{T.transBeds}}</span> <b> {{translation.texts[0].beds}}</b></p>
+              <p><span class="prop-width">{{T.transPropertyType}}</span> <b>{{property.propertyType}}</b></p>
+              <p><span class="prop-width">{{T.transAccomodates}}</span> <b>{{property.guests}}</b></p>
+            </div>
+            <div class="col-sm-6">
+              <p><span class="prop-width">{{T.transBedrooms}}</span> <b> {{property.bedrooms}}</b></p>
+              <p><span class="prop-width">{{T.transBathrooms}}</span> <b> {{property.bathrooms}}</b></p>
+              <p><span class="prop-width">{{T.transLivingrooms}}</span> <b> {{property.livingrooms}}</b></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="more_info custom-col-6 pull-right blue-border amenit">
+        <div class="title2">
+          <h3>{{T.transAmenities}}</h3>
+        </div>
+        <div class="options_2">
+          <div class="option" ng-class="property.amenities.wifi == true ? 'av' : 'hide'">
+            <i class="material-icons">wifi</i>
+            <p>{{T.transAmWifi}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.towels == true ? 'av' : 'hide'">
+            <i class="material-icons">layers</i>
+            <p>{{T.transAmTowels}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.parking == true ? 'av' : 'hide'">
+            <i class="material-icons">local_parking</i>
+            <p>{{T.transAmParking}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.cable == true ? 'av' : 'hide'">
+            <i class="material-icons">tv</i>
+            <p>{{T.transAmCable}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.smoking == true ? 'av' : 'hide'">
+            <i class="material-icons">whatshot</i>
+            <p>{{T.transAmSmoking}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.breakfast == true ? 'av' : 'hide'">
+            <i class="material-icons">restaurant</i>
+            <p>{{T.transAmBreakfast}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.air == true ? 'av' : 'hide'">
+            <i class="material-icons">toys</i>
+            <p>{{T.transAmAir}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.friendly == true ? 'av' : 'hide'">
+            <i class="material-icons">insert_emoticon</i>
+            <p>{{T.transAmFriendly}}</p>
+          </div>
+          <md-button class="md-raised md-primary pull-right read-more" ng-click="moreAmenties=true" ng-hide="moreAmenties">{{T.transShowMore}}</md-button>
+          <div class="option" ng-class="property.amenities.kitchen == true ? 'av' : 'hide'">
+            <i class="material-icons">restaurant_menu</i>
+            <p>{{T.transAmKitchen}}</p>
+          </div>
+          <div ng-show="moreAmenties">
+            <div class="option" ng-class="property.amenities.pets == true ? 'av' : 'hide'">
+              <i class="material-icons">adb</i>
+              <p>{{T.transAmPets}}</p>
+            </div>
+            <div class="option" ng-class="property.amenities.laundry == true ? 'av' : 'hide'">
+              <i class="material-icons">local_laundry_service</i>
+              <p>{{T.transAmLaundry}}</p>
+            </div>
+            <div class="option" ng-class="property.amenities.elevator == true ? 'av' : 'hide'">
+              <i class="material-icons">publish</i>
+              <p>{{T.transAmElevator}}</p>
+            </div>
+            <div class="option" ng-class="property.amenities.deposit == true ? 'av' : 'hide'">
+              <i class="material-icons">local_mall</i>
+              <p>{{T.transAmDeposit}}</p>
+            </div>
+            <div class="option" ng-class="property.amenities.washingmachine == true ? 'av' : 'hide'">
+              <i class="material-icons">local_laundry_service</i>
+              <p>{{T.transAmWashing}}</p>
+            </div>
+            <div class="option" ng-class="property.amenities.security == true ? 'av' : 'hide'">
+              <i class="material-icons">security</i>
+              <p>{{T.transAmSecurity}}</p>
+            </div>
+            <div class="option" ng-class="property.amenities.card == true ? 'av' : 'hide'">
+              <i class="material-icons">sim_card</i>
+              <p>{{T.transAmCard}}</p>
+            </div>
+            <!--<div class="option" ng-class="property.amenities.laundry == true ? 'av' : 'hide'">-->
+            <!--<i class="material-icons">local_laundry_service</i>-->
+            <!--<p>{{T.transAmLaundry}}</p>-->
+            <!--</div>-->
+            <div class="option" ng-class="property.amenities.childplay == true ? 'av' : 'hide'">
+              <i class="material-icons">face</i>
+              <p>{{T.transAmChildplay}}</p>
+            </div>
+            <div class="option" ng-class="property.amenities.pools == true ? 'av' : 'hide'">
+              <i class="material-icons">blur_circular</i>
+              <p>{{T.transAmPools}}</p>
+            </div>
+            <div class="option" ng-class="property.amenities.smoke == true ? 'av' : 'hide'">
+              <i class="material-icons">settings_input_antenna</i>
+              <p>{{T.transAmSmoke}}</p>
+            </div>
+            <div class="option" ng-class="property.amenities.fitness == true ? 'av' : 'hide'">
+              <i class="material-icons">accessibility</i>
+              <p>{{T.transAmFitness}}</p>
+            </div>
+            <div class="option" ng-class="property.amenities.wslide == true ? 'av' : 'hide'">
+              <i class="material-icons">gesture</i>
+              <p>{{T.transAmWslide}}</p>
+            </div>
+            <div class="option" ng-class="property.amenities.jaccuzis == true ? 'av' : 'hide'">
+              <i class="material-icons">blur_on</i>
+              <p>{{T.transAmJaccuzis}}</p>
+            </div>
+            <div class="option" ng-class="property.amenities.balcony == true ? 'av' : 'hide'">
+              <i class="material-icons">airline_seat_legroom_extra</i>
+              <p>{{T.transAmBalcony}}</p>
+            </div>
+            <div class="col-sm-12" style="padding: 0;margin-top: 20px;font-style: italic;">
+              <div class="option" ng-class="property.amenities.wifi == false ? 'show' : 'hide'">
+                <i class="material-icons">wifi</i>
+                <p style="text-decoration: line-through;">{{T.transAmWifi}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.towels == false ? 'show' : 'hide'">
+                <i class="material-icons">layers</i>
+                <p style="text-decoration: line-through;">{{T.transAmTowels}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.parking == false ? 'show' : 'hide'">
+                <i class="material-icons">local_parking</i>
+                <p style="text-decoration: line-through;">{{T.transAmParking}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.washingmachine == false ? 'show' : 'hide'">
+                <i class="material-icons">local_laundry_service</i>
+                <p style="text-decoration: line-through;">{{T.transAmWashing}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.cable == false ? 'show' : 'hide'">
+                <i class="material-icons">tv</i>
+                <p style="text-decoration: line-through;">{{T.transAmCable}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.smoking == false ? 'show' : 'hide'">
+                <i class="material-icons">whatshot</i>
+                <p style="text-decoration: line-through;">{{T.transAmSmoking}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.air == false ? 'show' : 'hide'">
+                <i class="material-icons">toys</i>
+                <p style="text-decoration: line-through;">{{T.transAmAir}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.friendly == false ? 'show' : 'hide'">
+                <i class="material-icons">insert_emoticon</i>
+                <p style="text-decoration: line-through;">{{T.transAmFriendly}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.kitchen == false ? 'show' : 'hide'">
+                <i class="material-icons">restaurant_menu</i>
+                <p style="text-decoration: line-through;">{{T.transAmKitchen}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.pets == false ? 'show' : 'hide'">
+                <i class="material-icons">adb</i>
+                <p style="text-decoration: line-through;">{{T.transAmPets}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.laundry == false ? 'show' : 'hide'">
+                <i class="material-icons">local_laundry_service</i>
+                <p style="text-decoration: line-through;">{{T.transAmLaundry}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.breakfast == false ? 'show' : 'hide'">
+                <i class="material-icons">restaurant</i>
+                <p style="text-decoration: line-through;">{{T.transAmBreakfast}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.elevator == false ? 'show' : 'hide'">
+                <i class="material-icons">publish</i>
+                <p style="text-decoration: line-through;">{{T.transAmElevator}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.deposit == false ? 'show' : 'hide'">
+                <i class="material-icons">local_mall</i>
+                <p style="text-decoration: line-through;">{{T.transAmDeposit}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.security == false ? 'show' : 'hide'">
+                <i class="material-icons">security</i>
+                <p style="text-decoration: line-through;">{{T.transAmSecurity}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.card == false ? 'show' : 'hide'">
+                <i class="material-icons">sim_card</i>
+                <p style="text-decoration: line-through;">{{T.transAmCard}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.childplay == false ? 'show' : 'hide'">
+                <i class="material-icons">face</i>
+                <p style="text-decoration: line-through;">{{T.transAmChildplay}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.pools == false ? 'show' : 'hide'">
+                <i class="material-icons">blur_circular</i>
+                <p style="text-decoration: line-through;">{{T.transAmPools}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.smoke == false ? 'show' : 'hide'">
+                <i class="material-icons">settings_input_antenna</i>
+                <p style="text-decoration: line-through;">{{T.transAmSmoke}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.fitness == false ? 'show' : 'hide'">
+                <i class="material-icons">accessibility</i>
+                <p style="text-decoration: line-through;">{{T.transAmFitness}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.wslide == false ? 'show' : 'hide'">
+                <i class="material-icons">gesture</i>
+                <p style="text-decoration: line-through;">{{T.transAmWslide}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.jaccuzis == false ? 'show' : 'hide'">
+                <i class="material-icons">blur_on</i>
+                <p style="text-decoration: line-through;">{{T.transAmJaccuzis}}</p>
+              </div>
+              <div class="option" ng-class="property.amenities.balcony == false ? 'show' : 'hide'">
+                <i class="material-icons">airline_seat_legroom_extra</i>
+                <p style="text-decoration: line-through;">{{T.transAmBalcony}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+  <footer></footer>

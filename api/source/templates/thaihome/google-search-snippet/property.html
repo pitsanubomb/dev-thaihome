@@ -1,0 +1,18 @@
+<div itemscope itemtype="http://schema.org/Product" style="display:none;">
+  <span itemprop="brand">ThaiHome</span>
+  <span itemprop="name">{{property.projectName}}</span>
+  <img itemprop="image" src="/assets/images/property/{{property.unique | lowercase}}/{{property.featured}}" alt="{{property.unique}}" />
+  <span itemprop="description">{{translation.texts[0].shorttext}}
+  </span> Product ID: <span itemprop="mpn">{{property.unique}}</span>
+  <span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" ng-if="ratings.length">
+    <span itemprop="ratingValue">{{stars}}</span> stars, based on <span itemprop="reviewCount">{{ratings.length}}
+      </span> reviews
+  </span>
+
+  <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    Price per night: {{price.priceDay}}
+    <meta itemprop="priceCurrency" content="THB" />
+    <span itemprop="price">{{price.priceDay}}</span>
+  </span>
+  </span>
+</div>

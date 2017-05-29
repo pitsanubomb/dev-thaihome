@@ -1,0 +1,77 @@
+{
+	"type": "Collection",
+	"properties": {
+		"category": {
+			"name": "category",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "category",
+			"order": 0
+		},
+		"manager": {
+			"name": "manager",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "manager",
+			"order": 1
+		},
+		"dueDate": {
+			"name": "dueDate",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "dueDate",
+			"order": 2
+		},
+		"time": {
+			"name": "time",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "time",
+			"order": 3
+		},
+		"taskText": {
+			"name": "taskText",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "taskText",
+			"order": 4
+		},
+		"propertyId": {
+			"name": "propertyId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "propertyId",
+			"order": 5
+		},
+		"bookingId": {
+			"name": "bookingId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "bookingId",
+			"order": 6
+		},
+		"done": {
+			"name": "done",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "done",
+			"order": 7
+		},
+		"createDate": {
+			"name": "createDate",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "createDate",
+			"order": 8
+		}
+	}
+}

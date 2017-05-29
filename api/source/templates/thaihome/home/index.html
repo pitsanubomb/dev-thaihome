@@ -1,0 +1,49 @@
+<header></header>
+<div class="container-fluid">
+
+</div>
+<!--container-fluid-->
+<div class="home-bg"><img src="" /></div>
+
+<div class="middle md-whiteframe-z4" ng-init="headerSlider()">
+
+
+  <h1>{{T.transHeadLine}}</h1>
+
+  <div id="arches" class="responsive homepage">
+    <div id="search-input">
+
+      <form id="vr-search" method="post" ng-submit="search()">
+        <select class="search-option location_select  form-control" ng-model="location">
+          <option selected value="" disabled>{{T.transHeadWhere}}</option>
+          <option value="0">{{T.transAllLocations}}</option>
+          <option ng-repeat="location in locations" value="{{location.id}}">{{location.name}}</option>
+        </select>
+        <span class="date-fields">
+        <booking-calendar></booking-calendar>
+        </span>
+        <md-button class="md-raised md-warn home-search-bt booking_search">{{T.transSearch}}</md-button>
+      </form>
+
+      <div style="display: none;" class="calendar-panel"><i class="previous icon-caret-left-circle inactive"></i><i class="next icon-caret-right-circle"></i>
+        <div class="months"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--middle-->
+
+<div class="container-fluid content-offers">
+  <div class="content">
+    <hot-deals></hot-deals>
+    <a ng-click="search()" class="home-archive-btn md-button md-ink-ripple"><span class="ng-binding ng-scope">{{T.transMoreProperties}}</span><div class="md-ripple-container"></div></a>
+    <div class="row home-news" ng-repeat="n in news">
+      <div class="blue-border" ng-bind-html="deliberatelyTrustDangerousSnippet(n.text)"></div>
+    </div>
+    <md-button  class="home-archive-btn" ng-class="{'pull-left': news.length == 0}" ui-sref="news">{{T.transMoreNews}}</md-button>
+  </div>
+</div>
+
+<div class="clear"></div>
+
+<footer></footer>

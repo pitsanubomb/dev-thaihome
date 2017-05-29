@@ -1,0 +1,6 @@
+<span ng-bind-html="T.transPayPalInvoice01"></span><b> {{payableAmount | currency: currency: 0}} </b>
+<br><br>
+<span ng-bind-html="T.transPayPalInvoice02"></span>
+<br>
+<md-button ng-show="bookingID" ng-click="paypalBookBtn()" class="md-raised book md-warn">{{T.transBookNow}}</md-button>
+<md-button ng-show="isBookingController" ng-click="showPaymentToggle()" class="md-raised book md-warn">{{T.transOK}}</md-button>

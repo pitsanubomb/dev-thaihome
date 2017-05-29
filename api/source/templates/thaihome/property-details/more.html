@@ -1,0 +1,114 @@
+<i ng-show="showMoreClose" ng-click="$close()" id="close-window" class="material-icons" role="button" tabindex="0">highlight_off</i>
+<p class="wrapspace" ng-bind-html="translation.texts[0].longtext | linky">
+
+</p>
+<br><h3>{{T.transBasic}}</h3>
+<div class="row">
+  <div class="col-sm-6">
+    <table class="table nomargin-table">
+      <tbody>
+        <tr>
+          <td class="property-td">{{T.transProject}}</td>
+          <td><b>{{property.projectName}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transUnitType}}</td>
+          <td><b>{{property.unitType}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transBedrooms}}</td>
+          <td><b>{{property.bedrooms}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transBathrooms}}</td>
+          <td><b>{{property.bathrooms}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transSize}}</td>
+          <td><b>{{property.sqm}} {{T.transSqm}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transView}}</td>
+          <td><b>{{translation.texts[0].view}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transFurnished}}</td>
+          <td><b>{{translation.texts[0].furnished}}</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-6">
+    <table class="table nomargin-table">
+      <tbody>
+        <tr>
+          <td class="property-td">{{T.transProperty}}</td>
+          <td><b>{{property.propertyType}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transUnitID}}</td>
+          <td><b>{{property.unique}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transGuests}}</td>
+          <td><b>{{property.guests}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transLivingrooms}}</td>
+          <td><b>{{property.livingrooms}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transFloor}}</td>
+          <td><b>{{translation.texts[0].floor}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transBalcony}}</td>
+          <td><b>{{translation.texts[0].balcony}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transKitchen}}</td>
+          <td><b>{{translation.texts[0].kitchen}}</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br><h3>{{T.transLocation}}</h3>
+<div class="row">
+  <div class="col-sm-6">
+    <table class="table nomargin-table">
+      <tbody>
+        <tr>
+          <td class="property-td">{{T.transLocation}}</td>
+          <td><b>{{property.locationName}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transAddress}}</td>
+          <td><b>{{property.address1}}<br />{{property.address2}}<br />{{property.address3}}</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-6">
+    <table class="table nomargin-table">
+      <tbody>
+        <tr>
+          <td class="property-td">{{T.transGoogleMaps}}</td>
+          <td><b><a target="_blank" href="{{property.gmapslink}}">{{property.gmapslink}}</a></b></td>
+        </tr>
+        <tr>
+          <td>{{T.transBeach}}</td>
+          <td><b>{{translation.texts[0].beach}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transShopping}}</td>
+          <td><b>{{translation.texts[0].shopping}}</b></td>
+        </tr>
+        <tr>
+          <td>{{T.transNightlife}}</td>
+          <td><b>{{translation.texts[0].nightlife}}</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

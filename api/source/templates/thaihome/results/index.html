@@ -1,0 +1,104 @@
+<header></header>
+
+<div class="results-container">
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="date-price md-whiteframe-z3">
+        <form ng-submit="search()" class="date-price-width" ng-controller="SearchCtrl">
+
+          <div class="result-dates">
+            <p>{{T.transDates}}</p>
+            <div class="date-fields">
+              <span class="date-fields">
+              <booking-calendar></booking-calendar>
+              </span>
+            </div>
+            <div class="result-options">
+              <select class="search-option location_select  form-control ng-class:{ 'haserror': locationError };" ng-model="location">
+                <option value="" disabled>{{T.transHeadWhere}}</option>
+                <option value="0" ng-selected="location == 0">{{T.transAllLocations}}</option>
+                <option ng-repeat="loc in locations" value="{{loc._id}}" ng-selected="location == loc._id">{{loc.name}}</option>
+              </select>
+
+
+              <div class="result-sort pull-left">
+                <select class="search-option sort form-control" placeholder="{{T.transOrderBy}}" ng-model="sortBy">
+                  <option value="">{{T.transOrderBy}}</option>
+                  <option value="price">{{T.transPriceLow}}</option>
+                  <option value="ratingavg">{{T.transRating}}</option>
+                  <option value="guests">{{T.transNoGuests}}</option>
+                </select>
+
+                <select ng-if="sortBy" class="search-option order form-control" placeholder="{{T.transOrderBy}}" ng-model="sortOrder">
+                  <option value="0" selected="selected">{{T.transAscending}}</option>
+                  <option value="1">{{T.transDescending}}</option>
+                </select>
+              </div>
+            </div>
+
+            <md-button class="md-raised md-warn home-search-bt booking_search">{{T.transSearch}}</md-button>
+          </div>
+        </form>
+      </div>
+      <div class="clear"></div>
+      <div ng-controller="ResultsCtrl" ng-init="init()">
+        <div class="col-sm-6 pull-right map-container" ng-if="results">
+          <div class="google-map">
+            <map style="height:100%"></map>
+          </div>
+        </div>
+        <div ng-repeat="property in properties | orderBy:sortBy:sortAsc | limitTo:freeLimit" class="cursor offer hvr-float md-whiteframe-z2" ui-sref="property({id: property.id, checkin: checkin, checkout: checkout})">
+          <a>
+            <img src="/images/property/{{property.id | lowercase}}/{{property.featured}}" class="offerimg" alt="{{property.name}}" />
+            <span class="offerprice">{{prices[property._id] / nights() | currency:currency:0}}</span>
+          </a>
+
+          <div class="offertitle">
+            <p class="offerdescription">{{translations[property._id].texts[0].frontpage1}}</p>
+          </div>
+          <!--offertitle-->
+          <div class="clear"></div>
+          <div class="to-align">
+            <p class="offerdescription">{{translations[property._id].texts[0].frontpage2}}</p>
+          </div>
+        </div>
+        <div class="clear"></div>
+        <md-button class="md-raised shw-more" ng-if="properties.length > freeLimit" ng-click="increaseLimit('free')">{{T.transMoreProperties}}</md-button>
+
+        <!--<div class="navigation">
+                <md-button class="md-raised pull-left">Previous</md-button>
+                <md-button class="md-raised pull-right">Next</md-button>
+            </div>-->
+        <h2 style="text-align:center;margin:20px auto;" ng-if="!results">{{T.transNothing}}</h2>
+        <div class="clear"></div>
+        <div ng-class="{ 'prop-not-available': properties.length < 2 , 'prop-not-available-full': properties.length >= 2  }" ng-if="bookedproperties.length && bookedLimit > 0">
+          <div class="prop-text md-whiteframe-z3">
+            <div ng-bind-html="T.results_text || TD.results_text"></div>
+          </div>
+          <br />
+          <div ng-repeat="property in bookedproperties  | orderBy:sortBy:sortAsc | limitTo:bookedLimit" class="cursor offer hvr-float md-whiteframe-z2" ui-sref="property({id: property.id})">
+            <a>
+              <img style="width:800px;height:545px;" src="/images/property/{{property.id | lowercase}}/{{property.featured}}" class="offerimg" alt="{{property.name}}" />
+              <!--<span class="offerprice">{{prices[property._id].price[0].price.day * nights() | currency:currency:0}}</span>-->
+            </a>
+
+            <div class="offertitle">
+              <p class="offerdescription">{{property.name}}</p>
+            </div>
+            <!--offertitle-->
+
+            <!--<p class="offerdescription">{{property.beds}} Bed, fitness, game room, 2 pools, can sleep {{property.guests}} people</p> -->
+
+          </div>
+          <div class="clear"></div>
+          <md-button class="md-raised shw-more" ng-if="bookedproperties.length > bookedLimit" ng-click="increaseLimit('booked')">{{T.transMoreProperties}}</md-button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

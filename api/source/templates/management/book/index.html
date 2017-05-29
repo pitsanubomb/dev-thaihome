@@ -1,0 +1,555 @@
+<div class="container">
+
+<div class="new-booking-area col-sm-10 col-sm-push-1">
+  <!-- ICONS -->
+
+  <table class="iconTD">
+    <tr>
+      <td ui-sref="management.home" ui-sref-opts="{reload:true}" style="position:relative;"><img
+        src="/assets/images/Home.png" alt="Start Page"><span ng-if="menu_bookings"
+                                                             class="management-menu-new-element-block">{{menu_bookings}}</span>
+      </td>
+      <td ui-sref="management.messages" ui-sref-opts="{reload:true}" style="position:relative;"><img
+        src="/assets/images/Messages.png" alt="Messages"><span ng-if="menu_messages"
+                                                               class="management-menu-new-element-block">{{menu_messages}}</span>
+      </td>
+      <td ui-sref="management.bookings"><img src="/assets/images/Bookings.png" alt="Bookings"></td>
+      <td ui-sref="management.properties"><img src="/assets/images/Properties.png" alt="Properties"></td>
+      <td ui-sref="management.calendar({month: '', year:''})"
+          ng-class="{'active-management-btn' : statename == 'management.calendar'}"><img
+        src="/assets/images/Calendar.png" alt="Calendar"></td>
+      <td>
+        <md-menu style="width: 100%;height: 100%;padding: 0;margin-top: 15px; display:block;"
+                 md-position-mode="target-right target" class="second-menu-container crnc-drop">
+          <md-button aria-label="" style="width: 100%!important;height: 100%;box-shadow: none;border: 0!important;"
+                     class="md-icon-button" ng-click="$mdOpenMenu()">
+            <img src="/assets/images/Menu.png" alt="Menu">
+          </md-button>
+          <md-menu-content>
+            <ul class="nav second-nav manage-nav">
+              <li md-ink-ripple>
+                <a ui-sref="management.book">New Booking</a>
+              </li>
+              <li md-ink-ripple>
+                <a ui-sref="admin.home">Admin</a>
+              </li>
+              <li md-ink-ripple>
+                <a ui-sref="home">Thai Home</a>
+              </li>
+              <li md-ink-ripple>
+                <a ui-sref="management.expenses">Expenses</a>
+              </li>
+              <!-- 2016-05-17 - Ajay - Add link for profile page || Ajay du lrpi lakot es asem imaci -->
+              <li md-ink-ripple>
+                <a ui-sref="management.profile">Profile</a>
+              </li>
+              <li md-ink-ripple>
+                <a ui-sref="management.todo">Todo</a>
+              </li>
+              <li md-ink-ripple>
+                <a ui-sref="admin_logout">Logout</a>
+              </li>
+            </ul>
+          </md-menu-content>
+        </md-menu>
+
+      </td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div>
+
+
+  <!-- BUTTONS -->
+  <table>
+    <tr>
+      <td class="midText overflow">
+        <button class="blue white_color" style="width: 70%; color:#ffffff;" ng-click="book()">SAVE</button>
+
+        <button class="grey white_color" style="width: 30%; color: #ffffff;" onclick="window.history.back();">CANCEL
+        </button>
+      </td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div>
+
+
+
+
+  <!-- STATUS -->
+  <table>
+    <tr style="height:56px;">
+      <td class="leftText" style="font-size:22px;">Status</td>
+      <td style="width:99%">
+        <select disabled ng-model="data.status" style="color: white !important;" class="statusSelect red white_color"
+                id="StatusSelect">
+          <option value="0" class="redTxt statusOption">NEW BOOKING</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div>
+
+
+  <!-- NOTICE -->
+  <!-- <table style="border: 4px solid #AA4040;">
+    <tr>
+      <td style="text-align:center;" class="noticeText">REMEMBER:<br>Send Booking Received email</td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div> -->
+
+  <!-- BOOKING ID -->
+  <table>
+    <tr>
+      <td class="leftText">Booking ID</td>
+      <td class="midText">{{data.id}} <input style="z-index: -999999999999;height: 0px;opacity: 0;position: absolute;"
+                                             id="data_id" type="text" value="{{copyLocation}}"></td>
+      <td style="width:99%">
+        <select ng-model="data.source" class="rightField">
+          <option ng-repeat="source in sources" value="{{getValueForBookingScource(source.name)}}">{{source.name}}</option>
+        </select>
+      </td>
+      <td>
+        <button id="copy_btn" class="blue white_color">COPY</button>
+      </td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div>
+
+  <!-- DATES -->
+  <table>
+    <tr>
+      <td class="leftText">Dates</td>
+      <td class="weakText overflow" style="width:99%"><b>{{data.checkin}}</b> to <b>{{data.checkout}}</b>
+        ({{data.nights}} night)
+      </td>
+      <td class="weakText" style="width:1%">&nbsp;</td>
+      <td>
+        <button class="blue white_color" ng-click="openCalendar()">EDIT</button>
+      </td>
+    </tr>
+  </table>
+
+  <div class="spacerDiv"></div>
+
+  <!-- UNIT -->
+  <table>
+    <tr>
+      <td class="leftText">Unit</td>
+      <td class="midText" style="width:99%">{{data.property.unique}}</td>
+      <td>
+        <button class="blue white_color" ng-click="propertyList()">EDIT</button>
+      </td>
+    </tr>
+  </table>
+
+  <div class="spacerDiv"></div>
+
+  <!-- TENANT -->
+  <div id="showTenant" style="display:inline;">
+    <table>
+      <tr>
+        <td class="leftText">Tenant</td>
+        <td class="midText overflow" style="width:99%">{{ data.tenant.name || '' }}<span style="font-family:'Ariel Narrow'; font-weight:normal; font-size:14px;"><i ng-if="data.tenant.country">({{data.tenant.country}})</i></span></td>
+        <td>
+          <button class="blue white_color" ng-click="editUser()"
+                  onclick="document.getElementById('showTenant').style.display = 'none';document.getElementById('formTenant').style.display = 'inline';">
+            EDIT
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td class="leftText">Phone</td>
+        <td class="midText overflow">{{ data.tenant.phone || '' }}</td>
+        <td class="weakText" style="min-width:50px;">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="leftText">Email</td>
+        <td class="midText overflow">{{ data.tenant.email }}</td>
+        <td class="weakText" style="min-width:50px;">&nbsp;</td>
+      </tr>
+    </table>
+    <div class="spacerDiv"></div>
+  </div>
+
+
+  <!-- TENANT FORM -->
+  <div id="formTenant" style="display:none;">
+    <table>
+      <tr>
+        <td class="leftText">Tenant</td>
+        <td style="width:99%"><input type="text" ng-model="data.tenant.name" class="rightField"></td>
+      </tr>
+      <tr>
+        <td class="leftText">Phone</td>
+        <td><input type="text" class="rightField" ng-model="data.tenant.phone"></td>
+      </tr>
+      <tr>
+        <td class="leftText">Email</td>
+        <td><input type="text" class="rightField" ng-model="data.tenant.email" ng-change="compareUserInfo(data.tenant.email)"></td>
+      </tr>
+      <tr>
+        <td class="leftText">Country</td>
+        <td>
+          <select class="rightField" ng-model="data.tenant.country" ng-options="s as s for s in countries">
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="midText overflow">
+          <button ng-if="compareUserInfo(data.tenant.email)" ng-click="saveUser()" type="submit" ng-disabled="editUser.$waiting" class="blue white_color" style="width: 48%;"
+
+                  onclick="document.getElementById('formTenant').style.display = 'none';document.getElementById('showTenant').style.display = 'inline';">
+            SAVE
+          </button>
+          <button class="orange white_color" style="width: 24%;" ng-click="tenantList()">SELECT</button>
+          <button class="grey white_color" style="width: 27%;" ng-click="cancelUserEdit()">CANCEL</button>
+        </td>
+      </tr>
+    </table>
+    <div class="spacerDiv"></div>
+  </div>
+
+  <!-- PAYMENT -->
+  <table>
+    <tr>
+      <td class="leftText">Payment</td>
+      <td style="width:99%">
+        <select class="rightField" ng-model="data.paymentType"
+                ng-options='method.id as method.name for method in paymentMethods'></select>
+
+      </td>
+      <td style="min-width:50px;">&nbsp;</td>
+    </tr>
+  </table>
+
+  <div class="spacerDiv"></div>
+
+
+  <!-- AGENT -->
+  <table>
+    <tr>
+      <td class="leftText">Agent</td>
+      <td class="midText overflow" style="width:99%">{{data.agent.name}}</td>
+      <td>
+        <button class="blue white_color" ng-click="agentList()">EDIT</button>
+      </td>
+    </tr>
+    <tr ng-if="data.agent.name">
+      <td class="leftText">Percent</td>
+      <td class="midText">{{agentPercent}}%</td>
+      <td class="weakText" style="min-wdth:50px;padding:0;">
+        <button ng-if="data.agent.name" class="red white_color" style="font-size: 15px;" ng-click="removeAgent()">X
+        </button>
+      </td>
+    </tr>
+    <tr ng-if="data.agent.name">
+      <td class="leftText">Amount</td>
+      <td><input type="text" class="rightField" ng-model="data.agentCommission"></td>
+      <td class="weakText" style="min-width:50px;">&nbsp;</td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div>
+
+  <!-- ARRIVE DEPART -->
+  <table>
+    <tr>
+      <td class="leftText">Arrive</td>
+      <td style="width:99%"><input type="text" class="rightField" ng-model="data.arrival"></td>
+    </tr>
+    <tr>
+      <td class="leftText">Depart</td>
+      <td><input type="text" class="rightField" ng-model="data.departure"></td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div>
+
+
+  <!-- RENT EXPENSE -->
+  <table>
+    <tr>
+      <td class="midText" colspan="6">Rent & Expense</td>
+    </tr>
+    <tr>
+      <td class="leftText">Rent Price</td>
+      <td style="width:20%" class="weakText overflow">{{data.nights}} night x</td>
+      <td style="width:25%"><input type="number" id="datePriceField" onchange="angular.element(this).scope().onDayPriceChange()"
+       class="rightField rightNum"
+                                   value="{{getDayPrice()}}"></td>
+      <td style="min-width:1px;"></td>
+      <td style="width:20%"><input type="number" id="totalPriceInput" onchange="angular.element(this).scope().onRentPriceChange()" class="rightField rightNum"
+                                   value="{{recentPriceValue}}">
+      </td>
+      <td style="min-width:6px;"></td>
+    </tr>
+    <tr>
+      <td
+        style="width: 100%; height: 1px; background: #CCCCCC; overflow: hidden; border-style: none; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; "
+        colspan="6"></td>
+    </tr>
+    <tr>
+      <td class="leftText">Discount</td>
+      <td class="weakText overflow" colspan="3">{{data.discount.code}} <span ng-if="data.discount.code">({{data.discount.percent}}%)</span>
+      </td>
+      <td><input type="number" class="rightField rightNum" ng-model="discountPrice"></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td
+        style="width: 100%; height: 1px; background: #CCCCCC; overflow: hidden; border-style: none; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; "
+        colspan="6"></td>
+    </tr>
+    <!--<tr>
+      <td colspan="2"><input type="text" class="rightField" value="Check-out Cleaning"></td>
+      <td><input type="text" class="rightField" value="1 x {{data.property.cleanfinalprice }}">
+      </td>
+      <td></td>
+      <td><input type="text" class="rightField rightNum"
+                 value="{{data.property.cleanfinalprice }}"></td>
+      <td></td>
+    </tr>-->
+    <tr>
+      <td
+        style="width: 100%; height: 1px; background: #CCCCCC; overflow: hidden; border-style: none; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; "
+        colspan="6"></td>
+    </tr>
+    <tr ng-repeat="extra in data.priceExtra track by $index">
+      <td e-required colspan="2"><input type="text" class="rightField" ng-model="data.priceExtra[$index].name"></td>
+      <td>
+        <input style="width: 98%;" type="text" class="rightField"
+               ng-model="data.priceExtra[$index].calc">
+      <td></td>
+      <td><input onchange="angular.element(this).scope().calcExtra()" ng-model="data.priceExtra[$index].price"
+                 type="number" class="rightField rightNum"></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td
+        style="width: 100%; height: 1px; background: #CCCCCC; overflow: hidden; border-style: none; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; "
+        colspan="6"></td>
+    </tr>
+    <tr>
+      <td class="midText" colspan="4"><b>Total</b></td>
+      <td class="midText" style="text-align:right;min-width: 70px;"><b>{{getExtrasPrices() }}</b></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td
+        style="width: 100%; height: 1px; background: #CCCCCC; overflow: hidden; border-style: none; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; "
+        colspan="6"></td>
+    </tr>
+    <tr>
+      <td colspan="6">
+        <button class="green white_color" style="width: 99%;color:white!important;" ng-click="addExtra()">NEW LINE
+        </button>
+      </td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div>
+
+
+  <!-- RESERVATION BOOKING FEE -->
+  <table>
+    <tr>
+      <td class="leftText" style="width:80%">Reservation</td>
+      <td style="width:20%"><input type="number" class="rightField rightNum" ng-model="data.priceReservation"></td>
+      <td class="weakText overflow" style="min-width:1px;">&nbsp;</td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div>
+
+
+  <!-- SECURITY DEPOSIT -->
+  <table>
+    <tr>
+      <td class="leftText" style="width:80%">Deposit</td>
+      <td style="width:20%"><input type="number" class="rightField rightNum" ng-model="data.priceSecurity"></td>
+      <td class="weakText overflow" style="min-width:1px;">&nbsp;</td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div>
+
+
+  <!-- LONG TERM -->
+
+  <table ng-if="data.nights > 31" class="ng-scope">
+    <tbody><tr>
+      <td class="leftText overflow" style="width:80%">Pay rent&nbsp;
+        <input type="number" class="rightField rightNum" style="max-width:35px;" ng-model="longTheremPayDay.value">
+        &nbsp;each month
+      </td>
+      <td style="min-width:1px; text-align:right; padding-right:5px;">
+			</td>
+    </tr>
+    <tr>
+      <td class="leftText overflow" colspan="2">Monthly rent&nbsp;
+        <input type="number" class="rightField rightNum" style="max-width:100px;" ng-model="longTheremPayPrice.value">
+        <span style="padding-left:5px; font-style: italic;" class="ng-binding leftText">(Month:{{pricesForRent.priceMonth | number:0}} </span>
+        <span style="padding-left:5px; font-style: italic;" class="ng-binding leftText">Year:{{(pricesForRent.priceYear / 12) | number:0}})</span>
+      </td>
+    </tr>
+   </tbody>
+  </table>
+  <div class="spacerDiv"></div>
+
+
+  <!-- INVOICE MENU -->
+
+
+  <style>
+    .full button span {
+      background-color: limegreen;
+      border-radius: 32px;
+      color: black;
+    }
+
+    .partially button span {
+      background-color: orange;
+      border-radius: 32px;
+      color: black;
+    }
+  </style>
+
+  <!-- ELECTRIC WATER -->
+  <table>
+    <tr>
+      <td class="midText" colspan="11">Electric & Water
+      </td>
+    </tr>
+    <tr style="font-size: 12px;white-space: nowrap;max-width: 1px;">
+      <td style="width:15%" class="weakText overflow"></td>
+      <td style="width:12%;min-width:38px;">
+        <div>Check-in</div>
+      </td>
+      <td style="width:1%" class="weakText"></td>
+      <td style="width:12%;min-width:38px;">
+        <div>Check-out</div>
+      </td>
+      <td style="width:1%" class="weakText">&nbsp;</td>
+      <td style="width:7%">
+        <div>Units</div>
+      </td>
+      <td style="width:1%" class="weakText">&nbsp;</td>
+      <td style="width:7%">
+        <div>Price</div>
+      </td>
+      <td style="width:1%" class="weakText">&nbsp;</td>
+      <td style="width:10%;min-width:28px;">
+        <div>Total</div>
+      </td>
+      <td style="width:1%" class="weakText">&nbsp;</td>
+    </tr>
+    <tr>
+      <td style="width:15%" class="weakText overflow">Electric</td>
+      <td style="width:12%;min-width:38px;"><input type="number" class="rightField rightNum"
+                                                   ng-model="data.electricFrom"></td>
+      <td style="width:1%" class="weakText"> -</td>
+      <td style="width:12%;min-width:38px;"><input type="number" class="rightField rightNum" ng-model="data.electricTo">
+      </td>
+      <td style="width:1%" class="weakText">&nbsp;=</td>
+      <td style="width:7%"><input type="text" class="rightField rightNum litgrey"
+                                  value="{{ data.electricTo - data.electricFrom }}" disabled></td>
+      <td style="width:1%" class="weakText">&nbsp;x</td>
+      <td style="width:7%"><input type="text" class="rightField rightNum" ng-model="data.property.electricUnit"></td>
+      <td style="width:1%" class="weakText">&nbsp;=</td>
+      <td style="width:10%;min-width:28px;"><input type="text" class="rightField rightNum litgrey"
+                                                   value="{{data.property.electricUnit * (data.electricTo - data.electricFrom)}}"
+                                                   disabled></td>
+      <td style="width:1%" class="weakText">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="weakText overflow">Water</td>
+      <td style="min-width:38px;"><input type="number" class="rightField rightNum" ng-model="data.waterFrom"></td>
+      <td class="weakText">&nbsp;-</td>
+      <td style="min-width:38px;"><input type="number" class="rightField rightNum" ng-model="data.waterTo"></td>
+      <td class="weakText">&nbsp;=</td>
+      <td><input type="text" class="rightField rightNum litgrey" value="{{data.waterTo - data.waterFrom }}" disabled>
+      </td>
+      <td class="weakText">&nbsp;x</td>
+      <td><input type="text" class="rightField rightNum" ng-model="data.property.waterUnit"></td>
+      <td class="weakText">&nbsp;=</td>
+      <td style="min-width:28px;"><input type="text" class="rightField rightNum litgrey"
+                                         value="{{data.property.waterUnit * (data.waterTo - data.waterFrom)}}" disabled>
+      </td>
+      <td class="weakText">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="midText" style="text-align:right;" colspan="9">Total&nbsp;</td>
+      <td style="min-width:28px;"><input type="text" class="rightField rightNum litgrey"
+                                         value="{{data.property.waterUnit * (data.waterTo - data.waterFrom) + data.property.electricUnit * (data.waterTo - data.waterFrom)}}"
+                                         disabled></td>
+      <td class="weakText">&nbsp;</td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div>
+
+
+  <!-- CONDITIONS -->
+  <table>
+    <tr>
+      <td class="midText" style="width:20%; white-space: nowrap;">TENANT Conditions</td>
+      <td class="weakText overflow" style="width:80%">(everyone can see)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="width:95%" colspan="2"><textarea rows="50" cols="4" class="rightField" style="height:60px;"
+                                                  ng-model="data.conditionsTenant"></textarea></td>
+      <td style="width:5%"></td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div>
+
+  <table>
+    <tr>
+      <td class="midText " style="width:20%; white-space: nowrap;">PRIVATE Comments</td>
+      <td class="weakText overflow" style="width:80%">(Only WE can see this)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="width:95%" colspan="2"><textarea rows="50" cols="4" class="rightField" style="height:60px;"
+                                                  ng-model="data.comment">
+</textarea></td>
+      <td style="width:5%"></td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div>
+
+  <table>
+    <tr>
+      <td class="midText " style="width:20%; white-space: nowrap;">AGENT Conditions</td>
+      <td class="weakText overflow" style="width:80%">(tenant cannot see)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="width:95%" colspan="2"><textarea rows="50" cols="4" class="rightField" style="height:60px;"
+                                                  ng-model="data.conditionsAgent"></textarea></td>
+      <td style="width:5%"></td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div>
+  <!-- BUTTONS -->
+  <table>
+    <tr>
+      <td style="width:60%">
+        <button class="blue white_color" style="width: 100%;" ng-click="book()">SAVE</button>
+      </td>
+      <td>
+        <button class="red white_color" style="width: 100%;"
+                ng-really-message="Are you sure you want to delete this booking ({{data.id}}) ?"
+                ng-really-click="delete(data.id)">DELETE
+        </button>
+      </td>
+      <td>
+        <button class="grey white_color" style="width: 100%;" onclick="alert('BACK TO STARTPAGE');">CANCEL</button>
+      </td>
+    </tr>
+  </table>
+  <div class="spacerDiv"></div>
+  <div class="spacerDiv"></div>
+
+  <div style="visibility:hidden;position:absolute;top:30%;left:50%;margin-left:-200px;">
+    <booking-calendar></booking-calendar>
+  </div>
+</div>
+</div>
+

@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">{{ email.id ? 'View':'Add'}} {{email.name}}</h1>
+    <button ng-click="viewTags();" class="btn btn-primary">View Tags</button>
+
+    <div style="clear:both;"></div>
+    <form role="form" onaftersave="update()" editable-form name="editableForm" oncancel="back();">
+      <button type="button" class="btn btn-primary inittable" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+        {{ email.id ? 'Edit': 'Add'}}
+      </button>
+      <p ng-show="editableForm.$visible">
+        <p ng-show="editableForm.$visible">
+          <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+            {{ email.id ? 'Edit': 'Save'}}
+          </button>
+          <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+            Cancel
+          </button>
+        </p>
+        <div style="clear:both;"></div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <p class="title">Name: </p>
+            <p e-class="form-control" editable-text="email.name" e-name="name" e-required>{{ email.name || '-' }}</p>
+          </div>
+          <div class="form-group" ng-show="!email.id">
+            <p class="title">Value: </p>
+            <p e-class="form-control" editable-text="email.value" e-name="value" e-required>{{ email.value || '-' }}</p>
+          </div>
+          <div class="form-group">
+            <p class="title">Subject: </p>
+            <p e-class="form-control" editable-text="email.subject" e-name="subjectHtml">{{ email.subject || '-' }}</p>
+          </div>
+          <div class="form-group">
+            <p class="title">Header: </p>
+            <p e-class="form-control" editable-text="email.header" e-name="headerHtml">{{ email.header || '-' }}</p>
+          </div>
+          <div class="form-group">
+            <p class="title">HTML: </p>
+            <p e-required editable-textarea="email.html" style="white-space:pre" e-rows="15" e-cols="60">{{ html || '-' }}
+            </p>
+          </div>
+        </div>
+
+        <div style="clear:both;"></div>
+        <button type="button" class="btn btn-primary" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+          {{ email.id ? 'Edit': 'Add'}}
+        </button>
+        <p ng-show="editableForm.$visible">
+          <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+            {{ email.id ? 'Edit': 'Save'}}
+          </button>
+          <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+            Cancel
+          </button>
+        </p>
+    </form>
+    <div class="clear"></div>
+    <!-- /.col-lg-12 -->
+  </div>
+  <!-- /.row -->
+</div>

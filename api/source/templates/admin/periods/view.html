@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">{{ period.id ? 'View':'Add'}} {{period.name}}</h1>
+    <div style="clear:both;"></div>
+    <button type="button" class="btn btn-primary inittable" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+      {{ period.id ? 'Edit': 'Add'}}
+    </button>
+    <p ng-show="editableForm.$visible">
+      <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+        {{ period.id ? 'Save': 'Add'}}
+      </button>
+      <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+        Cancel
+      </button>
+    </p>
+    <div style="clear:both;"></div>
+    <form role="form" onaftersave="update()" editable-form name="editableForm" oncancel="back();">
+      <div class="col-md-4">
+        <div class="form-group">
+          <p class="title">Season: </p>
+          <p e-readonly e-class="form-control form-popup" e-ng-click="seasonList()" editable-text="period.season" e-name="season" e-required>{{period.season || '-'}}</p>
+        </div>
+        <div class="form-group">
+          <p class="title">Name: </p>
+          <p e-class="form-control" editable-text="period.name" e-name="name" e-required>{{ period.name || '-' }}</p>
+        </div>
+        <div class="form-group" ng-init="loadCalendar()">
+          <p class="title">From - To: </p>
+          <p ng-show="!editableForm.$visible">
+            {{ period.from }} - {{ period.to}}
+          </p>
+          <div ng-show="editableForm.$visible">
+            <input class="periodPeriod form-control" readonly value="{{ period.from }} - {{ period.to}}" />
+          </div>
+        </div>
+      </div>
+      <div style="clear:both;"></div>
+      <button type="button" class="btn btn-primary" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+        {{ period.id ? 'Edit': 'Add'}}
+      </button>
+      <p ng-show="editableForm.$visible">
+        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+          {{ period.id ? 'Save': 'Add'}}
+        </button>
+        <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+          Cancel
+        </button>
+      </p>
+    </form>
+    <!-- /.col-lg-12 -->
+  </div>
+  <!-- /.row -->
+</div>

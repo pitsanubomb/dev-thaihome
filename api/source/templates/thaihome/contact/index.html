@@ -1,0 +1,156 @@
+<header></header>
+<div class="container payment-section top-images">
+  <div class="row">
+    <div class="col-md-7">
+      <h2 class="about-h2">{{T.transContactUs}}</h2>
+      <div class="contact-box1">
+        <chat ng-init="focusChat()"></chat>
+        <div class="clear"></div>
+
+      </div>
+
+      <div class="contact-box md-whiteframe-z3">
+        <div class="row">
+
+          <div class="col-xs-3">
+
+            <div class="owner-img">
+              <img src="/assets/images/contact/note.jpg" alt="Note">
+            </div>
+          </div>
+
+          <div class="col-xs-9 about-owner">
+
+            <div class="owner-buble">
+
+              <div ng-bind-html="T.transNoteAsk"></div>
+              <div class="arrow"></div>
+
+            </div>
+
+            <table class="table nomargin-table">
+              <tbody>
+                <tr>
+                  <td>{{T.transMobile}}:</td>
+                  <td>{{T.transNotePhone}}</td>
+                </tr>
+                <tr>
+                  <td>{{T.transEmail}}:</td>
+                  <td><span ng-bind-html="T.transNoteMail"></span></td>
+                </tr>
+                <tr>
+                  <td>Facebook:</td>
+                  <td><a target="_blank" href="https://www.facebook.com/note.lekpradit">https://www.facebook.com/note.lekpradit</a></td>
+                </tr>
+                <tr>
+                  <td>WhatsApp:</td>
+                  <td>080-209-7887</td>
+                </tr>
+                <tr>
+                  <td>LINE ID:</td>
+                  <td>Note.note4</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="clear"></div>
+
+
+
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="contact-box md-whiteframe-z3">
+        <div class="row">
+
+          <div class="col-xs-3">
+
+            <div class="owner-img">
+              <img src="/assets/images/contact/torben.jpg" alt="Torben">
+            </div>
+          </div>
+
+          <div class="col-xs-9 about-owner">
+
+            <div class="owner-buble">
+
+              <div ng-bind-html="T.transTorbenAsk"></div>
+              <div class="arrow"></div>
+
+            </div>
+
+            <table class="table nomargin-table">
+              <tbody>
+                <tr>
+                  <td>{{T.transMobile}}:</td>
+                  <td><b>{{T.transTorbenPhone}}</b></td>
+                </tr>
+                <tr>
+                  <td>{{T.transEmail}}:</td>
+                  <td><span ng-bind-html="T.transTorbenMail"></span></td>
+                </tr>
+                <tr>
+                  <td>Facebook:</td>
+                  <td><a target="blank" href="https://www.facebook.com/rudgaard">https://www.facebook.com/rudgaard</a></td>
+                </tr>
+                <tr>
+                  <td>WhatsApp:</td>
+                  <td>089-821-0724</td>
+                </tr>
+                <tr>
+                  <td>LINE ID:</td>
+                  <td>torbenrudgaard</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="clear"></div>
+
+
+
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-5">
+      <h2>{{T.transOffice}}</h2>
+      <div class="md-whiteframe-z3 contact-box">
+        <p><b>ThaiHome.co.uk</b> &nbsp; -  &nbsp; <i>({{T.transAgentOffice}})</i><br><span ng-bind-html="T.transOfficeAddress"></span></p>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>{{T.transMobile}}</td>
+              <td><b>{{T.transNotePhone}}</b></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>{{T.transLikeFacebook}} <a target="blank" href="https://www.facebook.com/thaihome.co.uk/">https://www.facebook.com/thaihome.co.uk/</a></p>
+        <p><b>{{T.transDiscountSignup}}</b></p>
+
+        <div>
+          <form ng-controller="Newsletter" ng-submit="add()">
+            <div class="discount-input md-default-theme">
+              <input type="text" id="input_351" tabindex="0" aria-invalid="false" class="form-control ng-pristine ng-valid md-input ng-touched discount-inp" placeholder="{{T.transEmailEnter}}" ng-model="email">
+            </div>
+
+            <button class="md-raised md-primary disc-btn md-button md-default-theme" type="submit" tabindex="0"><span class="ng-scope">{{T.transOK}}</span></button>
+          </form>
+        </div>
+        <div class="clear"></div>
+
+        <p>{{T.transGoogleLink}}: <a target="blank" href="https://goo.gl/maps/moEM0">https://goo.gl/maps/moEM0</a></p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<footer></footer>

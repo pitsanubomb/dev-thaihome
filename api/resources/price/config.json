@@ -1,0 +1,165 @@
+{
+	"type": "Collection",
+	"properties": {
+		"property": {
+			"name": "property",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "property",
+			"order": 0
+		},
+		"season": {
+			"name": "season",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "season",
+			"order": 1
+		},
+		"priceDay": {
+			"name": "priceDay",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "priceDay",
+			"order": 2
+		},
+		"priceWeekend": {
+			"name": "priceWeekend",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "priceWeekend",
+			"order": 3
+		},
+		"priceWeek": {
+			"name": "priceWeek",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "priceWeek",
+			"order": 4
+		},
+		"priceMonth": {
+			"name": "priceMonth",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "priceMonth",
+			"order": 5
+		},
+		"priceYear": {
+			"name": "priceYear",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "priceYear",
+			"order": 6
+		},
+		"commissionDay": {
+			"name": "commissionDay",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "commissionDay",
+			"order": 7
+		},
+		"commissionWeek": {
+			"name": "commissionWeek",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "commissionWeek",
+			"order": 8
+		},
+		"commissionMonth": {
+			"name": "commissionMonth",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "commissionMonth",
+			"order": 9
+		},
+		"commissionYear": {
+			"name": "commissionYear",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "commissionYear",
+			"order": 10
+		},
+		"created": {
+			"name": "created",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "created",
+			"order": 11
+		},
+		"depositDay": {
+			"name": "depositDay",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "depositDay",
+			"order": 12
+		},
+		"depositWeek": {
+			"name": "depositWeek",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "depositWeek",
+			"order": 13
+		},
+		"depositMonth": {
+			"name": "depositMonth",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "depositMonth",
+			"order": 14
+		},
+		"depositYear": {
+			"name": "depositYear",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "depositYear",
+			"order": 15
+		},
+		"reservationDay": {
+			"name": "reservationDay",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "reservationDay",
+			"order": 16
+		},
+		"reservationWeek": {
+			"name": "reservationWeek",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "reservationWeek",
+			"order": 17
+		},
+		"reservationMonth": {
+			"name": "reservationMonth",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "reservationMonth",
+			"order": 18
+		},
+		"reservationYear": {
+			"name": "reservationYear",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "reservationYear",
+			"order": 19
+		}
+	}
+}

@@ -1,0 +1,22 @@
+<i ng-click="$close()" id="close-window" class="material-icons" role="button" tabindex="0">highlight_off</i>
+<!--
+<table class="table table-striped table-bordered table-hover no-footer" datatable="ng" dt-options="dtOptions">
+  <thead>
+    <tr>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="cursor" ng-repeat="status in statuses" ng-click="selectStatus(status);$close();">
+      <td>{{status.name}}</td>
+    </tr>
+  </tbody>
+</table> -->
+
+
+
+<div class="bk-status">
+  <div class="bk-status-opt" ng-repeat="status in statuses" ng-click="selectStatus(status);$close();">
+    <p class="bookstatus_{{status.value}}">{{status.name}}</p>
+  </div>
+</div>

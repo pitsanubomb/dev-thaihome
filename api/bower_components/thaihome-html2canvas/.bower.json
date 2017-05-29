@@ -1,0 +1,32 @@
+{
+  "name": "thaihome-html2canvas",
+  "description": "",
+  "main": [
+    "html2canvas.js",
+    "jspdf.debug.js"
+  ],
+  "keywords": [
+    "html2canvas"
+  ],
+  "authors": [
+    "Synsoft"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/SynsoftDev/thaihome-html2canvas",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "919522e435",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "919522e4356e97d9769ddedc2915425a6567e553"
+  },
+  "_source": "https://github.com/SynsoftDev/thaihome-html2canvas.git",
+  "_target": "master",
+  "_originalSource": "https://github.com/SynsoftDev/thaihome-html2canvas.git"
+}

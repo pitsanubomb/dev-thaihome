@@ -1,0 +1,125 @@
+{
+	"type": "UserCollection",
+	"properties": {
+		"email": {
+			"name": "email",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "email",
+			"order": 0
+		},
+		"name": {
+			"name": "name",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "name",
+			"order": 1
+		},
+		"agent": {
+			"name": "agent",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "agent",
+			"order": 2
+		},
+		"phone": {
+			"name": "phone",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "phone",
+			"order": 3
+		},
+		"country": {
+			"name": "country",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "country",
+			"order": 4
+		},
+		"agency": {
+			"name": "agency",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "agency",
+			"order": 5
+		},
+		"token": {
+			"name": "token",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "token",
+			"order": 6
+		},
+		"comment": {
+			"name": "comment",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "comment",
+			"order": 7
+		},
+		"languages": {
+			"name": "languages",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "languages",
+			"order": 8
+		},
+		"type": {
+			"name": "type",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "type",
+			"order": 9
+		},
+		"created": {
+			"name": "created",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "created",
+			"order": 10
+		},
+		"lastContact": {
+			"name": "lastContact",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "lastContact",
+			"order": 11
+		},
+		"auth": {
+			"name": "auth",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "auth",
+			"order": 12
+		},
+		"signature": {
+			"name": "signature",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "signature",
+			"order": 13
+		},
+		"lastMessengerMail": {
+			"name": "lastMessengerMail",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "lastMessengerMail",
+			"order": 14
+		}
+	}
+}

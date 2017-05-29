@@ -1,0 +1,55 @@
+<br />
+<div class="chat-head">
+  <div class="chat-image pull-left">
+    <div class="circle pull-left">
+      <img src="/assets/images/contact/tenant.jpg" alt="">
+    </div>
+    <p class="pull-left">{{contact.name}}</p>
+  </div>
+  <div class="chat-image pull-right">
+    <div class="circle pull-right">
+      <img src="/assets/images/contact/note.jpg" alt="Note">
+    </div>
+    <p class="pull-right">Note</p>
+  </div>
+</div>
+<div class="clear"></div>
+<div class="md-whiteframe-z3 chat-box">
+  <div class="smaller-chat">
+    <div ng-class="message.manager === false ? 'chat-message-u': 'chat-message-a'" ng-repeat="message in messages.messages track by $index">
+      <div ng-if="getDay(message.date) != getDay(messages.messages[$index-1].date) || $index == 0">
+        <p class="chat-day text-center">{{message.date+'000' | date:'fullDate'}}</p>
+        <div class="message-border"></div>
+      </div>
+      <div class="clear"></div>
+      <div class="time-fix">
+        <div class="chat-buble">
+          <p class="wrapspace" ng-bind-html="message.message"></p>
+          <div ng-class="message.manager === false ? 'gray-arr': 'green-arr'"></div>
+        </div>
+        <div class="chat-time">
+          <p>{{message.date+'000' | date:"h:mm a"}}</p>
+        </div>
+        <p class="chat-refferece" ng-if="message.booking && message.manager === false">
+          <a ng-if="!agent.id && !admin.id" ui-sref="booking({id: message.booking.id})">{{T.transView}} {{message.booking.id}}</a>
+          <a ng-if="agent.id && !admin.id" ui-sref="agent.booking({id: message.booking.id})">{{T.transView}} {{message.booking.id}}</a>
+          <a ng-if="admin.id && !agent.id" ui-sref="management.booking({id: message.booking.id})">{{T.transView}} {{message.booking.id}}</a>
+        </p>
+        <p class="chat-refferece" ng-if="!message.booking && message.property && message.manager === false">
+          <a ng-if="!agent.id && !admin.id" ui-sref="property({id: message.property.unique})">{{message.property.unique}}</a>
+          <a ng-if="agent.id && !admin.id" ui-sref="agent.property({id: message.property.unique})">{{message.property.unique}}</a>
+          <a ng-if="admin.id && !agent.id" ui-sref="management.property({id: message.property.unique})">{{message.property.unique}}</a>
+        </p>
+        <p class="chat-refferece" ng-if="!message.booking && !message.property && message.manager === false">{{T.transContactForm}}</p>
+      </div>
+    </div>
+  </div>
+  <form ng-submit="askQuestion()" name="contact-form">
+    <div ng-hide="messages.messages.lenght">
+      <input value="" ng-if="!messages.messages.length" required type="text" class="form-control" placeholder="{{T.transName}}" name="contact-name" ng-model="contact.name">
+      <input value="" ng-if=" !messages.messages.length " required type="email " class="form-control " placeholder="{{T.transEmail}} " name="contact-email " ng-model="contact.email ">
+    </div>
+    <textarea id="txtChat" class="form-control " cols="30 " rows="5 " required maxlength="150 " ng-model="contact.message " placeholder="{{T.transMessage}} "></textarea>
+    <md-button ng-disabled="chatdisabled " class="md-raised md-primary " id="contact_submit_button ">{{T.transSend}}</md-button>
+  </form>
+</div>

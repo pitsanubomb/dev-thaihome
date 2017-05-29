@@ -1,0 +1,419 @@
+<header></header>
+<div class="tenant-booking" ng-init="init()">
+    <div class="container">
+        <div class="row">
+            <div ng-show="!agent.id && showPayment" class="col-sm-7 col-xs-12 well">
+                <div ng-if="payableAmount">
+                    <span ng-if="paymentError" style="color: red;"><b>{{T.transMailCreditFail02}}</b></span>
+                    <multi-step-container steps="steps">
+                        <step-container>
+
+                        </step-container>
+                    </multi-step-container>
+                </div>
+                <div ng-if="!payableAmount">
+                    <div class="cols-sm-12 text-center">
+                        <h3>{{T.transPaidAlready}}</h3>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <md-button ng-click="showPaymentToggle()" class="md-raised book md-warn">{{T.transOK}}</md-button>
+                    </div>
+                </div>
+            </div>
+            <div ng-hide="showPayment" class="col-sm-7 col-xs-12 booking-page-left-part">
+                <div class="top-image">
+                    <img ng-src="/assets/images/property/{{data.property.unique | lowercase}}/{{data.property.featured}}"
+                         alt="">
+                    <md-button ng-click="openGallery()" class="md-raised md-warn to-gallery">{{T.transSeePhotos}}
+                    </md-button>
+                </div>
+                <div class="clear"></div>
+                <h1 class="booking-h1">{{translation.texts[0].frontpage1}}</h1>
+                <p>{{data.property.locationName}}</p>
+
+                <div class="bordered">
+                    <div class="row">
+
+                        <div class="col-xs-3">
+
+                            <div class="owner-img">
+                                <img src="/assets/images/note.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-9 about-owner">
+                            <div class="owner-buble">
+                                <div ng-bind-html="T.transNoteAgent"></div>
+                                <div class="arrow"></div>
+                            </div>
+
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <chat></chat>
+                </div>
+            </div>
+
+            <div class="col-sm-5 col-xs-12">
+                <div class="voucher">
+                    <div class="title">
+                        <h1>{{T.transBookingID}} {{data.id}}</h1>
+                    </div>
+                    <div class="voucher-padd">
+                        <div class="text">
+                            <p><b>{{data.property.name}}</b></p>
+                            <p>{{data.property.locationName}}</p>
+                            <p ng-if="data.agent.id">{{T.transAgent}} {{data.agent.name}}, {{data.agent.agency}}</p>
+                        </div>
+
+                        <table style="margin-bottom: 20px!important;" class="table nomargin-table right-aligned-second">
+                            <tbody>
+                            <tr>
+                                <td class="td-align" style="border-top: none;">{{T.transGuest}}</td>
+                                <td style="border-top: none;"><b>{{data.user.name}}</b></td>
+                            </tr>
+                            <tr>
+                                <td>{{T.transCheckin}}</td>
+                                <td><b>{{data.checkin}}</b></td>
+                            </tr>
+                            <tr>
+                                <td>{{T.transCheckout}}</td>
+                                <td><b>{{data.checkout}}</b></td>
+                            </tr>
+                            <tr>
+                                <td>{{T.transPeriod}}</td>
+                                <td><b>{{data.nights | timeFormat}}</b></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                        <!--TIKO LOOK HERE-->
+                        <!--
+
+                        I am not sure how this works now?
+                        When we see this, is the booking already created in the booking table?
+                        If its already created then the data.cleanfinalprice is already in the extras and we do not need to show it.
+                        If not, then we have to show it.
+
+                        What we should show here is the same as everywhere else...
+
+                          ฿2000 x 4 nights	   ฿8000   (like you calculate on bookingform)
+                          Discount (10%)      -฿1000   (like on bookingform, in green color)
+                          Check-out Cleaning  	฿750   (it should be in the extras always)
+                          Extra-extra       	  ฿100   (anything in extras...)
+                          Extra-extra       	  ฿100   (anything in extras...)
+                          Total                ฿7950   (big fat bold text)
+
+                          Paid already         ฿2950   (sum of all receipts if any, if not then ฿0)
+                          Payment missing      ฿5000   (Total minus sum of all receipts if any, not then ฿0)
+
+                        -->
+                        <table class="table nomargin-table right-aligned-second">
+                            <tbody>
+                            <tr>
+                                <td class="td-align" style="border-top: none;">{{data.priceDay | currency : currency:0}}
+                                    x {{data.nights}}
+                                    {{T.transNights}}
+                                </td>
+                                <td style="border-top: none;"><b>{{data.priceDay * data.nights | currency :
+                                    currency:0}}</b></td>
+                            </tr>
+
+                            <tr ng-if="data.discountAmount !== '' && data.discountAmount != undefined">
+                                <td class="green">{{T.transDiscount}} <span class="green" ng-if="data.discountPercentage !== 0" >({{data.discountPercentage}}%)</span></td>
+                                <td ng-if="data.discountAmount > 0"><b  class="green">{{(data.discountAmount) * -1 | currency : currency:0}} </b></td>
+                                <td ng-if="data.discountAmount < 0"><b  class="green">{{(data.discountAmount) | currency : currency:0}} </b></td>
+                            </tr>
+
+                            <tr ng-repeat="pe in data.priceExtra">
+                                <td ng-class="{'green': pe.price<0}">{{pe.name}}</td>
+                                <td><b ng-class="{'green': pe.price<0}">{{pe.price | currency : currency:0}}</b></td>
+                            </tr>
+                            <tr ng-repeat="extra in data.price_extra track by $index">
+                                <td>{{extra.name}}</td>
+                                <td>{{extra.price | currency : currency:0}}</td>
+                            </tr>
+
+                            <!--TIKO why do we have this one here?  what is the ng-hide?  If discount=0 we should probably show the field in case they have a code -->
+                            <tr ng-hide="data.discount" class="book-discount">
+                                <td class="td-align">
+                                    <div class="discount-input md-default-theme">
+                                        <input type="text" class="form-control" placeholder="{{T.transDiscountEnter}}"
+                                               ng-model="discount_code">
+                                        <span ng-if="invalidcode" style="color:#f00;">{{T.transDiscountErr}}</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    <h4 style="margin: 0;">{{T.transTotal}}</h4></td>
+                                <td>
+                                    <h4 style="margin: 0;">{{ totalPrice() | currency : currency:0}}</h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>{{T.transPaidAlready}}</td>
+                                <td><b>{{payedAlready() | currency : currency:0}}</b></td>
+                            </tr>
+                            <tr>
+                                <td>{{T.transMissingPayment}}</td>
+                                <td><b>{{calculateMissingPrice() | currency : currency:0}}</b></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+
+                        <div ng-if="data.status == 6" class="confirmed-area" style="border-top: 1px solid black;
+                                                                                    margin: 0px -30px;
+                                                                                    padding: 0px 30px 20px;">
+                            <span ng-bind-html="T.transCancelBook"></span>
+                            <div>
+                                <p>{{T.transEmail}}: <span ng-bind-html="T.transNoteMail"></span></p>
+                                <p>{{T.transMobile}}: {{T.transNotePhone}}</p>
+                            </div>
+                        </div>
+
+
+                        <div style="margin-left: -30px;margin-right: -30px;padding-right: 30px;padding-left: 30px; border-top: 1px solid black;" ng-if="data.status ==5 || data.status == 4" class="confirmed-area">
+                            <span ng-bind-html="T.transRating01"></span>
+                            <br>
+                            <!--
+                                                        IF bookingID does NOT exist in the rating table THEN
+                                                        (look here:  https://db.tt/zaA7UVaia2)
+                                                        (we can see if the tenant already gave us a rating by looking up on the booking ID)
+                                                        (he thats the case, lets ask tenant to give us rating...)-->
+                            <div ng-if="data.rating.length == 0">
+                                <p>{{T.transRating02}}</p>
+                                <br>
+
+                                <a href="{{ratingUrl}}">
+                                    <md-button class="md-raised book md-warn">{{T.transRating}}</md-button>
+                                </a><br>
+                                <br>
+                                <p ng-bind-html="T.transRating03"></p>
+                                <img class="img-responsive" src="/assets/images/about/us.jpg">
+                            </div>
+
+                            <!--END IF-->
+
+
+                        </div>
+
+                        <div ng-if="data.status == 1"
+                             class="reservation-area"
+                             style="margin: 0px -30px;
+                                                            padding: 0px 30px 20px;
+                                                            border-top: 1px solid black;">
+                            <h3 ng-bind-html="T.transPayPendingHead"></h3>
+                            <span ng-bind-html="T.transPayPendingTxt"></span>
+
+                        </div>
+
+                        <div ng-if="data.status == 0 && payableAmount != 0"
+                             class="reservation-area"
+                             style="margin: 0px -30px;
+                                                            padding: 0px 30px 20px;
+                                                            border-top: 1px solid black;">
+                            <h3>{{T.transPayHeadline}}</h3>
+                            <p>{{T.transPayComplete1}}:
+                                <b>{{mustPayBooking() | currency: currency:0}}</b>
+                                {{T.transPayComplete2}}
+                                <b><span ng-bind-html="calcPayMethod()"></span></b>
+                                {{T.transPayComplete3}}
+                                <b>{{data.expires}}</b>
+                                {{T.transPayComplete4}}
+                            </p>
+
+                            <!--
+                              IF booking.expires > today() - 2          // If the booking expires in LESS than 2 days from now
+                            -->
+                            <p ng-if="payDayLessThenFourDays()" style="color:red; font-wright:bold;">
+                                {{T.transPayExpire}}</p>
+                            <!--
+                              END IF
+                            -->
+                            <div class="clear"></div>
+                            <button ng-click="showPaymentToggle()" ng-show="!showPayment && !data.pricePaid"
+                                    class="md-raised md-warn md-button md-default-theme voucher-pay-now"><span>{{T.transPayNow}}</span>
+                            </button>
+
+
+                        </div>
+
+                        <div style="padding-bottom:20px;border-top:1px solid black;    margin-left: -30px;
+                                margin-right: -30px;
+                                padding-left: 30px;
+                                padding-right: 30px" ng-if="data.status == 2 || data.status == 3" class="paid-area">
+                            <h3>{{T.transPayAcceptHead}}</h3>
+                            <p>{{T.transPayAcceptTxt}}</p>
+                            <a target="_blank" href="{{voucherLink}}">
+                                <md-button class="md-raised book md-warn">{{T.transViewVoucher}}</md-button>
+                            </a>
+                        </div>
+
+                        <div ng-if="calculateMissingPrice() > 0 && data.status == 2 "
+                             style="margin: 0px -30px;
+                                                            padding: 0px 30px 0px;
+                                                            border-top: 1px solid black;
+                                                            border-bottom: 1px solid black;">
+                            <h3 class="ng-binding">{{T.finalPayment}}</h3>
+                            <p><span ng-bind-html="T.transPayFinal01"></span>: <b>{{calculateMissingPrice() | currency:
+                                currency:0}}</b></p>
+                            <p ng-bind-html="T.transPayFinal02"></p>
+                            <div class="clear"></div>
+                            <button ng-click="showPaymentToggle()" ng-show="!showPayment && !data.pricePaid"
+                                    class="md-raised md-warn md-button md-default-theme voucher-pay-now"><span>{{T.transPayNow}}</span>
+                            </button>
+                            <br>
+                            <p ng-bind-html="T.transPayFinal03"></p>
+                        </div>
+
+
+                        <!--
+                        THE HERE WHEN WILL YOU ARRIVE AREA
+                        This layer should always be there:
+                        -->
+                        <div ng-if="data.status != 6 && data.status != 5 && data.status != 4" class="change-dates">
+                            <h3 ng-if="data.status < 3">{{T.transArriveHead}}</h3>
+                            <form ng-submit="saveDates()">
+                                <p ng-if="data.status < 3">{{T.transArriveTxt}}</p>
+                                <table class="table nomargin-table">
+                                    <tbody>
+                                    <tr ng-if="data.status < 3">
+                                        <td class="td-align">{{T.transArriveTime}}</td>
+                                        <td>
+                                            <input id="arrivalTimeInput" type="text" ng-model="data.arrival"
+                                                   name="arrival"
+                                                   placeholder="{{T.transArriveField}}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{T.transDepartTime}}</td>
+                                        <td>
+                                            <input type="text" ng-model="data.departure" name="departure"
+                                                   placeholder="{{T.transDepartField}}" required/>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <button class="md-raised md-primary md-button md-default-theme"
+                                        style="margin: 0 auto;display: block;color: #fff;width:220px;" type="submit">
+                                    Send
+                                </button>
+                            </form>
+                        </div>
+
+                        <div ng-if="data.status == 1 && payableAmount != 0"
+                             class="reservation-area"
+                             style="margin: 0px -30px;
+                                                            padding: 0px 30px 20px;">
+                            <h3>{{T.transPayHeadline}}</h3>
+                            <p>{{T.transPayComplete1}}:
+                                <b>{{mustPayBooking() | currency: currency:0}}</b>
+                                {{T.transPayComplete2}}
+                                <b><span ng-bind-html="calcPayMethod()"></span></b>
+                                {{T.transPayComplete3}}
+                                <b>{{data.expires}}</b>
+                                {{T.transPayComplete4}}
+                            </p>
+
+                            <!--
+                              IF booking.expires > today() - 2          // If the booking expires in LESS than 2 days from now
+                            -->
+                            <p ng-if="payDayLessThenFourDays()" style="color:red; font-wright:bold;">
+                                {{T.transPayExpire}}</p>
+                            <!--
+                              END IF
+                            -->
+                            <div class="clear"></div>
+                            <button ng-click="showPaymentToggle()" ng-show="!showPayment && !data.pricePaid"
+                                    class="md-raised md-warn md-button md-default-theme voucher-pay-now"><span>{{T.transPayChange}}</span>
+                            </button>
+
+
+                        </div>
+
+
+                        <!--
+                        THE utilities AREA
+                        This layer should always be there:
+                        -->
+
+                        <div ng-if="data.status != 6 && data.status != 5 && data.status != 4" class="utilities-area">
+                            <h4 style="margin:10px 0;">{{T.transUtilities}}</h4>
+                            <table class="table nomargin-table right-aligned-second">
+                                <tbody>
+                                <tr>
+                                    <td class="td-align" style="width: 80px;">{{T.transElectricity}}</td>
+                                    <td>{{T.transPayUse}}, &#3647;{{property.electricUnit}} {{T.transUnit}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{T.transWater}}</td>
+                                    <td>{{T.transPayUse}}, &#3647;{{property.waterUnit}} {{T.transUnit}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{T.transInternet}}</td>
+                                    <td>{{T.transIncluded}} {{property.internet}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{T.transCable}}</td>
+                                    <td>{{T.transIncluded}} {{property.cabletv}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div ng-if="data.conditionsTenant == undefined || data.conditionsTenant == ''">
+                                <h4 style="margin-bottom:10px;">{{T.transSpecialConditions}}</h4>
+                                <div class="bordered">
+                                    <p>{{T.transTenantExtras}}</p>
+                                </div>
+                            </div>
+                            <div ng-if="data.conditionsTenant != '' && data.conditionsTenant != undefined">
+                                <h4 style="margin-bottom:10px;">{{T.transSpecialConditions}}</h4>
+                                <div class="bordered">
+                                    <p>{{data.conditionsTenant}}</p>
+                                </div>
+                            </div>
+                            <p>{{T.transRead}} <a href="javascript:void(0)" ng-click="rules()">{{T.transHouseRules}}</a>
+                                {{T.transAnd}} <a href="javascript:void(0)" ng-click="cancellation()">{{T.transCancellation}}</a>
+                            </p>
+                        </div>
+
+
+                        <!--
+                        THE change date AREA
+                        This layer should always be there:
+                        -->
+
+                        <div ng-if="data.status != 6 && data.status != 5 && data.status != 4" class="change-date-area">
+                            <p>{{T.transChangeDateTxt}}</p>
+                            <button class="md-raised md-warn md-button md-default-theme voucher-pay-now"
+                                    ng-click="changeDates()">{{T.transChangeDate}}
+                            </button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <br>
+            <div class="col-sm-12">
+                <property-about></property-about>
+            </div>
+        </div>
+    </div>
+    <property-details></property-details>
+    <div class="main-content container">
+        <div class="map-container-prop">
+            <div class="google-map-prop">
+                <map style="height:100%;width:100%;" ng-init="map()"></map>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+</div>

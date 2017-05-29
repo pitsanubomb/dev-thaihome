@@ -1,0 +1,31 @@
+{"_id":{"$oid":"583b15c978c00a1b20f66979"},"variable":"BOOKING_ID","func":"booking.id","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b15d778c00a1b20f6697a"},"variable":"TENANT_NAME","func":"user.name","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b15e378c00a1b20f6697b"},"variable":"TENANT","func":"user.name","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b162378c00a1b20f6697c"},"variable":"TENANT_FIRSTNAME","func":"user.name.split(' ')[0]","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b164c78c00a1b20f6697d"},"variable":"DISCOUNT_CODE","func":"user.name.split(' ')[0] + '' + booking.id.slice(-3).toString()","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b16bb78c00a1b20f6697f"},"variable":"LOCATION","func":"property.locationName","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b16d178c00a1b20f66980"},"variable":"CHECKIN","func":"moment.unix(booking.checkin).utc().format('MMM D, YYYY')","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b16ec78c00a1b20f66981"},"variable":"NIGHTS","func":"booking.nights","condition":"Number(booking.nights) \u003e 8","__v":0,"default":"11"}
+{"_id":{"$oid":"583b170478c00a1b20f66982"},"variable":"CHECKOUT","func":"moment.unix(booking.checkout).utc().format('MMM D, YYYY')","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b172678c00a1b20f66983"},"variable":"CURRENCY","func":"currency.symbol","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b173c78c00a1b20f66984"},"variable":"PRICE_DAY","func":"(booking.priceDay * booking.rate).toFixed(0)","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b189ea2395e4060e644d2"},"variable":"PRICE_BOOKING","func":"(booking.priceDay * booking.nights * booking.rate).toFixed(0)","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b18caa2395e4060e644d3"},"variable":"FINAL_CLEANING","func":"(booking.cleanfinalprice * booking.rate).toFixed(0)","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b19aaa2395e4060e644d4"},"variable":"PRICE_TOTAL","func":"((booking.nights * booking.priceDay - (booking.nights * booking.priceDay / 100 * parseInt(booking.discountPercentage)) + parseFloat(PriceExtra) + booking.cleanfinalprice) * booking.rate).toFixed(0)","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b1a44a2395e4060e644d5"},"variable":"DISCOUNT","func":"'\u003ctr\u003e\u003ctd style=\"padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;color:green\"\u003eDiscount\u003c/td\u003e\u003ctd style=\"padding: 5px 0 0 0;border-top: 1px solid #ddd;width: 90px;color:green\"\u003e' + booking.currency.symbol + '' + ((booking.priceDay * booking.rate).toFixed(0) * booking.nights / 100 * booking.discountPercentage).toFixed(0) + '\u003c/td\u003e\u003c/tr\u003e'","condition":"booking.discountPercentage","__v":0,"default":""}
+{"_id":{"$oid":"583b1abaa2395e4060e644d6"},"variable":"PRICE_EXTRA","func":"PriceExtraHTML","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b1b78a2395e4060e644d7"},"variable":"PERIOD","func":"PERIOD","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b1bb2a2395e4060e644d8"},"variable":"GOOGLEMAPS","func":"'\u003ca style=\"color: #15c;\" href=\"' + property.gmapslink + '\"\u003e' + property.gmapslink + '\u003c/a\u003e'","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b1bbfa2395e4060e644d9"},"variable":"PROPERTY","func":"property.name","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b1bd6a2395e4060e644da"},"variable":"ADDRESS","func":"property.address1 + '\u003cbr\u003e' + property.address2 + '\u003cbr\u003e' + property.address3 + '\u003cbr\u003e'","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b1be2a2395e4060e644db"},"variable":"ADDRESS_THAI","func":"property.thaiAddress","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b1bf1a2395e4060e644dc"},"variable":"RESERVATION_FEE","func":"booking.priceReservation","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b1c09a2395e4060e644dd"},"variable":"CLEAN_PRICE","func":"bothPrices(property.cleanprice)","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"583b1c14a2395e4060e644de"},"variable":"FINAL_CLEAN_PRICE","func":"property.cleanfinalprice","condition":"","__v":0,"default":""}
+{"_id":{"$oid":"5846e4ff5a3596243cfbaf9d"},"variable":"SEARCH_CHECK_DATES","func":"'{{T.transOfferSearchDate}}'","condition":"booking.checkin != '' \u0026\u0026 Number(booking.checkin) != 0 \u0026\u0026 typeof booking.checkin != 'undefined'","default":"","__v":0}
+{"_id":{"$oid":"584716e30ea6de79951a5f69"},"variable":"THAIHOME_LINK","func":"'{{locationUrlProject}}'","condition":"","default":""}
+{"_id":{"$oid":"5863f52c647d422610f7a1d5"},"variable":"EMAIL_FINAL_PAYEMNT","func":"'{{T.transMailFinal}}'","condition":"invoicesAmount \u003e receiptsAmount","default":""}
+{"_id":{"$oid":"5863f87e647d422610f7a1d6"},"variable":"MISSING_PAYMENT","func":"invoicesAmount - receiptsAmount","condition":"","default":""}
+{"_id":{"$oid":"5877680522d17a0323a283f9"},"variable":"RESERVATION_CHECK","func":"booking.priceReservation","condition":"booking.priceReservation != 0 \u0026\u0026 typeof booking.priceReservation != 'undefined' \u0026\u0026 booking.priceReservation != ''","default":"","__v":0}
+{"_id":{"$oid":"5883b25c18c29025e77d25a6"},"variable":"BOTH_PRICES","func":"bothPrices","condition":"","default":"","__v":0}
+{"_id":{"$oid":"5883c06eae3e522b84f6ea6a"},"variable":"TOTAL_PRICE_BOOKING","func":"bothPrices(totalPriceBooking)","condition":"","default":"","__v":0}

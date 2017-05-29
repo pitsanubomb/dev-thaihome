@@ -1,0 +1,70 @@
+<header></header>
+<div class="container t-rating">
+  <div class="main-img-container">
+    <div ng-repeat="image in data.images | limitTo: 2" class="top-image col-sm-6 col-xs-12">
+      <img src="/assets/images/property/{{data.id | lowercase}}/{{image}}" alt="">
+    </div>
+  </div>
+  <h2>{{data.property.name}}</h2>
+  <p>{{data.property.locationName}}</p>
+  <div class="md-whiteframe-z3 rating-container">
+    <div class="row">
+      <div class="col-md-3">
+        <img src="/assets/images/note.png" alt="">
+      </div>
+      <form ng-submit="save()">
+        <div class="col-md-9">
+
+          <div ng-bind-html="T.transRatingTxt.replace('[[name]]', data.user.name.split(' ')[0])"></div>
+          <br><h4 ng-bind-html="T.transRatingGive">:</h4>
+          <textarea ng-disabled="ty" name="" cols="30" rows="7" class="form-control" required ng-model="rating.rating"></textarea>
+          <br><h4 ng-bind-html="T.transRatingBetter">:</h4>
+          <textarea ng-disabled="ty" name=""  cols="30" rows="7" class="form-control" required ng-model="rating.improve"></textarea>
+          <br><h4 ng-bind-html="T.transRatingUs">:</h4>
+
+        </div>
+        <div class="row rating-stars-container">
+          <div class="col-md-4">
+            <p>{{T.transRatingProperty}}</p>
+          </div>
+          <div class="col-md-8">
+            <div class="rating-stars">
+              <div class="star-rating" star-rating rating-value="rating.ratings[0]" data-max="5"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row rating-stars-container">
+          <div class="col-md-4">
+            <p>{{T.transRatingLocation}}</p>
+          </div>
+          <div class="col-md-8">
+            <div class="rating-stars">
+              <div class="star-rating" star-rating rating-value="rating.ratings[1]" data-max="5"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row rating-stars-container">
+          <div class="col-md-4">
+            <p>{{T.transRatingStaff}}</p>
+          </div>
+          <div class="col-md-8">
+            <div class="rating-stars">
+              <div class="star-rating" star-rating rating-value="rating.ratings[2]" data-max="5"></div>
+            </div>
+          </div>
+        </div>
+        <md-button ng-if="!ty" type="submit" class="md-raised md-primary md-button md-ink-ripple save-rate-btn">{{T.transRatingSave}}</md-button>
+      </form>
+      <div ng-if="ty">
+        <p ng-bind-html="T.transRatingDiscount"></p>
+        <p style="margin-right:20px;float:left;">{{T.transRatingCode}}:</p>
+        <p class="code"><b>{{discount.code}}</b></p>
+        <div class="clear"></div>
+      </div>
+      <div ng-bind-html="T.rating_text9 || TD.rating_text9"></div>
+      <p><b>{{T.transSeeYou}}</b></p>
+      <p ng-bind-html="T.transRatingGreet"></p>
+    </div>
+  </div>
+</div>
+<footer></footer>

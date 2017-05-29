@@ -1,0 +1,53 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+  <div class="navbar-header">
+
+    <button ng-click="isOpen = !isOpen" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="index.html">ThaiHome Administration</a>
+
+  </div>
+
+    <md-menu md-position-mode="target-right target" class="second-menu-container logout-drpdwn">
+      <md-button aria-label="" class="md-icon-button logout-icon-clr" ng-click="$mdOpenMenu()">
+        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+      </md-button>
+      <md-menu-content>
+        <ul class="nav second-nav">
+			<li><a ui-sref="management.home">Management</a></li>
+			<li><a ui-sref="home">Thai Home</a></li>
+			<li><a ui-sref="admin_logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+        </ul>
+      </md-menu-content>
+    </md-menu>
+  
+  <notifications-bar class="notifications"></notifications-bar>
+  <!-- /.navbar-header -->
+  <header-notification></header-notification>
+
+  <admin-sidebar ng-init="isOpen = true" ng-show="isOpen"></admin-sidebar>
+  
+</nav>
+
+
+
+
+
+
+
+<!--  PREVIOUS BOOTSTRAP DROPDOWN
+  <ul class="nav navbar-top-links navbar-right">
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-user">
+        <li><a ui-sref="admin_logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+      </ul>
+      <!-- /.dropdown-user 
+    </li> 
+    <!-- /.dropdown 
+  </ul> -->

@@ -1,0 +1,211 @@
+<header></header>
+
+<div class="container agent-booking">
+  <div class="row">
+    <div class="property-buttons">
+      <a ui-sref="agent.property({'id': property.unique})">
+        <md-button class="md-raised md-primary">Information</md-button>
+      </a>
+      <a ui-sref="agent.chat">
+        <md-button class="md-raised md-primary">Talk to us</md-button>
+      </a>
+      <a ui-sref="agent.home">
+        <md-button class="md-raised md-primary">Back to list</md-button>
+      </a>
+    </div>
+    <div class="col-md-7">
+      <form ng-submit="book()" name="bookForm">
+        <div class="md-whiteframe-z3 book-align">
+          <div class="date-price">
+            <div class="date-price-width">
+              <div class="result-dates">
+                <div class="col-md-3">
+                  <p>Booking Dates</p>
+                </div>
+                <div class="col-md-9">
+                  <div class="date-fields">
+                    <booking-calendar></booking-calendar>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="booking-tenant">
+              <div class="col-md-3">
+                <p>Payment</p>
+              </div>
+              <div class="col-md-9">
+                <div class="payment-container">
+                  <select ng-change="selectPayment(paymentID)" ng-model="paymentID" class="search-option-payment form-control" required placeholder="Payment Type" ng-model="paymentType">
+                    <option value="" disabled selected>{{T.book_payment_type || TD.book_payment_type}}</option>
+                    <option ng-repeat="method in paymentMethods" value="{{method.id}}">{{method.name}}</option>
+                  </select>
+
+                  <div class="clear"></div>
+                  <div id="payment_placeholder"></div>
+                </div>
+              </div>
+            </div>
+            <div class="booking-tenant">
+              <div class="col-md-3">
+                <p>Tenant Name</p>
+              </div>
+              <div class="col-md-9">
+                <input type="text" class="form-control pull-left" ng-model="tenant.name" required>
+              </div>
+            </div>
+            <div class="booking-tenant">
+              <div class="col-md-3">
+                <p>Tenant Email</p>
+              </div>
+              <div class="col-md-9">
+                <input type="email" class="form-control pull-left" ng-model="tenant.email" required>
+              </div>
+            </div>
+            <div class="booking-tenant-btn">
+              <p>Agent / Tenant ownership</p>
+              <md-button class="md-raised md-primary" type="button" ng-click="ownership()">Read More</md-button>
+              <md-button ng-disabled="bookForm.$invalid" class="md-raised save-booking md-warn">SAVE BOOKING</md-button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+      <div class="clear"></div>
+      <div class="md-whiteframe-z3">
+        <div class="date-price">
+          <table class="table nomargin-table">
+            <tbody>
+              <tr>
+                <td class="td-sm-align">Agency</td>
+                <td>{{agent.agency}}</td>
+              </tr>
+              <tr>
+                <td>Agent</td>
+                <td>{{agent.name}}</td>
+              </tr>
+              <tr>
+                <td>Property</td>
+                <td>{{property.projectName}} {{property.unique}} {{property.bedrooms}} Bedrooms</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table nomargin-table">
+            <tbody>
+              <tr>
+                <td class="td-sm-align">Rent period</td>
+                <td>{{checkin}} - {{checkout}}, {{nights | timeFormat}}</td>
+              </tr>
+              <tr>
+                <td>Rent price</td>
+                <td class="sm-table">
+                  <table class="table nomargin-table">
+                    <tbody>
+                      <tr>
+                        <td class="special-td">{{nights}} Nights ({{nights}} x {{priceDay | currency:currency:1}})</td>
+                        <td class="special-td price-right">{{nights * priceDay | currency:currency}}</td>
+                      </tr>
+                      <tr class="book-discount">
+                        <td colspan="2">
+                          <discount></discount>
+                        </td>
+                      </tr>
+                      <tr ng-if="discount.percent">
+                        <td class="green">Discount</td>
+                        <td class="green price-right">- {{nights * priceDay / 100 * discount.percent | currency:currency}} ({{discount.percent}}%)</td>
+                      </tr>
+                      <tr>
+                        <td>Check-out cleaning</td>
+                        <td class="price-right">{{property.cleanfinalprice | currency:currency:0}}</td>
+                      </tr>
+                      <tr ng-repeat="extra in newbooking.price_extra track by $index">
+                        <td>{{extra.name}}</td>
+                        <td class="price-right">{{extra.price | currency : currency:0}}</td>
+                      </tr>
+                      <tr>
+                        <td>Total</td>
+                        <td class="price-right">{{property.cleanfinalprice+(priceDay * nights - (priceDay * nights / 100 * discount.percent)) | currency : currency:0}}</td>
+                      </tr>
+                      <tr>
+                        <td><b>Agent commission({{agentCommission}}%)</b></td>
+                        <td class="price-right"><b>{{((nights * priceDay) - (nights * priceDay / 100 * discount.percent)) / 100 * agentCommission  | currency:currency}}</b></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row" id="conversation">
+        <div class="col-xs-3">
+          <div class="owner-img">
+            <img src="/assets/images/note.png" alt="">
+          </div>
+        </div>
+        <div class="col-xs-9 about-owner">
+          <div class="owner-buble">
+            <p>Hi, my name is Note. I am the property manager. Ask me about discount, cleaning, commission, booking or if someone want to see the condo. I will be happy to answer in the chat ---->
+              <br> or call me on: <b>080-209-7887</b>
+              <br>or e-mail me: <a href="mailto:note@flipinvert.com">note@flipinvert.com</a></p>
+            <div class="arrow"></div>
+          </div>
+        </div>
+      </div>
+      <chat></chat>
+    </div>
+    <div class="col-md-5">
+      <div class="payment-side md-whiteframe-z3">
+
+        <div class="picture">
+          <img src="/assets/images/property/{{property.unique | lowercase}}/{{property.featured}}" alt="">
+        </div>
+
+        <p><b>{{property.name}}</b></p>
+        <p>{{property.locationName}}</p>
+
+        <table class="table nomargin-table right-aligned-second">
+          <tbody>
+            <tr>
+              <td class="td-align">Check in:</td>
+              <td><b>{{checkin}}</b></td>
+            </tr>
+            <tr>
+              <td>Check out:</td>
+              <td><b>{{checkout}}</b></td>
+            </tr>
+            <tr>
+              <td>Nights</td>
+              <td><b>{{nights}}</b></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table nomargin-table right-aligned-second">
+          <tbody>
+            <tr>
+              <td class="td-align">{{priceDay | currency: currency:0}} x {{nights}} nights</td>
+              <td>{{priceDay * nights | currency: currency:0}}</td>
+            </tr>
+            <tr ng-if="discount.percent">
+              <td class="green">Discount</td>
+              <td class="green">- {{priceDay * nights / 100 * discount.percent | currency:currency}} ({{discount.percent}}%)</td>
+            </tr>
+            <tr>
+              <td>Check-out cleaning</td>
+              <td>{{property.cleanfinalprice | currency:currency:0}}</td>
+            </tr>
+            <tr>
+              <td class="td-align">
+                <h3>Total</h3></td>
+              <td>
+                <h3>{{property.cleanfinalprice + (priceDay * nights - (priceDay * nights / 100 * discount.percent))  | currency : currency:0}}</h3></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<footer></footer>

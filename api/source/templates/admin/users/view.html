@@ -1,0 +1,102 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">{{ user.id ? 'View':'Add'}} {{user.name}}</h1>
+
+    <p class="small red">If you're adding/editing a <b>tenant</b>, the system will overwrite the username and password so it can autologin him</p>
+    <br/>
+    <div style="clear:both;"></div>
+    <button type="button" class="btn btn-primary adduser" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+      {{ user.id ? 'Edit': 'Add'}}
+    </button>
+    <button ng-show="!editableForm.$visible" ng-if="user.id && user.type == 'tenant'" type="button" class="btn btn-primary" ng-click="bookingList(user.id)">Bookings</button>
+    <p ng-show="editableForm.$visible">
+      <p ng-show="editableForm.$visible">
+        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+          {{ user.id ? 'Edit': 'Save'}}
+        </button>
+        <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+          Cancel
+        </button>
+      </p>
+      <div style="clear:both;"></div>
+      <form role="form" onaftersave="update()" editable-form name="editableForm" oncancel="back();">
+        <div class="col-md-4">
+          <div class="form-group">
+            <p class="title">Name: </p>
+            <p e-class="form-control" editable-text="user.name" e-name="name" e-required>{{ user.name || '-' }}</p>
+          </div>
+          <div class="form-group">
+            <p class="title">Agent: </p>
+            <p editable-text="user.agent" e-name="agent">{{ user.agent || '-' }}</p>
+          </div>
+          <div class="form-group">
+            <p class="title">Agency: </p>
+            <p editable-text="user.agency" e-name="agency">{{ user.agency || '-' }}</p>
+          </div>
+          <div class="form-group">
+            <p class="title">Username: </p>
+            <p editable-text="user.username" e-name="username" e-required>{{ user.username || '-' }}</p>
+          </div>
+          <div class="form-group">
+            <p class="title">Email: </p>
+            <p editable-text="user.email" e-name="email" e-required>{{ user.email || '-' }}</p>
+          </div>
+          <div class="form-group">
+            <p class="title">Password: </p>
+            <p editable-text="user.password" e-name="password">{{ user.password || '-' }}</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+
+          <div class="form-group">
+            <p class="title">Type: </p>
+            <p editable-select="user.type" e-name="type" e-ng-options="s.value as s.text for s in userTypes">
+              {{ (userTypes | filter:{value: user.type})[0].text || '-' }}
+            </p>
+
+          </div>
+          <div class="form-group" ng-show="user.type=='translator'">
+            <p class="title">Languages: </p>
+            <p editable-select="user.languages" e-multiple e-name="languages" e-ng-options="s.shortname as s.name for s in languages">
+              {{ showLanguages() }}
+            </p>
+          </div>
+          <div class="form-group">
+            <p class="title">Phone: </p>
+            <p editable-text="user.phone" e-name="phone">{{ user.phone || '-' }}</p>
+          </div>
+          <div class="form-group">
+            <p class="title">Country: </p>
+            <p editable-select="user.country" e-name="country" e-ng-options="s as s for s in countries">
+              {{ user.country }}
+            </p>
+
+          </div>
+          <div class="form-group">
+            <p class="title">Last Contact: </p>
+            <p editable-text="user.lastContact" e-name="lastContact" e-disabled>{{ user.lastContact }}</p>
+          </div>
+          <div class="form-group">
+            <p class="title">Created: </p>
+            <p editable-text="user.created" e-name="created" e-disabled>{{ user.created }}</p>
+          </div>
+        </div>
+        <div style="clear:both;"></div>
+        <button type="button" class="btn btn-primary" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+          {{ user.id ? 'Edit': 'Add'}}
+        </button>
+        <button ng-show="!editableForm.$visible" ng-if="user.id && user.type == 'tenant'" type="button" class="btn btn-primary" ng-click="bookingList(user.id)">Bookings</button>
+        <p ng-show="editableForm.$visible">
+          <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+            {{ user.id ? 'Edit': 'Save'}}
+          </button>
+          <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+            Cancel
+          </button>
+        </p>
+      </form>
+      <div class="clear"></div>
+      <!-- /.col-lg-12 -->
+  </div>
+  <!-- /.row -->
+</div>

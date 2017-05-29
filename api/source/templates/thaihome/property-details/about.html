@@ -1,0 +1,9 @@
+<div class="more_info blue-border about-home">
+  <h3>{{T.transAboutProperty}}</h3>
+  <p>{{translation.texts[0].shorttext}}</p>
+  <md-button ng-show="!propertyDetails" ng-click="propertyDetails=true" class="md-raised md-primary pull-right read-more">{{T.transShowMore}}</md-button>
+  <div ng-show="propertyDetails">
+    <property-moreinfo></property-moreinfo>
+    <md-button ng-click="propertyDetails = false" class="md-raised md-primary pull-right read-more">{{T.transShowLess}}</md-button>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<ng-form name="booking_first" novalidate>
+  <h3 class="pull-left">{{T.transBillInfo}}</h3>
+
+  <div class="clear"></div>
+
+  <div class="billing-info">
+    <div class="clear"></div>
+    <label>{{T.transSelectCountry}}</label>
+    <div>
+      <div class="red" ng-show="booking_first.country.$error.required">{{T.transSelectCountryTxt}}</div>
+    </div>
+    <select name="country" required="" class="search-option-payment location_select form-control" placeholder="Country" ng-model="contact.country" ng-options="country for country in countries track by country">
+      <option value="" slected="selected" disabled="disabled">{{T.transSelectCountry}}</option>
+    </select>
+    <label>{{T.transName}}</label>
+    <div>
+      <div ng-show="booking_first.name.$error.required || booking_first.name.$error.required" class="red">{{T.transEnterName}}</div>
+      <div ng-show="!booking_first.name.$error.required && booking_first.name.$invalid" class="red">{{T.transEnterChars}}</div>
+    </div>
+    <input name="name" required="" type="text" ng-minlength="5" class="form-control" placeholder="Name" ng-model="contact.name">
+    <label>{{T.transEmail}}</label>
+    <div>
+      <div ng-show="booking_first.email.$error.required || booking_first.email.$error.phone" class="red">{{T.transEnterMail}}</div>
+      <div ng-show="!booking_first.email.$error.required && booking_first.email.$invalid" class="red">{{T.transEnterValidMail}}</div>
+    </div>
+    <input name="email" required="" type="email" ng-class="{error: compareUserInfo(booking_first.email.$modelValue) == false}" class="form-control" placeholder="Email" ng-model="contact.email">
+    <label>{{T.transMobilePhone}}</label>
+    <div>
+      <div ng-show="booking_first.phone.$error.required || booking_first.phone.$error.phone" class="red">{{T.transEnterPhone}}</div>
+      <div ng-show="!booking_first.phone.$error.required && booking_first.phone.$invalid" class="red">{{T.transEnterValidPhone}}</div>
+    </div>
+    <input name="phone" required="" type="text" ng-minlength="5" class="form-control" placeholder="Phone Number" ng-model="contact.phone">
+    <style>
+      input.ng-invalid {
+        color: red;
+      }
+    </style>
+    <span class="md-raised book red" ng-if="!compareUserInfo(booking_first.email.$modelValue)" ng-bind-html="T.transEmailUsed"></span>
+    <md-button ng-if="compareUserInfo(booking_first.email.$modelValue)" ng-disabled="booking_first.$invalid" ng-click="book();$nextStep()" class="md-raised book md-warn">{{T.transNext}}</md-button>
+  </div>
+</ng-form>

@@ -1,0 +1,112 @@
+<div id="wrapper" class="col-sm-6 col-sm-push-3" style="min-height: 561px;padding:5px;clear:both; max-width: 600px;">
+  <div class="new-booking-area">
+      <table class="iconTD ">
+          <tr>
+              <td ui-sref="management.home" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                      src="/assets/images/Home.png" alt="Start Page"><span ng-if="menu_bookings"
+                                                                           class="management-menu-new-element-block">{{menu_bookings}}</span>
+              </td>
+              <td ui-sref="management.messages" ui-sref-opts="{reload:true}" style="position:relative;"><img
+                      src="/assets/images/Messages.png" alt="Messages"><span ng-if="menu_messages"
+                                                                             class="management-menu-new-element-block">{{menu_messages}}</span>
+              </td>
+              <td ui-sref="management.bookings"><img src="/assets/images/Bookings.png" alt="Bookings"></td>
+              <td ui-sref="management.properties"><img src="/assets/images/Properties.png" alt="Properties"></td>
+              <td ui-sref="management.calendar({month: '', year:''})"
+                  ng-class="{'active-management-btn' : statename == 'management.calendar'}"><img
+                      src="/assets/images/Calendar.png" alt="Calendar"></td>
+              <td>
+                  <md-menu style="width: 100%;height: 100%;padding: 0;margin-top: 15px; display:block;"
+                           md-position-mode="target-right target" class="second-menu-container crnc-drop">
+                      <md-button aria-label=""
+                                 style="width: 100%!important;height: 100%;box-shadow: none;border: 0!important;"
+                                 class="md-icon-button" ng-click="$mdOpenMenu()">
+                          <img src="/assets/images/Menu.png" alt="Menu">
+                      </md-button>
+                      <md-menu-content>
+                          <ul class="nav second-nav manage-nav">
+                              <li md-ink-ripple>
+                                  <a ui-sref="management.book">New Booking</a>
+                              </li>
+                              <li md-ink-ripple>
+                                  <a ui-sref="admin.home">Admin</a>
+                              </li>
+                              <li md-ink-ripple>
+                                  <a ui-sref="home">Thai Home</a>
+                              </li>
+                              <li md-ink-ripple>
+                                  <a ui-sref="management.expenses">Expenses</a>
+                              </li>
+                              <li md-ink-ripple>
+                                <a ui-sref="management.todo">Todo</a>
+                              </li>
+                              <!-- 2016-05-17 - Ajay - Add link for profile page || Ajay du lrpi lakot es asem imaci -->
+                              <li md-ink-ripple>
+                                  <a ui-sref="management.profile">Profile</a>
+                              </li>
+                              <li md-ink-ripple>
+                                  <a ui-sref="admin_logout">Logout</a>
+                              </li>
+                          </ul>
+                      </md-menu-content>
+                  </md-menu>
+
+              </td>
+          </tr>
+      </table>
+  </div>
+
+
+  <table class="startHeadTable">
+    <tr>
+      <td class="startHeadTxt startRedTxt startOverflow" colspan="2">
+        Bookings
+      </td>
+    </tr>
+  	<tr>
+  		<td class="startOverflow" style="width:50%;">
+        <select ng-model="bookingType" class=" startField" ng-change="selectBooking()">
+          <option value="all">All Bookings</option>
+          <option value="old">Older than 14 days (<b>not paid</b>)</option>
+          <option ng-repeat="status in statuses" value="{{status.value.toString()}}">{{status.name}}</option>
+        </select>
+      </td>
+      <td class="startOverflow" style="width:50%;">
+        <a ui-sref="management.book()"><button class="startRedBg startButton" style="width:120px;">New Booking</button></a>
+      </td>
+  	</tr>
+  </table>
+  <div class="startSpacer"></div>
+
+  <div class="moved-up-table">
+    <table style="clear:both;width: 100% !important;" class="startLineTable table-striped table-bordered table-hover" datatable="ng" dt-options="dtOptions">
+      <thead>
+      	<tr>
+          <th style="display:none;">ID</th>
+      		<th style="width:19%;" class="startRedTh startUnit">Unit</th>
+      		<th style="width:41%;" class="startRedTh startOverflow">Tenant/Agent</th>
+      		<th style="width:1%;" class="startRedTh startOverflow"></th>
+      		<th style="width:15%;" class="startRedTh startOverflow">CheckIn</th>
+      		<th style="width:15%;" class="startRedTh startOverflow">CheckOut</th>
+      	</tr>
+      </thead>
+
+      <tbody>
+        <tr ui-sref="management.booking({id: booking.id})" ng-repeat="booking in bookings">
+          <td style="display:none;">{{booking.id}}</td>
+
+          <td class="startLineTxt">
+            <!-- TIKO please fix this to use correct booking source -->
+           <span class="startBook{{getSourceOfBooking(booking.id)}}">{{getSourceOfBooking(booking.id)}}</span>
+            &nbsp;{{booking.property.unique}}
+          </td>
+
+          <td class="startLineTxt startOverflow">{{booking.user.name}}<span ng-if="booking.agent.name && booking.user.name.length < 15">/{{booking.agent.name}}</span></td>
+          <td class="startLineTxt startBoldTxt startCenter"><span class="{{getDueDateForInvoice(booking.expires).color}}">{{getDueDateForInvoice(getExpDatebyID(booking.id)).days}}</span></td>
+          <td class="startLineTxt startOverflow startCenter" ui-sref="management.booking({id: booking.id})">{{booking.checkin+'000' | date: 'dd MMM' : 'UTC'}}</td>
+      		<td class="startLineTxt startOverflow startCenter" ui-sref="management.booking({id: booking.id})">{{booking.checkout+'000' | date: 'dd MMM' : 'UTC'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

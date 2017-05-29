@@ -1,0 +1,189 @@
+<header></header>
+<div class="container">
+  <div class="row listing">
+
+    <div id="arches" class="responsive">
+      <div id="search-input" class="manage">
+
+        <form id="vr-search" method="post" ng-submit="search(searchonly)" class="results-align">
+          <p>{{T.agent_results_date || TD.agent_results_date}}</p>
+          <span class="date-fields">
+            <booking-calendar></booking-calendar>
+          </span>
+          <select ng-model="searchonly" class="form-control">
+            <option value="">All</option>
+            <option value="unit_type-Studio">Studio</option>
+            <option value="bedrooms-1">1 Bedroom</option>
+            <option value="bedrooms-2">2 Bedrooms</option>
+            <option value="bedrooms-3">3 Bedrooms and More</option>
+          </select>
+          <md-button type="submit" class="md-raised md-warn home-search-bt booking_search">{{T.booking_search || TD.booking_search}}</md-button>
+        </form>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <h2 class="blue-title" style="margin:3px 0 0;">{{T.agent_results_curentbookings || TD.agent_results_curentbookings}} {{agent.name}}</h2>
+    <div>
+      <md-data-table-container>
+        <table class="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th name="{{T.agent_results_project || TD.agent_results_project}}"></th>
+              <th name="{{T.agent_results_unit_no || TD.agent_results_unit_no}}"></th>
+              <th name="{{T.agent_results_check_in || TD.agent_results_check_in}}"></th>
+              <th name="{{T.agent_results_check_out || TD.agent_results_check_out}}"></th>
+              <th name="{{T.agent_results_tenant || TD.agent_results_tenant}}"></th>
+              <th name="{{T.agent_results_status || TD.agent_results_status}}"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="book in bookings | limitTo: bookingslimit">
+              <td>
+                <a ui-sref="agent.booking({'id': book.id})">
+                  <md-button class="md-raised blue-btn other-info">{{T.agent_results_info || TD.agent_results_info}}</md-button>
+                </a>
+              </td>
+              <td><a ui-sref="agent.booking({'id': book.id})"><b>{{book.property.projectName}}</b></a></td>
+              <td>{{book.property.unique}}</td>
+              <td><b>{{book.checkin | defaultDateFormat}}</b></td>
+              <td><b>{{book.checkout | defaultDateFormat}}</b></td>
+              <td>{{book.user.name}}</td>
+              <td><b class="bookstatus_{{book.status}}">{{getStatus(book.status).name}}</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </md-data-table-container>
+      <md-button ng-click="bookingslimit = bookingslimit + 5" ng-show="bookingslimit < bookings.length" class="md-raised blue-btn pull-right">{{T.agent_load_more || TD.agent_load_more}}</md-button>
+    </div>
+    <div class="clear"></div>
+    <div class="col-md-12" style="padding:0px;">
+      <h2 class="blue-title">{{T.agent_results_rent_by || TD.agent_results_rent_by}}</h2>
+    </div>
+    <!--
+    <div class="model-table col-md-9" ng-show="properties.length || bookedproperties.length">
+      <md-data-table-container>
+        <table class="table dark-table">
+          <tbody>
+            <tr>
+              <td class="wide-td">{{T.agent_results_project || TD.agent_results_project}}</td>
+              <td>{{T.agent_results_unit_no || TD.agent_results_unit_no}}</td>
+              <td class="hide-sm">{{T.agent_results_bed_bath || TD.agent_results_bed_bath}}</td>
+              <td class="sm-td">{{T.agent_results_available_from || TD.agent_results_available_from}}</td>
+            </tr>
+            <tr>
+              <td>{{T.agent_results_location || TD.agent_results_location}}</td>
+              <td>{{T.agent_results_unit_type || TD.agent_results_unit_type}}</td>
+              <td class="hide-sm">{{T.agent_results_unit_size || TD.agent_results_unit_size}}</td>
+              <td>{{T.agent_results_no_guests || TD.agent_results_no_guests}}</td>
+            </tr>
+            <tr>
+              <td>Day Rate/Commission</td>
+              <td>Week Rate/Commission</td>
+              <td class="hide-sm">Month Rate/Commission</td>
+              <td>Year Rate/Commission</td>
+            </tr>
+          </tbody>
+        </table>
+      </md-data-table-container>
+    </div>
+-->
+    <div class="clear"></div>
+
+    <div>
+      <div class="container">
+        <div class="row properties-result" ng-repeat="property in properties">
+          <div class="col-md-3 list-img-container">
+            <div class="listing-img">
+              <img src="/assets/images/property/{{property.unique | lowercase}}/{{property.featured}}" alt="" />
+            </div>
+            <div class="img-buttons">
+              <md-button class="md-raised blue-btn" ui-sref="agent.property({id: property.unique})">{{T.agent_results_info || TD.agent_results_info}}</md-button>
+              <md-button class="md-raised md-warn" ui-sref="agent.book({id:property.unique})">{{T.agent_results_book || TD.agent_results_book}}</md-button>
+             <!-- <md-button class="md-raised blue-btn" ui-sref="agent.chat({property:property.id})">{{T.agent_results_chat || TD.agent_results_chat}}</md-button>-->			  
+			   <md-button class="md-raised blue-btn" ui-sref="agent.property({id: property.unique, action: 'chat'})">{{T.agent_results_chat || TD.agent_results_chat}}</md-button>
+			   
+            </div>
+          </div>
+          <div class="col-md-9 results-table">
+            <md-data-table-container>
+              <table class="table prices-right">
+                <tbody>
+                  <tr>
+                    <td data-toggle="tooltip" title="Project" class="wide-td"><b>{{property.projectName}}</b></td>
+                    <td data-toggle="tooltip" title="Unit No">{{property.unique}}</td>
+                    <td data-toggle="tooltip" title="Bed/Bath" class="hide-sm">{{property.bedrooms}} {{T.agent_results_bed || TD.agent_results_bed}} / {{property.bathrooms}} {{T.agent_results_bath || TD.agent_results_bath}}</td>
+                    <td data-toggle="tooltip" title="Available from" class="sm-td"><b class="green">{{T.agent_results_available || TD.agent_results_available}}</b></td>
+                  </tr>
+                  <tr>
+                    <td data-toggle="tooltip" title="Location">{{property.locationName}}</td>
+                    <td data-toggle="tooltip" title="Unit Type">{{property.unitType}}</td>
+                    <td data-toggle="tooltip" title="Unit Size" class="hide-sm">{{property.sqm}} {{T.agent_results_sqm || TD.agent_results_sqm}}</td>
+                    <td data-toggle="tooltip" title="No of Guests">{{property.guests}} {{T.agent_results_persons || TD.agent_results_persons}}</td>
+                  </tr>
+                  <tr>
+                    <td data-toggle="tooltip" title="Day Rate/Commission"><span>Day</span> <b>{{defaultPrices[property.id].priceDay | currency: currency}} / {{defaultPrices[property.id].priceDay / 100 * defaultPrices[property.id].commissionDay  | currency: currency}} ({{defaultPrices[property.id].commissionDay}}%)</b></td>
+                    <td data-toggle="tooltip" title="Week Rate/Commission"><span>Week</span> <b>{{defaultPrices[property.id].priceWeek  | currency: currency}} / {{defaultPrices[property.id].priceWeek / 100 * defaultPrices[property.id].commissionWeek  | currency: currency}} ({{defaultPrices[property.id].commissionWeek}}%)</b></td>
+                    <td data-toggle="tooltip" title="Month Rate/Commission" class="hide-sm"><span>Month</span> <b>{{defaultPrices[property.id].priceMonth | currency: currency}} / {{defaultPrices[property.id].priceMonth / 100 * defaultPrices[property.id].commissionMonth  | currency: currency}} ({{defaultPrices[property.id].commissionMonth}}%)</b></td>
+                    <td data-toggle="tooltip" title="Year Rate/Commission"><span>Year</span> <b>{{defaultPrices[property.id].priceYear | currency: currency}} / {{defaultPrices[property.id].priceYear / 100 * defaultPrices[property.id].commissionYear  | currency: currency}} ({{defaultPrices[property.id].commissionYear}}%)</b></td>
+                  </tr>
+                </tbody>
+              </table>
+            </md-data-table-container>
+          </div>
+          <div class="clear"></div>
+          <hr>
+        </div> 
+      </div>
+      <div class="container">
+        <div class="row properties-result2" ng-repeat="property in bookedproperties">
+          <div class="col-md-3 list-img-container">
+            <div class="listing-img">
+              <img src="/assets/images/property/{{property.unique | lowercase}}/{{property.featured}}" alt="" />
+            </div>
+            <div class="img-buttons">
+              <md-button class="md-raised blue-btn" ui-sref="agent.property({id: property.unique})">{{T.agent_results_info || TD.agent_results_info}}</md-button>
+              <md-button class="md-raised md-warn" ui-sref="agent.book({id: property.unique})">{{T.agent_results_book || TD.agent_results_book}}</md-button>
+             <!-- <md-button class="md-raised blue-btn" ui-sref="agent.chat({property: property.id})">{{T.agent_results_chat || TD.agent_results_chat}}</md-button>-->
+              <md-button class="md-raised blue-btn" ui-sref="agent.property({id: property.unique, action: 'chat'})">{{T.agent_results_chat || TD.agent_results_chat}}</md-button>
+            </div> 
+          </div>  
+          <div class="col-md-9 results-table">
+            <md-data-table-container>
+              <table class="table prices-right">
+                <tbody>
+                  <tr>
+                    <td data-toggle="tooltip" title="Project" class="wide-td"><b>{{property.projectName}}</b></td>
+                    <td data-toggle="tooltip" title="Unit No">{{property.unique}}</td>
+                    <td data-toggle="tooltip" title="Bed/Bath">{{property.bedrooms}} {{T.agent_results_bed || TD.agent_results_bed}} / {{property.bathrooms}} {{T.agent_results_bath || TD.agent_results_bath}}</td>
+                    <td data-toggle="tooltip" title="Available from" class="sm-td"><b class="red">From {{whenFree[property.id] | defaultDateFormat}}</b></td>
+                  </tr>
+                  <tr>
+                    <td data-toggle="tooltip" title="Location">{{property.locationName}}</td>
+                    <td data-toggle="tooltip" title="Unit Type">{{property.unitType}}</td>
+                    <td data-toggle="tooltip" title="Unit Size">{{property.sqm}} {{T.agent_results_sqm || TD.agent_results_sqm}}</td>
+                    <td data-toggle="tooltip" title="No of Guests">{{property.guests}} {{T.agent_results_persons || TD.agent_results_persons}}</td>
+                  </tr>
+                  <tr>
+                    <td data-toggle="tooltip" title="Day Rate/Commision"><span>Daily</span> <b>{{defaultPrices[property.id].priceDay | currency: currency}} / {{defaultPrices[property.id].priceDay / 100 * defaultPrices[property.id].commissionDay  | currency: currency}} ({{defaultPrices[property.id].commissionDay}}%)</b></td>
+                    <td data-toggle="tooltip" title="Week Rate/Commission"><span>Weekly</span> <b>{{defaultPrices[property.id].priceWeek | currency: currency}} / {{defaultPrices[property.id].priceWeek / 100 * defaultPrices[property.id].commissionWeek  | currency: currency}} ({{defaultPrices[property.id].commissionWeek}}%)</b></td>
+                    <td data-toggle="tooltip" title="Month Rate/Commission" class="hide-sm"><span>Monthly</span> <b>{{defaultPrices[property.id].priceMonth | currency: currency}} / {{defaultPrices[property.id].priceMonth / 100 * defaultPrices[property.id].commissionMonth  | currency: currency}} ({{defaultPrices[property.id].commissionMonth}}%)</b></td>
+                    <td data-toggle="tooltip" title="Year Rate/Commission"><span>Yearly</span> <b>{{defaultPrices[property.id].priceYear | currency: currency}} / {{defaultPrices[property.id].priceYear / 100 * defaultPrices[property.id].commissionYear  | currency: currency}} ({{defaultPrices[property.id].commissionYear}}%)</b></td>
+                  </tr>
+                </tbody>
+              </table>
+            </md-data-table-container>
+          </div>
+          <div class="clear"></div>
+          <hr>
+        </div>
+      </div>
+      <hr>
+
+
+    </div>
+  </div>
+</div>
+<footer></footer> 

@@ -1,0 +1,115 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">{{ translation.id ? 'View':'Add'}} {{translation.id}}</h1>
+  </div>
+  <div style="clear:both;"></div>
+  <button type="button" class="btn btn-primary inittable" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+    {{ translation.id ? 'Edit': 'Add'}}
+  </button>
+
+
+  <div style="clear:both;"></div>
+  <form role="form" onaftersave="update()" editable-form name="editableForm" oncancel="back();">
+    <p ng-show="editableForm.$visible">
+      <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+        {{ translation.id ? 'Edit': 'Add'}}
+      </button>
+      <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+        Cancel
+      </button>
+    </p>
+    <div class="col-md-8">
+      <div class="form-group" ng-if="admin.type=='admin'">
+        <p e-class="form-control" editable-select="translation.language" e-ng-options="s.shortname as s.name for s in languages" e-required>{{translation.language || '-'}}</p>
+      </div>
+      <div class="form-group" ng-if="admin.type=='translator'">
+        <p e-class="form-control" editable-select="translation.language" e-ng-options="s as s for s in languages" e-required>{{translation.language || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">Property: </p>
+        <p e-readonly e-class="form-control form-popup" e-ng-click="propertyList()" editable-text="translation.property.unique" e-name="property" e-required>{{translation.property.unique || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">FrontPage Text</p>
+        <p e-class="form-control" editable-text="translation.texts[0].frontpage1" e-name="frontpage1" e-required>{{translation.texts[0].frontpage1 || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">FrontPage Text 2</p>
+        <p e-class="form-control" editable-text="translation.texts[0].frontpage2" e-name="frontpage2" e-required>{{translation.texts[0].frontpage2 || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">Headline</p>
+        <p e-class="form-control" editable-text="translation.texts[0].headline" e-name="headline" e-required>{{translation.texts[0].headline || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">Short Text</p>
+        <p e-class="form-control" editable-textarea="translation.texts[0].shorttext" e-name="shorttext" e-required>{{translation.texts[0].shorttext || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">Long Text</p>
+        <p e-class="form-control" editable-textarea="translation.texts[0].longtext" e-name="shorttext" e-required>{{translation.texts[0].shorttext || '-'}}</p>
+      </div>
+
+      <hr>
+      <div class="form-group">
+        <p class="title">House Rules</p>
+        <p e-class="form-control" editable-textarea="translation.texts[0].house_rules" e-name="house_rules" e-required>{{translation.texts[0].house_rules || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">Beds</p>
+        <p e-class="form-control" editable-text="translation.texts[0].beds" e-name="beds" e-required>{{translation.texts[0].beds || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">Floor</p>
+        <p e-class="form-control" editable-text="translation.texts[0].floor" e-name="floor" e-required>{{translation.texts[0].floor || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">View</p>
+        <p e-class="form-control" editable-text="translation.texts[0].view" e-name="view" e-required>{{translation.texts[0].view || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">Balcony</p>
+        <p e-class="form-control" editable-text="translation.texts[0].balcony" e-name="balcony" e-required>{{translation.texts[0].balcony || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">Furnished</p>
+        <p e-class="form-control" editable-text="translation.texts[0].furnished" e-name="furnished" e-required>{{translation.texts[0].furnished || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">Kitchen</p>
+        <p e-class="form-control" editable-text="translation.texts[0].kitchen" e-name="kitchen" e-required>{{translation.texts[0].kitchen || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">Beach</p>
+        <p e-class="form-control" editable-text="translation.texts[0].beach" e-name="beach" e-required>{{translation.texts[0].beach || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">Shopping</p>
+        <p e-class="form-control" editable-text="translation.texts[0].shopping" e-name="shopping" e-required>{{translation.texts[0].shopping || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">Nightlife</p>
+        <p e-class="form-control" editable-text="translation.texts[0].nightlife" e-name="nightlife" e-required>{{translation.texts[0].nightlife || '-'}}</p>
+      </div>
+      <div class="form-group">
+        <p class="title">Maintanance</p>
+        <p e-class="form-control" editable-text="translation.texts[0].maintanance" e-name="maintanance" e-required>{{translation.texts[0].maintanance || '-'}}</p>
+      </div>
+    </div>
+    <div style="clear:both;"></div>
+    <button type="button" class="btn btn-primary" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+      {{ translation.id ? 'Edit': 'Add'}}
+    </button>
+    <p ng-show="editableForm.$visible">
+      <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+        {{ translation.id ? 'Edit': 'Add'}}
+      </button>
+      <button type="button" class="btn btn-primary" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+        Cancel
+      </button>
+    </p>
+  </form>
+
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

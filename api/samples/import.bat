@@ -1,0 +1,12 @@
+mongoimport --db thaihome --collection featured --file featured.json --drop
+mongoimport --db thaihome --collection location --file location.json --drop
+mongoimport --db thaihome --collection miscellaneous --file miscellaneous.json --drop
+mongoimport --db thaihome --collection price --file price.json --drop
+mongoimport --db thaihome --collection property --file property.json --drop
+mongoimport --db thaihome --collection season --file season.json --drop
+mongoimport --db thaihome --collection translation --file translation.json --drop
+mongoimport --db thaihome --collection language --file language.json --drop
+mongoimport --db thaihome --collection currency --file currency.json --drop
+mongoimport --db thaihome --collection currencydata --file currencydata.json --drop
+mongoimport --db thaihome --collection users --file users.json --drop
+mongoimport --db thaihome --collection emails --file emails.json --drop

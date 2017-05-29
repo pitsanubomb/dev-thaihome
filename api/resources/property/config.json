@@ -1,0 +1,309 @@
+{
+	"type": "Collection",
+	"properties": {
+		"unitNumber": {
+			"name": "unitNumber",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "unitNumber",
+			"order": 0
+		},
+		"beds": {
+			"name": "beds",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "beds",
+			"order": 1
+		},
+		"unique": {
+			"name": "unique",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "unique",
+			"order": 2
+		},
+		"minimDays": {
+			"name": "minimDays",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "minimDays",
+			"order": 3
+		},
+		"location": {
+			"name": "location",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "location",
+			"order": 4
+		},
+		"name": {
+			"name": "name",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "name",
+			"order": 5
+		},
+		"locationName": {
+			"name": "locationName",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "locationName",
+			"order": 6
+		},
+		"projectName": {
+			"name": "projectName",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "projectName",
+			"order": 7
+		},
+		"propertyType": {
+			"name": "propertyType",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "propertyType",
+			"order": 8
+		},
+		"unitType": {
+			"name": "unitType",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "unitType",
+			"order": 9
+		},
+		"address1": {
+			"name": "address1",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "address1",
+			"order": 10
+		},
+		"address2": {
+			"name": "address2",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "address2",
+			"order": 11
+		},
+		"address3": {
+			"name": "address3",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "address3",
+			"order": 12
+		},
+		"thaiAddress": {
+			"name": "thaiAddress",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "thaiAddress",
+			"order": 13
+		},
+		"ownership": {
+			"name": "ownership",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "ownership",
+			"order": 14
+		},
+		"electricUnit": {
+			"name": "electricUnit",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "electricUnit",
+			"order": 15
+		},
+		"waterUnit": {
+			"name": "waterUnit",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "waterUnit",
+			"order": 16
+		},
+		"guests": {
+			"name": "guests",
+			"type": "number",
+			"typeLabel": "string",
+			"required": true,
+			"id": "guests",
+			"order": 17
+		},
+		"bedrooms": {
+			"name": "bedrooms",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "bedrooms",
+			"order": 18
+		},
+		"bathrooms": {
+			"name": "bathrooms",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "bathrooms",
+			"order": 19
+		},
+		"livingrooms": {
+			"name": "livingrooms",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "livingrooms",
+			"order": 20
+		},
+		"sqm": {
+			"name": "sqm",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "sqm",
+			"order": 21
+		},
+		"gmapslink": {
+			"name": "gmapslink",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "gmapslink",
+			"order": 22
+		},
+		"gmapsdata": {
+			"name": "gmapsdata",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "gmapsdata",
+			"order": 23
+		},
+		"saleprice": {
+			"name": "saleprice",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "saleprice",
+			"order": 24
+		},
+		"salecommission": {
+			"name": "salecommission",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "salecommission",
+			"order": 25
+		},
+		"active": {
+			"name": "active",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": true,
+			"id": "active",
+			"order": 26
+		},
+		"images": {
+			"name": "images",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "images",
+			"order": 27
+		},
+		"featured": {
+			"name": "featured",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "featured",
+			"order": 28
+		},
+		"amenities": {
+			"name": "amenities",
+			"type": "object",
+			"typeLabel": "object",
+			"required": true,
+			"id": "amenities",
+			"order": 29
+		},
+		"dropbox": {
+			"name": "dropbox",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "dropbox",
+			"order": 30
+		},
+		"dropboxPdf": {
+			"name": "dropboxPdf",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "dropboxPdf",
+			"order": 31
+		},
+		"dropboxWeb": {
+			"name": "dropboxWeb",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "dropboxWeb",
+			"order": 32
+		},
+		"dropboxHq": {
+			"name": "dropboxHq",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "dropboxHq",
+			"order": 33
+		},
+		"conditionsAgent": {
+			"name": "conditionsAgent",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "conditionsAgent",
+			"order": 34
+		},
+		"conditionsTenant": {
+			"name": "conditionsTenant",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "conditionsTenant",
+			"order": 35
+		},
+		"internet": {
+			"name": "internet",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "internet",
+			"order": 36
+		},
+		"cabelTv": {
+			"name": "cabelTv",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "cabelTv",
+			"order": 37
+		}
+	}
+}

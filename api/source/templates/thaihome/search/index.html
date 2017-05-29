@@ -1,0 +1,153 @@
+<header></header>
+
+<div class="results-container">
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="date-price md-whiteframe-z3">
+        <form class="date-price-width" ng-submit="search()">
+
+          <div class="result-dates">
+            <p class="dp-align">{{T.transDates}}</p>
+            <div class="date-fields date-f-align">
+              <booking-calendar></booking-calendar>
+            </div>
+            <select class="search-option location_select  form-control" ng-model="location">
+              <option value="" disabled>{{T.transHeadWhere}}</option>
+              <option value="0" ng-selected="location == 0">{{T.transAllLocations}}</option>
+              <option ng-repeat="loc in locations" value="{{loc.id}}" ng-selected="location == loc.id">{{loc.name}}</option>
+            </select>
+
+            <div class="result-sort pull-left">
+              <select class="search-option sort form-control" placeholder="{{T.transOrderBy}}" ng-model="sortBy">
+                <option ng-disabled="true" value="">{{T.transOrderBy}}</option>
+                <option value="+price">{{T.transPriceLow}}</option>
+                <option value="-price">{{T.transPriceHigh}}</option>
+                <option value="-ratingAvg">{{T.transRating}}</option>
+                <option value="-guests">{{T.transNoGuests}}</option>
+              </select>
+            </div>
+
+            <md-button type="submit" class="md-raised md-warn home-search-bt booking_search">{{T.transSearch}}</md-button>
+          </div>
+        </form>
+      </div>
+
+      <div class="prop-text cn-prop md-whiteframe-z3" ng-if="availableCount == 0 || artificial">
+          <div>
+              <span class="xtra-red">!</span>
+              <p>{{T.transNothingBefore}} {{locationName}} {{T.transNothingAfter}}<br><br>
+              <span ng-if="freeProperties.length">{{T.transNothingOther}}:</span></p>
+          </div>
+      </div>
+
+      <div class="clear"></div>
+      <div class="col-lg-4 col-md-6 pull-right map-container">
+        <div class="google-map">
+          <map style="height:100% !important"></map>
+        </div>
+      </div>
+      <div ng-if="availableCount==0" ng-repeat="property in freeProperties | orderBy:sortBy | limitTo:limits.free" class="cursor offer hvr-float md-whiteframe-z2" ng-if="prices[property.id]">
+        <div class="prop_img_cont">
+          <a ui-sref="property({id: property.unique})">
+            <img ng-swipe-left="swipe(false, this)" ng-swipe-right="swipe(true, this)" property="{{property.unique | lowercase}}" ng-src="/assets/images/property/{{property.unique | lowercase}}/{{property.featured}}" class="offerimg imageonload" alt="{{property.name}}" />
+            <span class="loading"> <img src="/assets/images/loadingimg.gif"/></span>
+          </a>
+          <div direction="0" class="img_switch_left">
+            <img src="/assets/images/arrow-left-callendar.png" alt="">
+          </div>
+          <div direction="1" class="img_switch_right">
+            <img src="/assets/images/arrow-right-callendar.png" alt="">
+          </div>
+        </div>
+
+        <span class="offerprice">{{prices[property.id].price | currency:currency:0}}</span>
+
+
+        <div class="offertitle">
+          <a ui-sref="property({id: property.unique})">
+            <p class="offerdescription">{{translations[property.id].texts[0].frontpage1}}</p>
+          </a>
+        </div>
+
+        <!--offertitle-->
+        <div class="clear"></div>
+        <div class="to-align">
+          <p class="offerdescription">{{translations[property.id].texts[0].frontpage2}}</p>
+        </div>
+
+      </div>
+      <div ng-if="availableCount > 0" ng-repeat="property in freeProperties | orderBy:sortBy | limitTo:limits.free" class="cursor offer hvr-float md-whiteframe-z2" ng-if="prices[property.id]">
+        <div class="prop_img_cont">
+          <a ui-sref="property({id: property.unique})">
+            <img ng-swipe-left="swipe(false, $event)" ng-swipe-right="swipe(true, $event)" property="{{property.unique | lowercase}}" ng-src="/assets/images/property/{{property.unique | lowercase}}/{{property.featured}}" class="offerimg imageonload" alt="{{property.name}}" />
+            <span class="loading"> <img src="/assets/images/loadingimg.gif"/></span>
+          </a>
+          <div direction="0" class="img_switch_left">
+            <img src="/assets/images/arrow-left-callendar.png" alt="">
+          </div>
+          <div direction="1" class="img_switch_right">
+            <img src="/assets/images/arrow-right-callendar.png" alt="">
+          </div>
+        </div>
+        <span class="offerprice">{{prices[property.id].price | currency:currency:0}}</span>
+
+
+        <div class="offertitle">
+          <a ui-sref="property({id: property.unique})">
+            <p class="offerdescription">{{translations[property.id].texts[0].frontpage1}}</p>
+          </a>
+        </div>
+
+        <!--offertitle-->
+        <div class="clear"></div>
+        <div class="to-align">
+          <p class="offerdescription">{{translations[property.id].texts[0].frontpage2}}</p>
+        </div>
+
+      </div>
+
+      <md-button class="md-raised shw-more md-primary" ng-if="limits.free <= freeProperties.length" ng-click="increaseLimit()">{{T.transMoreProperties}}</md-button>
+
+      <div ng-if="bookedProperties.length && limits.booked > 0">
+        <div class="prop-text cn-prop md-whiteframe-z3" ng-class="{'smaller-err-msg': freeProperties.length < 3 }">
+          <div ng-bind-html="T.results_text || TD.results_text"></div>
+        </div>
+        <br />
+        <div ng-repeat="property in bookedProperties  | orderBy:sortBy | limitTo:limits.booked" class="cursor offer hvr-float md-whiteframe-z2">
+
+          <div class="prop_img_cont">
+            <a ui-sref="property({id: property.unique})">
+              <img property="{{property.unique | lowercase}}" ng-src="/assets/images/property/{{property.unique | lowercase}}/{{property.featured}}" class="offerimg imageonload" alt="{{property.name}}" />
+              <span class="loading"> <img src="/assets/images/loadingimg.gif"/></span>
+            </a>
+            <div direction="0" class="img_switch_left">
+              <img src="/assets/images/arrow-left-callendar.png" alt="">
+            </div>
+            <div direction="1" class="img_switch_right">
+              <img src="/assets/images/arrow-right-callendar.png" alt="">
+            </div>
+          </div>
+          <!--<span class="offerprice">{{prices[property._id].price[0].price.day * nights() | currency:currency:0}}</span>-->
+
+
+          <div class="offertitle">
+            <a ui-sref="property({id: property.unique})">
+              <p class="offerdescription">{{property.name}}</p>
+            </a>
+          </div>
+          <!--offertitle-->
+
+          <p class="offerdescription">{{translations[property.id].texts[0].frontpage2}}</p>
+
+        </div>
+        <div class="clear"></div>
+        <md-button ng-if="bookedProperties.length > limits.booked" ng-click="limits.booked=limits.booked+limits.increment" class="md-raised shw-more md-primary">{{T.transMoreProperties}}</md-button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<footer></footer>

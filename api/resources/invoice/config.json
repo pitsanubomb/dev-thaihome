@@ -1,0 +1,85 @@
+{
+	"type": "Collection",
+	"properties": {
+		"invoiceNumber": {
+			"name": "invoiceNumber",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "invoiceNumber",
+			"order": 0
+		},
+		"bookingId": {
+			"name": "bookingId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "bookingId",
+			"order": 1
+		},
+		"propertyId": {
+			"name": "propertyId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "propertyId",
+			"order": 2
+		},
+		"createDate": {
+			"name": "createDate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "createDate",
+			"order": 3
+		},
+		"dueDate": {
+			"name": "dueDate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "dueDate",
+			"order": 4
+		},
+		"paidDate": {
+			"name": "paidDate",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "paidDate",
+			"order": 5
+		},
+		"paymentSuggest": {
+			"name": "paymentSuggest",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "paymentSuggest",
+			"order": 6
+		},
+		"managerId": {
+			"name": "managerId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "managerId",
+			"order": 7
+		},
+		"invoiceLines": {
+			"name": "invoiceLines",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "invoiceLines",
+			"order": 8
+		},
+		"includeMissing": {
+			"name": "includeMissing",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "includeMissing",
+			"order": 9
+		}
+	}
+}

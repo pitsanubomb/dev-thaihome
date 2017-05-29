@@ -1,0 +1,35 @@
+<div>
+
+  <div class="blue-border ratings">
+
+    <div class="title">
+      <h3 class="pull-left">{{T.transRatingSaying}}</h3>
+      <div class="pull-right">
+        <h3>{{ratings.length}} {{T.transReviews}}</h3>
+
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div ng-if="ratings" ng-repeat="rating in ratings | limitTo: nrRatings" class="rate-container">
+
+      <div class="rate-user col-xs-5 col-sm-3">
+        <div class="opinion_name">
+          <h4>{{rating.user.name}}</h4>
+          <p>{{rating.date+'000' | date:"MMMM yyyy"}}</p>
+          <stars stars="{{rating.avgRating}}"></stars>
+        </div>
+      </div>
+
+      <div class="rate-message col-xs-7 col-sm-9">
+        <div class="opinion_content">
+          <p>{{rating.rating}}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <a ng-if="nrRatings < ratings.length" href="" ng-click="moreReviews()"><h3 class="pull-right">{{T.transShowMore}}</h3></a>
+
+  </div>
+
+</div>

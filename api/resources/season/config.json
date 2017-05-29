@@ -1,0 +1,37 @@
+{
+	"type": "Collection",
+	"properties": {
+		"season": {
+			"name": "season",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "season",
+			"order": 0
+		},
+		"name": {
+			"name": "name",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "name",
+			"order": 1
+		},
+		"from": {
+			"name": "from",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "from",
+			"order": 2
+		},
+		"to": {
+			"name": "to",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "to",
+			"order": 3
+		}
+	}
+}

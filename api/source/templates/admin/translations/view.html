@@ -1,0 +1,47 @@
+<h1 ng-init="default()">Translation</h1>
+
+<div class="col-sm-12">
+
+  <div class="col-sm-1">
+    <h4>Search</h4>
+  </div>
+  <div class="col-sm-6">
+    <input type="text" ng-model="transValueSearch" class=" form-control" />
+  </div>
+  <div class="col-sm-1">
+    <h4>ID</h4>
+  </div>
+  <div class="col-sm-4">
+    <input type="text" ng-model="searchTrans" typeahead-on-select="search($item)" uib-typeahead="v for v in translationKeys | filter:$viewValue | limitTo:8" class=" form-control" />
+  </div>
+</div>
+<div class="form-group" ng-show="searchKey">
+  <div class="col-md-6">
+    <h3>{{searchKey}}</h3>
+    <p>{{searchResult}}</p>
+    <textarea style="height: 200px;" ng-blur="updateText(searchTrans);" ng-model="transValues[searchTrans]" placeholder="{{searchResult}}" class="form-control">{{searchResult}}</textarea>
+  </div>
+  <div class="col-md-6"><img src="/assets/images/translations/{{searchKey}}.jpg" style="max-width:100%;border:1px #ccc;" /></div>
+</div>
+<div class="clear"></div>
+<button ng-show="searchKey" ng-click="searchKey = false">Done</button>
+<div class="border"></div>
+<div ng-hide="searchKey">
+  <uib-pagination total-items="pagination.number" ng-model="pagination.current" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" ng-change="pageChanged()" num-pages="numPages"></uib-pagination>
+  <pre>Page: {{pagination.current}} / {{numPages}}</pre>
+  <div ng-repeat="key in transData ">
+    <div class="form-group">
+      <div class="col-md-6">
+        <h3>{{key}}</h3>
+        <p>{{translationDefault[key]}}</p>
+        <textarea ng-blur="updateText(key);" ng-model="transValues[key]" style="height: 200px;" placeholder="{{transValues[key]}}" class="form-control">{{transValues[key]}}</textarea>
+      </div>
+      <div class="col-md-6"><img src="/assets/images/translations/{{key}}.jpg" style="max-width:100%;border:1px #ccc;" /></div>
+
+    </div>
+    <div class="border"></div>
+    <div class="clear"></div>
+  </div>
+  <div class="clear"></div>
+  <uib-pagination total-items="pagination.number" ng-model="pagination.current" max-size="pagination.maxSize" class="pagination-sm" boundary-links="true" rotate="false" ng-change="pageChanged()" num-pages="numPages"></uib-pagination>
+</div>

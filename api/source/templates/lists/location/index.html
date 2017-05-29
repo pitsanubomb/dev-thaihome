@@ -1,0 +1,13 @@
+<i ng-click="$close()" id="close-window" class="material-icons" role="button" tabindex="0">highlight_off</i>
+<table class="table table-striped table-bordered table-hover no-footer" datatable="ng" dt-options="dtOptions">
+  <thead>
+    <tr>
+      <th>Select a Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="cursor" ng-repeat="location in locations" ng-click="selectLocation(location);$close();">
+      <td>{{location.name}}</td>
+    </tr>
+  </tbody>
+</table>

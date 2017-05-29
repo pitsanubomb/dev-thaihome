@@ -1,0 +1,101 @@
+{
+	"type": "Collection",
+	"properties": {
+		"transactionNo": {
+			"name": "transactionNo",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "transactionNo",
+			"order": 0
+		},
+		"expenseCategory": {
+			"name": "expenseCategory",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "expenseCategory",
+			"order": 1
+		},
+		"dueDate": {
+			"name": "dueDate",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "dueDate",
+			"order": 2
+		},
+		"fromDate": {
+			"name": "fromDate",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "fromDate",
+			"order": 3
+		},
+		"toDate": {
+			"name": "toDate",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "toDate",
+			"order": 4
+		},
+		"paidDate": {
+			"name": "paidDate",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "paidDate",
+			"order": 5
+		},
+		"propertyId": {
+			"name": "propertyId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "propertyId",
+			"order": 6
+		},
+		"text": {
+			"name": "text",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "text",
+			"order": 7
+		},
+		"amount": {
+			"name": "amount",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "amount",
+			"order": 8
+		},
+		"account": {
+			"name": "account",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "account",
+			"order": 9
+		},
+		"managerId": {
+			"name": "managerId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "managerId",
+			"order": 10
+		},
+		"bookId": {
+			"name": "bookId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "bookId",
+			"order": 11
+		}
+	}
+}

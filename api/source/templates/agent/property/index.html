@@ -1,0 +1,482 @@
+<header></header>
+
+<div class="container agent-property">
+  <div class="row">
+    <div class="clear"></div>
+    <div class="property-buttons">
+      <a ui-sref="agent.book({'id':property.unique})">
+        <md-button class="md-raised md-primary">Booking</md-button>
+      </a>
+      <a ui-sref="agent.chat">
+        <md-button class="md-raised md-primary">Talk to us</md-button>
+      </a>
+      <a ui-sref="agent.home">
+        <md-button class="md-raised md-primary">Back to list</md-button>
+      </a>
+    </div>
+    <h2>Property Information for Agent</h2>
+    <div class="inprice-dates">
+      <p>Booking Date</p>
+      <span class="date-fields">
+      <booking-calendar></booking-calendar>
+      </span>
+    </div>
+    <div class="property-tables blue-border">
+      <h4>{{T.date_price || TD.date_price}}</h4>
+      <div class="clear"></div>
+      <div>
+        <div class="col-sm-7">
+          <div class="clear"></div>
+          <table class="table nomargin-table">
+            <tbody ng-show="nights">
+              <tr>
+                <td>{{priceDay | currency: currency:1}} x {{nights}} {{T.nights || TD.nights}}</td>
+                <td class="price-right">{{priceDay * nights | currency: currency:0}}</td>
+              </tr>
+              <tr ng-if="discount.percent">
+                <td class="green">Discount ({{discount.percent}}%)</td>
+                <td class="green price-right">{{priceDay * nights / 100 * discount.percent | currency: currency:0}}</td>
+              </tr>
+              <tr>
+                <td>{{T.complete_cleaning || TD.complete_cleaning}}</td>
+                <td class="price-right">{{property.cleanfinalprice | currency: currency:0}}</td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>{{T.total || TD.total}}</h4></td>
+                <td class="price-right">
+                  <h4>{{priceDay * nights - priceDay * nights * discount.percent / 100 + property.cleanfinalprice | currency: currency:0}}</h4></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="col-sm-5 discount-container2">
+          <discount></discount>
+          <div class="clear"></div>
+          <div class="bookorask2">
+            <!--<md-button ng-click="book()" class="md-raised book md-warn">{{T.book_now || TD.book_now}}</md-button>-->
+			<a ui-sref="agent.book({'id':property.unique})">
+				<md-button class="md-raised book md-warn">{{T.book_now || TD.book_now}}</md-button>
+			</a>
+            <p>{{T.or || TD.or}}</p>
+            <a ng-click="scrollToChat()">
+              <md-button type="button" class="md-raised ask md-primary">{{T.ask_question || TD.ask_question}}</md-button>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="property-tables blue-border">
+      <h4>Basic Information</h4>
+
+      <div class="col-md-6">
+        <table class="table nomargin-table">
+          <tbody>
+            <tr>
+              <td class="td-align">Project</td>
+              <td><b>{{property.projectName}}</b></td>
+            </tr>
+            <tr>
+              <td>Unit Type</td>
+              <td><b>{{property.unitType}}</b></td>
+            </tr>
+            <tr>
+              <td>Bedrooms</td>
+              <td><b>{{property.bedrooms}}</b></td>
+            </tr>
+            <tr>
+              <td>Bathrooms</td>
+              <td><b>{{property.bathrooms}}</b></td>
+            </tr>
+            <tr>
+              <td>Size</td>
+              <td><b>{{property.sqm}} Sqm</b></td>
+            </tr>
+            <tr>
+              <td>View</td>
+              <td><b>{{translation.texts[0].view}}</b></td>
+            </tr>
+            <tr>
+              <td>Furnished</td>
+              <td><b>{{translation.texts[0].furnished}}</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <table class="table nomargin-table">
+          <tbody>
+            <tr>
+              <td class="td-align">Property</td>
+              <td><b>{{property.propertyType}}</b></td>
+            </tr>
+            <tr>
+              <td>Unit No</td>
+              <td><b>{{property.unique}}</b></td>
+            </tr>
+            <tr>
+              <td>Guests</td>
+              <td><b>{{property.guests}}</b></td>
+            </tr>
+            <tr>
+              <td>Livingroom</td>
+              <td><b>{{property.livingrooms}}</b></td>
+            </tr>
+            <tr>
+              <td>Floor</td>
+              <td><b>{{translation.texts[0].floor}}</b></td>
+            </tr>
+            <tr>
+              <td>Balcony</td>
+              <td><b>{{translation.texts[0].balcony}}</b></td>
+            </tr>
+            <tr>
+              <td>Kitchen</td>
+              <td><b>{{translation.texts[0].kitchen}}</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <hr>
+    <div class="property-tables blue-border">
+      <h4>Location</h4>
+      <div class="col-md-6">
+        <table class="table nomargin-table">
+          <tbody>
+            <tr>
+              <td class="td-align">Location</td>
+              <td><b>{{property.locationName}}</b></td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td><b>{{property.address1}}, {{property.address2}}, {{property.address3}}</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <table class="table nomargin-table">
+          <tbody>
+            <tr>
+              <td class="td-align">Google Maps</td>
+              <td ng-bind-html="property.gmapslink | linky:'_blank'"></td>
+            </tr>
+            <tr>
+              <td>Beach</td>
+              <td><b>{{translation.texts[0].beach}}</b></td>
+            </tr>
+            <tr>
+              <td>Shopping</td>
+              <td><b>{{translation.texts[0].shopping}}</b></td>
+            </tr>
+            <tr>
+              <td>Nightlife</td>
+              <td><b>{{translation.texts[0].nightlife}}</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <hr>
+    <div class="property-tables blue-border">
+      <h4 class="pull-left">Rent</h4>
+      <div class="clear"></div>
+      <div class="col-md-6">
+        <table class="table nomargin-table" ng-init="basePrice()">
+          <tbody>
+            <tr>
+              <td class="td-align">Daily Rent</td>
+              <td class="price-right"><b>{{price.priceDay | currency:currency}}</b></td>
+            </tr>
+            <tr>
+              <td>Weekly Rent</td>
+              <td class="price-right"><b>{{price.priceWeek | currency:currency}}</b></td>
+            </tr>
+            <tr>
+              <td>Monthly Rent</td>
+              <td class="price-right"><b>{{price.priceMonth | currency:currency}}</b></td>
+            </tr>
+            <tr>
+              <td>Yearly Rent</td>
+              <td class="price-right"><b>{{price.priceYear | currency:currency}}</b></td>
+            </tr>
+            <tr>
+              <td>Internet</td>
+              <td class="price-right"><b>Included</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <table class="table nomargin-table">
+          <tbody>
+            <tr>
+              <td class="td-align">Commission</td>
+                <td class="price-right"><b>{{price.commissionDay}}% (or <span class="orange">{{price.priceDay / 100 * price.commissionDay | currency:currency}}</span> pr. day )</b></td>
+            </tr>
+            <tr>
+              <td>Commission</td>
+              <td class="price-right"><b>{{price.commissionWeek}}% (or <span class="orange">{{price.priceWeek / 100 * price.commissionWeek | currency:currency}}</span> pr. week )</b></td>
+            </tr>
+            <tr>
+              <td>Commission</td>
+              <td class="price-right"><b>{{price.commissionMonth}}% (or <span class="orange">{{price.priceMonth / 100 * price.commissionMonth | currency:currency}}</span> pr. month )</b></td>
+            </tr>
+            <tr>
+              <td>Commission</td>
+              <td class="price-right"><b>{{price.commissionYear}}% (or <span class="orange">{{price.priceYear / 100 * price.commissionYear | currency:currency}}</span> pr. year )</b></td>
+            </tr>
+            <tr>
+              <td>Cable TV</td>
+              <td class="price-right"><b>Included (BTV)</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-12">
+        <table class="table nomargin-table">
+          <tbody>
+            <tr>
+              <td class="td-align">Electric / Water</td>
+              <td><b>Included for short term (1-6 days). Tenant must pay if rent is one week or longer</b></td>
+            </tr>
+            <tr>
+              <td>Rent Prices</td>
+              <td><b>Rent prices might become lower during low season and higher during high season</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <hr>
+    <div class="property-tables blue-border">
+      <h4>Sale</h4>
+      <div class="col-md-6">
+        <table class="table nomargin-table">
+          <tbody>
+            <tr>
+              <td class="td-align"> Sales Price</td>
+              <td class="price-right"><b>{{property.saleprice | currency:currency}}</b></td>
+            </tr>
+            <tr>
+              <td>Ownership</td>
+              <td class="price-right"><b>{{property.ownership}}</b></td>
+            </tr>
+            <tr>
+              <td>Transfer costs</td>
+              <td class="price-right"><b>Negotiable</b></td>
+            </tr>
+            <tr>
+              <td>Seller Financing </td>
+              <td class="price-right"><b>Yes, we offer financing</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <table class="table nomargin-table">
+          <tbody>
+            <tr>
+              <td class="td-align"> Commission</td>
+              <td class="price-right"><b>{{property.salecommission}}% (or <span class="orange">{{property.saleprice / 100 * property.salecommission | currency: currency}}</span>)</b></td>
+            </tr>
+            <tr>
+              <td>Maintanence</td>
+              <td class="price-right"><b>{{translation.texts[0].maintanance}}</b></td>
+            </tr>
+            <tr>
+              <td>Conditions</td>
+              <td class="price-right"><b>5% interst pr. year (up to 10 years)</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <hr>
+    <div class="clear"></div>
+      <div class="row imgs-container" style="margin-top:15px;">
+          <div class="main-img-container2">
+            <div ng-repeat="image in getSubArray(property.images,2, 4) | limitTo: 2" class="top-image custom-col-img">
+              <img ng-click="openGallery()" class="cursor" src="/assets/images/property/{{property.unique | lowercase}}/{{image}}" alt="">
+            </div>
+          </div>
+          <div class="main-img-container3">
+            <div ng-repeat="image in getSubArray(property.images,4, 7) | limitTo: 3" class="top-image col-sm-4 col-xs-6">
+              <img ng-click="openGallery()" class="cursor" src="/assets/images/property/{{property.unique | lowercase}}/{{image}}" alt="">
+            </div>
+            <div>
+              <md-button ng-click="openGallery()" class="md-raised to-gallery md-warn">{{T.property_see_all || TD.property_see_all}} {{property.images.length}} photos</md-button>
+            </div>
+          </div>
+        </div>
+      <div class="property-download-img" ng-if="property.dropbox_web">
+        <p class="pull-left">Download <b>web quality</b> photos</p>
+        <input type="text" class="form-control pull-left" value="{{property.dropboxWeb}}">
+        <a href="{{property.dropboxWeb}}" target="_blank">
+          <md-button class="md-raised pull-left md-primary">View</md-button>
+        </a>
+      </div>
+      <div class="property-download-img" ng-if="property.dropbox_hq">
+        <p class="pull-left">Download <b>high quality</b> photos</p>
+        <input type="text" class="form-control pull-left" value="{{property.dropboxHq}}">
+        <a href="{{property.dropboxHq}}" target="_blank">
+          <md-button class="md-raised pull-left md-primary">View</md-button>
+        </a>
+      </div>
+    <div class="property-tables-img blue-border">
+      <h4>Description</h4>
+      <div class="col-md-2">
+        <p>Short Text</p>
+      </div>
+      <div class="col-md-10">
+        <textarea ng-bind-html="translation.texts[0].shorttext" rows="5" class="wrapspace form-control"></textarea>
+      </div>
+      <div class="col-md-2">
+        <p>Long Text</p>
+      </div>
+      <div class="col-md-10">
+        <textarea ng-bind-html="translation.texts[0].longtext" rows="10" class="wrapspace form-control"></textarea>
+      </div>
+    </div>
+    <hr>
+    <div class="clear"></div>
+    <div id="conversation"></div>
+    <div class="centered-content">
+      <div class="more_info blue-border">
+
+        <div class="options_2">
+
+          <div class="option" ng-class="property.amenities.kitchen  == true ? 'av' : 'hide'">
+            <i class="material-icons">restaurant_menu</i>
+            <p>{{translation.amenities[0].kitchen}}</p>
+          </div>
+
+          <div class="option" ng-class="property.amenities.wifi  == true ? 'av' : 'hide'">
+            <i class="material-icons">wifi</i>
+            <p>{{translation.amenities[0].wifi}}</p>
+          </div>
+
+          <div class="option" ng-class="property.amenities.parking  == true ? 'av' : 'hide'">
+            <i class="material-icons">local_parking</i>
+            <p>{{translation.amenities[0].parking}}</p>
+          </div>
+
+          <div class="option" ng-class="property.amenities.laundry  == true ? 'av' : 'hide'">
+            <i class="material-icons">local_laundry_service</i>
+            <p>{{translation.amenities[0].washingmachine}}</p>
+          </div>
+
+          <div class="option" ng-class="property.amenities.pets  == true ? 'av' : 'hide'">
+            <i class="material-icons">adb</i>
+            <p>{{translation.amenities[0].pets}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.smoking  == true ? 'av' : 'hide'">
+            <i class="material-icons">whatshot</i>
+            <p>{{translation.amenities[0].smoking}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.cable  == true ? 'av' : 'hide'">
+            <i class="material-icons">tv</i>
+            <p>{{translation.amenities[0].cable}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.air  == true ? 'av' : 'hide'">
+            <i class="material-icons">toys</i>
+            <p>{{translation.amenities[0].air}}</p>
+          </div>
+
+          <div class="option" ng-class="property.amenities.towels  == true ? 'av' : 'hide'">
+            <i class="material-icons">layers</i>
+            <p>{{translation.amenities[0].towels}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.friendly  == true ? 'av' : 'hide'">
+            <i class="material-icons">insert_emoticon</i>
+            <p>{{translation.amenities[0].friendly}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.elevator  == true ? 'av' : 'hide'">
+            <i class="material-icons">publish</i>
+            <p>{{translation.amenities[0].elevator}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.deposit  == true ? 'av' : 'hide'">
+            <i class="material-icons">local_mall</i>
+            <p>{{translation.amenities[0].deposit}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.security  == true ? 'av' : 'hide'">
+            <i class="material-icons">security</i>
+            <p>{{translation.amenities[0].security}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.card  == true ? 'av' : 'hide'">
+            <i class="material-icons">sim_card</i>
+            <p>{{translation.amenities[0].card}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.laundry  == true ? 'av' : 'hide'">
+            <i class="material-icons">local_laundry_service</i>
+            <p>{{translation.amenities[0].laundry}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.childplay  == true ? 'av' : 'hide'">
+            <i class="material-icons">face</i>
+            <p>{{translation.amenities[0].childplay}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.pools  == true ? 'av' : 'hide'">
+            <i class="material-icons">blur_circular</i>
+            <p>{{translation.amenities[0].pools}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.smoke  == true ? 'av' : 'hide'">
+            <i class="material-icons">settings_input_antenna</i>
+            <p>{{translation.amenities[0].smoke}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.fitness  == true ? 'av' : 'hide'">
+            <i class="material-icons">accessibility</i>
+            <p>{{translation.amenities[0].fitness}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.wslide  == true ? 'av' : 'hide'">
+            <i class="material-icons">gesture</i>
+            <p>{{translation.amenities[0].wslide}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.jaccuzis  == true ? 'av' : 'hide'">
+            <i class="material-icons">blur_on</i>
+            <p>{{translation.amenities[0].jaccuzis}}</p>
+          </div>
+          <div class="option" ng-class="property.amenities.balcony  == true ? 'av' : 'hide'">
+            <i class="material-icons">airline_seat_legroom_extra</i>
+            <p>{{translation.amenities[0].balcony}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="property-tables-img blue-border">
+      <h4>Agent Tools</h4>
+      <div class="col-md-5">
+        <p ng-if="property.dropbox">You can <a href="{{property.dropbox}}" target="_blank">Open DropBox</a> with all information or you can download from here :</p>
+        <div class="property-links">
+          <a ng-if="property.dropboxPdf" href="{{property.dropboxPdf}}" target="_blank">Download Fact Sheet PDF</a>
+          <a ng-if="property.dropboxWeb" href="{{property.dropboxWeb}}" target="_blank">Download Web Quality Photos</a>
+          <a ng-if="property.dropboxHq" href="{{property.dropboxHq}}" target="_blank">Download High Quality Photos</a>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <p>You can send a link with rent or sales information about the property to a costumer or tenant.</p>
+        <div class="property-download-img-bot">
+          <p class="pull-left">Rent Link</p>
+          <input type="text" ng-model="rentlink" class="form-control pull-left">
+          <a href="{{rentlink}}" target="_blank">
+            <md-button class="md-raised pull-left md-primary">View</md-button>
+          </a>
+        </div>
+        <div class="property-download-img-bot">
+          <p class="pull-left">Sale Link</p>
+          <input type="text" ng-model="salelink" class="form-control pull-left">
+          <a href="{{salelink}}" target="_blank">
+            <md-button class="md-raised pull-left md-primary">View</md-button>
+          </a>
+        </div>
+        <p>The costumer will see your name, agency, phone and email on the information page. If the client should go to us directly, we will still pay you commission. We always pay our agents!</p>
+      </div>
+    </div>
+	<chat></chat>
+  </div>
+</div>
+<footer></footer>

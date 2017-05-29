@@ -1,0 +1,17 @@
+<i ng-click="$close()" id="close-window" class="material-icons" role="button" tabindex="0">highlight_off</i>
+<table class="table table-striped table-bordered table-hover no-footer" datatable="ng" dt-options="dtOptions">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Percent</th>
+      <th>Promotion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="cursor" ng-repeat="discount in data" ng-click="selectDiscount(discount);$close()">
+      <td>{{discount.code}}</td>
+      <td>{{discount.percent}}</td>
+      <td>{{discount.promotion}}</td>
+    </tr>
+  </tbody>
+</table>

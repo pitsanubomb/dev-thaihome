@@ -1,0 +1,108 @@
+<div class="header">
+      <div id="logo" class="pull-left">
+            <a ui-sref="home" href="/home/">
+                <img src="/images/logo.png" alt="Thai Home" class="img-responsive">
+            </a>
+      </div>
+    <div class="property-head-item">
+        <h3><span ng-if="agent.agent">{{agent.agent}},</span> {{agent.name}}</h3>
+    </div>
+</div>
+
+
+<div class="container agent-booking" ng-init="init()">
+   <div class="row">
+    <div class="property-buttons">
+        <a onclick="window.history.back();return false;"><md-button class="md-raised md-primary">Back</md-button></a>
+    </div>
+    <div class="col-md-7">
+       <h2>Talk to Us</h2>
+        <div class="clear"></div>
+        <div class="row" id="conversation" >
+            <div class="col-xs-3">
+               <div class="owner-img">
+                <img src="/images/note.png" alt="">
+               </div>
+            </div>
+            <div class="col-xs-9 about-owner">
+                <div class="owner-buble">
+                    <p>
+
+Hi, my name is Note.  I am the property manager.
+
+Ask me about discount, cleaning, commission, booking or if someone want to see the condo.. 
+
+I will be happy to answer in the chat  
+
+<br />or call me on:  <b>080-209-7887</b>
+
+<br />or e-mail me:  <a href="mailto:note@flipinvert.com">note@flipinvert.com</a>
+</p>
+                    <div class="arrow"></div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="row" id="conversation" >
+            <div class="col-xs-3">
+               <div class="owner-img">
+                <img src="/images/torben.png" alt="">
+               </div>
+            </div>
+            <div class="col-xs-9 about-owner">
+                <div class="owner-buble">
+                    <p>Hi, my name is Torben.  I am the owner. Ask me if you wants to buy one of our condos or houses. Remember we offer seller financing.<br />Call me on: <b>089-821-0724</b><br />
+
+or e-mail me:  <a href="mailto:torben@flipinvert.com">torben@flipinvert.com</a></p>
+                    <div class="arrow"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5" >
+		<div class="agent-chat" id="messages">
+					<div class="chat-head">
+						<div class="chat-image pull-left">
+							<div class="circle pull-left">
+								<img src="/images/tenant.jpg" alt="">
+							</div>
+							<p class="pull-left">{{agent.agent}}</p>
+						</div>
+						<div class="chat-image pull-right">
+							<div class="circle pull-right">
+								<img src="/images/note.png" alt="">
+							</div>
+							<p class="pull-right">Note</p>
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="md-whiteframe-z3 chat-box">
+						<div ng-class="message.by == 'agent' ? 'chat-message-u': 'chat-message-a'" ng-repeat="message in messenger.messages">
+							<div ng-if="getDay(message.date) != getDay(messenger.messages[$index-1].date) || $index == 0">
+								<p class="chat-day text-center">{{message.date | date:'fullDate'}}</p>
+								<div class="message-border"></div>
+							</div>
+							<div class="time-fix">
+							<div class="chat-buble">
+								<p class="wrapspace" ng-bind-html="message.message"></p>
+								<div ng-class="message.by == 'agent' ? 'gray-arr': 'green-arr'"></div>
+							</div>
+							<div class="chat-time">
+								<p>{{message.date | date:"h:mm a"}}</p>
+							</div>
+							<p class="chat-refferece" ng-if="message.booking && message.by == 'tenant'"><a ui-sref="booking({id: message.booking._id})">View Booking</a></p>
+							<p class="chat-refferece" ng-if="!message.booking && message.property && message.by == 'tenant'"><a ui-sref="property({id: message.property.id})">View Property</a></p>
+							<p class="chat-refferece" ng-if="!message.booking && !message.property && message.by == 'tenant'">Contact Form</p>
+                            </div>
+						</div>
+						<form ng-submit="askQuestion(question)">
+							<textarea class="form-control" required cols="30" rows="10" ng-model="question" placeholder="Message"></textarea>
+							<md-button class="md-raised md-primary">Send</md-button>
+						</form>
+					</div>
+				</div>
+    </div>
+    
+    </div>
+</div>
+<footer></footer>
