@@ -23,6 +23,17 @@ var CurrencyDataController = require('./controllers/CurrencyDataController');
 var booking = require('./routes/booking');
 var omise = require('./routes/omise');
 var news = require('./routes/news');
+var translationRoute = require('./routes/translationRoute');
+var agentSaleRoute = require('./routes/agentSaleRoute');
+var expenseCategoryRoute = require('./routes/expenseCategoryRoute');
+var expenseRoute = require('./routes/expenseRoute');
+var propertyIdListRoute = require('./routes/propertyIdListRoute');
+var agentSaleRoute = require('./routes/agentSaleRoute');
+var agentRentRoute = require('./routes/agentRentRoute');
+var bankAccountRoute = require('./routes/bankAccountRoute');
+var bankRoute = require('./routes/bankRoute');
+var balanceSheetRoute = require('./routes/balanceSheetRoute');
+var bookingListRoute = require('./routes/bookingListRoute');
 
 // Just add bluebird to your package.json, and then the following line should work
 mongoose.Promise = require('bluebird');
@@ -90,6 +101,18 @@ app.use('/currency', currency);
 app.use('/booking', booking);
 app.use('/omise', omise);
 app.use('/news', news);
+app.use('/report', translationRoute);
+app.use('/report', agentSaleRoute);
+app.use('/report', expenseCategoryRoute);
+app.use('/report', expenseRoute);
+app.use('/report', propertyIdListRoute);
+app.use('/report', agentSaleRoute);
+app.use('/report', agentRentRoute);
+app.use('/report', bankAccountRoute);
+app.use('/report', bankRoute);
+app.use('/report', balanceSheetRoute);
+app.use('/report', bookingListRoute);
+
 
 
 // catch 404 and forward to error handler
