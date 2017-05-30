@@ -13,7 +13,7 @@
 
 var express = require('express');
 var router = express.Router();
-var locationController = require('../controllers/frontpageController');
+var frontpageController = require('../controllers/frontpageController');
 
 router.get('/getFrontpage', function(req, res) {
 	frontpageController.getFrontpage(req, res);

@@ -9,7 +9,7 @@
 // - none
 // OUTPUT:
 // - Json structure with the following data
-// - 
+// - featuredArray[] with all featured images 
 //
 //
 //
@@ -33,214 +33,147 @@ exports.getFrontpage = function(req, res) {
     // 
 	var featuredModel = require('../models/featuredModel');
     var featuredTable = mongoose.model('featuredModel');
-    var findFeatured = new Promise(
-        (resolve, reject) => {
-		featuredTable.find() 
+	var findFeatured = function() {
+		return new Promise((resolve, reject) => {
+		console.log("=====START findFeatured=====")
+		featuredTable.find({} 
         ,function(err, data) {
             if (!err) {
 				console.log("findFeatured Result: " + JSON.stringify(data, null, 4));
+				console.log("=====RESOLVE findFeatured=====");
                 resolve(data);
             } else {
                 reject(new Error('findFeatured ERROR : ' + err));
             }
-        };
-	});
-
-
-
-	let tempDate = new Date();
-	let firstDay = new Date(tempDate.getFullYear(), tempDate.getMonth(), 1);
-	let lastDay = new Date(tempDate.getFullYear(), tempDate.getMonth() + 1, 0);
-
-	// if checkinDate is missing
-	if (req.body.fromDate) {
-	    var checkinDate = new Date(req.body.fromDate*1000);
-	} else {
-		var checkinDate = new Date(firstDay);
-	}
-	
-	// if checkoutDate is missing
-	if (req.body.toDate) {
-	    var checkoutDate = new Date(req.body.toDate*1000);
-		if (checkoutDate.getTime() < checkinDate.getTime()) {
-			checkoutDate = new Date(lastDay);
-		}
-	} else {
-		var	checkoutDate = new Date(lastDay);
-	}
-
-	var checkin = Math.round(new Date(checkinDate.getTime())/1000)
-	var checkout = Math.round(new Date(checkoutDate.getTime())/1000)
-
-	var myMatch = {
-		checkin: {$gte: checkin},
-		checkout: {$lte: checkout}
-	};
-	if (req.body.hasOwnProperty('propertyID') && req.body.propertyID!='') {
-        var properties = req.body.propertyID.map(function (obj) {
-            return obj._id;
-        });
-		console.log("properties: " + properties); 
-		myMatch["property"] = { "$in": properties };
-	}
-	if (req.body.status=="ACTIVE" || req.body.status=="NOPAY") {
-		myMatch["status"] = { "$lte": 4 };
-	} else if (req.body.hasOwnProperty('status') && req.body.status!="ALL") {
-		myMatch["status"] = +req.body.status;
-	}
-
-
-    // 
-    // Find all bookings
-    // 
-	var bookingListModel = require('../models/bookingListModel');
-    var bookingTable = mongoose.model('bookingListModel');
-	var bookingID = [];
-	var bookingArray = [];
-	var findBookings = function() {
-		return new Promise((resolve, reject) => {
-		console.log("=====START findBookings=====")
-		bookingTable.aggregate([
-			{ "$match": myMatch },
-			{                                                                  
-				$lookup: {                                                     
-					from: "users",                                             
-					localField: "user",                                        
-					foreignField: "_id",	                                   
-					as: "users"		                                           
-				}	                                                           
-			},                                                                 
-			{                                                                  
-				$unwind: "$users"		                                       
-			},                                                                 
-			{                                                                  
-				$lookup: {                                                     
-					from: "languagecodes",                                     
-					localField: "users.country",                               
-					foreignField: "country",	                               
-					as: "language"		                                       
-				}	                                                           
-			},                                                                 
-			{                                                                  
-				$unwind: "$language"		                                   
-			},                                                                 
-			{                                                                  
-				$lookup: {                                                     
-					from: "users",                                             
-					localField: "agent",                                       
-					foreignField: "_id",	                                   
-					as: "agent"		                                           
-				}	                                                           
-			},	                                                               
-			{                                                                  
-				$unwind: { path: "$agent", preserveNullAndEmptyArrays: true }  
-			},                                                                 
-			{                                                                  
-				$project:{                                                     
-					"_id" : 1,                                                 
-					"property" : 1,                             
-					"source" : 1,                                              
-					"status" : 1,                                              
-					"checkin" : 1,                                             
-					"checkout" : 1,                                            
-					"name" : "$users.name",                                    
-					"agent" : "$agent.name",                                   
-					"langCode" : "$language.code",                             
-					"priceDay" : 1,                                            
-					"nights" : 1                                               
-				}                                                              
-			}	                                                               
-		], function (err, data) {
-			if (!err) {
-				bookingArray = data;
-				bookingID = bookingArray.map(function (obj) {
-					return obj._id;
-				});
-				console.log("bookingArray Result: " + JSON.stringify(bookingArray, null, 4));
-				console.log("bookingID Result: " + JSON.stringify(bookingID, null, 4));
-				console.log("=====RESOLVE findBookings=====")
-				resolve(data);
-			} else {
-				reject(new Error('findBooking ERROR : ' + err));
-			};
 		});
 	})};
 
 
     // 
-    // Find all invoices
+    // Find all locations in Pattaya 
     // 
-	var invoiceSumModel = require('../models/invoiceSumModel');
-    var invoiceSumTable = mongoose.model('invoiceSumModel');
-	var findInvoiceSum = function() {
+	var locationModel = require('../models/locationModel');
+    var locationTable = mongoose.model('locationModel');
+	var findLocation = function() {
 		return new Promise((resolve, reject) => {
-		console.log("=====START findInvoiceSum=====")
-		invoiceSumTable.aggregate([
-			{                                                   
-				$match: {                                       
-					 bookingId: { $in: bookingID } 
-				}
-			},                                                  
-			{                                                   
-				$unwind: "$invoiceLines"		                
-			},                                                  
-			{                                                   
-				$group: {                                       
-					_id: "$_id",                                
-					sum: {$sum: "$invoiceLines.amountTotal"},   
-					bookingId: { $first: "$bookingId" },
-					dueDate: { $first: "$dueDate" }			    
-				}                                               
-			},                                                  
-			{                                                   
-				$project:{                                      
-					"_id" : 1,                                  
-					"bookingId" : 1,                                  
-					"dueDate" : 1,                              
-					"sum" : 1                                   
-				}                                               
-			}                                                   
-		], function (err, data) {
-			if (!err) {
-				console.log("=====RESOLVE findInvoiceSum=====")
-				resolve(data);
-			} else {
-				reject(new Error('findExpense ERROR : ' + err));
-			};
+		console.log("=====START findLocation=====")
+		locationTable.find({} 
+        ,function(err, data) {
+            if (!err) {
+				console.log("findLocation Result: " + JSON.stringify(data, null, 4));
+				console.log("=====RESOLVE findLocation=====");
+                resolve(data);
+            } else {
+                reject(new Error('findLocation ERROR : ' + err));
+            }
 		});
 	})};
 
 
     // 
-    // Find all preceipts
+    // Find all News
     // 
-	var receiptModel = require('../models/receiptModel');
-    var receiptTable = mongoose.model('receiptModel');
-	var findReceipt = function() {
+	var newsModel = require('../models/newsModel');
+    var newsTable = mongoose.model('newsModel');
+	var findNews = function() {
 		return new Promise((resolve, reject) => {
-		console.log("=====START findReceipt=====")
-		receiptTable.aggregate([
+		console.log("=====START findNews=====")
+		var todayDate = Math.round(new Date()/1000)
+		newsTable.aggregate([
 			{                                                   
 				$match: {                                       
-					 bookingId: { $in: bookingID } 
+					start: {$lte: todayDate}, 
+					end: { $gte: todayDate}
 				}
 			},                                                  
+			{
+				$sort: {
+					start:-1
+				}
+			},	
 			{                                               
 				$project:{                                  
-					"_id" : 1,                              
-					"bookingId" : 1,                                  
-					"amount" : 1                            
+					"text" : 1                            
 				}                                           
 			}                                               
 		],function(err, data) {
 			if (!err) {
-				console.log("=====RESOLVE findReceipt=====")
+				console.log("findNews Result: " + JSON.stringify(data, null, 4));
+				console.log("=====RESOLVE findNews=====")
 				resolve(data);
 			} else {
-				reject(new Error('ERR findPropert : ' + err));
+				reject(new Error('ERR findNews : ' + err));
 			};
 		});
     })};
+
+
+    // 
+    // Find all HotDeals
+    // 
+	var hotdealModel = require('../models/hotdealModel');
+    var hotdealTable = mongoose.model('hotdealModel');
+	var findHotdeal = function() {
+		return new Promise((resolve, reject) => {
+		console.log("=====START findHotdeal=====")
+		var todayDate = Math.round(new Date()/1000)
+		hotdealTable.aggregate([
+			{                                                   
+				$match: {                                       
+					start: {$lte: todayDate}, 
+					end: { $gte: todayDate},
+					active: true
+				}
+			},                                                  
+			{
+				$sort: {
+					hot: 1
+				}
+			},	
+			{                                               
+				$project:{                                  
+					"property" : 1,                            
+					"discount" : 1,                            
+					"hot" : 1                            
+				}                                           
+			}                                               
+		],function(err, data) {
+			if (!err) {
+				console.log("findHotdeal Result: " + JSON.stringify(data, null, 4));
+				console.log("=====RESOLVE findHotdeal=====")
+				resolve(data);
+			} else {
+				reject(new Error('ERR findHotdeal : ' + err));
+			};
+		});
+    })};
+
+
+
+    // 
+    // Find all HotDeals
+    // 
+	var priceController = require('./priceController');
+	var priceModel = require('../models/priceModel');
+    var priceTable = mongoose.model('priceModel');
+	var callPriceController = function() {
+		return new Promise((resolve, reject) => {
+		console.log("=====START callPriceController=====")
+		priceController.getPrice(
+		[{ "propertyID": "WAT-606" }]
+		,function(err, data) {
+			if (!err) {
+				console.log("callPriceController Result: " + JSON.stringify(data, null, 4));
+				console.log("=====RESOLVE callPriceController=====")
+				resolve(data);
+			} else {
+				reject(new Error('ERR callPriceController : ' + err));
+			};
+		});
+    })};
+
+
+
 
 
     // 
@@ -262,13 +195,23 @@ exports.getFrontpage = function(req, res) {
     // 
     // Run the promises
     // 
+
+	// Promise.all([findFeatured(), findLocation(), findNews(), findHotdeal()])
+	// .then(findAllPrices)
+	// .then(sendResult)
+
 	findFeatured()
-		// .then(() => Promise.all([findInvoiceSum(), findReceipt()]))
+		.then(findLocation)
+		.then(findNews)
+		.then(findHotdeal)
+		.then(callPriceController)
+
+
 		// .then(sendResult)
+		// .then(() => Promise.all([findInvoiceSum(), findReceipt()]))
 		.catch(err => {
 			console.log("getFrontpage ERR: " + err);
 			res.json({error:true,err})
 		}
 	)
 }
-

@@ -54,9 +54,6 @@ cron.schedule('* * * * *', function () {
 
 
 global.db = "mongodb://thaihome:rootlocal@10.5.50.16:27017/thaihome";
-
-
-
 mongoose.connect(global.db);
 
 // Can we connect to mongodb
@@ -68,6 +65,9 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', (err) => {
   console.log("*** MongoDB cannot connect :" + err);
 });
+
+// Set debug = on so we can see what its doing
+mongoose.set('debug', true);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
