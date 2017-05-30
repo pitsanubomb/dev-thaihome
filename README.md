@@ -12,3 +12,10 @@ ________________________________________________________________________________
 1.Run on local simulate server
 <br>
 2.Start helper and api 
+__________________________________________________________________________________________________________________________________________
+How to run api 
+1.npm install -g grunt-cli
+2.go to api directory
+3.grunt
+
+Doc : https://gruntjs.com/getting-started
