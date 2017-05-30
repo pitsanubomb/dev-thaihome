@@ -5,3 +5,10 @@
 2.Make some new menu and route
 <br>
 3.Set new path api and helper
+<br>
+__________________________________________________________________________________________________________________________________________
+<center>How to Reports</center>
+<br>
+1.Run on local simulate server
+<br>
+2.Start helper and api 
