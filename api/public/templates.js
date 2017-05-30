@@ -14559,7 +14559,7 @@ angular.module("templates/thaihome/home/index.html", []).run(["$templateCache", 
     "  </div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"clear\"></div>\n" +
+    "<div class=\"clear\">HELLO FROM THE OTHER SIDE</div>\n" +
     "\n" +
     "<footer></footer>\n" +
     "");
