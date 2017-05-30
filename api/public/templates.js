@@ -14523,7 +14523,6 @@ angular.module("templates/thaihome/home/index.html", []).run(["$templateCache", 
     "\n" +
     "<div class=\"middle md-whiteframe-z4\" ng-init=\"headerSlider()\">\n" +
     "\n" +
-    "\n" +
     "  <h1>{{T.transHeadLine}}</h1>\n" +
     "\n" +
     "  <div id=\"arches\" class=\"responsive homepage\">\n" +
