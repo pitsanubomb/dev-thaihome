@@ -23,7 +23,9 @@ var CurrencyDataController = require('./controllers/CurrencyDataController');
 var booking = require('./routes/booking');
 var omise = require('./routes/omise');
 var news = require('./routes/news');
-var translationRoute = require('./routes/translationRoute');
+var frontpageRoute = require('./routes/frontpageRoute'); 
+
+// Reports
 var agentSaleRoute = require('./routes/agentSaleRoute');
 var expenseCategoryRoute = require('./routes/expenseCategoryRoute');
 var expenseRoute = require('./routes/expenseRoute');
@@ -101,7 +103,9 @@ app.use('/currency', currency);
 app.use('/booking', booking);
 app.use('/omise', omise);
 app.use('/news', news);
-app.use('/report', translationRoute);
+app.use('/frontpageRoute', frontpageRoute);
+
+// Reports
 app.use('/report', agentSaleRoute);
 app.use('/report', expenseCategoryRoute);
 app.use('/report', expenseRoute);
@@ -140,7 +144,7 @@ app.set('port', process.env.PORT || 3001);
 
 var server = app.listen(app.get('port'), function () {
   // util.log('Ready on port ' + server.address().port);
-  console.log("Now server is run "+ server.address().port);
+  console.log("Server run at "+ server.address().port);
 })
 
 // production error handler

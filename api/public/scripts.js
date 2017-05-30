@@ -1,6 +1,16 @@
 (function () {
   'use strict';
   angular
+    // What does the modules do?
+    //  angularMoment   - Date manipulation "moment"
+    //  ngRoute         - Angular Route 
+    //  ngMap           - Used to map data 
+    //  
+    // Stuff we might want to remove:
+    // - vcRecaptcha  (we do not use recaptcha)
+    // - datatables (for searching/sorting tables in html)
+    //
+    //
     .module('ThaiHome', ['angularMoment', 'underscore', 'ngRoute', 'ngMap', 'ngMaterial', 'ngAnimate', 'ui.router', 'ui.bootstrap', 'ngTouch', 'duScroll', 'ngResource', 'templates-main', 'dpd', 'datatables', 'xeditable', 'ui-notification', 'routeStyles', 'angularFileUpload', 'credit-cards', 'ui.sortable', 'multiStepForm', 'textAngular', 'ENV', 'vcRecaptcha','ngclipboard'])
     .value('dpdConfig', {
       collections: ['discount', 'booking', 'users', 'language', 'translation', 'news'],
@@ -21,8 +31,6 @@
         positionX: 'right',
         positionY: 'top'
       });
-
-
 
       $locationProvider.html5Mode(true);
       $urlRouterProvider.otherwise('/');
@@ -83,6 +91,13 @@
           return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
       };
 
+      // Show both currencies
+      // Example:  ฿30,000 ($1000)
+      // price      - Amount 
+      // currency   - Currency for the Amount
+      // rate       - The rate from currencydata table 
+      // format     - "left" is use the left side or first amount/currency  ฿30,000
+      //            - "both" is use both amount/currency  ฿30,000 ($1000)
       $rootScope.bothPrices = function(price, currency, rate, format){
           if(currency == '฿' || format == 'left'){
               return String( "฿  " + $rootScope.formatMoney(price ,0,'.',','));
@@ -122,6 +137,7 @@
         $(".page-loading").addClass("hide");
         $state.go('home');
       });
+      
     }])
     .filter('currency', ['$rootScope', function ($rootScope) {
       return function (sum, currency, dec, rate) {
@@ -14735,6 +14751,7 @@ function renderBookings(x, includeBookings, sortBookings, showChannel, showStatu
           }
         },
         loadCalendar: function (checkin, checkout, force, bookings) {
+          console.log("LOAD CALENDAR CALLED")
           if (Locale.validateDates(checkin, checkout) === false) {
             checkin = false;
             checkout = false;
@@ -14766,7 +14783,6 @@ function renderBookings(x, includeBookings, sortBookings, showChannel, showStatu
           }
 
           function highlightField(el) {
-
             if (el === false) {
               $('.arrival, .departure').removeClass('highlight');
             } else {
@@ -14777,7 +14793,6 @@ function renderBookings(x, includeBookings, sortBookings, showChannel, showStatu
           function setFirstDate(d) {
             $('#checkinval').html(moment(d.date1).format(CONFIG.DEFAULT_DATE_FORMAT));
           }
-
 
           var configObject = {
             showShortcuts: false,			
@@ -14916,7 +14931,7 @@ function renderBookings(x, includeBookings, sortBookings, showChannel, showStatu
           });
         }
       };
-          }]);
+   }]);
 })();
 (function () {
     "use strict";
@@ -16047,8 +16062,11 @@ function renderBookings(x, includeBookings, sortBookings, showChannel, showStatu
                     //Moment Error fix
 
                     if (!$scope.checkin || !$scope.checkout) {
+                        console.log ('$scope.checkin: ' + $scope.checkin)
+                        console.log ('$scope.checkout: ' + $scope.checkout)
                         $scope.checkin = moment().add(30, 'days').format("MMM D, YYYY");
                         $scope.checkout = moment().add(37, 'days').format("MMM D, YYYY");
+                        console.log("HERE!")
                         localStorage.setItem('checkin', moment().add(30, 'days').format("MMM D, YYYY"));
                         localStorage.setItem('checkout', moment().add(37, 'days').format("MMM D,  YYYY"));
                         $('.arrival, .departure').data('dateRangePicker').setDateRange($scope.checkin, $scope.checkout);

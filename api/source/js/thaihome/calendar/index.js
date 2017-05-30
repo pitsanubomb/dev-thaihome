@@ -27,6 +27,7 @@
           }
         },
         loadCalendar: function (checkin, checkout, force, bookings) {
+          console.log("LOAD CALENDAR CALLED")
           if (Locale.validateDates(checkin, checkout) === false) {
             checkin = false;
             checkout = false;
@@ -58,7 +59,6 @@
           }
 
           function highlightField(el) {
-
             if (el === false) {
               $('.arrival, .departure').removeClass('highlight');
             } else {
@@ -69,7 +69,6 @@
           function setFirstDate(d) {
             $('#checkinval').html(moment(d.date1).format(CONFIG.DEFAULT_DATE_FORMAT));
           }
-
 
           var configObject = {
             showShortcuts: false,			
@@ -208,5 +207,5 @@
           });
         }
       };
-          }]);
+   }]);
 })();
