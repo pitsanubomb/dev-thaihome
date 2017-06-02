@@ -1,14 +1,13 @@
-// Frontpage Controller
-// This Controller will give you data for the Thaihome frontpage
-//		all featured images from "featured" table
+// Search Result Page Controller
+// This Controller will give you data for the Thaihome Search Result Page
 //		all locations from "location" table (jomtien, pattaya, naklua...)
-//		all news from "news" table
-//		all hotdeals from "hotdeal" table
-//		all prices from "price" table to match hotdeal
+//		all properties that are available in the choosen period with prices and hotdeals
+//		all properties that are occupied in the choosen period with prices and hotdeals
 // GET INPUT:
-// - none
+// - from / to date
 // OUTPUT:
 // - Json structure with the following data:
+
 // - featured[] with all featured images 
 // - location[] with all locations
 // - news[] with all news
@@ -21,6 +20,10 @@ var mongoose = require('mongoose');
 exports.getFrontpage = function(req, callback) {
 
 	console.log("###### getFrontpage ######")
+	var	featuredArray = [];
+	var	locationArray = [];
+	var	newsArray 	  = [];
+	var hotdealArray  = [];
 
     // 
     // Find all featured images 

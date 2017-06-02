@@ -35,6 +35,7 @@ var omise = require('./routes/omise');
 
 // ThaiHome Website Routes
 var frontpageRoute = require('./routes/frontpageRoute'); 
+var searchRoute = require('./routes/searchRoute'); 
 
 // Manager Routes
 
@@ -145,6 +146,7 @@ app.use('/booking', booking);
 app.use('/omise', omise);
 app.use('/news', news);
 app.use('/frontpageRoute', frontpageRoute);
+app.use('/searchRoute', searchRoute);
 
 // Report Routes
 app.use('/report', agentSaleRoute);
