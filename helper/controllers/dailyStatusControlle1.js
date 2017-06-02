@@ -1,50 +1,140 @@
-// Booking List Report Controller
-// This Controller will give you data for Booking List Report
+// Daily Status Report Controller
+// This Controller will give you data for Daily Status Report
 // GET INPUT:
-// - From and To Date
-// - Multiple properties or ALL
-// - Booking Status
-// - invoice = true/false
-// - receipt = true/false
+// - From Date
 // OUTPUT:
-// - Json structure with all booking list data
+// - Json structure with all Daily Status Report data
 //
 
 var mongoose = require('mongoose');
 
-exports.getBookingList = function(req, res) {
+exports.getStatus = function(req, res) {
 
 
 	//
     // Receive data from caller
 	//
-	console.log("###### getBookingList ######")
+	console.log("###### getStatus ######")
 	console.log("Data received: " + JSON.stringify(req.body, null, 4));
-
-	let tempDate = new Date();
-	let firstDay = new Date(tempDate.getFullYear(), tempDate.getMonth(), 1);
-	let lastDay = new Date(tempDate.getFullYear(), tempDate.getMonth() + 1, 0);
 
 	// if checkinDate is missing
 	if (req.body.fromDate) {
 	    var checkinDate = new Date(req.body.fromDate*1000);
 	} else {
-		var checkinDate = new Date(firstDay);
+		var checkinDate = new Date();
 	}
-	
-	// if checkoutDate is missing
-	if (req.body.toDate) {
-	    var checkoutDate = new Date(req.body.toDate*1000);
-		if (checkoutDate.getTime() < checkinDate.getTime()) {
-			checkoutDate = new Date(lastDay);
-		}
-	} else {
-		var	checkoutDate = new Date(lastDay);
-	}
-
+	checkinDate.setHours(0,0,0,0); // last midnight
+	var checkoutDate = new Date(checkinDate);
+	checkoutDate.setHours(23,59,59,0); // next midnignt
 	var checkin = Math.round(new Date(checkinDate.getTime())/1000)
 	var checkout = Math.round(new Date(checkoutDate.getTime())/1000)
 
+
+	//
+    // Find all bookings for Double and Same Day bookings
+	// All bookings where booking.checkout is > today at 00:00:00
+	//
+	var bookingListModel = require('../models/bookingListModel');
+    var bookingTable = mongoose.model('bookingListModel');
+	var bookingArray = [];
+	var findDoubleBookings = function() {
+		return new Promise((resolve, reject) => {
+		console.log("=====START findDoubleBookings=====")
+		bookingTable.aggregate([
+			{ 
+				$match: {
+					checkout: {$gte: checkin},
+					status: {$lte: 3}
+				}
+			},
+			{
+				$sort: {
+					"checkin":1
+				}
+			},	
+			{                                                                  
+				$lookup: {                                                     
+					from: "users",                                             
+					localField: "user",                                        
+					foreignField: "_id",	                                   
+					as: "users"		                                           
+				}	                                                           
+			},                                                                 
+			{                                                                  
+				$unwind: "$users"		                                       
+			},                                                                 
+			{                                                                  
+				$lookup: {                                                     
+					from: "languagecodes",                                     
+					localField: "users.country",                               
+					foreignField: "country",	                               
+					as: "language"		                                       
+				}	                                                           
+			},                                                                 
+			{                                                                  
+				$unwind: "$language"		                                   
+			},                                                                 
+			{                                                                  
+				$lookup: {                                                     
+					from: "users",                                             
+					localField: "agent",                                       
+					foreignField: "_id",	                                   
+					as: "agent"		                                           
+				}	                                                           
+			},	                                                               
+			{                                                                  
+				$unwind: { path: "$agent", preserveNullAndEmptyArrays: true }  
+			},                                                                 
+			{                                    
+				$lookup: {                       
+					from: "receipt",             
+					localField: "_id",           
+					foreignField: "bookingId",	 
+					as: "receipt"		         
+				}	                             
+			},  			
+			{                                                                  
+				$project:{                                                     
+					"_id" : 1,                                                 
+					"property" : 1,                             
+					"source" : 1,                                              
+					"status" : 1,                                              
+					"checkin" : 1,                                             
+					"checkout" : 1,                                            
+					"name" : "$users.name",                                    
+					"agent" : "$agent.name",                                   
+					"langCode" : "$language.code",                             
+					"priceDay" : 1,                                            
+					"nights" : 1,                                               
+					"discountAmount" : 1,                                          
+					"paidAlready": {
+						"$sum": {
+							"$map": {
+							"input": "$receipt",
+							"as": "iv",
+							"in": "$$iv.amount"
+							}
+						}
+					}
+				}                                                              
+			}	                                                               
+		], function (err, data) {
+			if (err) {
+				reject(new Error('findBooking ERROR : ' + err));
+			} else {
+				// console.log("bookingArray Result: " + JSON.stringify(data, null, 4));
+				bookingArray = data;
+				console.log("=====RESOLVE findDoubleBookings=====")
+				resolve(data);
+			};
+		});
+	})};
+
+
+
+	//
+    // Create the match string
+	//
 	var myMatch = {
 		checkin: {$gte: checkin},
 		checkout: {$lte: checkout}
@@ -61,6 +151,13 @@ exports.getBookingList = function(req, res) {
 	} else if (req.body.hasOwnProperty('status') && req.body.status!="ALL") {
 		myMatch["status"] = +req.body.status;
 	}
+
+
+
+
+
+
+
 
 
     // 
@@ -108,7 +205,7 @@ exports.getBookingList = function(req, res) {
 			{                                                                  
 				$unwind: { path: "$agent", preserveNullAndEmptyArrays: true }  
 			},                                                                 
-			{
+			{                                                                  
 				$project:{                                                     
 					"_id" : 1,                                                 
 					"property" : 1,                             
@@ -121,8 +218,8 @@ exports.getBookingList = function(req, res) {
 					"langCode" : "$language.code",                             
 					"priceDay" : 1,                                            
 					"nights" : 1,                                               
-					"discountAmount" : 1
-				}                                                         
+					"discountAmount" : 1,                                          
+				}                                                              
 			}	                                                               
 		], function (err, data) {
 			if (!err) {
@@ -148,7 +245,6 @@ exports.getBookingList = function(req, res) {
     var invoiceSumTable = mongoose.model('invoiceSumModel');
 	var findInvoiceSum = function() {
 		return new Promise((resolve, reject) => {
-		if (req.body.invoice == false) {resolve(); return};
 		console.log("=====START findInvoiceSum=====")
 		invoiceSumTable.aggregate([
 			{                                                   
@@ -187,13 +283,12 @@ exports.getBookingList = function(req, res) {
 
 
     // 
-    // Find all receipts
+    // Find all preceipts
     // 
 	var receiptModel = require('../models/receiptModel');
     var receiptTable = mongoose.model('receiptModel');
 	var findReceipt = function() {
 		return new Promise((resolve, reject) => {
-		if (req.body.receipt == false) {resolve(); return};
 		console.log("=====START findReceipt=====")
 		receiptTable.aggregate([
 			{                                                   
@@ -238,11 +333,11 @@ exports.getBookingList = function(req, res) {
     // 
     // Run the promises
     // 
-	findBookings()
-		.then(() => Promise.all([findInvoiceSum(), findReceipt()]))
-		.then(sendResult)
+	findDoubleBookings()
+		// .then(() => Promise.all([findInvoiceSum(), findReceipt()]))
+		// .then(sendResult)
 		.catch(err => {
-			console.log("getBookingList ERR: " + err);
+			console.log("getStatus ERR: " + err);
 			res.json({error:true,err})
 		}
 	)

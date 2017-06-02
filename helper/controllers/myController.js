@@ -12,8 +12,12 @@
 // - featured[] with all featured images 
 // - location[] with all locations
 // - news[] with all news
-// - hotdeal[] with all hotdeals (including priceNight)
+// - hotdeal[] with all hotdeals (including prices)
 //
+
+// THIS ONE WORKS!!!!!!!!!!!
+// THIS ONE WORKS!!!!!!!!!!!
+// THIS ONE WORKS!!!!!!!!!!!
 
 
 var mongoose = require('mongoose');
@@ -153,8 +157,14 @@ exports.getFrontpage = function(req, callback) {
     // Find all Prices for the HotDeals
     //
 	var collectHotDealPrices = function([featuredArr, locationArr, newsArr, hotdealArr]) {
-		return Promise.all(hotdealArr.map(findPrice)).then(hotdealArr => {
-			return ( { "featured":featuredArr, "location":locationArr, "news":newsArr, "hotdeal": hotdealArr } );	
+		console.log("=====START collectHotDealPrices=====")
+		featuredArray = featuredArr;
+		locationArray = locationArr;
+		newsArray 	  = newsArr;
+		hotdealArray  = hotdealArr;
+		return Promise.all(hotdealArray.map(findPrice)).then(hotdealArray => {
+			console.log("=====RESOLVE collectHotDealPrices=====")
+			return ( { "featured":featuredArray, "location":locationArray, "news":newsArray, "hotdeal": hotdealArray } );	
 		});
 	}; 
 
@@ -173,7 +183,9 @@ exports.getFrontpage = function(req, callback) {
 				if (result.error == true) {
 					throw new Error(result.err);
 				};
-				hotdeal.priceNight = result.res.priceNight;
+				hotdeal.priceNight = result.price.priceNight;
+				console.log ("hotdealArray property: " + hotdeal.property);
+				console.log ("hotdealArray priceNight: " + hotdeal.priceNight);
 				resolve(hotdeal); 
 			}
 		);

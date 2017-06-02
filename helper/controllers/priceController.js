@@ -6,26 +6,25 @@
 // - checkin date (unix format)
 // - checkout date (unix format)
 // OUTPUT:
-// - Json structure with all price data 
+// - Json structure with all price data for that property
 //
 
 var mongoose = require('mongoose');
 
-exports.getPrice = function(req, res){
+exports.getPrice = function(req, callback) {
 
     // 
     // Validate the data we get from router
     // 
-	console.log("priceController received: " + JSON.stringify(req.body, null, 4));
-	console.log("propertyID: " +req.body.propertyID);
-	console.log("checkin: " +req.body.checkin);
-	console.log("checkout: " +req.body.checkout);
+	// console.log("priceController received: " + JSON.stringify(req.body, null, 4));
+	// console.log("propertyID: " +req.body.propertyID);
+	// console.log("checkin: " +req.body.checkin);
+	// console.log("checkout: " +req.body.checkout);
 
 	// if property is missing
 	if (!req.body.propertyID) {
         console.log('propertyID missing in call of getPrice');
-        res.json({error:true, message:'propertyID missing in call of getPrice'});
-        return;
+        throw new Error('ERR: propertyID missing in call of getPrice');
 	} else {
 	    var propertyID = req.body.propertyID;
 	}
@@ -50,25 +49,25 @@ exports.getPrice = function(req, res){
 	}
 
 
-
     // 
     // Find the PRICE for the property
     // 
 	var priceModel = require('../models/priceModel');
     var priceTable = mongoose.model('priceModel');
-    var findPrice = new Promise(
-        (resolve, reject) => {
+	var findPrice = function() {
+		return new Promise((resolve, reject) => {
+		console.log("=====START findPrice=====")
 		priceTable.findOne(
 			{ _id: propertyID } 
         ,function(err, data) {
             if (!err) {
+				console.log("=====RESOLVE findPrice=====")
                 resolve(data);
             } else {
                 reject(new Error('findPrice ERROR : ' + err));
             }
         });
-	});
-
+	})};
 
 
     // 
@@ -76,8 +75,9 @@ exports.getPrice = function(req, res){
     // 
 	var seasonModel = require('../models/seasonModel');
     var seasonTable = mongoose.model('seasonModel');
-    var findSeason = new Promise(
-        (resolve, reject) => {
+	var findSeason = function() {
+		return new Promise((resolve, reject) => {
+		console.log("=====START findSeason=====")
         seasonTable.aggregate([
         {
             $match:{}
@@ -87,13 +87,13 @@ exports.getPrice = function(req, res){
         }
         ],function(err, data) {
             if (!err) {
+				console.log("=====RESOLVE findSeason=====")
                 resolve(data);
             } else {
                 reject(new Error('findSeason ERROR : ' + err));
             }
         });
-    });
-
+    })};
 
 
     // 
@@ -101,8 +101,9 @@ exports.getPrice = function(req, res){
     // 
 	var hotdealModel = require('../models/hotdealModel');
     var hotdealTable = mongoose.model('hotdealModel');
-    var findHotdeal = new Promise(
-        (resolve, reject) => {
+	var findHotdeal = function() {
+		return new Promise((resolve, reject) => {
+		console.log("=====START findHotdeal=====")
         hotdealTable.aggregate([
         {
             $match:{
@@ -119,24 +120,30 @@ exports.getPrice = function(req, res){
         }
         ],function(err, data) {
             if (!err) {
+				console.log("=====RESOLVE findHotdeal=====")
                 resolve(data);
             } else {
                 reject(new Error('findHotdeal ERROR : ' + err));
             }
         });
-    });
-
+    })};
 
 
     // 
     // Calculate the price based on all data 
     // 
 	var calculatePrice = function ([priceArray, seasonArray, hotdealArray]) {
+		return new Promise((resolve, reject) => {
+		console.log("=====START calculatePrice=====")
+		if (!priceArray) {
+			throw new Error('Price not found for property: ' + req.body.propertyID); 
+		}
+
 	    // console.log("findPrice Result: " + JSON.stringify(priceArray, null, 4));
 	    // console.log("findSeason Result: " + JSON.stringify(seasonArray, null, 4));
 	    // console.log("findHotdeal Result: " + JSON.stringify(hotdealArray, null, 4));
-		console.log("checkin: " +checkin);
-		console.log("checkout: " +checkout);
+		// console.log("checkin: " +checkin);
+		// console.log("checkout: " +checkout);
 
 		//Calculate nights
 		var nights = daysBetween(checkin, checkout)
@@ -258,34 +265,36 @@ exports.getPrice = function(req, res){
 			reservationMonth:   Number(priceArray.reservationMonth), // Reservation fee for monthly rental 31-179 nights (reservation is paid as part of total price)
 			reservationYear:    Number(priceArray.priceYear*30)   	 // Reservation fee for year rental 180+ nights (reservation is paid as part of total price)
 		});
-		console.log ('finalPrice ' + finalPrice)
-		console.log ('finalPriceNight ' + finalPriceNight)
-		console.log ('nights ' + nights)
+	    // console.log ("priceFindResult: " + JSON.stringify(priceFindResult, null, 4));
+		console.log("=====RESOLVE calculatePrice=====")
+		resolve(priceFindResult);
+    })};
 
-		res.json({error:false,priceFindResult})
-        console.log("Sent data back to router");
+	// Calculate amount of DAYS between two dates
+	var daysBetween = function (date1, date2) {
+		var ONE_DAY = 1000 * 60 * 60 * 24
+		var date1_ms = date1.getTime()
+		var date2_ms = date2.getTime()
+		var difference_ms = Math.abs(date1_ms - date2_ms)
+		return Math.round(difference_ms/ONE_DAY)
 	}
-
 
 	//
 	// Start all the promises
 	//
-	Promise.all([findPrice, findSeason, findHotdeal])
-		.then(calculatePrice)
+	Promise.all([findPrice(), findSeason(), findHotdeal()])
+	.then(res => {
+		calculatePrice(res).then(res => {
+			//resolve( { error:false, res } );
+			callback( { error:false, res } );
+		})
 		.catch(err => {
-			console.log("priceController ERROR: " + err);
-			res.json({error:true,err})
-		}
-	)
+			console.error("priceController " + err);
+			console.log("priceController " + err);
+			// reject( { error:true, err } );
+			callback( { error:true, err } );
+		})
+	})
 
 }
-
-// Calculate amount of DAYS between two dates
-function daysBetween(date1, date2) {
-    var ONE_DAY = 1000 * 60 * 60 * 24
-    var date1_ms = date1.getTime()
-    var date2_ms = date2.getTime()
-    var difference_ms = Math.abs(date1_ms - date2_ms)
-    return Math.round(difference_ms/ONE_DAY)
-}
-
+	

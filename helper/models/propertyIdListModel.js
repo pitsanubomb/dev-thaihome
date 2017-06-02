@@ -6,7 +6,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var propertyIdListSchema = new Schema({
-    _id:    String     // Property ID 
+    _id:    String,     // Property ID 
+    name:   String      // Property Name 
 });
 
 module.exports = mongoose.model('propertyIdListModel', propertyIdListSchema,'property');

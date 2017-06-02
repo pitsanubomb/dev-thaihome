@@ -11,15 +11,9 @@
 var express = require('express');
 var router = express.Router();
 var priceController = require('../controllers/priceController');
-
 router.post('/getPrice', function(req, res) {
-	console.log("getPrice: " + req.body);
-	console.log("getPrice received: " + JSON.stringify(req.body, null, 4));
-	console.log("propertyID: " +req.body.propertyID);
-	console.log("checkin: " +req.body.checkin);
-	console.log("checkout: " +req.body.checkout);
-	priceController.getPrice(req, res);
+	priceController.getPrice(req, function(result) {
+		res.json(result);
+	});
 });
-
 module.exports = router;
-

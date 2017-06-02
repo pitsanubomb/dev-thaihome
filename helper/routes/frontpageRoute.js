@@ -10,13 +10,12 @@
 // OUTPUT:
 // - Json structure with all data needed for the front page
 //
-
 var express = require('express');
 var router = express.Router();
 var frontpageController = require('../controllers/frontpageController');
-
 router.get('/getFrontpage', function(req, res) {
-	frontpageController.getFrontpage(req, res);
+	frontpageController.getFrontpage(req, function(result) {
+		res.json(result);
+	});
 });
-
 module.exports = router;

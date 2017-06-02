@@ -6,8 +6,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var hotdealSchema = new Schema({
-    _id:       String,     // Unique ID 
-    property:  Number,     // Property ID 
     discount:  Number,     // Discount in percentage 
     start:     Number,     // Start date for deal UNIX
     end:       Number,     // End date for deal UNIX
@@ -16,3 +14,4 @@ var hotdealSchema = new Schema({
 });
 
 module.exports = mongoose.model('hotdealModel', hotdealSchema,'hotdeal');
+
