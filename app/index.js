@@ -1,7 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
+import angular from 'angular';
 
-import 'angular';
-import 'angular-mocks/angular-mocks';
-
-const context = require.context('./app', true, /\.js$/);
-
-context.keys().forEach(context);
+angular.module('app', []);

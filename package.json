@@ -15,9 +15,10 @@
   "author": "mandarin && Torbe",
   "license": "MIT",
   "dependencies": {
-    "angular": "^1.5.0",
     "@uirouter/angularjs": "latest",
-    "@uirouter/visualizer": "latest"
+    "@uirouter/visualizer": "latest",
+    "angular": "^1.5.0",
+    "bootstrap": "^3.3.7"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0",
