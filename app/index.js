@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import angular from 'angular';
-import appModule from 'config';
 
-angular.module('app', [appModule.name]);
+angular.module('app', [home])
+  .directive('app', app)
