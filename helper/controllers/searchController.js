@@ -55,7 +55,6 @@ exports.getSearch = function(req, callback) {
 	console.log("checkout: " +checkout);
 
 
-
     // 
     // Find all locations in Pattaya 
     // 
