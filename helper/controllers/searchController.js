@@ -4,7 +4,8 @@
 //		all properties that are available in the choosen period with prices and hotdeals
 //		all properties that are occupied in the choosen period with prices and hotdeals
 // GET INPUT:
-// - from / to date
+// - checkin date
+// - checkout date
 // OUTPUT:
 // - Json structure with the following data:
 
@@ -17,33 +18,19 @@
 
 var mongoose = require('mongoose');
 
-exports.getFrontpage = function(req, callback) {
+exports.getSearch = function(req, callback) {
 
-	console.log("###### getFrontpage ######")
-	var	featuredArray = [];
-	var	locationArray = [];
-	var	newsArray 	  = [];
-	var hotdealArray  = [];
+	console.log("###### getSearch ######")
 
     // 
-    // Find all featured images 
+    // Validate the data we get from router
     // 
-	var featuredModel = require('../models/featuredModel');
-    var featuredTable = mongoose.model('featuredModel');
-	var findFeatured = function() {
-		return new Promise((resolve, reject) => {
-		console.log("=====START findFeatured=====")
-		featuredTable.find({} 
-        ,function(err, data) {
-            if (!err) {
-				// console.log("findFeatured Result: " + JSON.stringify(data, null, 4));
-				console.log("=====RESOLVE findFeatured=====");
-                resolve(data);
-            } else {
-                reject(new Error('findFeatured ERROR : ' + err));
-            }
-		});
-	})};
+	console.log("getSearch received: " + JSON.stringify(req.body, null, 4));
+	console.log("checkin: " +req.body.checkin);
+	console.log("checkout: " +req.body.checkout);
+
+
+
 
 
     // 
@@ -65,6 +52,103 @@ exports.getFrontpage = function(req, callback) {
             }
 		});
 	})};
+
+
+    // 
+    // Find all AVAILABLE properties
+    // 
+	var propertyModel = require('../models/propertyModel');
+    var propertyTable = mongoose.model('propertyModel');
+	var findAvailable = function() {
+		return new Promise((resolve, reject) => {
+		console.log("=====START findAvailable=====")
+		propertyTable.aggregate([
+		{                                                   
+			$match: {                                       
+				active : true
+			}
+		},                                                  
+		{
+			$lookup: {
+				from: "booking",
+				localField: "_id",
+				foreignField: "apartmentID",
+				as: "bookings"
+			}
+		},
+		{
+			$match: {
+				"bookings": {
+					$not: {
+						$elemMatch: {
+							checkin: {
+								$lte: 1520000000
+							},
+							checkout: {
+								$gte: 1510000000
+							}
+						}
+					}
+				}
+			}
+		},
+		{
+			$lookup: {
+				from: "translation",
+				localField: "_id",
+				foreignField: "apartmentID",
+				as: "bookings"
+			}
+		},
+	    {
+			$project: {
+				_id: 0,
+				name: 1
+			}
+		},
+
+
+
+
+
+			{                                               
+				$project:{                                  
+					"_id" : 1,
+					"name" : 1,
+					"location" : 1,
+					"languageCode" : 1,
+					"locationName" : 1,
+					"projectName" : 1,
+					"images" : 1,
+					"guests" : 1,
+					"gmapsdata" : 1,
+
+					"frontpage1" : 1,                            
+					"frontpage2" : 1,                            
+
+					"hotDealPct" : 1
+
+				}                                           
+			}                                               
+		],function(err, data) {
+			if (!err) {
+				// console.log("findAvailable Result: " + JSON.stringify(data, null, 4));
+				console.log("=====RESOLVE findAvailable=====")
+				resolve(data);
+			} else {
+				reject(new Error('ERR findAvailable : ' + err));
+			};
+		});
+    })};
+
+
+    // 
+    // Find all OCCUPIED properties
+    // 
+
+
+
+
 
 
     // 
@@ -149,9 +233,18 @@ exports.getFrontpage = function(req, callback) {
 
 
     // 
-    // Find all Prices for the HotDeals
+    // Find all Prices for the AVAILABLE properties 
     //
-	var collectHotDealPrices = function([featuredArr, locationArr, newsArr, hotdealArr]) {
+	var collectAvailablePrices = function([featuredArr, locationArr, newsArr, hotdealArr]) {
+		return Promise.all(hotdealArr.map(findPrice)).then(hotdealArr => {
+			return ( { "featured":featuredArr, "location":locationArr, "news":newsArr, "hotdeal": hotdealArr } );	
+		});
+	}; 
+
+    // 
+    // Find all Prices for the OCCUPIED properties 
+    //
+	var collectOccupiedPrices = function([featuredArr, locationArr, newsArr, hotdealArr]) {
 		return Promise.all(hotdealArr.map(findPrice)).then(hotdealArr => {
 			return ( { "featured":featuredArr, "location":locationArr, "news":newsArr, "hotdeal": hotdealArr } );	
 		});

@@ -99,7 +99,7 @@ mongoose.connection.on('error', (err) => {
 });
 
 // Set debug = on so we can see what its doing
-mongoose.set('debug', false);
+mongoose.set('debug', true);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

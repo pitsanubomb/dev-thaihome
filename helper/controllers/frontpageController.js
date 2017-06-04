@@ -21,6 +21,10 @@ var mongoose = require('mongoose');
 exports.getFrontpage = function(req, callback) {
 
 	console.log("###### getFrontpage ######")
+	console.log("getFrontpage received: " + JSON.stringify(req.body, null, 4));
+	var languageCode = 	req.body.lc ? req.body.lc : "gb"; 
+	console.log("languageCode: " + languageCode);
+	
 
     // 
     // Find all featured images 
@@ -124,19 +128,55 @@ exports.getFrontpage = function(req, callback) {
 					hot: 1
 				}
 			},	
+			{
+				$lookup: {
+					from: "property",
+					localField: "property",
+					foreignField: "_id",
+					as: "properties"
+				}
+			},
+			{
+				$unwind: "$properties"
+			},
+			{
+				$lookup: {
+					from: "translation",
+					localField: "property",
+					foreignField: "property",
+					as: "translations"
+				}
+			},
+			{
+				$unwind: "$translations"
+			},
+			{                                                   
+				$match: {                                       
+					"translations.language": "gb" //languageCode
+				}
+			},
+			{
+				$unwind: "$translations.texts"
+			},
 			{                                               
-				$project:{                                  
+				$project:{
+					_id : 0,                                 
 					"property" : 1,                            
 					"discount" : 1,                            
-					"hot" : 1                            
-				}                                           
+					"hot" : 1,                            
+					"text" : 1,                            
+					"start" : 1,                            
+					"end" : 1,                            
+					"featured" : "$properties.featured", 
+					"name" : "$properties.name",
+					"frontpage1": "$translations.texts.frontpage1",
+					"frontpage2": "$translations.texts.frontpage2"
+				} 
 			}                                               
 		],function(err, data) {
 			if (!err) {
 				// console.log("findHotdeal Result: " + JSON.stringify(data, null, 4));
 				console.log("=====RESOLVE findHotdeal=====")
-				hotdealArray = data;
-				// console.log("findHotdeal Result: " + JSON.stringify(hotdealArray, null, 4));
 				resolve(data);
 			} else {
 				reject(new Error('ERR findHotdeal : ' + err));

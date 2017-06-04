@@ -16,10 +16,10 @@ exports.getPrice = function(req, callback) {
     // 
     // Validate the data we get from router
     // 
-	// console.log("priceController received: " + JSON.stringify(req.body, null, 4));
+	console.log("getPrice received: " + JSON.stringify(req.body, null, 4));
 	// console.log("propertyID: " +req.body.propertyID);
-	// console.log("checkin: " +req.body.checkin);
-	// console.log("checkout: " +req.body.checkout);
+	console.log("checkin: " +req.body.checkin);
+	console.log("checkout: " +req.body.checkout);
 
 	// if property is missing
 	if (!req.body.propertyID) {
@@ -28,25 +28,31 @@ exports.getPrice = function(req, callback) {
 	} else {
 	    var propertyID = req.body.propertyID;
 	}
-	
+
+	var firstDay = new Date();
+	firstDay.setDate(firstDay.getDate() + 30);
+	var lastDay = new Date();
+	lastDay.setDate(lastDay.getDate() + 37);
+
 	// if checkin is missing
 	if (req.body.checkin) {
 	    var checkin = new Date(req.body.checkin*1000);
 	} else {
-		var checkin = new Date();
+		var checkin = new Date(firstDay)
 	}
 	
 	// if checkout is missing
 	if (req.body.checkout) {
 	    var checkout = new Date(req.body.checkout*1000);
 		if (checkout.getTime() < checkin.getTime()) {
-			let newCheckout = new Date(checkin);
-			checkout = new Date(newCheckout.setDate(newCheckout.getDate() + 1));
+			var checkout = new Date(lastDay)
 		}
 	} else {
-		let newCheckout = new Date(checkin);
-		var checkout = new Date(newCheckout.setDate(newCheckout.getDate() + 1));
+		var checkout = new Date(lastDay)
 	}
+
+	console.log("checkin: " +checkin);
+	console.log("checkout: " +checkout);
 
 
     // 
@@ -99,6 +105,11 @@ exports.getPrice = function(req, callback) {
     // 
     // Find HOTDEAL 
     // 
+    // We have to find all hotdeals where 
+	//	hotdeal.start is between checkin-checkout
+    // AND
+	//	hotdeal.end is between checkin-checkout
+    // 
 	var hotdealModel = require('../models/hotdealModel');
     var hotdealTable = mongoose.model('hotdealModel');
 	var findHotdeal = function() {
@@ -109,14 +120,16 @@ exports.getPrice = function(req, callback) {
             $match:{
 				$and:[
 					{ property : propertyID },
-					{ start    : {$lte: checkin.getTime()} },
-					{ end      : {$gte: checkout.getTime()} },
-					{ active   : true }
+					{ active   : true },
+					{ $or: [
+						{ start: { $lte: Math.round(new Date(checkout.getTime())/1000), $gte: Math.round(new Date(checkin.getTime())/1000) } },
+						{ end: { $lte: Math.round(new Date(checkout.getTime())/1000), $gte: Math.round(new Date(checkin.getTime())/1000) } }
+					]}
 				]
 			}
         },
         {
-            $project:{"_id":0, "discount":1, "start":1, "end":1, "hot":1, "active":1}
+            $project:{"_id":0, "discount":1, "start":1, "end":1, "hot":1, "active":1, "text":1}
         }
         ],function(err, data) {
             if (!err) {
@@ -212,37 +225,65 @@ exports.getPrice = function(req, callback) {
 		var avgPrice   = Math.round(totalPrice/nights);
 		var finalPrice = 0;
 		var dn 		   = 0;
+		var totalDiscount = 0;
 		for (var d = new Date(checkin); d < checkout; d.setDate(d.getDate() + 1)) {
 			dn = Number((d.getMonth()+1) + ('0' + d.getDate()).slice(-2)) 
 			var season = seasonArray.find(item => {
 				return item.from <= dn && item.to >= dn
 			});
 			var pct = season ? season.pct : 0;
-			finalPrice += avgPrice * (1 + pct / 100);
+			if (pct>0) {
+				totalDiscount +=  avgPrice * (1 + pct / 100); 
+			}
 		}
+		console.log("Season: " + (avgPrice * nights) + " - " + totalDiscount + " = " + ((avgPrice * nights) - totalDiscount));
+		finalPrice = (avgPrice * nights) - totalDiscount;
+
 
 		//Calculate HotDeals to deduct discount from prices
+		var pctHotDeal = 0;
+		var txtHotDeal = "";
+		var startHotDeal = 0;
+		var endHotDeal = 0;
+		var totalDiscount = 0;
 		avgPrice = Math.round(finalPrice/nights);
 		finalPrice = 0;
-		for (var d = new Date(checkin); d < checkout; d.setDate(d.getDate() + 1)) {
-			var hotdeal = hotdealArray.find(item => {
-				return new Date(item.start) <= d && new Date(item.end) >= d
-			});
-			var pct = hotdeal ? hotdeal.discount : 0;
-			finalPrice += avgPrice - (avgPrice * (pct / 100));
+		if (hotdealArray.length) {
+			for (var d = new Date(checkin.setHours(0,0,0,0)); d < new Date(checkout.setHours(0,0,0,0)); d.setDate(d.getDate() + 1)) {
+				d.setHours(23,59,0,0); 
+				let searchData = Math.round(new Date(d.getTime())/1000)
+				var hotdeal = hotdealArray.find(item => {
+					return item.start <= searchData && item.end >= searchData
+				});
+				let calcPct = hotdeal ? hotdeal.discount : 0;
+				if (calcPct>0) {
+					totalDiscount += (avgPrice * (calcPct / 100))
+				}
+				pctHotDeal = hotdeal ? hotdeal.discount : pctHotDeal;
+				txtHotDeal = hotdeal ? hotdeal.text : txtHotDeal;
+				startHotDeal = hotdeal ? hotdeal.start : startHotDeal;
+				endHotDeal = hotdeal ? hotdeal.end : endHotDeal;
+			}
 		}
+		console.log("HotDeal: " + (avgPrice * nights) + " - " + totalDiscount + " = " + ((avgPrice * nights) - totalDiscount));
+		finalPrice = (avgPrice * nights) - totalDiscount;
 
 		//compensate for math.round difference
+		console.log("3finalPrice: " + finalPrice/nights);
 		finalPrice = Math.round(finalPrice)
 		finalPriceNight = Math.round(finalPrice/nights);
 		finalPrice = finalPriceNight * nights 
-
+		console.log("4finalPrice: " + finalPrice);
 
 		// Put everything into the priceFindResult
 		var priceFindResult = ({
 		    priceTotal:         Number(finalPrice), 				 // The correct calculated total price from checkin to checkout 
 			priceNight:         Number(finalPriceNight),			 // The price pr night is priceTotal divided by nights 
 			nights:             Number(nights),      				 // The correct calculated amount of nights from checkin to checkout
+			hotdealPct:         Number(pctHotDeal),					 // If this property is in a hotdeal, we want to show the Pct on the site 
+			hotdealTxt:         String(txtHotDeal),					 // If this property is in a hotdeal, we want to show the Text on the site 
+			hotdealStart:       Number(startHotDeal),				 // If this property is in a hotdeal, we want to show the Startdate on the site 
+			hotdealEnd:         Number(endHotDeal),					 // If this property is in a hotdeal, we want to show the Enddate on the site 
 			priceWeekend:       Number(priceArray.priceWeekend),	 // The standard price for friday night or saturday night
 			priceWeek1:         Number(priceArray.priceWeek1),       // The standard price for weekday night (sun-mon-tue-wed-thu)
 			priceWeek2:         Number(priceArray.priceWeek2),       // The standard price pr night (mon-sun) if more than 7 nights (more than 1 week)
@@ -289,7 +330,7 @@ exports.getPrice = function(req, callback) {
 			callback( { error:false, res } );
 		})
 		.catch(err => {
-			console.error("priceController " + err);
+			console.error(err);
 			console.log("priceController " + err);
 			// reject( { error:true, err } );
 			callback( { error:true, err } );

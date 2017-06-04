@@ -9,6 +9,8 @@ var priceSchema = new Schema({
     _id:                String,     // Property ID
     priceNight:         Number,     // The price pr night is priceTotal divided by nights 
     nights:             Number,     // The correct calculated amount of nights from checkin to checkout
+    hotdealPct:         Number,     // If this property is in a hotdeal, we want to show the Pct on the site 
+    hotdealTxt:         String,		// If this property is in a hotdeal, we want to show the Text on the site 
     priceWeekend:       Number,     // The standard price for friday night or saturday night
     priceWeek1:         Number,     // The standard price for weekday night (sun-mon-tue-wed-thu)
     priceWeek2:         Number,     // The standard price pr night (mon-sun) if more than 7 nights (more than 1 week)
