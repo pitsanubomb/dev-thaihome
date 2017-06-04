@@ -63,11 +63,9 @@ module.exports = function makeWebpackConfig() {
    */
   if (isTest) {
     config.devtool = 'inline-source-map';
-  }
-  else if (isProd) {
+  } else if (isProd) {
     config.devtool = 'source-map';
-  }
-  else {
+  } else {
     config.devtool = 'eval-source-map';
   }
 
@@ -86,7 +84,11 @@ module.exports = function makeWebpackConfig() {
       // Transpile .js files using babel-loader
       // Compiles ES6 and ES7 into ES5 code
       test: /\.js$/,
-      loader: 'babel-loader',
+      loader: [{
+        loader: 'ng-annotate-loader'
+      }, {
+        loader: 'babel-loader'
+      }],
       exclude: /node_modules/
     }, {
       // CSS LOADER
@@ -104,9 +106,15 @@ module.exports = function makeWebpackConfig() {
 
       loader: isTest ? 'null-loader' : ExtractTextPlugin.extract({
         fallbackLoader: 'style-loader',
-        loader: [
-          {loader: 'css-loader', query: {sourceMap: true}},
-          {loader: 'postcss-loader'}
+        loader: [{
+            loader: 'css-loader',
+            query: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader'
+          }
         ],
       })
     }, {
@@ -151,8 +159,8 @@ module.exports = function makeWebpackConfig() {
    * Reference: https://github.com/postcss/autoprefixer-core
    * Add vendor prefixes to your css
    */
-   // NOTE: This is now handled in the `postcss.config.js`
-   //       webpack2 has some issues, making the config file necessary
+  // NOTE: This is now handled in the `postcss.config.js`
+  //       webpack2 has some issues, making the config file necessary
 
   /**
    * Plugins
@@ -183,7 +191,11 @@ module.exports = function makeWebpackConfig() {
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
       // Extract css files
       // Disabled when in test mode or not in build mode
-      new ExtractTextPlugin({filename: 'css/[name].css', disable: !isProd, allChunks: true})
+      new ExtractTextPlugin({
+        filename: 'css/[name].css',
+        disable: !isProd,
+        allChunks: true
+      })
     )
   }
 
