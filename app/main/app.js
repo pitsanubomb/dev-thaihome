@@ -7,3 +7,4 @@ import home from '../thaihome/home';
 
 angular.module('app', ['ui.router',home])
     .config(routing);
+    aaa
