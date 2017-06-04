@@ -1,8 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.css';
 
-import angular from 'angular';
-import uirouter from 'angular-ui-router';
+import 'angular';
+import 'angular-mocks/angular-mocks';
 
+const context = require.context('./app', true, /\.js$/);
 
-
-angular.module('app', [uirouter])
+context.keys().forEach(context);
