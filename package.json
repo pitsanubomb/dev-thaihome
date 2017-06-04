@@ -15,9 +15,8 @@
   "author": "mandarin && Torbe",
   "license": "MIT",
   "dependencies": {
-    "@uirouter/angularjs": "latest",
-    "@uirouter/visualizer": "latest",
     "angular": "^1.5.0",
+    "angular-ui-router": "^0.2.18",
     "bootstrap": "^3.3.7"
   },
   "devDependencies": {
