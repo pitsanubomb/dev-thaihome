@@ -21,8 +21,8 @@ var mongoose = require('mongoose');
 exports.getFrontpage = function(req, callback) {
 
 	console.log("###### getFrontpage ######")
-	console.log("getFrontpage received: " + JSON.stringify(req.body, null, 4));
-	var languageCode = 	req.body.lc ? req.body.lc : "gb"; 
+	console.log("getFrontpage received: " + JSON.stringify(req.query, null, 4));
+	var languageCode = 	req.query.lc ? req.query.lc : "gb"; 
 	console.log("languageCode: " + languageCode);
 	
 
@@ -152,7 +152,7 @@ exports.getFrontpage = function(req, callback) {
 			},
 			{                                                   
 				$match: {                                       
-					"translations.language": "gb" //languageCode
+					"translations.language": languageCode
 				}
 			},
 			{

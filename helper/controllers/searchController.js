@@ -29,7 +29,30 @@ exports.getSearch = function(req, callback) {
 	console.log("checkin: " +req.body.checkin);
 	console.log("checkout: " +req.body.checkout);
 
+	var firstDay = new Date();
+	firstDay.setDate(firstDay.getDate() + 30);
+	var lastDay = new Date();
+	lastDay.setDate(lastDay.getDate() + 37);
 
+	// if checkin is missing
+	if (req.body.checkin) {
+	    var checkin = new Date(req.body.checkin*1000);
+	} else {
+		var checkin = new Date(firstDay)
+	}
+	
+	// if checkout is missing
+	if (req.body.checkout) {
+	    var checkout = new Date(req.body.checkout*1000);
+		if (checkout.getTime() < checkin.getTime()) {
+			var checkout = new Date(lastDay)
+		}
+	} else {
+		var checkout = new Date(lastDay)
+	}
+
+	console.log("checkin: " +checkin);
+	console.log("checkout: " +checkout);
 
 
 

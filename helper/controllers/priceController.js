@@ -28,27 +28,24 @@ exports.getPrice = function(req, callback) {
 	} else {
 	    var propertyID = req.body.propertyID;
 	}
-
-	var firstDay = new Date();
-	firstDay.setDate(firstDay.getDate() + 30);
-	var lastDay = new Date();
-	lastDay.setDate(lastDay.getDate() + 37);
-
+	
 	// if checkin is missing
 	if (req.body.checkin) {
 	    var checkin = new Date(req.body.checkin*1000);
 	} else {
-		var checkin = new Date(firstDay)
+		var checkin = new Date();
 	}
 	
 	// if checkout is missing
 	if (req.body.checkout) {
 	    var checkout = new Date(req.body.checkout*1000);
 		if (checkout.getTime() < checkin.getTime()) {
-			var checkout = new Date(lastDay)
+			let newCheckout = new Date(checkin);
+			checkout = new Date(newCheckout.setDate(newCheckout.getDate() + 1));
 		}
 	} else {
-		var checkout = new Date(lastDay)
+		let newCheckout = new Date(checkin);
+		var checkout = new Date(newCheckout.setDate(newCheckout.getDate() + 1));
 	}
 
 	console.log("checkin: " +checkin);
