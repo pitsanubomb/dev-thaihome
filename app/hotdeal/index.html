@@ -1,16 +1,16 @@
 <div class="row">
   <div ng-repeat="property in HotDeals.properties" class="offer hvr-float md-whiteframe-z2 offerhome">
-    <a ui-sref="property({id: property.unique})">
-      <img class="offerimg" src="/assets/images/property/{{property.unique | lowercase}}/{{property.featured}}">
-      <span class="offerhotprice offerhotpricehome">{{HotDeals.prices[property.id].price.price || HotDeals.prices[property.id].price[0].priceDay | currency: currency:0}}</span>
+    <a ui-sref="property({id: property.property})">
+      <img class="offerimg" src="img/property/{{property.property | lowercase}}/{{property.featured}}">
+      <span class="offerhotprice offerhotpricehome">{{property.priceNight| currency: currency:0}}</span>
     </a>
 
     <div ui-sref="property({id: property.id})" class="offertitle offertitlehome">
       <p ng-if="HotDeals.hotdeals[property.id].hot" ng-bind-html="HotDeals.hotdeals[property.id].text"></p>
-      <p ng-if="!HotDeals.hotdeals[property.id].hot">{{HotDeals.translations[property.id].texts[0].frontpage1}}</p>
+      <p ng-if="!HotDeals.hotdeals[property.id].hot">{{property.frontpage1}}</p>
     </div>
     <!--offertitle-->
 
-    <p ui-sref="property({id: property.unique})" class="offerdescription">{{HotDeals.translations[property.id].texts[0].frontpage2}}</p>
+    <p ui-sref="property({id: property.unique})" class="offerdescription">{{property.frontpage2}}</p>
   </div>
 </div>

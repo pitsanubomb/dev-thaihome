@@ -5,6 +5,7 @@
         method: "GET",
         url: "http://localhost:3001/frontpage/getFrontpage"
       }).then(function successCallback(data) {
+        console.log(data.data.data.hotdeal);
         // Set  Image for slide 
         vm.images = data.data.data.featured;
         //Set new sope
@@ -23,7 +24,7 @@
 
         //Begin slider load image from public/img/rotator + imagename
         $('.home-bg img').attr('src', '/img/rotator/' + vm.images[0].image);
-        for (var i = 0; i < images.length; i++) {
+        for (var i = 0; i < vm.images.length; i++) {
           $('body').append('<img src="/img/rotator/' + vm.images[i].image + '" style="display:none"/>');
         }
         if ($rootScope.rotator != true) {
@@ -45,6 +46,16 @@
             }
           }, 10000);
         }
+
+        vm.properties = [{
+          "unique":"ATL-D406"
+        }];
+        $scope.HotDeals = {
+          "properties": data.data.data.hotdeal,
+          // "prices": data.data.prices,
+          // "hotdeals": data.data.hotdeals,
+          // "translations": data.data.translations
+        };
       });
     }
 
