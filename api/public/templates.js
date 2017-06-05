@@ -15474,7 +15474,7 @@ angular.module("templates/thaihome/property/index.html", []).run(["$templateCach
     "        <div>\n" +
     "          <md-button ng-click=\"openGallery()\" class=\"md-raised to-gallery md-warn\">{{T.transSeePhotos}}</md-button>\n" +
     "        </div>\n" +
-    "		<div class=\"clear\"></div>\n" +
+    "	    	<div class=\"clear\"></div>\n" +
     "      </div>\n" +
     "\n" +
     "    </div>\n" +

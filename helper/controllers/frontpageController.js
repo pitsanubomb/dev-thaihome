@@ -160,10 +160,10 @@ exports.getFrontpage = function(req, callback) {
 			},
 			{                                               
 				$project:{
-					_id : 0,                                 
-					"property" : 1,                            
-					"discount" : 1,                            
+					"_id": 0,
+					"property" : 1,                                 
 					"hot" : 1,                            
+					"discount" : 1,                            
 					"text" : 1,                            
 					"start" : 1,                            
 					"end" : 1,                            

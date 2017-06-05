@@ -145,8 +145,8 @@ app.use('/currency', currency);
 app.use('/booking', booking);
 app.use('/omise', omise);
 app.use('/news', news);
-app.use('/frontpageRoute', frontpageRoute);
-app.use('/searchRoute', searchRoute);
+app.use('/frontpage', frontpageRoute);
+app.use('/search', searchRoute);
 
 // Report Routes
 app.use('/report', agentSaleRoute);

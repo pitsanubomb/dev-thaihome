@@ -6,6 +6,7 @@
 // GET INPUT:
 // - checkin date
 // - checkout date
+// - lc languageCode
 // OUTPUT:
 // - Json structure with the following data:
 
@@ -28,6 +29,9 @@ exports.getSearch = function(req, callback) {
 	console.log("getSearch received: " + JSON.stringify(req.body, null, 4));
 	console.log("checkin: " +req.body.checkin);
 	console.log("checkout: " +req.body.checkout);
+	console.log("languagecode: " +req.body.lc);
+
+	var languageCode = 	req.body.lc ? req.body.lc : "gb"; 
 
 	var firstDay = new Date();
 	firstDay.setDate(firstDay.getDate() + 30);
@@ -36,23 +40,48 @@ exports.getSearch = function(req, callback) {
 
 	// if checkin is missing
 	if (req.body.checkin) {
-	    var checkin = new Date(req.body.checkin*1000);
+	    var checkinDate = new Date(req.body.checkin*1000);
 	} else {
-		var checkin = new Date(firstDay)
+		var checkinDate = new Date(firstDay)
 	}
 	
 	// if checkout is missing
 	if (req.body.checkout) {
-	    var checkout = new Date(req.body.checkout*1000);
-		if (checkout.getTime() < checkin.getTime()) {
-			var checkout = new Date(lastDay)
+	    var checkoutDate = new Date(req.body.checkout*1000);
+		if (checkoutDate.getTime() < checkinDate.getTime()) {
+			var checkoutDate = new Date(lastDay)
 		}
 	} else {
-		var checkout = new Date(lastDay)
+		var checkoutDate = new Date(lastDay)
 	}
+
+	var checkin  = Math.round(new Date(checkinDate.getTime())/1000)
+	var checkout = Math.round(new Date(checkoutDate.getTime())/1000)
 
 	console.log("checkin: " +checkin);
 	console.log("checkout: " +checkout);
+
+    // Build match to find available units 
+	var availableMatch = {
+		"bookings": {
+			$not: {
+				$elemMatch: {
+					checkin: { $lte: checkout },
+					checkout: { $gte: checkin }
+				}
+			}
+		}
+	};
+
+    // Build match to find occupied units 
+	var occupiedMatch = {
+		"bookings": {
+			$elemMatch: {
+				checkin: { $lte: checkout },
+				checkout: { $gte: checkin }
+			}
+		}
+	};
 
 
     // 
@@ -81,7 +110,7 @@ exports.getSearch = function(req, callback) {
     // 
 	var propertyModel = require('../models/propertyModel');
     var propertyTable = mongoose.model('propertyModel');
-	var findAvailable = function() {
+	var findAvailable = function(myMatch) {
 		return new Promise((resolve, reject) => {
 		console.log("=====START findAvailable=====")
 		propertyTable.aggregate([
@@ -94,64 +123,70 @@ exports.getSearch = function(req, callback) {
 			$lookup: {
 				from: "booking",
 				localField: "_id",
-				foreignField: "apartmentID",
+				foreignField: "property",
 				as: "bookings"
 			}
 		},
 		{
-			$match: {
-				"bookings": {
-					$not: {
-						$elemMatch: {
-							checkin: {
-								$lte: 1520000000
-							},
-							checkout: {
-								$gte: 1510000000
-							}
-						}
-					}
-				}
+			$match: myMatch
+		},
+		{
+			$lookup: {
+				from: "hotdeal",
+				localField: "_id",
+				foreignField: "property",
+				as: "hotdeals"
 			}
 		},
+		{ 
+			$unwind: { 
+				path: "$hotdeals", preserveNullAndEmptyArrays: true
+			}
+		}, 
 		{
 			$lookup: {
 				from: "translation",
 				localField: "_id",
-				foreignField: "apartmentID",
-				as: "bookings"
+				foreignField: "property",
+				as: "translations"
 			}
 		},
-	    {
-			$project: {
-				_id: 0,
-				name: 1
+		{
+			$unwind: { 
+				path: '$translations', preserveNullAndEmptyArrays: true
 			}
 		},
+		{                                                   
+			$match: {                                       
+				"translations.language": languageCode
+			}
+		},
+		{
+			$unwind: "$translations.texts"
+		},
+		{                                               
+			$project:{
+				"_id" : 1,                                 
+				"name" : 1,
+				"location" : 1,
+				"languageCode" : 1,
+				"locationName" : 1,
+				"projectName" : 1,
+				"featured" : 1,
+				"images" : 1,
+				"guests" : 1,
+				"gmapsdata" : 1,
 
+				"hot" : "$hotdeals.hot",                            
+				"discount" : "$hotdeals.discount",                            
+				"text" : "$hotdeals.text",                                                        
+				"start" : "$hotdeals.start",                                                        
+				"end" : "$hotdeals.end",                                                        
 
-
-
-
-			{                                               
-				$project:{                                  
-					"_id" : 1,
-					"name" : 1,
-					"location" : 1,
-					"languageCode" : 1,
-					"locationName" : 1,
-					"projectName" : 1,
-					"images" : 1,
-					"guests" : 1,
-					"gmapsdata" : 1,
-
-					"frontpage1" : 1,                            
-					"frontpage2" : 1,                            
-
-					"hotDealPct" : 1
-
-				}                                           
-			}                                               
+				"frontpage1": "$translations.texts.frontpage1",
+				"frontpage2": "$translations.texts.frontpage2"
+			} 
+		}                                               
 		],function(err, data) {
 			if (!err) {
 				// console.log("findAvailable Result: " + JSON.stringify(data, null, 4));
@@ -165,154 +200,68 @@ exports.getSearch = function(req, callback) {
 
 
     // 
-    // Find all OCCUPIED properties
-    // 
-
-
-
-
-
-
-    // 
-    // Find all News
-    // 
-	var newsModel = require('../models/newsModel');
-    var newsTable = mongoose.model('newsModel');
-	var findNews = function() {
-		return new Promise((resolve, reject) => {
-		console.log("=====START findNews=====")
-		var todayDate = Math.round(new Date()/1000)
-		newsTable.aggregate([
-			{                                                   
-				$match: {                                       
-					start: {$lte: todayDate}, 
-					end: { $gte: todayDate}
-				}
-			},                                                  
-			{
-				$sort: {
-					start:-1
-				}
-			},	
-			{                                               
-				$project:{                                  
-					"text" : 1                            
-				}                                           
-			}                                               
-		],function(err, data) {
-			if (!err) {
-				// console.log("findNews Result: " + JSON.stringify(data, null, 4));
-				console.log("=====RESOLVE findNews=====")
-				resolve(data);
-			} else {
-				reject(new Error('ERR findNews : ' + err));
-			};
-		});
-    })};
-
-
-    // 
-    // Find all HotDeals
-    // 
-	var hotdealModel = require('../models/hotdealModel');
-    var hotdealTable = mongoose.model('hotdealModel');
-	var findHotdeal = function() {
-		return new Promise((resolve, reject) => {
-		console.log("=====START findHotdeal=====")
-		var todayDate = Math.round(new Date()/1000);
-		hotdealTable.aggregate([
-			{                                                   
-				$match: {                                       
-					start: {$lte: todayDate}, 
-					end: { $gte: todayDate},
-					active: true
-				}
-			},                                                  
-			{
-				$sort: {
-					hot: 1
-				}
-			},	
-			{                                               
-				$project:{                                  
-					"property" : 1,                            
-					"discount" : 1,                            
-					"hot" : 1                            
-				}                                           
-			}                                               
-		],function(err, data) {
-			if (!err) {
-				// console.log("findHotdeal Result: " + JSON.stringify(data, null, 4));
-				console.log("=====RESOLVE findHotdeal=====")
-				hotdealArray = data;
-				// console.log("findHotdeal Result: " + JSON.stringify(hotdealArray, null, 4));
-				resolve(data);
-			} else {
-				reject(new Error('ERR findHotdeal : ' + err));
-			};
-		});
-    })};
-
-
-    // 
-    // Find all Prices for the AVAILABLE properties 
+    // Find all Prices for the properties 
     //
-	var collectAvailablePrices = function([featuredArr, locationArr, newsArr, hotdealArr]) {
-		return Promise.all(hotdealArr.map(findPrice)).then(hotdealArr => {
-			return ( { "featured":featuredArr, "location":locationArr, "news":newsArr, "hotdeal": hotdealArr } );	
+	var collectAvailablePrices = function([locationArr, availableArr, occupiedArr]) {
+		return Promise.all(availableArr.map(findPrice)).then(availableArr => {
+			return ( [locationArr, availableArr, occupiedArr] );	
 		});
 	}; 
-
-    // 
-    // Find all Prices for the OCCUPIED properties 
-    //
-	var collectOccupiedPrices = function([featuredArr, locationArr, newsArr, hotdealArr]) {
-		return Promise.all(hotdealArr.map(findPrice)).then(hotdealArr => {
-			return ( { "featured":featuredArr, "location":locationArr, "news":newsArr, "hotdeal": hotdealArr } );	
+	var collectOccupiedPrices = function([locationArr, availableArr, occupiedArr]) {
+		return Promise.all(occupiedArr.map(findPrice)).then(occupiedArr => {
+			return ( { "location":locationArr, "available": availableArr , "occupied": occupiedArr } );	
 		});
 	}; 
 
 
     // 
-    // Find individual PriceNight and add it to hotdeal.priceNight
+    // Find individual PriceNight and add it to property.priceNight
     // 
 	var priceController = require('./priceController');
 	var priceNight = 0;
-	var findPrice = function(hotdeal) {
+	var findPrice = function(property) {
 		return new Promise((resolve, reject) => {
-	 	console.log ("=====START findPrice: " +hotdeal.property);
+	 	console.log ("=====START findPrice: " +property._id);
 		priceController.getPrice (
-			{ "body": { "propertyID": hotdeal.property } }, 
+			{ "body": { "propertyID": property._id, "checkin": checkin, "checkout": checkout } }, 
 			function(result) {
 				if (result.error == true) {
 					throw new Error(result.err);
 				};
-				hotdeal.priceNight = result.res.priceNight;
-				resolve(hotdeal); 
+				// console.log("PRICE: " + JSON.stringify(result, null, 4));
+				property.priceNight = result.res.priceNight;
+				property.priceTotal = result.res.priceTotal;
+				property.nights = result.res.nights;
+				resolve(property); 
 			}
 		);
-	 	console.log ("=====RESOLVE findPrice: " +hotdeal.property);
+	 	console.log ("=====RESOLVE findPrice: " +property._id);
 	})}
 
 
     // 
     // Run the promises
     // 
-	Promise.all([findFeatured(), findLocation(), findNews(), findHotdeal()])
+	Promise.all([findLocation(), findAvailable(availableMatch), findAvailable(occupiedMatch)])
 	    .then(res => {
 
-			console.log("### === TIME TO FIND ALL PRICES === ###")
-			collectHotDealPrices(res).then(data => {
+			console.log("### === FIND AVAILABLE PRICES === ###")
+			collectAvailablePrices(res).then(res => {
 
-				console.log("### === SEND ALL RESULTS === ###")
-				callback( { error:false, data } );
+				console.log("### === FIND OCCUPIED PRICES === ###")
+				collectOccupiedPrices(res).then(res => {
+
+					console.log("### === SEND ALL RESULTS === ###")
+					callback( { error:false, res } );
+
+				});
 
 			});
 
 		})
 		.catch(err => {
 			console.error(err);
-			console.log(" frontpageController: " + err);
+			console.log(" searchController: " + err);
 			callback( { error:true, err } );
 		})
 }

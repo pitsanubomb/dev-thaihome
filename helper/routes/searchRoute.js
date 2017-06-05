@@ -11,8 +11,8 @@
 var express = require('express');
 var router = express.Router();
 var searchController = require('../controllers/searchController');
-router.get('/getSearch', function(req, res) {
-	searchController.getFrontpage(req, function(result) {
+router.post('/getSearch', function(req, res) {
+	searchController.getSearch(req, function(result) {
 		res.json(result);
 	});
 });
