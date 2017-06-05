@@ -11,7 +11,8 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
             .state('home', {
                 url: '/',
                 template: require('../thaihome/home/index.html'),
-                controller: HomeController
+                controller: HomeController,
+                controllerAs: 'vm'
             })
 
         $locationProvider.html5Mode(true);
