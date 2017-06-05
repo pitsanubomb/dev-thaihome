@@ -5,7 +5,6 @@
         method: "GET",
         url: "http://localhost:3001/frontpage/getFrontpage"
       }).then(function successCallback(data) {
-        console.log(data.data.data.hotdeal);
         // Set  Image for slide 
         vm.images = data.data.data.featured;
         //Set new sope
