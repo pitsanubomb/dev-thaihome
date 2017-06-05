@@ -1,9 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.css';
-
 import angular from 'angular';
+import 'bootstrap/dist/css/bootstrap.css';
+import '../style/style.css';
+import appModule from './app.config';
 
-import routing from './app.config';
-import home from '../thaihome/home';
 
-angular.module('app', ['ui.router',home])
-    .config(routing);
+angular.bootstrap(document, [appModule.name]);

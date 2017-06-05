@@ -1,0 +1,64 @@
+/* -------------
+   Color Styles
+   ------------- */
+
+.blue {
+    background-color: #337AB7;
+}
+.green {
+    background-color: #008000;
+}
+.litgreen {
+    background-color: #DDFFDD;
+}
+.red {
+    background-color: #AA4040;
+}
+.litred {
+    background-color: #FFE5E5;
+}
+.litred2 {
+    background-color: #FFF5F5;
+}
+.cyan {
+    background-color: #40977E;
+}
+.orange {
+    background-color: #E36C09;
+}
+.darkred {
+    background-color: #804040;
+}
+.grey {
+    background-color: gray;
+}
+.litgrey {
+    background-color: #E0E0E0;
+}
+.blueTxt {
+    color: #337AB7;
+}
+.greenTxt {
+    color: #008000;
+}
+.redTxt {
+    color: #AA4040;
+}
+.cyanTxt {
+    color: #40977E;
+}
+.orangeTxt {
+    color: #E36C09;
+}
+.darkredTxt {
+    color: #804040;
+}
+.greyTxt {
+    color: gray;
+}
+.greydarkTxt {
+    color: #666666;
+}
+.logoTxt {
+    color: #4CACCD;
+}
