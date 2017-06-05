@@ -14,7 +14,13 @@
         $scope.deliberatelyTrustDangerousSnippet = function (text) {
           return $sce.trustAsHtml(text);
         };
-        
+
+        //Date time bar
+        $rootScope.$on("datesChanged", function (event, dates) {
+          $scope.checkin = dates.checkin;
+          $scope.checkout = dates.checkout;
+        })
+
         //Begin slider load image from public/img/rotator + imagename
         $('.home-bg img').attr('src', '/img/rotator/' + vm.images[0].image);
         for (var i = 0; i < images.length; i++) {
