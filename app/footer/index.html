@@ -1,0 +1,88 @@
+<div class="footer">
+  <div class="row">
+    <div class="col-md-5 cnt col-sm-4">
+      <div class="contact md-whiteframe-z4" style="height: 211px;">
+        <div class="in-contact" style="text-align:center;">
+          <h3>ThaiHome.co.uk</h3>
+          <p class="" style="margin-bottom:5px;">{{T.transSlogan}}</p>
+          <p class="" style="margin-bottom:5px;">{{T.transMobile}}:
+            <span>{{T.transNotePhone}}</span>
+          </p>
+          <div class="clear"></div>
+          <p class="" style="margin-bottom:5px;">{{T.transEmail}}:
+            <span  ng-bind-html="T.transNoteMail"></span>
+          </p>
+          <div class="clear"></div>
+          <div class="foot-contact">
+            <a ui-sref="contact" class="contact-link yellow-btn">
+              <md-button class="md-raised md-button">{{T.transContactUs}}</md-button>
+            </a>
+            <a ui-sref="about" class="contact-link yellow-btn">
+              <md-button class="md-raised md-button">{{T.transAboutUs}}</md-button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 mid col-sm-4">
+      <div class="language md-whiteframe-z4">
+        <form>
+          <div class="footer-cl">
+            <div class="lang-item-container" ng-controller="Locale">
+              <div class="lang-item">
+                <p>{{T.transCurrency}}:</p>
+                <md-select ng-change="updateCurrency(currency)" class="menu-lang currency-selector sx" placeholder="{{currency}} {{currencyname}}" ng-model="currency">
+                  <md-option ng-repeat="currency in currencies" value="{{currency.currency}}"><img class="lang-flag" ng-src="/assets/images/currencies/{{currency.currency | lowercase}}.png" /> {{currency.symbol}} {{currency.name}}</md-option>
+                </md-select>
+              </div>
+              <div class="lang-item2">
+                <p>{{T.transLanguage}}:</p>
+                <md-select ng-change="updateLanguage(language)" class="menu-lang language-selector foot-lang" ng-model="language">
+                  <md-option ng-repeat="language in languages" value="{{language.shortname}}"><img ng-src="/assets/images/flags/{{language.shortname}}.png" /> <span>{{language.name}}</span></md-option>
+                </md-select>
+              </div>
+            </div>
+            <style>
+              .language-selector .md-select-value:nth-child(1) {
+                background: url(/assets/images/flags/{{language}}.png) 0px 12px no-repeat;
+                margin-left: 3px;
+                padding-left: 4px;
+                background-position: 0 8px;
+              }
+
+              .language-selector-top .md-select-value:nth-child(1) {
+                color: transparent;
+                background: url(/assets/images/flags/{{language}}.png) 5px 0px no-repeat;
+              }
+
+              .language-selector-second .md-select-value:nth-child(1) {
+                color: transparent;
+                background: url(/assets/images/flags/{{language}}.png) 0px 14px no-repeat;
+              }
+            </style>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-5 cnt2 col-sm-4">
+      <div class="sign-up md-whiteframe-z4">
+        <form ng-controller="Newsletter" name="discountform" ng-submit="add()">
+          <h3>{{T.transGetDiscounts}}</h3>
+          <p>{{T.transSignUp}}</p>
+          <div class="search-w">
+            <input type="email" required class="form-control" placeholder="{{T.newsletter_placeholder || TD.newsletter_placeholder }}" ng-model="email">
+          </div>
+          <span class="yellow-btn">
+            <md-button type="submit" class="md-raised pull-right disc-btn">{{T.transOK}}</md-button>
+          </span>
+        </form>
+      </div>
+    </div>
+
+
+
+  </div>
+  <!--row-->
+</div>
+<!--footer-->
