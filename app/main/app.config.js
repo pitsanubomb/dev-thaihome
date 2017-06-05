@@ -22,6 +22,11 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
             restrict: 'AE',
             template: require('../head/index.html')
         };
+    })
+    .directive('hotDeals', function () {
+        return {
+            template: require('../hotdeal/index.html')
+        };
     });
 
 export default app;
