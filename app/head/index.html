@@ -1,0 +1,20 @@
+<div class="header">
+  <div id="logo" class="pull-left">
+    <a ui-sref="{{agent ? 'agent.home': 'home'}}">
+      <img src="img/logo_small.png" alt="Thai Home" class="img-responsive" />
+    </a>
+  </div>
+  <!--logo-->
+
+  <div ng-if="agent">
+    <agent-navigation></agent-navigation>
+  </div>
+  <div ng-if="!agent">
+    <navigation></navigation>
+  </div>
+  <div class="header-blue-text">
+    <h2>{{T.transHeadLine}}</h2>
+  </div>
+
+</div>
+<!--header-->

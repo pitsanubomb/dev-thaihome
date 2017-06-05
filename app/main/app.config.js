@@ -5,16 +5,22 @@ import HomeController from '../thaihome/home/';
 const app = angular.module('app', [uiRouter]);
 
 app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
-    $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/');
 
-    $stateProvider
-        .state('home', {
-            url: '/',
-            template: require('../thaihome/home/index.html'),
-            controller: HomeController
-        })  
+        $stateProvider
+            .state('home', {
+                url: '/',
+                template: require('../thaihome/home/index.html'),
+                controller: HomeController
+            })
 
-    $locationProvider.html5Mode(true);
-});
+        $locationProvider.html5Mode(true);
+    })
+    .directive('header', function () {
+        return {
+            restrict: 'AE',
+            template: require('../head/index.html')
+        };
+    });
 
 export default app;

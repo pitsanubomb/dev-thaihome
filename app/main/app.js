@@ -4,4 +4,4 @@ import '../style/style.css';
 import appModule from './app.config';
 
 
-angular.module(document, [appModule.name]);
+angular.module(document, [appModule.name])
