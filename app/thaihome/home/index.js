@@ -9,6 +9,7 @@
         vm.images = data.data.data.featured;
         //Set new sope
         $scope.news = data.data.data.news;
+        $scope.locations = data.data.data.location;
 
         //Make text funtion
         $scope.deliberatelyTrustDangerousSnippet = function (text) {

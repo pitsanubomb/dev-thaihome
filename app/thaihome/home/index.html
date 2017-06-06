@@ -17,7 +17,7 @@
         <select class="search-option location_select  form-control" ng-model="location">
           <option selected value="" disabled>{{T.transHeadWhere}}</option>
           <option value="0">{{T.transAllLocations}}</option>
-          <option ng-repeat="location in locations" value="{{location.id}}">{{location.name}}</option>
+          <option ng-repeat="location in locations" value="{{location._id}}">{{location.name}}</option>
         </select>
         <span class="date-fields">
         <booking-calendar></booking-calendar>
