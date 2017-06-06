@@ -23,10 +23,5 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
             template: require('../directive/head.html')
         };
     })
-    .directive('hotDeals', function () {
-        return {
-            template: require('../directive/hotdeal.html')
-        };
-    });
 
 export default app;
