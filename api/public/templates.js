@@ -15481,6 +15481,7 @@ angular.module("templates/thaihome/property/index.html", []).run(["$templateCach
     "\n" +
     "  </div>\n" +
     "\n" +
+    "\n" +
     "  <div class=\"main-content container\">\n" +
     "\n" +
     "    <div class=\"centered-content\">\n" +

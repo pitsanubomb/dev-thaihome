@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var propertySchema = new Schema({
     _id:                String,     // Unique property ID
     location:           String,     // Property location ID --> Location
-    minimDays:          Number,     // Minimum number of days to rent
+    mindays:            Number,     // Minimum number of days to rent
     name:               String,     // Building Sort Name
     locationName:       String,     // Location Name Text
     projectName:        String,     // Project Long Name

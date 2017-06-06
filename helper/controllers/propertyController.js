@@ -1,29 +1,26 @@
-// Search Result Page Controller
-// This Controller will give you data for the Thaihome Search Result Page
-//		all locations from "location" table (jomtien, pattaya, naklua...)
-//		all properties that are available in the choosen period with prices and hotdeals
-//		all properties that are occupied in the choosen period with prices and hotdeals
+// Property Page Controller
+// This Controller will give you data for the Thaihome Property Page
 // GET INPUT:
+// - PropertyID or array of properties
 // - checkin date
 // - checkout date
 // - lc languageCode
 // OUTPUT:
 // - Json structure with the following data:
-// - location[] with all locations
-// - available[] with all available properties
-// - occupied[] with all occupied properties
+// - property[] with all property/translation/hotdeal data 
 //
 
 var mongoose = require('mongoose');
 
-exports.getSearch = function(req, callback) {
+exports.getProperty = function(req, callback) {
 
-	console.log("###### getSearch ######")
+	console.log("###### getProperty ######")
 
     // 
     // Validate the data we get from router
     // 
-	console.log("getSearch received: " + JSON.stringify(req.body, null, 4));
+	console.log("getProperty received: " + JSON.stringify(req.body, null, 4));
+	console.log("property: " +req.body.property);
 	console.log("checkin: " +req.body.checkin);
 	console.log("checkout: " +req.body.checkout);
 	console.log("languagecode: " +req.body.lc);
@@ -58,48 +55,38 @@ exports.getSearch = function(req, callback) {
 	console.log("checkin: " +checkin);
 	console.log("checkout: " +checkout);
 
-    // Build match to find available units 
-	var availableMatch = {
-		"bookings": {
-			$not: {
-				$elemMatch: {
-					checkin: { $lte: checkout },
-					checkout: { $gte: checkin }
-				}
-			}
-		}
-	};
-
-    // Build match to find occupied units 
-	var occupiedMatch = {
-		"bookings": {
-			$elemMatch: {
-				checkin: { $lte: checkout },
-				checkout: { $gte: checkin }
-			}
-		}
-	};
-
-
-    // 
-    // Find all locations in Pattaya 
-    // 
-	var locationModel = require('../models/locationModel');
-    var locationTable = mongoose.model('locationModel');
-	var findLocation = function() {
-		return new Promise((resolve, reject) => {
-		console.log("=====START findLocation=====")
-		locationTable.find({} 
-        ,function(err, data) {
-            if (!err) {
-				// console.log("findLocation Result: " + JSON.stringify(data, null, 4));
-				console.log("=====RESOLVE findLocation=====");
-                resolve(data);
-            } else {
-                reject(new Error('findLocation ERROR : ' + err));
+	//
+    // Build the match dynamically 
+	//
+	// if property is missing
+	if (!req.body.propertyID) {
+        console.log('propertyID missing in call of getPrice');
+        throw new Error('ERR: propertyID missing in call of getPrice');
+	} else {
+		var properties = req.body.propertyID.map(function (obj) {
+            return obj._id;
+        });
+		var unixToday = Math.round(new Date().getTime()/1000);
+        var matchStr = { 
+            $match: {
+                $and: 
+                [{ 
+                    _id: { $in: properties },
+                    active : true
+                }]
             }
-		});
-	})};
+        }
+		var matchBooking = { 
+            $match: {
+                $and: 
+                [{ 
+                    property: { $in: properties },
+					checkout: {$gt: unixToday}
+                }]
+            }
+        }
+    }
+
 
 
     // 
@@ -107,9 +94,9 @@ exports.getSearch = function(req, callback) {
     // 
 	var propertyModel = require('../models/propertyModel');
     var propertyTable = mongoose.model('propertyModel');
-	var findAvailable = function(myMatch) {
+	var findProperty = function(myMatch) {
 		return new Promise((resolve, reject) => {
-		console.log("=====START findAvailable=====")
+		console.log("=====START findProperty=====")
 		propertyTable.aggregate([
 		{                                                   
 			$match: {                                       
@@ -163,50 +150,90 @@ exports.getSearch = function(req, callback) {
 		},
 		{                                               
 			$project:{
-				"_id" : 1,                                 
+				"_id" : 1,
 				"name" : 1,
 				"location" : 1,
-				"languageCode" : 1,
 				"locationName" : 1,
 				"projectName" : 1,
+
+				"propertyType" : 1,
+				"unitType" : 1,
+				"unitNumber" : 1,
+				"bedrooms" : 1,
+				"bathrooms" : 1,
+				"livingrooms" : 1,
+
+				"address1" : 1,
+				"address2" : 1,
+				"address3" : 1,
+				"thaiAddress" : 1,
+				"livingrooms" : 1,
+				"gmapslink" : 1,
+				"gmapsdata" : 1,
+
+				"minDays" : 1,
+				"guestsMin" : 1,
+				"guestsMax" : 1,
+				"sqm" : 1,
+				"ownership" : 1,
+				"purchaseprice" : 1,
+				"saleprice" : 1,
+				"salecommission" : 1,
+
+				"electricUnit" : 1,
+				"waterUnit" : 1,
+				"cleanprice" : 1,
+				"cleanfinalprice" : 1,
+
+				"headline": "$translations.texts.headline",
+				"frontpage1": "$translations.texts.frontpage1",
+				"frontpage2": "$translations.texts.frontpage2",
+				"longtext": "$translations.texts.longtext",
+				"house_rules": "$translations.texts.house_rules",
+				"beds": "$translations.texts.beds",
+				"floor": "$translations.texts.floor",
+				"view": "$translations.texts.view",
+				"balcony": "$translations.texts.balcony",
+				"furnished": "$translations.texts.furnished",
+				"kitchen": "$translations.texts.kitchen",
+				"beach": "$translations.texts.beach",
+				"shopping": "$translations.texts.shopping",
+				"nightlife": "$translations.texts.nightlife",
+				"maintanance": "$translations.texts.maintanance",
+
 				"featured" : 1,
 				"images" : 1,
-				"guests" : 1,
-				"gmapsdata" : 1,
+				"amenities" : 1,
 
 				"hot" : "$hotdeals.hot",                            
 				"discount" : "$hotdeals.discount",                            
 				"text" : "$hotdeals.text",                                                        
 				"start" : "$hotdeals.start",                                                        
-				"end" : "$hotdeals.end",                                                        
+				"end" : "$hotdeals.end"                                                        
 
-				"frontpage1": "$translations.texts.frontpage1",
-				"frontpage2": "$translations.texts.frontpage2"
 			} 
 		}                                               
 		],function(err, data) {
 			if (!err) {
-				// console.log("findAvailable Result: " + JSON.stringify(data, null, 4));
-				console.log("=====RESOLVE findAvailable=====")
+				// console.log("findProperty Result: " + JSON.stringify(data, null, 4));
+				console.log("=====RESOLVE findProperty=====")
 				resolve(data);
 			} else {
-				reject(new Error('ERR findAvailable : ' + err));
+				reject(new Error('ERR findProperty : ' + err));
 			};
 		});
     })};
 
 
+
+
+
     // 
     // Find all Prices for the properties 
     //
-	var collectAvailablePrices = function([locationArr, availableArr, occupiedArr]) {
-		return Promise.all(availableArr.map(findPrice)).then(availableArr => {
-			return ( [locationArr, availableArr, occupiedArr] );	
-		});
-	}; 
-	var collectOccupiedPrices = function([locationArr, availableArr, occupiedArr]) {
-		return Promise.all(occupiedArr.map(findPrice)).then(occupiedArr => {
-			return ( { "location":locationArr, "available": availableArr , "occupied": occupiedArr } );	
+	var collectPrices = function([propertyArr]) {
+		return Promise.all(propertyArr.map(findPrice)).then(propertyArr => {
+			return ( { propertyArr } );	
 		});
 	}; 
 
@@ -239,26 +266,21 @@ exports.getSearch = function(req, callback) {
     // 
     // Run the promises
     // 
-	Promise.all([findLocation(), findAvailable(availableMatch), findAvailable(occupiedMatch)])
+	Promise.all([findProperty()])
 	    .then(res => {
 
 			console.log("### === FIND AVAILABLE PRICES === ###")
 			collectAvailablePrices(res).then(res => {
 
-				console.log("### === FIND OCCUPIED PRICES === ###")
-				collectOccupiedPrices(res).then(res => {
-
-					console.log("### === SEND ALL RESULTS === ###")
-					callback( { error:false, res } );
-
-				});
+				console.log("### === SEND ALL RESULTS === ###")
+				callback( { error:false, res } );
 
 			});
 
 		})
 		.catch(err => {
 			console.error(err);
-			console.log(" searchController: " + err);
+			console.log(" propertyController: " + err);
 			callback( { error:true, err } );
 		})
 }

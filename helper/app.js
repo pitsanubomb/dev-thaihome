@@ -34,8 +34,9 @@ var omise = require('./routes/omise');
 
 
 // ThaiHome Website Routes
-var frontpageRoute = require('./routes/frontpageRoute'); 
-var searchRoute = require('./routes/searchRoute'); 
+var frontpageRoute = require('./routes/frontpageRoute');  // front page
+var searchRoute = require('./routes/searchRoute');        // search result page
+var propertyRoute = require('./routes/propertyRoute');    // property page
 
 // Manager Routes
 
@@ -147,6 +148,7 @@ app.use('/omise', omise);
 app.use('/news', news);
 app.use('/frontpage', frontpageRoute);
 app.use('/search', searchRoute);
+app.use('/property', propertyRoute);
 
 // Report Routes
 app.use('/report', agentSaleRoute);
