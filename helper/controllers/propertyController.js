@@ -1,7 +1,7 @@
 // Property Page Controller
 // This Controller will give you data for the Thaihome Property Page
 // GET INPUT:
-// - PropertyID or array of properties
+// - PropertyID 
 // - checkin date
 // - checkout date
 // - lc languageCode
@@ -20,7 +20,7 @@ exports.getProperty = function(req, callback) {
     // Validate the data we get from router
     // 
 	console.log("getProperty received: " + JSON.stringify(req.body, null, 4));
-	console.log("property: " +req.body.property);
+	console.log("property: " +req.body.propertyID);
 	console.log("checkin: " +req.body.checkin);
 	console.log("checkout: " +req.body.checkout);
 	console.log("languagecode: " +req.body.lc);
@@ -52,41 +52,16 @@ exports.getProperty = function(req, callback) {
 	var checkin  = Math.round(new Date(checkinDate.getTime())/1000)
 	var checkout = Math.round(new Date(checkoutDate.getTime())/1000)
 
-	console.log("checkin: " +checkin);
-	console.log("checkout: " +checkout);
+	// console.log("checkin: " +checkin);
+	// console.log("checkout: " +checkout);
 
-	//
-    // Build the match dynamically 
-	//
 	// if property is missing
 	if (!req.body.propertyID) {
         console.log('propertyID missing in call of getPrice');
         throw new Error('ERR: propertyID missing in call of getPrice');
 	} else {
-		var properties = req.body.propertyID.map(function (obj) {
-            return obj._id;
-        });
-		var unixToday = Math.round(new Date().getTime()/1000);
-        var matchStr = { 
-            $match: {
-                $and: 
-                [{ 
-                    _id: { $in: properties },
-                    active : true
-                }]
-            }
-        }
-		var matchBooking = { 
-            $match: {
-                $and: 
-                [{ 
-                    property: { $in: properties },
-					checkout: {$gt: unixToday}
-                }]
-            }
-        }
-    }
-
+		var propertyID = req.body.propertyID
+	}
 
 
     // 
@@ -94,39 +69,16 @@ exports.getProperty = function(req, callback) {
     // 
 	var propertyModel = require('../models/propertyModel');
     var propertyTable = mongoose.model('propertyModel');
-	var findProperty = function(myMatch) {
+	var findProperty = function() {
 		return new Promise((resolve, reject) => {
 		console.log("=====START findProperty=====")
 		propertyTable.aggregate([
-		{                                                   
-			$match: {                                       
+		{
+			$match: {
+				_id: propertyID,
 				active : true
 			}
-		},                                                  
-		{
-			$lookup: {
-				from: "booking",
-				localField: "_id",
-				foreignField: "property",
-				as: "bookings"
-			}
 		},
-		{
-			$match: myMatch
-		},
-		{
-			$lookup: {
-				from: "hotdeal",
-				localField: "_id",
-				foreignField: "property",
-				as: "hotdeals"
-			}
-		},
-		{ 
-			$unwind: { 
-				path: "$hotdeals", preserveNullAndEmptyArrays: true
-			}
-		}, 
 		{
 			$lookup: {
 				from: "translation",
@@ -203,13 +155,7 @@ exports.getProperty = function(req, callback) {
 
 				"featured" : 1,
 				"images" : 1,
-				"amenities" : 1,
-
-				"hot" : "$hotdeals.hot",                            
-				"discount" : "$hotdeals.discount",                            
-				"text" : "$hotdeals.text",                                                        
-				"start" : "$hotdeals.start",                                                        
-				"end" : "$hotdeals.end"                                                        
+				"amenities" : 1
 
 			} 
 		}                                               
@@ -219,21 +165,111 @@ exports.getProperty = function(req, callback) {
 				console.log("=====RESOLVE findProperty=====")
 				resolve(data);
 			} else {
+				console.error(err);
 				reject(new Error('ERR findProperty : ' + err));
 			};
 		});
     })};
 
 
+    // 
+    // Find ratings for this property 
+    // 
+	var ratingModel = require('../models/ratingModel');
+    var ratingTable = mongoose.model('ratingModel');
+	var findRating = function() {
+		return new Promise((resolve, reject) => {
+		console.log("=====START findRating=====")
+		ratingTable.aggregate([
+		{                                                   
+			$match: {                                       
+				property : propertyID
+			}
+		},
+		{ 	$sort: { average: 1 } },
+		{                                               
+			$project:{
+				"_id" : 0,
+				"rating" : 1,
+				"average" : 1			} 
+		}                                               
+		],function(err, data) {
+            if (!err) {
+				// console.log("findRating Result: " + JSON.stringify(data, null, 4));
+				console.log("=====RESOLVE findRating=====");
+                resolve(data);
+            } else {
+				console.error(err);
+                reject(new Error('findRating ERROR : ' + err));
+            }
+		});
+	})};
 
+
+    // 
+    // Collect hotdeals for the property
+    //
+	var collectHotdeals = function([ratingArr, propertyArr]) {
+		return Promise.all(propertyArr.map(findHotdeal)).then(propertyArr => {
+			return ( [ratingArr, propertyArr] );	
+		});
+	}; 
+
+
+    // 
+    // Find hotdeals for this property 
+    // 
+	var hotdealModel = require('../models/hotdealModel');
+    var hotdealTable = mongoose.model('hotdealModel');
+	var findHotdeal = function(property) {
+		return new Promise((resolve, reject) => {
+		console.log("=====START findHotdeal=====")
+		hotdealTable.aggregate([
+		{                                                   
+			$match: {                                       
+				property : propertyID,
+				active : true,
+				discount : { $gte: 0 },
+				$or: [
+					{ start: { $gte: checkin, $lte: checkout } },
+					{ end: { $gte: checkin, $lte: checkout } }
+				] 
+			}
+		},
+		{ 	$sort: { discount: 1 } },
+		{ 	$limit : 1 },
+		{                                               
+			$project:	{
+				_id : 0,
+				discount : 1,                            
+				text : 1,                                                        
+				start : 1,                                                        
+				end : 1
+			}
+		}                                               
+		],function(err, data) {
+            if (!err) {
+				console.log("findHotdeal Result: " + JSON.stringify(data, null, 4));
+				console.log("=====RESOLVE findHotdeal=====");
+				property.hotDiscount = data.discount;
+				property.hotText = data.text;
+				property.hotStart = data.start;
+				property.hotEnd = data.end;
+				resolve(property); 
+            } else {
+				console.error(err);
+                reject(new Error('findHotdeal ERROR : ' + err));
+            }
+		});
+	})};
 
 
     // 
     // Find all Prices for the properties 
     //
-	var collectPrices = function([propertyArr]) {
+	var collectPrices = function([ratingArr, propertyArr]) {
 		return Promise.all(propertyArr.map(findPrice)).then(propertyArr => {
-			return ( { propertyArr } );	
+			return ( { "rating" : ratingArr, "property" : propertyArr } );	
 		});
 	}; 
 
@@ -250,6 +286,7 @@ exports.getProperty = function(req, callback) {
 			{ "body": { "propertyID": property._id, "checkin": checkin, "checkout": checkout } }, 
 			function(result) {
 				if (result.error == true) {
+					console.error(err);
 					throw new Error(result.err);
 				};
 				// console.log("PRICE: " + JSON.stringify(result, null, 4));
@@ -266,15 +303,20 @@ exports.getProperty = function(req, callback) {
     // 
     // Run the promises
     // 
-	Promise.all([findProperty()])
+	Promise.all([findRating(),findProperty()])
 	    .then(res => {
 
-			console.log("### === FIND AVAILABLE PRICES === ###")
-			collectAvailablePrices(res).then(res => {
+			console.log("### === FIND AVAILABLE HOTDEALS === ###")
+			collectHotdeals(res).then(res => {
 
-				console.log("### === SEND ALL RESULTS === ###")
-				callback( { error:false, res } );
+				console.log("### === FIND AVAILABLE PRICES === ###")
+				collectPrices(res).then(res => {
 
+					console.log("### === SEND ALL RESULTS === ###")
+					callback( { error:false, res } );
+
+				});
+	
 			});
 
 		})

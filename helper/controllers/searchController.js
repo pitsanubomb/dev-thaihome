@@ -135,6 +135,13 @@ exports.getSearch = function(req, callback) {
 				as: "hotdeals"
 			}
 		},
+		{                                                   
+			$match: {                                       
+				"hotdeals.active": true,
+				"hotdeals.start": { $lte: checkout },
+				"hotdeals.end": { $gte: checkin }
+			}
+		},
 		{ 
 			$unwind: { 
 				path: "$hotdeals", preserveNullAndEmptyArrays: true
