@@ -1,6 +1,12 @@
 import angular from 'angular';
 
 //Set factory name and app
+// Not yet to do
+//  -- set datetimepick jquery(Find in bower to split)
+//  -- set env.js run by use webpack
+//  -- set lodash (https://lodash.com/docs/) Document
+//  -- set moment or date time for date time picker 
+
 const Calendar = angular.module('app.Calendar', [])
 
     .factory("Calendar", ['Locale', 'CONFIG', '$timeout', '$rootScope', function (Locale, CONFIG, $timeout, $rootScope) {
