@@ -8,7 +8,8 @@ var Users = require('../models/Users');
 var priceModel = require('../models/priceModel');
 var Price =  mongoose.model('priceModel');
 var fs = require('fs');
-var lngFile = JSON.parse(fs.readFileSync('./languageToCountry.json', 'utf8'));
+//var lngFile = JSON.parse(fs.readFileSync('./languageToCountry.json', 'utf8'));
+var lngFile = {}
 
 exports.getProperty = function () {
     var PropKeys = ['ThaiHomeTestingWAT'];

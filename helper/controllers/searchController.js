@@ -235,9 +235,6 @@ exports.getSearch = function(req, callback) {
 	})};
 
 
-
-
-
     // 
     // Find all Prices for the properties 
     //

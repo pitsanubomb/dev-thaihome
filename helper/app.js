@@ -69,21 +69,24 @@ var testRoute = require('./routes/testRoute');
 var dataRoute = require('./routes/dataRoute');
 
 
+
+
 // Just add bluebird to your package.json, and then the following line should work
 // mongoose.Promise = require('bluebird');
 
 var app = express();
 
-// Runs the scheduled Get currency rates job every 1 hour
-cron.schedule('0 1 * * *', function () {
-//  CurrencyDataController.getRates();
+// Cron Job:  Get all currency exchange rates from http://www.apilayer.net/ every 1 hour
+cron.schedule('0 1 * * *', function(){
+  CurrencyDataController.getRates();
 });
 
-// Runs the scheduled Beds24 jobs every second
-cron.schedule('* * * * *', function () {
-  // Beds24.getProperty();
-  // Beds24.getBookings();
+// Cron Job:  Get all properties and bookings from http://www.beds24.com/ every second
+cron.schedule('* * * * *', function(){
+   Beds24.getProperty();
+   Beds24.getBookings();
 });
+
 
 // Connect to mongodb
 global.db = "mongodb://thaihome:rootlocal@10.5.50.16:27017/thaihome";

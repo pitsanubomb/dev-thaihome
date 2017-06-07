@@ -174,19 +174,6 @@ exports.getFrontpage = function(req, callback) {
 			if (!err) {
 				// console.log("findHotdeal Result: " + JSON.stringify(data, null, 4));
 				console.log("=====RESOLVE findHotdeal=====")
-
-				// remove duplicate hotdeals
-				var newArray = [];
-				var lookupObject = {};
-
-				for (var i in data) {
-					lookupObject[data[i].property] = data[i];
-				}
-				for (i in lookupObject) {
-					newArray.push(lookupObject[i]);
-				}
-
-
 				resolve(data);
 			} else {
 				reject(new Error('ERR findHotdeal : ' + err));
