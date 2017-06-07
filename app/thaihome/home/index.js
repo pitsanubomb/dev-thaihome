@@ -1,4 +1,4 @@
-  export default function ($state, $rootScope, $interval, $http, $scope, $sce, $timeout) {
+  export default function ($state, $rootScope, $interval, $http, $scope, $sce, $timeout, Calendar) {
     var vm = this;
     $scope.headerSlider = function () {
       $http({
@@ -48,7 +48,7 @@
         }
 
         vm.properties = [{
-          "unique":"ATL-D406"
+          "unique": "ATL-D406"
         }];
         $scope.HotDeals = {
           "properties": data.data.data.hotdeal,
@@ -59,4 +59,24 @@
       });
     }
 
-  }
+    // $scope.checkin = null;
+    // $scope.checkout = null;
+
+    $scope.search = function () {
+      //Moment Error fix
+
+      if (!$scope.checkin || !$scope.checkout) {
+        console.log('$scope.checkin: ' + $scope.checkin)
+        console.log('$scope.checkout: ' + $scope.checkout)
+        $scope.checkin = moment().add(30, 'days').format("MMM D, YYYY");
+        $scope.checkout = moment().add(37, 'days').format("MMM D, YYYY");
+        console.log("HERE!")
+        localStorage.setItem('checkin', moment().add(30, 'days').format("MMM D, YYYY"));
+        localStorage.setItem('checkout', moment().add(37, 'days').format("MMM D,  YYYY"));
+        $('.arrival, .departure').data('dateRangePicker').setDateRange($scope.checkin, $scope.checkout);
+
+        $scope.search();
+      }
+    }
+
+    }
