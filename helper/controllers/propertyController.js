@@ -7,6 +7,7 @@
 // - lc languageCode
 // OUTPUT:
 // - Json structure with the following data:
+// - rating[] with all ratings for the property 
 // - property[] with all property/translation/hotdeal data 
 //
 
@@ -17,7 +18,7 @@ exports.getProperty = function(req, callback) {
 	console.log("###### getProperty ######")
 
     // 
-    // Validate the data we get from router
+    // Validate the data we get from router 
     // 
 	console.log("getProperty received: " + JSON.stringify(req.body, null, 4));
 	console.log("property: " +req.body.propertyID);
