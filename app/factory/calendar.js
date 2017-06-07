@@ -116,7 +116,7 @@ const Calendar = angular.module('app.Calendar', [])
                     $('.arrival').removeClass('highlight');
                     $timeout(function () {
                         if (checkin && checkout) {
-                            $('.arrival, .departure').dateRangePicker(configObject).bind('datepicker-open', function () {
+                            $('.arrival, .departure').daterangepicker(configObject).bind('datepicker-open', function () {
                                 $('.calendar_current_selection').html('CHOOSE <span class="calendar_text_border">CHECK-IN DATE</span>');
                                 highlightField('.arrival');
                             }).bind('datepicker-first-date-selected', function (o, d) {
@@ -127,7 +127,7 @@ const Calendar = angular.module('app.Calendar', [])
                                 //setFirstDate(d);
                             }).data('dateRangePicker').setDateRange(checkin, checkout);
                         } else {
-                            $('.arrival, .departure').dateRangePicker(configObject).bind('datepicker-open', function () {
+                            $('.arrival, .departure').daterangepicker(configObject).bind('datepicker-open', function () {
                                 $('.calendar_current_selection').html('CHOOSE <span class="calendar_text_border">CHECK-IN DATE</span>');
                                 highlightField('.arrival');
                             }).bind('datepicker-first-date-selected', function (o, d) {
