@@ -4,11 +4,12 @@ import uiRouter from 'angular-ui-router'; //Set ui rote
 
 //Import Controller
 import HomeController from '../thaihome/home/';
+import Locale from '../thaihome/locale/';
 
 //Import factory
 import Calendar from '../factory/calendar';
 
-const app = angular.module('app', [uiRouter,Calendar.name]);
+const app = angular.module('app', [uiRouter,Calendar.name]); //Add module to use and factory
 
 app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
         $urlRouterProvider.otherwise('/');
@@ -21,6 +22,7 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
                 controllerAs: 'vm'
             })
 
+        //Set to html 5 
         $locationProvider.html5Mode(true);
     })
 
