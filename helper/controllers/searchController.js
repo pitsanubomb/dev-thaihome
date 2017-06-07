@@ -129,26 +129,6 @@ exports.getSearch = function(req, callback) {
 		},
 		{
 			$lookup: {
-				from: "hotdeal",
-				localField: "_id",
-				foreignField: "property",
-				as: "hotdeals"
-			}
-		},
-		{                                                   
-			$match: {                                       
-				"hotdeals.active": true,
-				"hotdeals.start": { $lte: checkout },
-				"hotdeals.end": { $gte: checkin }
-			}
-		},
-		{ 
-			$unwind: { 
-				path: "$hotdeals", preserveNullAndEmptyArrays: true
-			}
-		}, 
-		{
-			$lookup: {
 				from: "translation",
 				localField: "_id",
 				foreignField: "property",
@@ -178,12 +158,6 @@ exports.getSearch = function(req, callback) {
 				"guests" : 1,
 				"gmapsdata" : 1,
 
-				"hot" : "$hotdeals.hot",                            
-				"discount" : "$hotdeals.discount",                            
-				"text" : "$hotdeals.text",                                                        
-				"start" : "$hotdeals.start",                                                        
-				"end" : "$hotdeals.end",                                                        
-
 				"frontpage1": "$translations.frontpage1",
 				"frontpage2": "$translations.frontpage2"
 			} 
@@ -198,6 +172,70 @@ exports.getSearch = function(req, callback) {
 			};
 		});
     })};
+
+
+    // 
+    // Collect hotdeals for the available properties
+    //
+	var collectHotdeals = function([locationArr, availableArr, occupiedArr]) {
+		return Promise.all(availableArr.map(findHotdeal)).then(availableArr => {
+			return ( [locationArr, availableArr, occupiedArr] );	
+		});
+	}; 
+
+
+    // 
+    // Find hotdeals for this property 
+    // 
+	var hotdealModel = require('../models/hotdealModel');
+    var hotdealTable = mongoose.model('hotdealModel');
+	var findHotdeal = function(property) {
+		return new Promise((resolve, reject) => {
+		console.log("=====START findHotdeal=====")
+		hotdealTable.aggregate(
+		{                                                   
+			$match: {                                       
+				property : property._id,
+				active : true,
+				discount : { $gte: 0 },
+				start: { $lte: checkout },
+				end: { $gte: checkin }
+			}
+		},
+		{ 	$sort: { discount: -1 } },
+		{ 	$limit : 1 },
+		{                                               
+			$project:	{
+				_id : 0,
+				discount : 1,                            
+				text : 1,                                                        
+				start : 1,                                                        
+				end : 1
+			}
+		}                                               
+		,function(err, data) {
+            if (!err) {
+				console.log("findHotdeal Result: " + JSON.stringify(data, null, 4));
+				if (data.length) {
+					console.log("findHotdeal Result: " + data[0].text);
+					property.hotDiscount = data[0].discount;
+					property.hotText = data[0].text;
+					property.hotStart = data[0].start;
+					property.hotEnd = data[0].end;
+				} else {
+					property.hotDiscount = 0;
+				}
+				console.log("=====RESOLVE findHotdeal=====");
+				resolve(property); 
+            } else {
+				console.error(err);
+                reject(new Error('findHotdeal ERROR : ' + err));
+            }
+		});
+	})};
+
+
+
 
 
     // 
@@ -246,14 +284,19 @@ exports.getSearch = function(req, callback) {
 	Promise.all([findLocation(), findAvailable(availableMatch), findAvailable(occupiedMatch)])
 	    .then(res => {
 
-			console.log("### === FIND AVAILABLE PRICES === ###")
-			collectAvailablePrices(res).then(res => {
+			console.log("### === FIND AVAILABLE HOTDEALS === ###")
+			collectHotdeals(res).then(res => {
 
-				console.log("### === FIND OCCUPIED PRICES === ###")
-				collectOccupiedPrices(res).then(res => {
+				console.log("### === FIND AVAILABLE PRICES === ###")
+				collectAvailablePrices(res).then(res => {
 
-					console.log("### === SEND ALL RESULTS === ###")
-					callback( { error:false, res } );
+					console.log("### === FIND OCCUPIED PRICES === ###")
+					collectOccupiedPrices(res).then(res => {
+
+						console.log("### === SEND ALL RESULTS === ###")
+						callback( { error:false, res } );
+
+					});
 
 				});
 

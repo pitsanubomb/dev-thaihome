@@ -218,7 +218,7 @@ exports.getProperty = function(req, callback) {
     // Find hotdeals for this property 
     // 
 	/*
-		start < checkout && end > checkin
+		if start < checkout && end > checkin {}
 
 		if 40 < 50 && 60 > 30 { TRUE! }
 		if 40 < 70 && 60 > 50 { TRUE! }
@@ -244,7 +244,7 @@ exports.getProperty = function(req, callback) {
 	var findHotdeal = function(property) {
 		return new Promise((resolve, reject) => {
 		console.log("=====START findHotdeal=====")
-		hotdealTable.aggregate([
+		hotdealTable.aggregate(
 		{                                                   
 			$match: {                                       
 				property : propertyID,
@@ -254,7 +254,7 @@ exports.getProperty = function(req, callback) {
 				end: { $gte: checkin }
 			}
 		},
-		{ 	$sort: { discount: 1 } },
+		{ 	$sort: { discount: -1 } },
 		{ 	$limit : 1 },
 		{                                               
 			$project:	{
@@ -265,14 +265,22 @@ exports.getProperty = function(req, callback) {
 				end : 1
 			}
 		}                                               
-		],function(err, data) {
+		,function(err, data) {
             if (!err) {
 				console.log("findHotdeal Result: " + JSON.stringify(data, null, 4));
+				if (data.length) {
+					console.log("findHotdeal Result: " + data[0].text);
+					property.hotDiscount = data[0].discount;
+					property.hotText = data[0].text;
+					property.hotStart = data[0].start;
+					property.hotEnd = data[0].end;
+				} else {
+					property.hotDiscount = 0;
+					property.hotText = "";
+					property.hotStart = 0;
+					property.hotEnd = 0;
+				}
 				console.log("=====RESOLVE findHotdeal=====");
-				property.hotDiscount = data.discount;
-				property.hotText = data.text;
-				property.hotStart = data.start;
-				property.hotEnd = data.end;
 				resolve(property); 
             } else {
 				console.error(err);

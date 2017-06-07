@@ -102,11 +102,6 @@ exports.getPrice = function(req, callback) {
     // 
     // Find HOTDEAL 
     // 
-    // We have to find all hotdeals where 
-	//	hotdeal.start is between checkin-checkout
-    // AND
-	//	hotdeal.end is between checkin-checkout
-    // 
 	var hotdealModel = require('../models/hotdealModel');
     var hotdealTable = mongoose.model('hotdealModel');
 	var findHotdeal = function() {
@@ -115,16 +110,15 @@ exports.getPrice = function(req, callback) {
         hotdealTable.aggregate([
         {
             $match:{
-				$and:[
-					{ property : propertyID },
-					{ active   : true },
-					{ $or: [
-						{ start: { $lte: Math.round(new Date(checkout.getTime())/1000), $gte: Math.round(new Date(checkin.getTime())/1000) } },
-						{ end: { $lte: Math.round(new Date(checkout.getTime())/1000), $gte: Math.round(new Date(checkin.getTime())/1000) } }
-					]}
-				]
+				property : propertyID,
+				active : true,
+				discount : { $gte: 0 },
+				start: { $lte: Math.round(new Date(checkout.getTime())/1000) },
+				end: { $gte: Math.round(new Date(checkin.getTime())/1000) }
 			}
         },
+		{ 	$sort: { discount: -1 } },
+		{ 	$limit : 1 },
         {
             $project:{"_id":0, "discount":1, "start":1, "end":1, "hot":1, "active":1, "text":1}
         }
@@ -234,6 +228,7 @@ exports.getPrice = function(req, callback) {
 			}
 		}
 		console.log("Season: " + (avgPrice * nights) + " - " + totalDiscount + " = " + ((avgPrice * nights) - totalDiscount));
+		var seasonDiscount = totalDiscount;
 		finalPrice = (avgPrice * nights) - totalDiscount;
 
 
@@ -264,6 +259,7 @@ exports.getPrice = function(req, callback) {
 		}
 		console.log("HotDeal: " + (avgPrice * nights) + " - " + totalDiscount + " = " + ((avgPrice * nights) - totalDiscount));
 		finalPrice = (avgPrice * nights) - totalDiscount;
+		var hotdealDiscount = totalDiscount;
 
 		//compensate for math.round difference
 		console.log("3finalPrice: " + finalPrice/nights);
@@ -281,6 +277,8 @@ exports.getPrice = function(req, callback) {
 			hotdealTxt:         String(txtHotDeal),					 // If this property is in a hotdeal, we want to show the Text on the site 
 			hotdealStart:       Number(startHotDeal),				 // If this property is in a hotdeal, we want to show the Startdate on the site 
 			hotdealEnd:         Number(endHotDeal),					 // If this property is in a hotdeal, we want to show the Enddate on the site 
+			hotdealDiscount:    Number(hotdealDiscount),			 // How much discount did we give to hotdeals?
+			seasonDiscount:     Number(seasonDiscount),			 	 // How much discount did we give to seasons?
 			priceWeekend:       Number(priceArray.priceWeekend),	 // The standard price for friday night or saturday night
 			priceWeek1:         Number(priceArray.priceWeek1),       // The standard price for weekday night (sun-mon-tue-wed-thu)
 			priceWeek2:         Number(priceArray.priceWeek2),       // The standard price pr night (mon-sun) if more than 7 nights (more than 1 week)
