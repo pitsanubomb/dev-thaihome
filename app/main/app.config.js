@@ -1,6 +1,11 @@
-import angular from 'angular';
-import uiRouter from 'angular-ui-router';
+//Import libary angualr and another js lib
+import angular from 'angular'; //Call angular form webpack
+import uiRouter from 'angular-ui-router'; //Set ui rote
+
+//Import Controller
 import HomeController from '../thaihome/home/';
+
+//Import factory
 import Calendar from '../factory/calendar';
 
 const app = angular.module('app', [uiRouter,Calendar.name]);
