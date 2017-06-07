@@ -1,19 +1,21 @@
 
 // Standard libs
-var express = require('express');
-var mongoose = require('mongoose');
-var path = require('path');
-var bodyParser = require('body-parser');
-var favicon = require('serve-favicon');
+var express = require('express');         // The Nodejs framework
+var mongoose = require('mongoose');       // The mongodb framework
+var path = require('path');               // Set absolute path to files 
+var bodyParser = require('body-parser');  // Parse data from POST requests
+var favicon = require('serve-favicon');   // Serve a favicon to all who request it
+var cron = require('node-cron');          // Run timed Cron jobs
+var request = require('request');         // Request data from API's
 
 // Unknown libs
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var cron = require('node-cron');
-var request = require('request');
 
 // Custom libs
-var Beds24 = require('./controllers/Beds24Controller');
+var Beds24 = require('./controllers/Beds24Controller');                         // Beds24 channel manager controller
+var exchangeRateRoute = require('./routes/exchangeRateRoute');                  // Route for exchange rates
+var exchangeRateController = require('./controllers/exchangeRateController');   // Gets all exchange rates from API
 
 // Unknown routes
 var routes = require('./routes/index');
@@ -22,15 +24,13 @@ var todos = require('./routes/todos');
 var checkList = require('./routes/checkList');
 var emailVariable = require('./routes/emailVariable');
 var invoice = require('./routes/invoice');
-var currency = require('./routes/currency');
-var CurrencyDataController = require('./controllers/CurrencyDataController');
 var booking = require('./routes/booking');
 var news = require('./routes/news');
 
 
 // Global Routes - we use everywhere
-var priceRoute = require('./routes/priceRoute');
-var omise = require('./routes/omise');
+var priceRoute = require('./routes/priceRoute');          // Get ALL prices for a property
+var omise = require('./routes/omise');                    // Our OMISE 3rd party credit card payment solution  
 
 
 // ThaiHome Website Routes
@@ -73,20 +73,9 @@ var dataRoute = require('./routes/dataRoute');
 
 // Just add bluebird to your package.json, and then the following line should work
 // mongoose.Promise = require('bluebird');
+mongoose.Promise = Promise;
 
 var app = express();
-
-// Cron Job:  Get all currency exchange rates from http://www.apilayer.net/ every 1 hour
-cron.schedule('0 1 * * *', function(){
-  CurrencyDataController.getRates();
-});
-
-// Cron Job:  Get all properties and bookings from http://www.beds24.com/ every second
-cron.schedule('* * * * *', function(){
-   Beds24.getProperty();
-   Beds24.getBookings();
-});
-
 
 // Connect to mongodb
 global.db = "mongodb://thaihome:rootlocal@10.5.50.16:27017/thaihome";
@@ -140,18 +129,20 @@ app.use('/', routes);
 app.use('/price', priceRoute);
 
 // ThaiHome Website Routes
+app.use('/frontpage', frontpageRoute);
+app.use('/search', searchRoute);
+app.use('/property', propertyRoute);
+app.use('/exchangeRate', exchangeRateRoute);
+
 app.use('/users', users);
 app.use('/todos', todos);
 app.use('/checkList', checkList);
 app.use('/emailVariable', emailVariable);
 app.use('/invoice', invoice);
-app.use('/currency', currency);
 app.use('/booking', booking);
 app.use('/omise', omise);
 app.use('/news', news);
-app.use('/frontpage', frontpageRoute);
-app.use('/search', searchRoute);
-app.use('/property', propertyRoute);
+
 
 // Report Routes
 app.use('/report', agentSaleRoute);
@@ -176,6 +167,18 @@ app.use('/report', bookingCheckinRoute);
 // For Torbens Testing
 app.use('/testRoute', testRoute);
 app.use('/dataRoute', dataRoute);
+
+
+// Cron Job:  Get all currency exchange rates from http://www.apilayer.net/ every 1 hour
+cron.schedule('0 1 * * *', function(){
+  exchangeRateController.getRates();
+});
+
+// Cron Job:  Get all properties and bookings from http://www.beds24.com/ every second
+cron.schedule('0 1 * * *', function(){
+  Beds24.getProperty();
+  Beds24.getBookings();
+});
 
 
 // catch 404 and forward to error handler
