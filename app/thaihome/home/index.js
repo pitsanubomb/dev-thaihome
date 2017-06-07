@@ -61,8 +61,8 @@
     // call calendar
     Calendar.loadCalendar();
 
+    //Seach Button
     $scope.search = function () {
-      //Moment Error fix
 
       if (!$scope.checkin || !$scope.checkout) {
         console.log('$scope.checkin: ' + $scope.checkin)
@@ -78,4 +78,4 @@
       }
     }
 
-    }
+  }
