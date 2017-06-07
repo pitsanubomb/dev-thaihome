@@ -98,9 +98,6 @@ exports.getProperty = function(req, callback) {
 				"translations.language": languageCode
 			}
 		},
-		{
-			$unwind: "$translations.texts"
-		},
 		{                                               
 			$project:{
 				"_id" : 1,
@@ -138,21 +135,21 @@ exports.getProperty = function(req, callback) {
 				"cleanprice" : 1,
 				"cleanfinalprice" : 1,
 
-				"headline": "$translations.texts.headline",
-				"frontpage1": "$translations.texts.frontpage1",
-				"frontpage2": "$translations.texts.frontpage2",
-				"longtext": "$translations.texts.longtext",
-				"house_rules": "$translations.texts.house_rules",
-				"beds": "$translations.texts.beds",
-				"floor": "$translations.texts.floor",
-				"view": "$translations.texts.view",
-				"balcony": "$translations.texts.balcony",
-				"furnished": "$translations.texts.furnished",
-				"kitchen": "$translations.texts.kitchen",
-				"beach": "$translations.texts.beach",
-				"shopping": "$translations.texts.shopping",
-				"nightlife": "$translations.texts.nightlife",
-				"maintanance": "$translations.texts.maintanance",
+				"headline": "$translations.headline",
+				"frontpage1": "$translations.frontpage1",
+				"frontpage2": "$translations.frontpage2",
+				"longtext": "$translations.longtext",
+				"house_rules": "$translations.house_rules",
+				"beds": "$translations.beds",
+				"floor": "$translations.floor",
+				"view": "$translations.view",
+				"balcony": "$translations.balcony",
+				"furnished": "$translations.furnished",
+				"kitchen": "$translations.kitchen",
+				"beach": "$translations.beach",
+				"shopping": "$translations.shopping",
+				"nightlife": "$translations.nightlife",
+				"maintanance": "$translations.maintanance",
 
 				"featured" : 1,
 				"images" : 1,
@@ -220,6 +217,28 @@ exports.getProperty = function(req, callback) {
     // 
     // Find hotdeals for this property 
     // 
+	/*
+		start < checkout && end > checkin
+
+		if 40 < 50 && 60 > 30 { TRUE! }
+		if 40 < 70 && 60 > 50 { TRUE! }
+		if 40 < 55 && 60 > 45 { TRUE! }
+		if 40 < 70 && 60 > 30 { TRUE! }
+
+		if 40 < 20 && 60 > 10 { FALSE! }
+		if 40 < 80 && 60 > 70 { FALSE! }
+
+
+		1---------------------------------------------------------------------------------------------------------100
+												40-------------------------------60
+										30---------------50
+																		50---------------70
+														45---------------55
+										30---------------------------------------------------70
+		10----------20
+																									70----------80
+	*/
+
 	var hotdealModel = require('../models/hotdealModel');
     var hotdealTable = mongoose.model('hotdealModel');
 	var findHotdeal = function(property) {
@@ -231,10 +250,8 @@ exports.getProperty = function(req, callback) {
 				property : propertyID,
 				active : true,
 				discount : { $gte: 0 },
-				$or: [
-					{ start: { $gte: checkin, $lte: checkout } },
-					{ end: { $gte: checkin, $lte: checkout } }
-				] 
+				start: { $lte: checkout },
+				end: { $gte: checkin }
 			}
 		},
 		{ 	$sort: { discount: 1 } },

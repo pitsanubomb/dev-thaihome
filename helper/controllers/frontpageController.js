@@ -155,9 +155,6 @@ exports.getFrontpage = function(req, callback) {
 					"translations.language": languageCode
 				}
 			},
-			{
-				$unwind: "$translations.texts"
-			},
 			{                                               
 				$project:{
 					"_id": 0,
@@ -169,8 +166,8 @@ exports.getFrontpage = function(req, callback) {
 					"end" : 1,                            
 					"featured" : "$properties.featured", 
 					"name" : "$properties.name",
-					"frontpage1": "$translations.texts.frontpage1",
-					"frontpage2": "$translations.texts.frontpage2"
+					"frontpage1": "$translations.frontpage1",
+					"frontpage2": "$translations.frontpage2"
 				} 
 			}                                               
 		],function(err, data) {

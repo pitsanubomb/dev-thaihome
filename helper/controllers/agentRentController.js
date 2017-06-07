@@ -102,9 +102,6 @@ exports.getAgentRentReport = function(req, res){
 				}
 			},
 			{                                             
-				$unwind: "$translation.texts"                        
-			},                                            
-			{                                             
 				$project:{                                
 					"_id" : 1,                                   
 					"name" : 1,                                  
@@ -119,9 +116,9 @@ exports.getAgentRentReport = function(req, res){
 					"commissionMonth" :"$price.commissionMonth",
 					"priceMonth6" :"$price.priceMonth6",        
 					"priceYear" :"$price.priceYear",             
-					"floor" : "$translation.texts.floor",       
-					"view" : "$translation.texts.view",         
-					"furnished" : "$translation.texts.furnished"
+					"floor" : "$translation.floor",       
+					"view" : "$translation.view",         
+					"furnished" : "$translation.furnished"
 				}                                         
 			}                                             
 	    ],function(err, data) {

@@ -165,9 +165,6 @@ exports.getSearch = function(req, callback) {
 				"translations.language": languageCode
 			}
 		},
-		{
-			$unwind: "$translations.texts"
-		},
 		{                                               
 			$project:{
 				"_id" : 1,                                 
@@ -187,8 +184,8 @@ exports.getSearch = function(req, callback) {
 				"start" : "$hotdeals.start",                                                        
 				"end" : "$hotdeals.end",                                                        
 
-				"frontpage1": "$translations.texts.frontpage1",
-				"frontpage2": "$translations.texts.frontpage2"
+				"frontpage1": "$translations.frontpage1",
+				"frontpage2": "$translations.frontpage2"
 			} 
 		}                                               
 		],function(err, data) {

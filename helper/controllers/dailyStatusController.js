@@ -153,13 +153,6 @@ exports.getStatus = function(req, res) {
 	}
 
 
-
-
-
-
-
-
-
     // 
     // Find all bookings
     // 

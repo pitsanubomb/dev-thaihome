@@ -78,9 +78,6 @@ exports.getAgentSaleReport = function(req, res){
             }
         },
         {                                             
-            $unwind: "$translation.texts"                        
-        },                                            
-        {                                             
             $project:{                                
                 "_id" : 1,                            
                 "name" : 1,                           
@@ -91,9 +88,9 @@ exports.getAgentSaleReport = function(req, res){
                 "saleprice" : 1,                      
                 "salecommission" : 1,                 
                 "priceYear" :"$price.priceYear",	  			
-                "floor" : "$translation.texts.floor",       
-                "view" : "$translation.texts.view",         
-                "furnished" : "$translation.texts.furnished"
+                "floor" : "$translation.floor",       
+                "view" : "$translation.view",         
+                "furnished" : "$translation.furnished"
             }                                         
         }                                             
     ],function(err, data) {
