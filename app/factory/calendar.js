@@ -13,23 +13,23 @@ const Calendar = angular.module('app.Calendar', [])
         return {
             loadCalendar: function (checkin, checkout, force, bookings) {
                 console.log("LOAD CALENDAR CALLED")
-                if (Locale.validateDates(checkin, checkout) === false) {
-                    checkin = false;
-                    checkout = false;
+                // if (Locale.validateDates(checkin, checkout) === false) {
+                //     checkin = false;
+                //     checkout = false;
 
-                    if (force === true) {
-                        var dates = Locale.getDefaultDates();
-                        checkin = dates.checkin;
-                        checkout = dates.checkout;
-                    } else {
-                        //load dates for localStorage
-                        var newDates = Locale.getDates();
-                        if (newDates.valid === true) {
-                            checkin = newDates.checkin;
-                            checkout = newDates.checkout;
-                        }
-                    }
-                }
+                //     if (force === true) {
+                //         var dates = Locale.getDefaultDates();
+                //         checkin = dates.checkin;
+                //         checkout = dates.checkout;
+                //     } else {
+                //         //load dates for localStorage
+                //         var newDates = Locale.getDates();
+                //         if (newDates.valid === true) {
+                //             checkin = newDates.checkin;
+                //             checkout = newDates.checkout;
+                //         }
+                //     }
+                // }
 
                 function check(time) {
                     var utc = moment.utc(parseInt(time.getTime() / 1000), 'X').add('0', 'day').format('X');
@@ -72,7 +72,7 @@ const Calendar = angular.module('app.Calendar', [])
                         highlightField(false);
                         $('#checkinval').html(s1);
                         $('#checkoutval').html(s2);
-                        Locale.setDates(s1, s2);
+             
                         $rootScope.$broadcast("datesChanged", {
                             "checkin": s1,
                             "checkout": s2
