@@ -58,9 +58,8 @@
         };
       });
     }
-
-    // $scope.checkin = null;
-    // $scope.checkout = null;
+    // call calendar
+    Calendar.loadCalendar();
 
     $scope.search = function () {
       //Moment Error fix
