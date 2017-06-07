@@ -34,9 +34,11 @@ var omise = require('./routes/omise');                    // Our OMISE 3rd party
 
 
 // ThaiHome Website Routes
-var frontpageRoute = require('./routes/frontpageRoute');  // front page
-var searchRoute = require('./routes/searchRoute');        // search result page
-var propertyRoute = require('./routes/propertyRoute');    // property page
+var headerFooterRoute = require('./routes/headerFooterRoute');  // header footer
+var frontpageRoute = require('./routes/frontpageRoute');        // front page
+var searchRoute = require('./routes/searchRoute');              // search result page
+var propertyRoute = require('./routes/propertyRoute');          // property page
+
 
 // Manager Routes
 
@@ -129,6 +131,7 @@ app.use('/', routes);
 app.use('/price', priceRoute);
 
 // ThaiHome Website Routes
+app.use('/headerFooter', headerFooterRoute);
 app.use('/frontpage', frontpageRoute);
 app.use('/search', searchRoute);
 app.use('/property', propertyRoute);
