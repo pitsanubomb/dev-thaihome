@@ -26,6 +26,13 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
             template: require('../directive/head.html')
         };
     })
+    //Navigation
+    .directive('navigation', function () {
+        return {
+            restrict: 'AE',
+            template: require('../directive/navigation.html')
+        };
+    })
 
     //Other dircetive
     .directive('bookingCalendar', function () {
