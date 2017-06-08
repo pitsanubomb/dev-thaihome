@@ -7,10 +7,7 @@
 // - language[] with all languages 
 // - currency[] with all currencies
 //
-
-
 var mongoose = require('mongoose');
-
 exports.getHeaderFooter = function(req, callback) {
 
 	console.log("###### getHeaderFooter ######")
